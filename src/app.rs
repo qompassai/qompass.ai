@@ -65,7 +65,7 @@ fn Footer() -> impl IntoView {
     view! {
         <footer class="site-footer">
             <div class="footer-inner">
-                <p class="footer-line">"© 2026 Qompass AI · Amor Fati Labs LLC"</p>
+                <p class="footer-line">"© 2026 Qompass AI. All rights reserved."</p>
                 <p class="footer-links">
                     <a href="https://orcid.org/0000-0002-0302-4812" rel="me">
                         "ORCID"
