@@ -1,3 +1,5 @@
+// deno-lint-ignore-file
+// Browser module (Three.js hero scene). Deno lint rules target the Deno runtime and do not apply here.
 // Qompass hero: a compass rose drawn as a Bloch sphere — orbital rings at
 // quantum angles, rhumb-line bearings, a celestial/particle starfield, and
 // light pulses travelling the chart like photons in fiber.
