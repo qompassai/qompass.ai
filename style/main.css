@@ -260,7 +260,6 @@ h3 {
 
 /* — Content bands ———————————————————————— */
 .pillars,
-.chart-band,
 .services-band,
 .quickstart,
 .proof-band,
@@ -292,9 +291,6 @@ h3 {
 }
 .pillar p {
   color: var(--fog);
-}
-.chart-band {
-  border-top: 1px solid var(--chart-line);
 }
 .band-copy {
   font-family: var(--font-display);

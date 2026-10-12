@@ -327,14 +327,6 @@ pub fn Home() -> impl IntoView {
                 </article>
             </div>
         </section>
-        <section class="chart-band">
-            <p class="band-label">"CURRENT FIX"</p>
-            <p class="band-copy">
-                "This site is compiled from Rust to WebAssembly, generated statically, and "
-                "served by vongola — our own post-quantum reverse proxy — alongside volta, "
-                "our key server, and bunker, our signed binary cache."
-            </p>
-        </section>
         <section class="invitation">
             <p class="band-label">"OPEN CHANNEL"</p>
             <h2 class="band-title">"Got a hard problem?"</h2>
