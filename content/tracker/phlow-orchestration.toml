@@ -1,0 +1,9 @@
+title = "Bounded agent orchestration: a field report from the phlow runtime"
+topic = "A practice paper from building phlow: a Rust agent runtime where planner, coder, and reviewer agents work under operator-approved checks — what the dispatch gate has to guarantee, how adversarial gauntlet testing shapes the design, and what a 2,600+ test suite actually buys."
+abstract = ""
+stage = "soundings"
+updated = "2026-10-12"
+next_step = "Finish the rust-branch completion program, then fold the gauntlet results in."
+public = true
+abstract_public = false
+tags = ["agents", "rust", "phlow", "orchestration"]

@@ -1,0 +1,9 @@
+title = "Transforming Knowledge Ontology: the Model Context Protocol"
+topic = "A practice paper from building tko: an MCP-based approach to representing project knowledge as a structured ontology agents can query, instead of re-deriving context from raw files on every run."
+abstract = ""
+stage = "soundings"
+updated = "2026-10-12"
+next_step = "Write up the ontology design and the MCP surface from the current TypeScript implementation."
+public = true
+abstract_public = false
+tags = ["mcp", "ontology", "tko", "agents"]

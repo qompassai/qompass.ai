@@ -1,0 +1,9 @@
+title = "The editor as a broker: periscope and agent-facing editor intelligence"
+topic = "A practice paper from building periscope: a Rust MCP server that brokers a live Neovim session to agents — diagnostics, definitions, references, and configuration intelligence as twelve read-only tools — and why the editor, not the filesystem, is the right source of truth."
+abstract = ""
+stage = "soundings"
+updated = "2026-10-12"
+next_step = "Fold in the in-use validation results from the diver integration and draft the broker-design section."
+public = true
+abstract_public = false
+tags = ["mcp", "neovim", "periscope", "tooling"]
