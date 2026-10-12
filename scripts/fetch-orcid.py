@@ -32,8 +32,18 @@ def main() -> int:
         if not title:
             continue
         venue = (w.get("journal-title") or {}).get("value", "") or w.get("type", "")
+        work_type = w.get("type", "") or ""
         date = w.get("publication-date") or {}
         year = ((date.get("year") or {}).get("value") or "")
+        doi = ""
+        for ext in w.get("external-ids", {}).get("external-id", []):
+            if ext.get("external-id-type") == "doi":
+                doi = ext.get("external-id-value", "").strip()
+                break
+        for prefix in ("https://doi.org/", "http://doi.org/"):
+            if doi.startswith(prefix):
+                doi = doi[len(prefix):]
+                break
         url = (w.get("url") or {}).get("value", "") or ""
         if not url:
             for ext in w.get("external-ids", {}).get("external-id", []):
@@ -42,7 +52,21 @@ def main() -> int:
                     break
         if not url:
             url = f"https://orcid.org/{ORCID}"
-        works.append({"title": title, "venue": venue, "year": year, "url": url})
+        if not doi:
+            for prefix in ("https://doi.org/", "http://doi.org/"):
+                if url.startswith(prefix):
+                    doi = url[len(prefix):]
+                    break
+        works.append(
+            {
+                "title": title,
+                "venue": venue,
+                "year": year,
+                "url": url,
+                "doi": doi,
+                "kind": work_type,
+            }
+        )
     works.sort(key=lambda x: x["year"], reverse=True)
     works = works[:100]
 
@@ -55,6 +79,8 @@ def main() -> int:
         "    pub url: &'static str,",
         "    pub venue: &'static str,",
         "    pub year: &'static str,",
+        "    pub doi: &'static str,",
+        "    pub kind: &'static str,",
         "}",
         "",
         "pub static WORKS: &[Work] = &[",
@@ -65,6 +91,8 @@ def main() -> int:
         lines.append(f"        url: {json.dumps(w['url'], ensure_ascii=False)},")
         lines.append(f"        venue: {json.dumps(w['venue'], ensure_ascii=False)},")
         lines.append(f"        year: {json.dumps(w['year'], ensure_ascii=False)},")
+        lines.append(f"        doi: {json.dumps(w['doi'], ensure_ascii=False)},")
+        lines.append(f"        kind: {json.dumps(w['kind'], ensure_ascii=False)},")
         lines.append("    },")
     lines.append("];")
     lines.append("")

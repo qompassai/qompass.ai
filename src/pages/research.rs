@@ -103,12 +103,23 @@ pub fn Research() -> impl IntoView {
                     .collect_view()}
             </div>
             <h2 class="record-head">"Complete record — live from ORCID"</h2>
+            <p class="record-blurb">
+                <a href="https://orcid.org">"ORCID"</a>
+                " — the Open Researcher and Contributor ID — is a persistent identifier for "
+                "researchers: one ID that ties a scholar's publications, software, and datasets "
+                "together across publishers and repositories, so a record can't be confused with "
+                "anyone else's. This is Matt Porter's complete record, synced from his "
+                <a href="https://orcid.org/0000-0002-0302-4812">"ORCID profile"</a>
+                "; every entry links to the work itself."
+            </p>
             <p class="record-meta">
                 <span id="orcid-status">"Snapshot from build time; refreshing from ORCID…"</span>
             </p>
+            <h3 class="record-head">"Publications"</h3>
             <ul class="record-list" id="orcid-works">
                 {crate::orcid_data::WORKS
                     .iter()
+                    .filter(|w| w.kind != "software")
                     .map(|w| {
                         view! {
                             <li class="record-item">
@@ -117,6 +128,34 @@ pub fn Research() -> impl IntoView {
                                     <a href={w.url}>{w.title}</a>
                                 </span>
                                 <span class="record-venue">{w.venue}</span>
+                            </li>
+                        }
+                    })
+                    .collect_view()}
+            </ul>
+            <h3 class="record-head">"Software"</h3>
+            <p class="record-meta">"Self-published by Qompass AI · archived on Zenodo"</p>
+            <ul class="record-list" id="orcid-software">
+                {crate::orcid_data::WORKS
+                    .iter()
+                    .filter(|w| w.kind == "software")
+                    .map(|w| {
+                        view! {
+                            <li class="record-item">
+                                <span class="record-year">{w.year}</span>
+                                <span class="record-title">
+                                    <a href={w.url}>{w.title}</a>
+                                </span>
+                                {(!w.doi.is_empty())
+                                    .then(|| {
+                                        let doi_url = format!("https://doi.org/{}", w.doi);
+                                        view! {
+                                            <span class="record-doi">
+                                                "DOI: "
+                                                <a href={doi_url}>{w.doi}</a>
+                                            </span>
+                                        }
+                                    })}
                             </li>
                         }
                     })

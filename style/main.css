@@ -500,6 +500,11 @@ h3 {
   color: var(--brass);
   text-transform: uppercase;
 }
+.record-blurb {
+  color: var(--fog);
+  line-height: 1.65;
+  max-width: 68ch;
+}
 .record-head {
   margin-top: 3rem;
   font-size: 1.5rem;
@@ -529,6 +534,12 @@ h3 {
   grid-column: 2;
   color: var(--fog);
   font-size: 0.94rem;
+}
+.record-doi {
+  grid-column: 2;
+  color: var(--fog);
+  font-family: var(--font-mono);
+  font-size: 0.85rem;
 }
 
 /* — CV ——————————————————————————————————— */
