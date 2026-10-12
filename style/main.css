@@ -429,6 +429,53 @@ h3 {
   font-size: 0.92rem;
   color: var(--fog);
 }
+.press-grid {
+  display: grid;
+  gap: 1rem;
+  grid-template-columns: repeat(auto-fit, minmax(270px, 1fr));
+  margin: 0.4rem 0 0.6rem;
+}
+.press-card {
+  background: var(--chart-raise);
+  border: 1px solid var(--chart-line);
+  border-top: 2px solid var(--brass);
+  padding: 1rem 1.1rem 1.1rem;
+}
+.press-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.35rem 0.8rem;
+  margin: 0 0 0.55rem;
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.12em;
+}
+.press-date {
+  color: var(--brass);
+}
+.press-outlet {
+  color: var(--fog);
+  text-transform: uppercase;
+}
+.press-title {
+  margin: 0 0 0.5rem;
+  font-family: var(--font-display);
+  font-size: 1.06rem;
+  line-height: 1.35;
+}
+.press-title a {
+  color: var(--starlight);
+  text-decoration: none;
+}
+.press-title a:hover {
+  color: var(--cherenkov-soft);
+  text-decoration: underline;
+}
+.press-note {
+  margin: 0;
+  color: var(--fog);
+  font-size: 0.94rem;
+}
 .cv-print-note {
   margin-top: 2.5rem;
   font-family: var(--font-mono);

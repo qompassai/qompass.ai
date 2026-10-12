@@ -1,8 +1,8 @@
 # Matthew A. Porter's CV — the single source of truth for qompass.ai/cv.
 # Transcribed from his running resume (2026-10-12). Edit this file, rebuild,
 # and the page (and its print/PDF view) updates.
-# Groups: profile, experience, education, certifications, awards, service,
-# skills, identifiers, personal.
+# Groups: profile, experience, education, certifications, awards, press,
+# service, skills, identifiers, personal.
 
 [profile]
 name = "Matthew (Matt) Anthony Porter"
@@ -160,6 +160,34 @@ items = [
   "Army Service Ribbon",
   "Overseas Service Ribbon",
 ]
+
+[[press]]
+date = "2024-10"
+note = "One of four inaugural winners; $2,000 from the Washington State Department of Commerce and Greater Spokane Inc. to build Qompass AI's structured intern program."
+outlet = "Evergreen Bioscience Innovation Cluster — LinkedIn"
+title = "Qompass named an Evergreen Bio Internship Development Incentive winner"
+url = "https://www.linkedin.com/posts/bioscience-internships-workforcedevelopment-ugcPost-7253166460607320064-3FMH/"
+
+[[press]]
+date = "2022-07-01"
+note = "Joined the Medical Student Orthopedic Society and its Mentorship Leadership Committee, representing WSU's community-based program."
+outlet = "WSU Elson S. Floyd College of Medicine News"
+title = "Matt Porter joins the Medical Student Orthopedic Society"
+url = "https://medicine.wsu.edu/news/2022/07/01/matt-porter-joins-the-medical-student-orthopedic-society/"
+
+[[press]]
+date = "2022-06-23"
+note = "Received the 2022 Shikany Service Award — the Shikany Awards honor students who embody inspiration and service to the community."
+outlet = "WSU Elson S. Floyd College of Medicine News"
+title = "Blake Cohoe and Matt Porter receive the 2022 Shikany Awards"
+url = "https://medicine.wsu.edu/news/2022/06/23/blake-cohoe-and-matt-porter-receive-the-2022-shikany-awards/"
+
+[[press]]
+date = "2022-05-13"
+note = "Named a Chancellor's Excellence Award recipient in Leadership, and a recipient of the Veterans Scholarship."
+outlet = "WSU Elson S. Floyd College of Medicine News"
+title = "College of Medicine Chancellor's Excellence Award Recipients"
+url = "https://medicine.wsu.edu/news/2022/05/13/college-of-medicine-chancellors-excellence-award-recipients/"
 
 [[service]]
 item = "Peer Reviewer"

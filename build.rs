@@ -16,6 +16,8 @@ struct Cv {
     identifiers: Vec<Identifier>,
     personal: Personal,
     #[serde(default)]
+    press: Vec<Press>,
+    #[serde(default)]
     service: Vec<Item>,
     skills: Skills,
 }
@@ -74,6 +76,15 @@ struct SkillGroup {
 struct Identifier {
     label: String,
     value: String,
+    url: String,
+}
+
+#[derive(Deserialize)]
+struct Press {
+    date: String,
+    note: String,
+    outlet: String,
+    title: String,
     url: String,
 }
 
@@ -181,7 +192,8 @@ fn emit_cv() -> Result<(), Box<dyn std::error::Error>> {
          pub struct CvRole { pub role: &'static str, pub org: &'static str, pub period: &'static str, pub location: &'static str, pub bullets: &'static [&'static str] }\n\
          pub struct CvItem { pub item: &'static str, pub org: &'static str, pub period: &'static str, pub detail: &'static str }\n\
          pub struct CvSkillGroup { pub label: &'static str, pub items: &'static [&'static str] }\n\
-         pub struct CvIdentifier { pub label: &'static str, pub value: &'static str, pub url: &'static str }\n",
+         pub struct CvIdentifier { pub label: &'static str, pub value: &'static str, pub url: &'static str }\n\
+         pub struct CvPress { pub date: &'static str, pub note: &'static str, pub outlet: &'static str, pub title: &'static str, pub url: &'static str }\n",
     );
     let _ = writeln!(
         out,
@@ -231,6 +243,19 @@ fn emit_cv() -> Result<(), Box<dyn std::error::Error>> {
         }
         out.push_str("];\n");
     }
+    out.push_str("pub static CV_PRESS: &[CvPress] = &[");
+    for p in &cv.press {
+        let _ = write!(
+            out,
+            "CvPress {{ date: {}, note: {}, outlet: {}, title: {}, url: {} }},",
+            lit(&p.date),
+            lit(&p.note),
+            lit(&p.outlet),
+            lit(&p.title),
+            lit(&p.url)
+        );
+    }
+    out.push_str("];\n");
     let _ = writeln!(out, "pub static CV_PERSONAL_LINE: &str = {};", lit(&cv.personal.line));
     out.push_str("pub static CV_IDENTIFIERS: &[CvIdentifier] = &[");
     for i in &cv.identifiers {

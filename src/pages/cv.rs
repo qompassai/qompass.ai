@@ -85,6 +85,29 @@ pub fn Cv() -> impl IntoView {
                 })
                 .collect_view()}
 
+            <h2 class="cv-head">"Coverage"</h2>
+            <div class="press-grid">
+                {CV_PRESS
+                    .iter()
+                    .map(|p| {
+                        view! {
+                            <article class="press-card">
+                                <p class="press-meta">
+                                    <span class="press-date">{p.date}</span>
+                                    <span class="press-outlet">{p.outlet}</span>
+                                </p>
+                                <h3 class="press-title">
+                                    <a href={p.url} target="_blank" rel="noopener noreferrer">
+                                        {p.title}
+                                    </a>
+                                </h3>
+                                <p class="press-note">{p.note}</p>
+                            </article>
+                        }
+                    })
+                    .collect_view()}
+            </div>
+
             <h2 class="cv-head">"Service & Review"</h2>
             {CV_SERVICE
                 .iter()
