@@ -47,6 +47,8 @@ ssr = [
 [package.metadata.leptos]
 assets-dir = "public"
 bin-features = ["ssr"]
+end2end-cmd = "npx playwright test"
+end2end-dir = "end2end"
 lib-features = ["hydrate"]
 output-name = "qompass-ai"
 reload-port = 3001

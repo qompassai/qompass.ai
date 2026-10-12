@@ -4,3 +4,5 @@
 build.done
 CLIPPY_FULL_DUMP.txt
 CLIPPY_TRACKER.md
+end2end/node_modules/
+end2end/test-results/

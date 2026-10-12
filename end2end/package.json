@@ -1,0 +1,1 @@
+{"description":"Playwright end-to-end tests for qompass.ai, driven by `cargo leptos end-to-end`.","devDependencies":{"@playwright/test":"1.64.0"},"name":"qompass-ai-end2end","private":true,"version":"0.1.0"}
