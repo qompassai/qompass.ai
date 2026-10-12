@@ -1,0 +1,515 @@
+/* Qompass AI — design system.
+   A compass for the quantum deep: abyssal navy charts, Cherenkov glow,
+   quantum violet state-changes, brass instrument metal.
+   Tokens first; components after. Palette is deliberately NOT Hyprland aqua. */
+
+@font-face {
+  font-family: "Space Grotesk";
+  src: url("/fonts/space-grotesk-700.woff2") format("woff2");
+  font-weight: 700;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Space Grotesk";
+  src: url("/fonts/space-grotesk-500.woff2") format("woff2");
+  font-weight: 500;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Inter";
+  src: url("/fonts/inter-400.woff2") format("woff2");
+  font-weight: 400;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Inter";
+  src: url("/fonts/inter-600.woff2") format("woff2");
+  font-weight: 600;
+  font-display: swap;
+}
+@font-face {
+  font-family: "JetBrains Mono";
+  src: url("/fonts/jetbrains-mono-400.woff2") format("woff2");
+  font-weight: 400;
+  font-display: swap;
+}
+
+:root {
+  --abyss: #04070f;
+  --chart: #0a1220;
+  --chart-raise: #0e1930;
+  --chart-line: #1b2a44;
+  --cherenkov: #5b8cff;
+  --cherenkov-soft: #9dbcff;
+  --violet: #7c5cff;
+  --brass: #c9a227;
+  --brass-dim: #8f741f;
+  --starlight: #e8eef7;
+  --fog: #8ca3c3;
+  --font-display: "Space Grotesk", "Inter", system-ui, sans-serif;
+  --font-body: "Inter", system-ui, sans-serif;
+  --font-mono: "JetBrains Mono", ui-monospace, monospace;
+  --measure: 72rem;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  background: var(--abyss);
+}
+
+body {
+  margin: 0;
+  background:
+    radial-gradient(1100px 520px at 85% -10%, rgba(124, 92, 255, 0.13), transparent 60%),
+    radial-gradient(900px 600px at 8% 0%, rgba(91, 140, 255, 0.12), transparent 55%),
+    var(--abyss);
+  color: var(--starlight);
+  font-family: var(--font-body);
+  font-size: 1.0625rem;
+  line-height: 1.65;
+}
+
+a {
+  color: var(--cherenkov-soft);
+  text-decoration-color: rgba(201, 162, 39, 0.55);
+  text-underline-offset: 0.18em;
+}
+a:hover {
+  color: var(--starlight);
+  text-decoration-color: var(--violet);
+}
+
+h1,
+h2,
+h3 {
+  font-family: var(--font-display);
+  line-height: 1.12;
+  letter-spacing: -0.01em;
+}
+
+/* — Header ——————————————————————————————— */
+.site-header {
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  background: rgba(4, 7, 15, 0.86);
+  backdrop-filter: blur(10px);
+  border-bottom: 1px solid var(--brass-dim);
+}
+.header-inner {
+  max-width: var(--measure);
+  margin: 0 auto;
+  padding: 0.7rem 1.25rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+.brand {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  text-decoration: none;
+  color: var(--starlight);
+}
+.brand-mark {
+  width: 34px;
+  height: 34px;
+}
+.mark-ring {
+  fill: none;
+  stroke: var(--brass);
+  stroke-width: 1.4;
+}
+.mark-orbit {
+  fill: none;
+  stroke: var(--cherenkov);
+  stroke-width: 1;
+  stroke-dasharray: 3 4;
+}
+.mark-north {
+  fill: var(--cherenkov);
+}
+.mark-point {
+  fill: var(--fog);
+}
+.mark-core {
+  fill: var(--brass);
+}
+.brand-word {
+  font-family: var(--font-display);
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  font-size: 1.02rem;
+}
+.brand-ai {
+  color: var(--cherenkov);
+}
+.site-nav {
+  display: flex;
+  gap: 1.4rem;
+  font-family: var(--font-mono);
+  font-size: 0.86rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+.site-nav a {
+  color: var(--fog);
+  text-decoration: none;
+}
+.site-nav a:hover,
+.site-nav a[aria-current="page"] {
+  color: var(--brass);
+}
+
+/* — Hero ————————————————————————————————— */
+.hero {
+  position: relative;
+  overflow: hidden;
+  border-bottom: 1px solid var(--chart-line);
+  background:
+    linear-gradient(rgba(27, 42, 68, 0.35) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(27, 42, 68, 0.35) 1px, transparent 1px);
+  background-size: 56px 56px;
+}
+#qompass-hero {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+}
+.hero-copy {
+  position: relative;
+  max-width: var(--measure);
+  margin: 0 auto;
+  padding: 6.5rem 1.25rem 5.5rem;
+  pointer-events: none;
+}
+.hero-copy a {
+  pointer-events: auto;
+}
+.hero-bearing,
+.page-bearing,
+.pillar-mark,
+.entry-kind,
+.band-label {
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  letter-spacing: 0.22em;
+  color: var(--brass);
+  text-transform: uppercase;
+}
+.hero h1 {
+  font-size: clamp(2.5rem, 6.5vw, 4.4rem);
+  font-weight: 700;
+  margin: 0.8rem 0 1.1rem;
+  max-width: 13ch;
+}
+.hero h1 .glow {
+  color: var(--cherenkov);
+  text-shadow: 0 0 26px rgba(91, 140, 255, 0.65);
+}
+.hero-sub {
+  max-width: 56ch;
+  color: var(--fog);
+  font-size: 1.16rem;
+}
+.hero-ctas {
+  display: flex;
+  gap: 0.9rem;
+  flex-wrap: wrap;
+  margin-top: 2rem;
+}
+.cta {
+  font-family: var(--font-display);
+  font-weight: 500;
+  padding: 0.72rem 1.35rem;
+  border-radius: 3px;
+  text-decoration: none;
+}
+.cta-primary {
+  background: var(--cherenkov);
+  color: #04122e;
+  box-shadow: 0 0 22px rgba(91, 140, 255, 0.45);
+}
+.cta-primary:hover {
+  background: var(--cherenkov-soft);
+  color: #04122e;
+}
+.cta-quiet {
+  border: 1px solid var(--brass-dim);
+  color: var(--starlight);
+}
+.cta-quiet:hover {
+  border-color: var(--brass);
+  color: var(--brass);
+}
+
+/* — Content bands ———————————————————————— */
+.pillars,
+.chart-band,
+.page {
+  max-width: var(--measure);
+  margin: 0 auto;
+  padding: 3.2rem 1.25rem;
+}
+.pillars {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 1.6rem;
+}
+.pillar {
+  background: var(--chart);
+  border: 1px solid var(--chart-line);
+  border-top: 2px solid var(--brass-dim);
+  padding: 1.4rem 1.4rem 1.2rem;
+  border-radius: 4px;
+}
+.pillar h2 {
+  font-size: 1.3rem;
+  margin: 0.55rem 0 0.6rem;
+}
+.pillar p {
+  color: var(--fog);
+}
+.chart-band {
+  border-top: 1px solid var(--chart-line);
+}
+.band-copy {
+  font-family: var(--font-display);
+  font-size: 1.35rem;
+  max-width: 62ch;
+}
+.page h1 {
+  font-size: clamp(2.1rem, 5vw, 3.2rem);
+  margin: 0.7rem 0 1rem;
+}
+.page-lede {
+  color: var(--fog);
+  font-size: 1.14rem;
+  max-width: 64ch;
+}
+.prose p {
+  max-width: 68ch;
+  color: var(--starlight);
+}
+
+/* — Entries & records ———————————————————— */
+.entry-list {
+  display: grid;
+  gap: 1.1rem;
+  margin-top: 2rem;
+}
+.entry {
+  background: var(--chart);
+  border: 1px solid var(--chart-line);
+  border-left: 2px solid var(--cherenkov);
+  border-radius: 4px;
+  padding: 1.3rem 1.5rem;
+}
+.entry h2 {
+  margin: 0.4rem 0 0.5rem;
+  font-size: 1.35rem;
+}
+.entry p {
+  color: var(--fog);
+  margin: 0.3rem 0;
+}
+.tracker-entry {
+  border-left-color: var(--brass);
+}
+.tracker-abstract {
+  color: var(--starlight) !important;
+  border-left: 2px solid var(--violet);
+  padding-left: 0.9rem;
+}
+.tracker-next {
+  font-size: 0.95rem;
+}
+.tracker-next-label {
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  letter-spacing: 0.14em;
+  color: var(--brass);
+  text-transform: uppercase;
+}
+.record-head {
+  margin-top: 3rem;
+  font-size: 1.5rem;
+}
+.record-meta {
+  font-family: var(--font-mono);
+  font-size: 0.82rem;
+  color: var(--fog);
+}
+.record-list {
+  list-style: none;
+  padding: 0;
+  margin: 1rem 0 0;
+}
+.record-item {
+  display: grid;
+  grid-template-columns: 4.2rem 1fr;
+  gap: 0.2rem 1rem;
+  padding: 0.75rem 0;
+  border-bottom: 1px solid var(--chart-line);
+}
+.record-year {
+  font-family: var(--font-mono);
+  color: var(--brass);
+}
+.record-venue {
+  grid-column: 2;
+  color: var(--fog);
+  font-size: 0.94rem;
+}
+
+/* — CV ——————————————————————————————————— */
+.cv-title {
+  font-family: var(--font-display);
+  font-size: 1.25rem;
+  color: var(--cherenkov-soft);
+  margin: 0.2rem 0;
+}
+.cv-meta {
+  font-family: var(--font-mono);
+  font-size: 0.9rem;
+  color: var(--fog);
+}
+.cv-head {
+  margin-top: 2.6rem;
+  padding-bottom: 0.4rem;
+  border-bottom: 1px solid var(--brass-dim);
+  font-size: 1.45rem;
+}
+.cv-entry {
+  margin: 1.3rem 0;
+}
+.cv-row {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  flex-wrap: wrap;
+  align-items: baseline;
+}
+.cv-row h3 {
+  margin: 0;
+  font-size: 1.12rem;
+}
+.cv-period {
+  font-family: var(--font-mono);
+  font-size: 0.86rem;
+  color: var(--brass);
+}
+.cv-org {
+  color: var(--cherenkov-soft);
+  margin: 0.15rem 0 0.4rem;
+}
+.cv-bullets {
+  margin: 0.3rem 0 0;
+  padding-left: 1.2rem;
+  color: var(--fog);
+}
+.cv-skills {
+  color: var(--fog);
+}
+.cv-skill-label,
+.cv-id-label {
+  color: var(--starlight);
+  font-weight: 600;
+}
+.cv-ids {
+  list-style: none;
+  padding: 0;
+  font-family: var(--font-mono);
+  font-size: 0.92rem;
+  color: var(--fog);
+}
+.cv-print-note {
+  margin-top: 2.5rem;
+  font-family: var(--font-mono);
+  font-size: 0.82rem;
+  color: var(--fog);
+}
+.mono-block {
+  font-family: var(--font-mono);
+  font-size: 1.05rem !important;
+  letter-spacing: 0.04em;
+  color: var(--starlight);
+}
+.mono-inline {
+  font-family: var(--font-mono);
+  font-size: 0.92em;
+  color: var(--brass);
+}
+
+/* — Footer ——————————————————————————————— */
+.site-footer {
+  border-top: 1px solid var(--chart-line);
+  margin-top: 2rem;
+}
+.footer-inner {
+  max-width: var(--measure);
+  margin: 0 auto;
+  padding: 2rem 1.25rem 2.6rem;
+  color: var(--fog);
+  font-size: 0.95rem;
+}
+.footer-links {
+  display: flex;
+  gap: 1.3rem;
+  font-family: var(--font-mono);
+  font-size: 0.85rem;
+}
+.footer-note {
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  letter-spacing: 0.08em;
+}
+
+/* — Motion & print ——————————————————————— */
+@media (prefers-reduced-motion: no-preference) {
+  .hero-copy {
+    animation: rise 0.9s ease-out both;
+  }
+  @keyframes rise {
+    from {
+      opacity: 0;
+      transform: translateY(14px);
+    }
+    to {
+      opacity: 1;
+      transform: none;
+    }
+  }
+}
+
+@media print {
+  :root {
+    --abyss: #ffffff;
+    --chart: #ffffff;
+    --starlight: #101828;
+    --fog: #3d4b63;
+    --chart-line: #c8d2e0;
+    --cherenkov: #1c4fd6;
+    --cherenkov-soft: #1c4fd6;
+    --brass: #7a5f10;
+    --brass-dim: #7a5f10;
+  }
+  body {
+    background: #ffffff;
+    font-size: 10.5pt;
+  }
+  .site-header,
+  .site-footer,
+  .cv-print-note {
+    display: none;
+  }
+  .page {
+    padding: 0;
+  }
+}

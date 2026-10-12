@@ -1,0 +1,224 @@
+# Matthew A. Porter's CV — the single source of truth for qompass.ai/cv.
+# Transcribed from his running resume (2026-10-12). Edit this file, rebuild,
+# and the page (and its print/PDF view) updates.
+# Groups: profile, experience, education, certifications, awards, service,
+# skills, identifiers, personal.
+
+[profile]
+name = "Matthew (Matt) Anthony Porter"
+title = "Service-Disabled Veteran · Deep-Tech Founder & CEO, Qompass AI"
+location = "Spokane, WA"
+email = "map@qompass.ai"
+summary = "West Point graduate and former Army intelligence officer (Bronze Star) who moved through medicine into deep tech: founder of Qompass AI, post-quantum cryptography researcher, certified Python instructor, and field service technician — the rare profile that runs from brigade intelligence staff to fiber splice tray."
+
+[[experience]]
+role = "Field Service Technician"
+org = "TDS Telecom — Spokane, WA"
+period = "02/2026 — Present"
+location = "Spokane, WA"
+bullets = [
+  "First FST in market history to earn the WA Telecom Administrator License, allowing internal MDU wiring permits.",
+  "Developed the first educational framework for the telecommunications administrator exam and the first market training SharePoint.",
+  "2026 TDS Field Service Top Notch Award.",
+]
+
+[[experience]]
+role = "Founder & Chief Executive Officer"
+org = "Qompass AI — Spokane, WA"
+period = "03/2023 — Present"
+location = "Spokane, WA"
+bullets = [
+  "Service-disabled veteran deep-tech startup: post-quantum cryptography benchmarking, AI safety research, and a Rust infrastructure fleet (vongola, volta, bunker, phlow, diver).",
+  "Consulting: awarded a $30,000 Zimmer Biomet Foundation grant for the first national GenAI medical-education pilot with para-access capabilities.",
+  "Teaching: awarded a $2,000 Greater Spokane Incorporated grant for the PathFinder intern program; trained 12 interns.",
+  "Selected as an American Association of Medical Colleges AI Community Champion for educational expertise.",
+]
+
+[[experience]]
+role = "Education Ambassador"
+org = "North American Spine Society · MSOS · Pixorize · MedAll · Elsevier"
+period = "06/2022 — 03/2023"
+location = "Spokane, WA"
+bullets = [
+  "Coordinated matching of 22 underrepresented medical students from 14 medical schools with 13 longitudinal attending mentors.",
+  "MedAll: coordinated international technical collaboration resulting in a 200% increase in student mentorship access.",
+]
+
+[[experience]]
+role = "Student Educational Leader"
+org = "WSU Elson S. Floyd College of Medicine — Spokane, WA"
+period = "06/2021 — 03/2023"
+location = "Spokane, WA"
+bullets = [
+  "Outreach: founded a longitudinal AI-enabled youth outreach program; raised $10,000 to deliver small-group and individualized K-12 instruction.",
+  "Research: founded a multi-site Community Research Mentorship Center supporting 20 students mentored by five MD/PhD researchers.",
+  "Built the first AI-enabled educational knowledge platform; adopted by WSU Medicine with over 8,000 uses.",
+  "Co-founded three student groups (Diversity Alliance, Financial Medicine, PM&R) and led 10 events, partnering with two residency programs and three hospital systems.",
+]
+
+[[experience]]
+role = "Intelligence Officer — Top Secret Clearance"
+org = "United States Army (Active Duty)"
+period = "05/2011 — 06/2019"
+location = "AZ · KR · CO · AF · WA"
+bullets = [
+  "Brigade Intelligence Officer / Intelligence Director: served in a senior Major (O-4) position as a Captain (O-3) while transitioning out of the military.",
+  "Detachment Commander / Director: led an intelligence support company of 74 soldiers and equipment valued at $40,000,000.",
+  "Directed over 1,000 intelligence collection operations; collaborated with international partners, Palantir, and national intelligence agencies supporting a successful democratic election and provincial transfer in Afghanistan.",
+  "Led pilot training maneuver intelligence program training eight deployed tactical intelligence teams.",
+  "Fusion Platoon Leader: led the northernmost US / Republic of Korea tactical intelligence cell.",
+]
+
+[[experience]]
+role = "Acute Care Medical Scribe"
+org = "Spanaway Community Healthcare Clinic — Spanaway, WA"
+period = "08/2019 — 03/2020"
+location = "Spanaway, WA"
+bullets = [
+  "Supported acute-care patients in medically underserved regions with patient education, lab orders, and referrals.",
+]
+
+[[experience]]
+role = "Volunteer Emergency Technician"
+org = "Tacoma Neighborhood Free Clinic — Tacoma, WA"
+period = "07/2019 — 03/2020"
+location = "Tacoma, WA"
+bullets = [
+  "Patient intake, education, labs, and referrals for Project Access patients — uninsured and disabled patients in Tacoma.",
+]
+
+[[experience]]
+role = "Volunteer Trainer / ER Volunteer"
+org = "MultiCare Allenmore Emergency Department — Tacoma, WA"
+period = "10/2018 — 03/2020"
+location = "Tacoma, WA"
+bullets = [
+  "Selected as Emergency Room Volunteer Trainer for support given to clinical staff; trained 15 new volunteers.",
+]
+
+[[education]]
+item = "Medical Studies — Elson S. Floyd College of Medicine"
+org = "Washington State University, Spokane, WA"
+period = "08/2020 — 04/2025"
+detail = "Class of 2026; leave of absence 03/2023–12/2024; withdrew 04/2025. Student Educational Leader; founded the Community Research Mentorship Center and an AI-enabled educational platform adopted college-wide."
+
+[[education]]
+item = "B.S. Life Sciences, with Honors — Nuclear Engineering Track"
+org = "United States Military Academy, West Point, NY"
+period = "07/2007 — 05/2011"
+detail = "Class of 2011. Cadet Leader: Regimental Academic Officer, USMAPS Basic Training Deputy Director, American Chemical Society Youth Mentor, Special Olympics Partner."
+
+[[education]]
+item = "Certificate in Emergency Medical Services"
+org = "Pierce Community College, Ft. Steilacoom, WA"
+period = "01/2019 — 03/2019"
+detail = "EMT-Basic (EMS ID 3725-5746-8319), 03/2019–03/2021."
+
+[[certifications]]
+label = "Instruction"
+items = ["Anaconda Certified Python Instructor (04/2024 — current)", "Microsoft Certified Educator"]
+
+[[certifications]]
+label = "Microsoft Azure"
+items = ["Data Science Associate", "Data Engineer Associate", "Security Engineer Associate"]
+
+[[certifications]]
+label = "Google"
+items = ["Project Management", "Cybersecurity", "Business Intelligence", "Digital Marketing"]
+
+[[certifications]]
+label = "Medical"
+items = ["Johns Hopkins Health IT (10/2023)", "EMT-Basic (03/2019 — 03/2021)"]
+
+[[awards]]
+label = "Professional"
+items = [
+  "2026 TDS Field Service Top Notch Award",
+  "2024 Zimmer Biomet Startup Pre-Seed Grant ($30,000)",
+  "2024 VIP Foster Teamwork Award (x2)",
+  "2024 Evergreen Internship Development Incentive ($2,000)",
+  "2023 Perry Initiative Orthopaedics in Action Grant ($2,000)",
+  "2022 Health Sciences Chancellor's Excellence Award for Leadership ($1,000)",
+  "2022 WSU Shikany Service Award ($1,000)",
+  "2022 WSU Carson Veteran Scholarship ($1,000)",
+  "Founding Dean's Research Grant Recipient (3x, $5,000)",
+  "WSU Research Travel Grant ($875)",
+]
+
+[[awards]]
+label = "Military Decorations"
+items = [
+  "Bronze Star",
+  "Army Commendation Medal (x2)",
+  "Army Achievement Medal",
+  "Afghanistan Campaign Medal with Campaign Star",
+  "Global War on Terrorism Service Medal",
+  "Korea Defense Service Medal",
+  "National Defense Service Medal",
+  "German Armed Forces Proficiency Badge",
+  "NATO Medal",
+  "Army Service Ribbon",
+  "Overseas Service Ribbon",
+]
+
+[[service]]
+item = "Peer Reviewer"
+detail = "Manuscripts on LLMs in medical education and clinical AI — JGME, JMIR, and orthopaedic journals."
+
+[[service]]
+item = "Youth Instructor"
+detail = "Village Seven Presbyterian Church, Colorado Springs, CO (07/2013–12/2013) — classroom teaching and mentoring of 15 elementary students."
+
+[skills]
+groups = [
+  { label = "Code", items = ["Python", "Rust", "Lua", "JavaScript", "C++ (Unreal)", "Go", "Zig", "CUDA", "Mojo"] },
+  { label = "Network", items = ["IPv6/IPv4", "DNS", "SSL/TLS", "SSH", "GPG/PGP", "Tor"] },
+  { label = "DevOps", items = ["Bash", "Kernel", "Docker/Podman", "Kubernetes", "Terraform", "Ansible", "Postgres", "MySQL/MariaDB", "SQLite", "Redis/Valkey", "Vulkan", "Git"] },
+  { label = "Systems", items = ["Windows 10/11", "macOS", "Debian", "Ubuntu", "Arch", "Nix", "Fedora"] },
+  { label = "Medical & Healthcare", items = ["CPR", "BLS", "HIPAA Compliance", "Research Design", "Publication", "Peer Review"] },
+  { label = "Military", items = ["Project Management", "Leadership", "Civil/Military Relations"] },
+  { label = "Education", items = ["AI Education Integration", "Teaching", "Tutoring", "Para-Education", "Curriculum Development"] },
+]
+
+[[identifiers]]
+label = "ORCID"
+value = "0000-0002-0302-4812"
+url = "https://orcid.org/0000-0002-0302-4812"
+
+[[identifiers]]
+label = "Scopus Author ID"
+value = "57385910700"
+url = ""
+
+[[identifiers]]
+label = "ResearcherID (Web of Science)"
+value = "HNQ-0292-2023"
+url = ""
+
+[[identifiers]]
+label = "Loop profile"
+value = "2230223"
+url = ""
+
+[[identifiers]]
+label = "AuthenticusID"
+value = "R-00K-KM3"
+url = ""
+
+[[identifiers]]
+label = "SciProfiles"
+value = "2835041"
+url = ""
+
+[[identifiers]]
+label = "GitHub"
+value = "qompassai · PhaedrusFlow"
+url = "https://github.com/qompassai"
+
+[[identifiers]]
+label = "YouTube"
+value = "@QompassAI"
+url = "https://www.youtube.com/@QompassAI"
+
+[personal]
+line = "Motorcycles, programming, and time with my wife Katy and our dogs Dempsey and Zen."

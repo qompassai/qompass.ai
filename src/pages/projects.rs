@@ -1,0 +1,103 @@
+use leptos::prelude::*;
+use leptos_meta::Title;
+
+#[component]
+pub fn Projects() -> impl IntoView {
+    view! {
+        <Title text="Projects - Qompass AI" />
+        <section class="page">
+            <p class="page-bearing">"CHART — THE FLEET"</p>
+            <h1>"Projects"</h1>
+            <p class="page-lede">
+                "Open source, Apache-2.0, built in the open at "
+                <a href="https://github.com/qompassai">"github.com/qompassai"</a>
+                ". Every vessel below is in active service — this website runs on three of them."
+            </p>
+            <div class="entry-list">
+                <article class="entry">
+                    <p class="entry-kind">"REVERSE PROXY — RUST"</p>
+                    <h2>
+                        <a href="https://github.com/qompassai/vongola">"vongola"</a>
+                    </h2>
+                    <p>
+                        "Post-quantum hybrid TLS reverse proxy on Pingora, with built-in ACME. "
+                        "It serves this site."
+                    </p>
+                </article>
+                <article class="entry">
+                    <p class="entry-kind">"OPENPGP KEY SERVER — RUST"</p>
+                    <h2>
+                        <a href="https://github.com/qompassai/volta">"volta"</a>
+                    </h2>
+                    <p>
+                        "A Hagrid-derived key server — HKP, VKS, and Web Key Directory — with "
+                        "post-quantum ambitions: ML-KEM/ML-DSA throughout, WebAuthn-class "
+                        "authentication, no deprecated algorithms. Live at keys.qompass.ai."
+                    </p>
+                </article>
+                <article class="entry">
+                    <p class="entry-kind">"NIX BINARY CACHE — RUST"</p>
+                    <h2>
+                        <a href="https://github.com/qompassai/bunker">"bunker"</a>
+                    </h2>
+                    <p>
+                        "An Attic-based Nix binary cache with hybrid Ed25519 + ML-DSA-65 "
+                        "narinfo signing — packages signed for the post-quantum era, served "
+                        "from cache.qompass.ai."
+                    </p>
+                </article>
+                <article class="entry">
+                    <p class="entry-kind">"PGP MAIL CLIENT — ANDROID"</p>
+                    <h2>"ghost"</h2>
+                    <p>
+                        "Encrypted mail the way it should feel: OpenPGP compose with a real "
+                        "key picker, Tor transport, and key lookup against volta. Heading to "
+                        "F-Droid."
+                    </p>
+                </article>
+                <article class="entry">
+                    <p class="entry-kind">"NEOVIM ENVIRONMENT — LUA"</p>
+                    <h2>
+                        <a href="https://github.com/qompassai/diver">"diver"</a>
+                    </h2>
+                    <p>
+                        "A Neovim-native development environment: 138 formatter adapters, deep "
+                        "LSP coverage, in-editor AI — the cockpit the rest of the fleet is "
+                        "built from."
+                    </p>
+                </article>
+                <article class="entry">
+                    <p class="entry-kind">"AGENT RUNTIME — RUST"</p>
+                    <h2>
+                        <a href="https://github.com/qompassai/phlow">"phlow"</a>
+                    </h2>
+                    <p>
+                        "A bounded planner-coder-reviewer agent runtime: one safe core shared "
+                        "by CLI, TUI, and MCP, with operator-approved checks and an "
+                        "ATLAS-mapped adversarial test program."
+                    </p>
+                </article>
+                <article class="entry">
+                    <p class="entry-kind">"GAME — RUST / BEVY"</p>
+                    <h2>
+                        <a href="https://github.com/qompassai/light-show">"light-show"</a>
+                    </h2>
+                    <p>
+                        "A fiber-optic cabling puzzle game — route the light, validate the "
+                        "signal. Coming to Google Play, F-Droid, and Windows."
+                    </p>
+                </article>
+                <article class="entry">
+                    <p class="entry-kind">"REVERSE ENGINEERING — RUST"</p>
+                    <h2>
+                        <a href="https://github.com/qompassai/fathom">"fathom"</a>
+                    </h2>
+                    <p>
+                        "A clean-room Rust port of the REA MCP reverse-engineering server — "
+                        "depth-sounding for binaries."
+                    </p>
+                </article>
+            </div>
+        </section>
+    }
+}

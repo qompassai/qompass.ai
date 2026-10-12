@@ -1,0 +1,40 @@
+#!/usr/bin/env bash
+# Prerender the Leptos SSR build into dist/ — the static site that gets
+# deployed to the VPS. Run after `cargo leptos build --release`.
+set -euo pipefail
+cd "$(dirname "$0")/.."
+
+BIN="target/release/qompass-ai"
+SITE="target/site"
+DIST="dist"
+ROUTES=("/" "/research" "/projects" "/cv" "/about" "/contact")
+
+rm -rf "$DIST"
+mkdir -p "$DIST"
+cp -r "$SITE"/. "$DIST"/
+
+"$BIN" &
+SERVER_PID=$!
+trap 'kill "$SERVER_PID" 2>/dev/null || true' EXIT
+
+for _ in $(seq 1 50); do
+    if curl -sf http://127.0.0.1:3000/ >/dev/null; then
+        break
+    fi
+    sleep 0.2
+done
+
+for route in "${ROUTES[@]}"; do
+    if [ "$route" = "/" ]; then
+        out="$DIST/index.html"
+    else
+        mkdir -p "$DIST$route"
+        out="$DIST$route/index.html"
+    fi
+    curl -sf "http://127.0.0.1:3000$route" -o "$out"
+    echo "prerendered $route -> $out"
+done
+
+kill "$SERVER_PID"
+trap - EXIT
+echo "dist/ ready: $(du -sh "$DIST" | cut -f1)"

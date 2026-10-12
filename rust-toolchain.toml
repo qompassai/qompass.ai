@@ -1,0 +1,7 @@
+# Current stable Rust, no exact version pin: any machine builds this site
+# identically (wasm target + lint/format components declared).
+[toolchain]
+channel = "stable"
+targets = ["wasm32-unknown-unknown"]
+components = ["clippy", "rustfmt", "rust-src"]
+profile = "default"

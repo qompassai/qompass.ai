@@ -1,0 +1,6 @@
+/target
+/dist
+*.log
+build.done
+CLIPPY_FULL_DUMP.txt
+CLIPPY_TRACKER.md

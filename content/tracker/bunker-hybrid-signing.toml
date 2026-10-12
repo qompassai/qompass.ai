@@ -1,0 +1,9 @@
+title = "Hybrid-signed package caches: an Ed25519 + ML-DSA-65 field report"
+topic = "A practice paper from building bunker: how hybrid classical/post-quantum narinfo signing works in a Nix binary cache, what the key-loading contract has to guarantee, and what a live deployment on qompass.ai proves out."
+abstract = ""
+stage = "drafting"
+updated = "2026-10-12"
+next_step = "Complete the VPS deployment validation (push/pull as a signed substituter), then fold the results in."
+public = true
+abstract_public = false
+tags = ["post-quantum", "nix", "bunker", "infrastructure"]

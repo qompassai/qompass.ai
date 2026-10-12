@@ -1,0 +1,9 @@
+title = "Qompass Benchmark v1 (Kaggle)"
+topic = "A public benchmark built from the estate's evaluation work — scoped and specced, awaiting a build decision."
+abstract = ""
+stage = "soundings"
+updated = "2026-10-12"
+next_step = "Founder go/no-go on the v1 scope."
+public = false
+abstract_public = false
+tags = ["benchmarks", "evaluation"]

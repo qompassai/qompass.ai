@@ -1,0 +1,9 @@
+title = "The grounded/ungrounded gap: MATE protocol coordination results"
+topic = "Multi-agent coordination experiments run under the MATE protocol analog in phlow: whether agents with grounded shared context coordinate measurably better than ungrounded agents, and by how much."
+abstract = ""
+stage = "soundings"
+updated = "2026-10-12"
+next_step = "Record the falsifiable-checkpoint verdict (OP-only condition must stay at chance) and finish the Phase 1 seed sweep before drafting."
+public = false
+abstract_public = false
+tags = ["agents", "phlow", "evaluation"]
