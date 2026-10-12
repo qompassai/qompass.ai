@@ -4,13 +4,13 @@ use leptos_meta::Title;
 #[component]
 pub fn Home() -> impl IntoView {
     view! {
-        <Title text="Qompass AI - Navigation for the Quantum Age" />
+        <Title text="Qompass AI - Navigating Deep Tech's Murky Waters" />
         <section class="hero">
             <canvas id="qompass-hero" aria-hidden="true"></canvas>
             <div class="hero-copy">
                 <p class="hero-bearing">"47.66° N · 117.43° W — SPOKANE, FIXED"</p>
                 <h1>
-                    "Navigation for the " <span class="glow">"quantum age"</span> "."
+                    "Navigating deep tech's " <span class="glow">"murky waters"</span> "."
                 </h1>
                 <p class="hero-sub">
                     "Qompass AI builds the instruments deep tech runs on: post-quantum "

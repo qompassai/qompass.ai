@@ -15,7 +15,7 @@ pub fn shell(options: LeptosOptions) -> impl IntoView {
                 <meta name="viewport" content="width=device-width, initial-scale=1" />
                 <meta
                     name="description"
-                    content="Qompass AI - navigation for the quantum age. Post-quantum systems, agent runtimes, and deep-tech research."
+                    content="Qompass AI - navigating deep tech's murky waters. Post-quantum systems, agent runtimes, and deep-tech research."
                 />
                 <Stylesheet id="leptos" href="/pkg/qompass-ai.css" />
                 <AutoReload options=options.clone() />
