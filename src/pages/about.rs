@@ -8,11 +8,6 @@ pub fn About() -> impl IntoView {
         <section class="page">
             <p class="page-bearing">"CHART — THE COMPANY"</p>
             <h1>"About"</h1>
-            <p class="page-lede">
-                "Qompass AI is the trade name of Amor Fati Labs LLC, a Washington company "
-                "founded by Matthew A. Porter — West Point Class of 2011, former Army "
-                "intelligence officer, and service-disabled veteran."
-            </p>
             <div class="prose">
                 <p>
                     "The name is the mission. A compass does not move the ship — it tells the "
