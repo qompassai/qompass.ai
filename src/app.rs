@@ -1,6 +1,6 @@
 use crate::pages::{about::About, contact::Contact, cv::Cv, home::Home, projects::Projects, research::Research};
 use leptos::prelude::*;
-use leptos_meta::{provide_meta_context, MetaTags, Title};
+use leptos_meta::{provide_meta_context, MetaTags, Stylesheet, Title};
 use leptos_router::{
     components::{Route, Router, Routes, A},
     path,
@@ -17,6 +17,7 @@ pub fn shell(options: LeptosOptions) -> impl IntoView {
                     name="description"
                     content="Qompass AI - navigation for the quantum age. Post-quantum systems, agent runtimes, and deep-tech research."
                 />
+                <Stylesheet id="leptos" href="/pkg/qompass-ai.css" />
                 <AutoReload options=options.clone() />
                 <HydrationScripts options />
                 <MetaTags />
