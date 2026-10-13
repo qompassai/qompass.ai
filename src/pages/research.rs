@@ -18,6 +18,9 @@ pub fn Research() -> impl IntoView {
                 <a href="https://orcid.org/0000-0002-0302-4812">"ORCID 0000-0002-0302-4812"</a>
                 " — when the ORCID record changes, this page follows."
             </p>
+            <p class="page-motto">
+                "Quality is not a claim. It is what remains after the check."
+            </p>
             <div class="entry-list">
                 <article class="entry">
                     <p class="entry-kind">"BENCHMARK STUDY"</p>

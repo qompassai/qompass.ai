@@ -456,6 +456,13 @@ h3 {
   font-size: 1.14rem;
   max-width: 64ch;
 }
+.page-motto {
+  color: var(--brass);
+  font-family: var(--font-display);
+  font-style: italic;
+  margin-top: 1rem;
+  text-align: center;
+}
 .prose p {
   max-width: 68ch;
   color: var(--starlight);
