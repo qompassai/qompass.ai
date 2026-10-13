@@ -1,0 +1,9 @@
+title = "First, Do No Harm"
+topic = "A pragmatic standard for safe, secure, and trustworthy AI: drawn from clinical medicine's oldest rule and a red teamer's threat model, and written to be applied, not admired."
+abstract = ""
+stage = "soundings"
+updated = "2026-10-13"
+next_step = ""
+public = true
+abstract_public = false
+tags = ["ai-safety", "security", "policy"]
