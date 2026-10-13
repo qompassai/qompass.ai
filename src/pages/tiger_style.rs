@@ -12,6 +12,149 @@ use leptos::prelude::*;
 use leptos_meta::Title;
 use leptos_router::hooks::use_params_map;
 
+/// The badge every chapter icon shares.
+///
+/// A rounded tile, a gradient ring (the `ts-ring-grad` gradient
+/// defined once beside the chapters), a soft halo, and a dashed
+/// orbit ring the stylesheet slowly turns. Glyphs are hand-drawn
+/// in the Qompass palette — stylized motifs, never the projects'
+/// own logo assets.
+const ICON_BADGE: &str = r#"<rect x="3" y="3" width="42" height="42" rx="11" fill="var(--chart-raise)" stroke="url(#ts-ring-grad)" stroke-width="1.6"/><circle class="ts-icon-halo" cx="24" cy="24" r="11" fill="var(--cherenkov)"/><circle class="ts-icon-ring" cx="24" cy="24" r="17.5" fill="none" stroke="var(--cherenkov)" stroke-opacity=".5" stroke-width="1.3" stroke-dasharray="3.5 5.5"/>"#;
+
+/// The glyph at the centre of one chapter's icon badge, by slug.
+fn icon_glyph(slug: &str) -> &'static str {
+    match slug {
+        "aseprite" => {
+            r##"<g fill="#9DBCFF"><rect x="13.5" y="13.5" width="7" height="7" rx="1.5" opacity=".5"/><rect x="22.5" y="13.5" width="7" height="7" rx="1.5" opacity=".85"/><rect x="31.5" y="13.5" width="7" height="7" rx="1.5" opacity=".5"/><rect x="13.5" y="22.5" width="7" height="7" rx="1.5" opacity=".85"/><rect x="31.5" y="22.5" width="7" height="7" rx="1.5" opacity=".85"/><rect x="13.5" y="31.5" width="7" height="7" rx="1.5" opacity=".5"/><rect x="22.5" y="31.5" width="7" height="7" rx="1.5" opacity=".85"/><rect x="31.5" y="31.5" width="7" height="7" rx="1.5" opacity=".5"/></g><rect x="22.5" y="22.5" width="7" height="7" rx="1.5" fill="#C9A227"/>"##
+        }
+        "bash" => r#"<text class="ts-icon-text" x="24" y="30" text-anchor="middle" font-size="15">&gt;_</text>"#,
+        "c" => r#"<text class="ts-icon-text" x="24" y="32" text-anchor="middle" font-size="22">C</text>"#,
+        "cpp" => r#"<text class="ts-icon-text" x="24" y="29.5" text-anchor="middle" font-size="13.5">C++</text>"#,
+        "go" => r#"<text class="ts-icon-text" x="24" y="30.5" text-anchor="middle" font-size="17">Go</text>"#,
+        "kotlin" => {
+            r##"<path d="M13 35 L35 13 L35 35 Z" fill="#7C5CFF" opacity=".3"/><text class="ts-icon-text" x="24" y="31" text-anchor="middle" font-size="19">K</text>"##
+        }
+        "lua" => {
+            r##"<path d="M28.5 9.5 A14.5 14.5 0 1 0 28.5 38.5 A17.5 17.5 0 1 1 28.5 9.5 Z" fill="#9DBCFF"/><circle cx="32" cy="15.5" r="1.7" fill="#C9A227"/>"##
+        }
+        "mojo" => {
+            r##"<path d="M24 9 C27.5 14.5 32 18.5 32 26.5 A8 8 0 1 1 16 26.5 C16 18.5 20.5 14.5 24 9 Z" fill="none" stroke="#9DBCFF" stroke-width="1.8"/><path d="M24 21.5 C25.8 23.8 27.3 25.4 27.3 28.3 A3.3 3.3 0 1 1 20.7 28.3 C20.7 25.4 22.2 23.8 24 21.5 Z" fill="#C9A227"/>"##
+        }
+        "nix" => {
+            r##"<g stroke="#9DBCFF" stroke-width="2" stroke-linecap="round"><line x1="24" y1="13" x2="24" y2="35"/><line x1="14.5" y1="18.5" x2="33.5" y2="29.5"/><line x1="33.5" y1="18.5" x2="14.5" y2="29.5"/></g><circle cx="24" cy="24" r="2.3" fill="#C9A227"/>"##
+        }
+        "odin" => {
+            r##"<path d="M15.5 15.5 L12 10.5 M32.5 15.5 L36 10.5" stroke="#7C5CFF" stroke-width="2" stroke-linecap="round" fill="none"/><circle cx="24" cy="24" r="9.5" fill="none" stroke="#9DBCFF" stroke-width="2"/><circle cx="24" cy="24" r="3.4" fill="#C9A227"/>"##
+        }
+        "php" => {
+            r##"<ellipse cx="24" cy="24" rx="13" ry="9.5" fill="none" stroke="#9DBCFF" stroke-width="1.8"/><text class="ts-icon-mono" x="24" y="27.5" text-anchor="middle" font-size="10">php</text>"##
+        }
+        "python" => {
+            r##"<rect x="13" y="13" width="15" height="11" rx="5.5" fill="none" stroke="#5B8CFF" stroke-width="2"/><rect x="20" y="24" width="15" height="11" rx="5.5" fill="none" stroke="#C9A227" stroke-width="2"/><circle cx="19.5" cy="18.5" r="1.7" fill="#9DBCFF"/><circle cx="28.5" cy="29.5" r="1.7" fill="#C9A227"/>"##
+        }
+        "rust" => {
+            r##"<circle cx="24" cy="24" r="11" fill="none" stroke="#9DBCFF" stroke-width="4.5" stroke-dasharray="4.2 4.45"/><circle cx="24" cy="24" r="3.2" fill="#C9A227"/>"##
+        }
+        "scala" => {
+            r##"<polyline points="13,33.5 20,33.5 20,26.5 27,26.5 27,19.5 35,19.5" fill="none" stroke="#9DBCFF" stroke-width="2.4" stroke-linejoin="round" stroke-linecap="round"/><rect x="32.5" y="11.5" width="5" height="5" fill="#C9A227"/>"##
+        }
+        "typescript" => r#"<text class="ts-icon-text" x="24" y="29.5" text-anchor="middle" font-size="14.5">TS</text>"#,
+        "wgsl" => {
+            r##"<path d="M12.5 20.5 Q16.5 15.5 20.5 20.5 T28.5 20.5 T36.5 20.5" fill="none" stroke="#5B8CFF" stroke-width="2" stroke-linecap="round"/><path d="M12.5 28 Q16.5 23 20.5 28 T28.5 28 T36.5 28" fill="none" stroke="#7C5CFF" stroke-width="2" stroke-linecap="round"/>"##
+        }
+        "zig" => r##"<polygon points="27.5,9 15.5,26.5 22.5,26.5 20,39 33,20.5 26,20.5" fill="#C9A227"/>"##,
+        _ => r##"<circle cx="24" cy="24" r="4" fill="#9DBCFF"/>"##,
+    }
+}
+
+/// The one-sentence header summary for a chapter, where one is used.
+///
+/// Three chapters' imported scope lines are long, multi-sentence
+/// skill descriptions whose substance the guide body already
+/// carries; their headers keep one sentence summarizing the
+/// approach instead, and nothing is repeated inside. Every other
+/// chapter folds its scope line into the chapter as the lead and
+/// its header is name-only.
+fn chapter_headline(slug: &str) -> Option<&'static str> {
+    match slug {
+        "c" => Some("Safety-first C — explicit contracts, checked bounds, and disciplined manual ownership, hardened against overflow and use-after-free."),
+        "nix" => Some("Safety-first Nix — pure evaluation, explicit inputs, and pinned sources, validated by a pinned toolchain."),
+        "typescript" => Some("Safety-first TypeScript under the strict profile — explicit contracts, strict null handling, and bounded async work."),
+        _ => None,
+    }
+}
+
+/// Reference links for one chapter's body, by slug.
+///
+/// The official language or tool documentation, the standard or
+/// toolchain reference the guide names, and the lineage link where
+/// it fits. Every URL verified live when this list was written.
+fn chapter_references(slug: &str) -> &'static [(&'static str, &'static str)] {
+    match slug {
+        "aseprite" => &[
+            ("Aseprite", "https://www.aseprite.org/"),
+            ("Aseprite CLI docs", "https://www.aseprite.org/docs/cli/"),
+            ("Aseprite scripting docs", "https://www.aseprite.org/docs/scripting/"),
+        ],
+        "bash" => &[
+            ("Bash manual", "https://www.gnu.org/software/bash/manual/html_node/index.html"),
+            ("ShellCheck", "https://www.shellcheck.net/"),
+        ],
+        "c" => {
+            &[("C reference (cppreference)", "https://en.cppreference.com/w/c"), ("clangd", "https://clangd.llvm.org/")]
+        }
+        "cpp" => &[
+            ("C++ reference (cppreference)", "https://en.cppreference.com/w/cpp"),
+            ("C++ Core Guidelines", "https://isocpp.github.io/CppCoreGuidelines/CppCoreGuidelines"),
+        ],
+        "go" => &[("Go documentation", "https://go.dev/doc/"), ("Effective Go", "https://go.dev/doc/effective_go")],
+        "kotlin" => &[
+            ("Kotlin documentation", "https://kotlinlang.org/docs/home.html"),
+            ("Kotlin standard library", "https://kotlinlang.org/api/latest/jvm/stdlib/"),
+        ],
+        "lua" => &[("Lua 5.4 reference manual", "https://www.lua.org/manual/5.4/"), ("LuaJIT", "https://luajit.org/")],
+        "mojo" => &[
+            ("Mojo documentation", "https://docs.modular.com/mojo/"),
+            ("Mojo manual", "https://docs.modular.com/mojo/manual/"),
+        ],
+        "nix" => &[
+            ("Nix manual", "https://nixos.org/manual/nix/stable/"),
+            ("Nixpkgs manual", "https://nixos.org/manual/nixpkgs/stable/"),
+            ("nix.dev", "https://nix.dev/"),
+        ],
+        "odin" => {
+            &[("Odin", "https://odin-lang.org/"), ("Odin language overview", "https://odin-lang.org/docs/overview/")]
+        }
+        "php" => &[
+            ("PHP manual", "https://www.php.net/manual/en/"),
+            ("PSR-12 coding style", "https://www.php-fig.org/psr/psr-12/"),
+        ],
+        "python" => {
+            &[("Python documentation", "https://docs.python.org/3/"), ("PEP 8", "https://peps.python.org/pep-0008/")]
+        }
+        "rust" => &[
+            ("The Rust Book", "https://doc.rust-lang.org/book/"),
+            ("Clippy documentation", "https://doc.rust-lang.org/clippy/"),
+            ("Rust API Guidelines", "https://rust-lang.github.io/api-guidelines/"),
+            ("TigerStyle", "https://tigerstyle.dev/"),
+        ],
+        "scala" => &[
+            ("Scala documentation", "https://docs.scala-lang.org/"),
+            ("Scala 3 Book", "https://docs.scala-lang.org/scala3/book/introduction.html"),
+        ],
+        "typescript" => {
+            &[("TypeScript documentation", "https://www.typescriptlang.org/docs/"), ("Biome", "https://biomejs.dev/")]
+        }
+        "wgsl" => &[("WGSL specification", "https://www.w3.org/TR/WGSL/"), ("Bevy", "https://bevyengine.org/")],
+        "zig" => &[
+            ("Zig learning resources", "https://ziglang.org/learn/"),
+            ("Zig language reference", "https://ziglang.org/documentation/master/"),
+            ("TigerStyle", "https://tigerstyle.dev/"),
+        ],
+        _ => &[],
+    }
+}
+
 #[component]
 pub fn TigerStyle() -> impl IntoView {
     view! {
@@ -152,16 +295,67 @@ pub fn TigerStyle() -> impl IntoView {
                 "guide, verbatim. Open one and read it here; the full reference "
                 "behind each chapter is one link further, on its own page."
             </p>
+            <svg class="ts-defs" aria-hidden="true">
+                <defs>
+                    <linearGradient
+                        id="ts-ring-grad"
+                        x1="0"
+                        y1="0"
+                        x2="48"
+                        y2="48"
+                        gradientUnits="userSpaceOnUse"
+                    >
+                        <stop offset="0" stop-color="#5B8CFF"></stop>
+                        <stop offset=".55" stop-color="#7C5CFF"></stop>
+                        <stop offset="1" stop-color="#C9A227"></stop>
+                    </linearGradient>
+                </defs>
+            </svg>
             {TIGER_GUIDES
                 .iter()
                 .map(|g| {
+                    let headline = chapter_headline(g.slug);
+                    let lead = headline.is_none().then_some(g.scope);
+                    let icon = format!("{ICON_BADGE}{}", icon_glyph(g.slug));
+                    let refs = chapter_references(g.slug)
+                        .iter()
+                        .enumerate()
+                        .map(|(i, &(label, url))| {
+                            view! {
+                                {(i > 0)
+                                    .then(|| {
+                                        view! { <span class="ts-ref-sep">" · "</span> }
+                                    })}
+                                <a href={url} rel="external">{label}</a>
+                            }
+                        })
+                        .collect_view();
                     view! {
                         <details class="ts-chapter" id={format!("chapter-{}", g.slug)}>
                             <summary class="ts-summary">
+                                <svg
+                                    class="ts-icon"
+                                    viewBox="0 0 48 48"
+                                    aria-hidden="true"
+                                    inner_html={icon}
+                                ></svg>
                                 <span class="ts-lang">{g.name}</span>
-                                <span class="ts-scope">{g.scope}</span>
+                                {headline
+                                    .map(|h| {
+                                        view! { <span class="ts-headline">{h}</span> }
+                                    })}
                             </summary>
-                            <div class="ts-guide" inner_html={g.html}></div>
+                            <div class="ts-guide">
+                                {lead
+                                    .map(|scope| {
+                                        view! { <p class="ts-lead">{scope}</p> }
+                                    })}
+                                <div inner_html={g.html}></div>
+                                <p class="ts-refs">
+                                    <span class="ts-refs-label">"References"</span>
+                                    {refs}
+                                </p>
+                            </div>
                             {(g.has_reference)
                                 .then(|| {
                                     view! {

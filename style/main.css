@@ -1101,26 +1101,85 @@ h3 {
   max-width: 54rem;
 }
 .ts-summary {
+  align-items: center;
   cursor: pointer;
   display: flex;
-  flex-wrap: wrap;
-  gap: 0.3rem 1rem;
-  list-style-position: inside;
-  padding: 0.9rem 1.1rem;
+  flex-direction: column;
+  gap: 0.45rem;
+  list-style: none;
+  padding: 1rem 1.1rem 0.9rem;
+  text-align: center;
 }
-.ts-summary::marker {
+.ts-summary::-webkit-details-marker {
+  display: none;
+}
+.ts-summary::after {
   color: var(--brass);
+  content: "▾";
+  font-size: 0.8rem;
+  line-height: 1;
+}
+.ts-chapter[open ] > .ts-summary::after {
+  transform: rotate(180deg);
+}
+.ts-defs {
+  height: 0;
+  overflow: hidden;
+  position: absolute;
+  width: 0;
+}
+.ts-icon {
+  display: block;
+  height: 44px;
+  width: 44px;
+}
+.ts-icon-text {
+  fill: var(--starlight);
+  font-family: var(--font-display);
+  font-weight: 700;
+}
+.ts-icon-mono {
+  fill: var(--starlight);
+  font-family: var(--font-mono);
+  font-weight: 700;
+}
+.ts-icon-halo {
+  opacity: 0.1;
 }
 .ts-lang {
   color: var(--starlight);
   font-family: var(--font-display);
   font-size: 1.15rem;
 }
-.ts-scope {
+.ts-headline {
   color: var(--fog);
-  flex: 1;
   font-size: 0.92rem;
-  min-width: 12rem;
+  max-width: 34rem;
+}
+.ts-lead {
+  border-left: 2px solid var(--brass-dim);
+  color: var(--fog);
+  font-size: 0.98rem;
+  margin: 0.7rem 0 0.2rem;
+  padding-left: 0.9rem;
+}
+.ts-refs {
+  border-top: 1px solid var(--chart-line);
+  font-size: 0.9rem;
+  margin: 1.2rem 0 0;
+  padding-top: 0.8rem;
+}
+.ts-refs-label {
+  color: var(--brass);
+  display: block;
+  font-family: var(--font-mono);
+  font-size: 0.74rem;
+  letter-spacing: 0.08em;
+  margin-bottom: 0.35rem;
+  text-transform: uppercase;
+}
+.ts-ref-sep {
+  color: var(--fog);
 }
 .ts-guide {
   border-top: 1px solid var(--chart-line);
@@ -1205,6 +1264,32 @@ h3 {
 .ts-closing {
   margin: 2.2rem auto 0;
   max-width: 54rem;
+}
+@media (prefers-reduced-motion: no-preference) {
+  .ts-icon-ring {
+    animation: ts-icon-spin 26s linear infinite;
+    transform-box: fill-box;
+    transform-origin: center;
+  }
+  .ts-icon-halo {
+    animation: ts-icon-pulse 5s ease-in-out infinite alternate;
+  }
+  .ts-summary::after {
+    transition: transform 0.25s ease;
+  }
+  @keyframes ts-icon-spin {
+    to {
+      transform: rotate(360deg);
+    }
+  }
+  @keyframes ts-icon-pulse {
+    from {
+      opacity: 0.05;
+    }
+    to {
+      opacity: 0.17;
+    }
+  }
 }
 @media (max-width: 640px) {
   /* Six nav links (On AI added) no longer fit one phone-width row. */
