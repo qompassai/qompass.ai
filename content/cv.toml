@@ -254,6 +254,11 @@ value = "phaedrusflow"
 url = "https://learn.microsoft.com/en-us/users/phaedrusflow/"
 
 [[identifiers]]
+label = "OpenAlex"
+value = "A5013877486"
+url = "https://openalex.org/A5013877486"
+
+[[identifiers]]
 label = "ORCID"
 value = "0000-0002-0302-4812"
 url = "https://orcid.org/0000-0002-0302-4812"
