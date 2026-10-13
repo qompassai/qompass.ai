@@ -18,7 +18,7 @@ period = "02/2026 — Present"
 location = "Spokane, WA"
 bullets = [
   "First FST in market history to earn the WA Telecom Administrator License, allowing internal MDU wiring permits.",
-  "Developed the first educational framework for the telecommunications administrator exam and the first market training SharePoint.",
+  "Built first curriculum for telco administrator test and first training sharepoint.",
   "2026 TDS Field Service Top Notch Award.",
 ]
 
@@ -116,7 +116,7 @@ detail = "EMT-Basic (EMS ID 3725-5746-8319), 03/2019–03/2021."
 
 [[certifications]]
 label = "Licensure"
-items = ["Electrical Administrator — Telecommunications (09), Washington State Department of Labor & Industries, License No. PORTEM*744M3"]
+items = ["Telecommunications Administrator (09), Washington State Department of Labor & Industries, License No. PORTEM*744M3"]
 
 [[certifications]]
 label = "Instruction"
