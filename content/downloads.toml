@@ -18,8 +18,8 @@
 
 [projects.bunker]
 # android = "https://..."
-# linux_aarch64 = "https://..."
-# linux_x86_64 = "https://..."
+linux_aarch64 = "https://github.com/qompassai/bunker/releases/download/v2026-09-10/bunker-aarch64-unknown-linux-gnu.tar.gz"
+linux_x86_64 = "https://github.com/qompassai/bunker/releases/download/v2026-09-10/bunker-x86_64-unknown-linux-gnu.tar.gz"
 # windows = "https://..."
 
 [projects.diver]
@@ -30,9 +30,9 @@
 
 [projects.fathom]
 # android = "https://..."
-# linux_aarch64 = "https://..."
-# linux_x86_64 = "https://..."
-# windows = "https://..."
+linux_aarch64 = "https://github.com/qompassai/fathom/releases/download/v2026-10-13/fathom-aarch64-unknown-linux-gnu.tar.gz"
+linux_x86_64 = "https://github.com/qompassai/fathom/releases/download/v2026-10-13/fathom-x86_64-unknown-linux-gnu.tar.gz"
+windows = "https://github.com/qompassai/fathom/releases/download/v2026-10-13/fathom-x86_64-pc-windows-gnu.zip"
 
 [projects.ghost]
 # android = "https://..."
