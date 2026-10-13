@@ -2,7 +2,7 @@
 
 ## Purpose
 
-Apply Matt's Tiger Style standard to Odin code. Priority order, always:
+Apply the Tiger Style standard to Odin code. Priority order, always:
 **Safety > Performance > Developer Experience.** The full guide lives in
 [references/TIGER_STYLE_ODIN.md](references/TIGER_STYLE_ODIN.md); this file
 is the operational core. When the two disagree, the full guide wins.
@@ -65,7 +65,7 @@ is the operational core. When the two disagree, the full guide wins.
 
 ## Output Contract
 
-Odin you produce for Matt must: compile on the pinned compiler with
+Odin you produce must: compile on the pinned compiler with
 diagnostics at full strength, carry doc comments on public procedures
 stating contract, allocator expectations, and bounds, return typed
 errors on expected failures, assert internal invariants, bound all

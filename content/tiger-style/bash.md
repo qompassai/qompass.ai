@@ -2,7 +2,7 @@
 
 ## Purpose
 
-Apply Matt's Tiger Style standard to Bash scripts. Priority order, always:
+Apply the Tiger Style standard to Bash scripts. Priority order, always:
 **Safety > Performance > Developer Experience.** The full guide lives in
 [references/TIGER_STYLE_BASH.md](references/TIGER_STYLE_BASH.md); this
 file is the operational core. When the two disagree, the full guide wins.
@@ -84,7 +84,7 @@ file is the operational core. When the two disagree, the full guide wins.
 
 ## Output Contract
 
-Bash you produce for Matt must: open with `#!/usr/bin/env bash` and the
+Bash you produce must: open with `#!/usr/bin/env bash` and the
 strict-mode header, quote every expansion, use `local` in all functions,
 create temp files only via `mktemp` with `trap` cleanup, never `eval` or
 pipe curl to bash, bound all reads/loops/retries/timeouts with named

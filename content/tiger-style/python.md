@@ -2,7 +2,7 @@
 
 ## Purpose
 
-Apply Matt's Tiger Style standard to Python code. Priority order, always:
+Apply the Tiger Style standard to Python code. Priority order, always:
 **Safety > Performance > Developer Experience.** The full guide lives in
 [references/TIGER_STYLE_PYTHON.md](references/TIGER_STYLE_PYTHON.md); this
 file is the operational core. When the two disagree, the full guide wins.
@@ -85,7 +85,7 @@ file is the operational core. When the two disagree, the full guide wins.
 
 ## Output Contract
 
-Python you produce for Matt must: run under `python` and `python -O`
+Python you produce must: run under `python` and `python -O`
 identically, carry type hints on public functions, raise precise domain
 exceptions on expected failures, assert only internal invariants, bound
 all input/loops/retries/queues with named constants, close every resource

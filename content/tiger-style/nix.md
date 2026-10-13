@@ -2,7 +2,7 @@
 
 ## Purpose
 
-Apply Matt's Tiger Style standard to Nix expressions. Priority order, always:
+Apply the Tiger Style standard to Nix expressions. Priority order, always:
 **Safety > Performance > Developer Experience.** The full guide lives in
 [references/TIGER_STYLE_NIX.md](references/TIGER_STYLE_NIX.md); this file is
 the operational core. When the two disagree, the full guide wins.
@@ -92,7 +92,7 @@ are omitted rather than invented.
 
 ## Output Contract
 
-Nix you produce for Matt must: evaluate cleanly under the declared Nix
+Nix you produce must: evaluate cleanly under the declared Nix
 version, document argument sets on functions, assert its invariants, return
 tagged `{ ok = false; error = ...; }` on expected invalid input, bound all
 folds/traversals with named constants, stay near ≤70 lines per function and

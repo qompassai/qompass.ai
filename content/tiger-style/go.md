@@ -2,7 +2,7 @@
 
 ## Purpose
 
-Apply Matt's Tiger Style standard to Go code. Priority order, always:
+Apply the Tiger Style standard to Go code. Priority order, always:
 **Safety > Performance > Developer Experience.** The full guide lives in
 [references/TIGER_STYLE_GO.md](references/TIGER_STYLE_GO.md); this file is
 the operational core. When the two disagree, the full guide wins.
@@ -71,7 +71,7 @@ the operational core. When the two disagree, the full guide wins.
 
 ## Output Contract
 
-Go you produce for Matt must: build under the recorded toolchain, return
+Go you produce must: build under the recorded toolchain, return
 `(zero, err)` on expected failures with wrapped sentinel errors, verify
 internal invariants with explicit checks, bound all input/workers/queues/
 retries, pass `go vet` and `go test -race`, stay gofmt-clean with

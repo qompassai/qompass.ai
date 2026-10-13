@@ -2,7 +2,7 @@
 
 ## Purpose
 
-Apply Matt's Tiger Style standard to Kotlin code. Priority order, always:
+Apply the Tiger Style standard to Kotlin code. Priority order, always:
 **Safety > Performance > Developer Experience.** The full guide lives in
 [references/TIGER_STYLE_KOTLIN.md](references/TIGER_STYLE_KOTLIN.md); this file
 is the operational core. When the two disagree, the full guide wins.
@@ -60,7 +60,7 @@ is the operational core. When the two disagree, the full guide wins.
 
 ## Output Contract
 
-Kotlin you produce for Matt must: compile on the pinned toolchain with
+Kotlin you produce must: compile on the pinned toolchain with
 warnings treated as errors, carry KDoc on public items stating contract
 and bounds, use sealed result types (not exceptions) for expected
 failures, assert internal invariants, bound all work/queues/retries/

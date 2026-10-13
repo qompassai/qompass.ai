@@ -2,7 +2,7 @@
 
 ## Purpose
 
-Apply Matt's Tiger Style standard to Scala 3 code. Priority order, always:
+Apply the Tiger Style standard to Scala 3 code. Priority order, always:
 **Safety > Performance > Developer Experience.** The full guide lives in
 [references/TIGER_STYLE_SCALA.md](references/TIGER_STYLE_SCALA.md); this file
 is the operational core. When the two disagree, the full guide wins.
@@ -82,7 +82,7 @@ is the operational core. When the two disagree, the full guide wins.
 
 ## Output Contract
 
-Scala you produce for Matt must: compile cleanly, carry Scaladoc on public
+Scala you produce must: compile cleanly, carry Scaladoc on public
 API, assert its invariants, return `Either`/`Option` on expected failures,
 bound all work with named constants, stay within 100 columns and ~70 lines
 per function, and pass the review checklist.

@@ -2,7 +2,7 @@
 
 ## Purpose
 
-Apply Matt's Tiger Style standard to C code. Priority order, always:
+Apply the Tiger Style standard to C code. Priority order, always:
 **Safety > Performance > Developer Experience.** The full guide lives in
 [references/TIGER_STYLE_C.md](references/TIGER_STYLE_C.md); this file is
 the operational core. When the two disagree, the full guide wins.
@@ -98,7 +98,7 @@ the operational core. When the two disagree, the full guide wins.
 
 ## Output Contract
 
-C you produce for Matt must: compile cleanly under strict warnings for the
+C you produce must: compile cleanly under strict warnings for the
 declared standard, document contracts in public headers, return status enums
 on expected failures with outputs unchanged, assert its invariants, bound all
 loops/retries/sizes, pass clean under ASan/UBSan **and** with `-DNDEBUG`,

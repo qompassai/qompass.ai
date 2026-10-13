@@ -2,7 +2,7 @@
 
 ## Purpose
 
-Apply Matt's Tiger Style standard to Lua code. Priority order, always:
+Apply the Tiger Style standard to Lua code. Priority order, always:
 **Safety > Performance > Developer Experience.** The full guide lives in
 [references/TIGER_STYLE_LUA.md](references/TIGER_STYLE_LUA.md); this file is
 the operational core. When the two disagree, the full guide wins.
@@ -66,7 +66,7 @@ the operational core. When the two disagree, the full guide wins.
 
 ## Output Contract
 
-Lua you produce for Matt must: compile cleanly, carry LuaCATS types on
+Lua you produce must: compile cleanly, carry LuaCATS types on
 exported functions, assert its invariants, return `(nil, err)` on expected
 failures, bound all loops/retries/queues, stay within 100 columns and ~70
 lines per function, and pass the review checklist.

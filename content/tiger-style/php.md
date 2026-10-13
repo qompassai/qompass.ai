@@ -2,7 +2,7 @@
 
 ## Purpose
 
-Apply Matt's Tiger Style standard to PHP code. Priority order, always:
+Apply the Tiger Style standard to PHP code. Priority order, always:
 **Safety > Performance > Developer Experience.** The full guide lives in
 [references/TIGER_STYLE_PHP.md](references/TIGER_STYLE_PHP.md); this
 file is the operational core. When the two disagree, the full guide wins.
@@ -89,7 +89,7 @@ file is the operational core. When the two disagree, the full guide wins.
 
 ## Output Contract
 
-PHP you produce for Matt must: open with `declare(strict_types=1);`,
+PHP you produce must: open with `declare(strict_types=1);`,
 type every property/parameter/return, throw precise domain exceptions on
 expected failures, assert only internal invariants (valid with
 `zend.assertions=-1`), use `===` at trust boundaries, bound all

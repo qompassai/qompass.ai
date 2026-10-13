@@ -2,7 +2,7 @@
 
 ## Purpose
 
-Apply Matt's Tiger Style standard to C++. Priority order, always:
+Apply the Tiger Style standard to C++. Priority order, always:
 **Safety > Performance > Developer Experience.** The full guide lives in
 [references/TIGER_STYLE_CPP.md](references/TIGER_STYLE_CPP.md); this file is
 the operational core. When the two disagree, the full guide wins.
@@ -74,7 +74,7 @@ the operational core. When the two disagree, the full guide wins.
 
 ## Output Contract
 
-C++ you produce for Matt must: compile cleanly under the declared profile,
+C++ you produce must: compile cleanly under the declared profile,
 carry documented contracts on public operations, assert its invariants,
 return `std::expected` on expected failures, bound all loops/retries/queues,
 give every resource one RAII owner with failure-path teardown, stay within

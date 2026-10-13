@@ -2,7 +2,7 @@
 
 ## Purpose
 
-Apply Matt's Tiger Style standard to WGSL shaders. Priority order, always:
+Apply the Tiger Style standard to WGSL shaders. Priority order, always:
 **Safety > Performance > Developer Experience.** The full guide lives in
 [references/TIGER_STYLE_WGSL.md](references/TIGER_STYLE_WGSL.md); this file
 is the operational core. When the two disagree, the full guide wins.

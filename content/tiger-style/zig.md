@@ -2,7 +2,7 @@
 
 ## Purpose
 
-Apply Matt's Tiger Style standard to Zig code. Priority order, always:
+Apply the Tiger Style standard to Zig code. Priority order, always:
 **Safety > Performance > Developer Experience.** The full guide lives in
 [references/TIGER_STYLE_ZIG.md](references/TIGER_STYLE_ZIG.md); this file is
 the operational core. When the two disagree, the full guide wins.
@@ -80,7 +80,7 @@ the operational core. When the two disagree, the full guide wins.
 
 ## Output Contract
 
-Zig you produce for Matt must: compile cleanly under the pinned toolchain,
+Zig you produce must: compile cleanly under the pinned toolchain,
 pass `zig fmt --check`, document allocator ownership and error sets on
 exported functions, return error unions on fallible paths, assert invariants,
 bound all loops/allocations/retries, stay near 70 lines per function and 100

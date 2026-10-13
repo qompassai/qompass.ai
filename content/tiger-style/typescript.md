@@ -2,7 +2,7 @@
 
 ## Purpose
 
-Apply Matt's Tiger Style standard to TypeScript code. Priority order, always:
+Apply the Tiger Style standard to TypeScript code. Priority order, always:
 **Safety > Performance > Developer Experience.** The full guide lives in
 [references/TIGER_STYLE_TYPESCRIPT.md](references/TIGER_STYLE_TYPESCRIPT.md);
 this file is the operational core. When the two disagree, the full guide wins.
@@ -82,7 +82,7 @@ this file is the operational core. When the two disagree, the full guide wins.
 
 ## Output Contract
 
-TypeScript you produce for Matt must: compile under the strict profile with
+TypeScript you produce must: compile under the strict profile with
 `tsc --noEmit`, carry explicit types on exported functions, assert its
 invariants with real runtime guards, return `Result<T, E>` (or the declared
 contract) on expected failures, bound all loops/retries/queues/promise
