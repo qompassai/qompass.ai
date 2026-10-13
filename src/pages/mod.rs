@@ -3,6 +3,7 @@ pub mod contact;
 pub mod home;
 pub mod legal;
 pub mod on_ai;
+pub mod ontrack_privacy;
 pub mod privacy;
 pub mod project;
 pub mod projects;

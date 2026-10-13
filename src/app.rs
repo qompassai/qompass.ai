@@ -4,6 +4,7 @@ use crate::pages::{
     home::Home,
     legal::Legal,
     on_ai::OnAi,
+    ontrack_privacy::OnTrackPrivacy,
     privacy::Privacy,
     project::ProjectDispatch,
     projects::Projects,
@@ -186,6 +187,7 @@ pub fn App() -> impl IntoView {
                     <Route path=path!("/about") view=About />
                     <Route path=path!("/contact") view=Contact />
                     <Route path=path!("/privacy") view=Privacy />
+                    <Route path=path!("/ontrack/privacy") view=OnTrackPrivacy />
                     <Route path=path!("/legal") view=Legal />
                     <Route path=path!("/solutions") view=Projects />
                     <Route path=path!("/on-ai") view=OnAi />
