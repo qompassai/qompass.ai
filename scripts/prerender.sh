@@ -7,7 +7,15 @@ cd "$(dirname "$0")/.."
 BIN="target/release/qompass-ai"
 SITE="target/site"
 DIST="dist"
-ROUTES=("/" "/research" "/projects" "/on-ai" "/cv" "/about" "/contact")
+ROUTES=("/" "/research" "/projects" "/on-ai" "/tiger-style" "/cv" "/about" "/contact")
+
+# Tiger Style full references: one quiet page per imported reference,
+# linked only from its chapter on /tiger-style.
+for ref in content/tiger-style/*-reference.md; do
+    [ -e "$ref" ] || continue
+    slug="$(basename "$ref" -reference.md)"
+    ROUTES+=("/tiger-style/$slug")
+done
 
 # Project study pages: one route per content/projects/*.toml flagged
 # ready = true. build.rs enforces file stem == slug, so the stem IS the

@@ -1,0 +1,106 @@
+# Tiger Style language index. Scope lines are the SKILL.md frontmatter
+# descriptions (first sentence) from ~/workspace/skills/tiger-style-*/ at
+# import time; the guides beside this file are copied verbatim (frontmatter
+# stripped). Aseprite has two reference documents, joined with a rule.
+
+[[language]]
+slug = "aseprite"
+name = "Aseprite"
+scope = "Drive Aseprite from the CLI and Lua in Matt's Tiger Style: headless batch exports, sprite-sheet pipelines, and scripted pixel work with explicit contracts, version guards, and a documented LibreSprite divergence table."
+has_reference = true
+
+[[language]]
+slug = "bash"
+name = "Bash"
+scope = "Write or review Bash scripts in Matt's Tiger Style: safety-first shell standard with explicit contracts, strict mode, bounded work, and disciplined quoting."
+has_reference = true
+
+[[language]]
+slug = "c"
+name = "C"
+scope = "Write or review C code in Matt's Tiger Style: safety-first C standard with explicit contracts, assertions, bounded work, and disciplined manual memory ownership. Applies whenever C code is written, regenerated, refactored, reviewed, or debugged - from systems libraries and POSIX/Linux adapters to embedded targets. Toolchain pairing: clangd for LSP (diagnostics, completions, code actions), clang-format for formatting, lldb-dap for DAP debugging. Covers contract-first design, error-code discipline, no hidden allocation, bounded loops and buffers, and half-adversarial test splits. Hardens against buffer overflows, use-after-free, and integer overflow."
+has_reference = true
+
+[[language]]
+slug = "cpp"
+name = "C++"
+scope = "Write or review C++ code in Matt's Tiger Style: safety-first C++ standard with explicit contracts, assertions, bounded work, and disciplined RAII ownership."
+has_reference = true
+
+[[language]]
+slug = "go"
+name = "Go"
+scope = "Write or review Go code in Matt's Tiger Style: safety-first Go standard with explicit contracts, assertions, bounded work, and disciplined ownership."
+has_reference = true
+
+[[language]]
+slug = "kotlin"
+name = "Kotlin"
+scope = "Write or review Kotlin code in Matt's Tiger Style: safety-first Kotlin standard with explicit contracts, assertions, bounded work, and disciplined resource ownership."
+has_reference = true
+
+[[language]]
+slug = "lua"
+name = "Lua"
+scope = "Write or review Lua code in Matt's Tiger Style: safety-first Lua standard with explicit contracts, assertions, bounded work, and disciplined ownership."
+has_reference = true
+
+[[language]]
+slug = "mojo"
+name = "Mojo"
+scope = "Write or review Mojo code in Matt's Tiger Style: safety-first Mojo standard with explicit contracts, assertions, bounded work, and disciplined ownership."
+has_reference = true
+
+[[language]]
+slug = "nix"
+name = "Nix"
+scope = "Write or review Nix expressions in Matt's Tiger Style: safety-first Nix standard with explicit contracts, assertions, bounded work, and disciplined ownership. Applies whenever Nix expressions are written, regenerated, refactored, reviewed, or debugged - from flake.nix and packages to NixOS and Home Manager modules and dev shells. Toolchain pairing: nil and nixd for LSP (diagnostics, completions), alejandra and nixfmt for formatting, nix-debug-adapter for DAP debugging. Covers pure evaluation discipline, explicit inputs, pinned sources, and half-adversarial test splits."
+has_reference = true
+
+[[language]]
+slug = "odin"
+name = "Odin"
+scope = "Write or review Odin code in Matt's Tiger Style: safety-first Odin standard with explicit contracts, assertions, bounded work, and disciplined manual memory management."
+has_reference = true
+
+[[language]]
+slug = "php"
+name = "PHP"
+scope = "Write or review PHP code in Matt's Tiger Style: safety-first PHP standard with explicit contracts, assertions, bounded work, and disciplined ownership."
+has_reference = true
+
+[[language]]
+slug = "python"
+name = "Python"
+scope = "Write or review Python code in Matt's Tiger Style: safety-first Python standard with explicit contracts, assertions, bounded work, and disciplined ownership."
+has_reference = true
+
+[[language]]
+slug = "rust"
+name = "Rust"
+scope = "Write or review Rust code in Matt's Tiger Style: safety-first Rust standard with explicit contracts, assertions, bounded work, and disciplined ownership."
+has_reference = true
+
+[[language]]
+slug = "scala"
+name = "Scala"
+scope = "Write or review Scala code in Matt's Tiger Style: safety-first Scala standard with explicit contracts, assertions, bounded work, and disciplined ownership."
+has_reference = true
+
+[[language]]
+slug = "typescript"
+name = "TypeScript"
+scope = "Write or review TypeScript code in Matt's Tiger Style: safety-first TypeScript standard with explicit contracts, assertions, bounded work, and disciplined ownership. Applies whenever TypeScript is written, regenerated, refactored, reviewed, or debugged under the strict profile (TS 5.9+ and ES2022), for Node services and Deno projects alike. Toolchain pairing: ts_ls (tsgo_ls, deno_ls for Deno) for LSP, prettier and biome for formatting, the Node DAP adapter for debugging. Covers contract-first design, strict null handling, exhaustive switches, bounded async work, and half-adversarial test splits. Catches any-casts, unhandled promises, and non-exhaustive narrowing."
+has_reference = true
+
+[[language]]
+slug = "wgsl"
+name = "WGSL"
+scope = "Write or review WGSL shaders in Matt's Tiger Style: safety-first shader standard with explicit contracts, backend portability (Vulkan/Metal/D3D12/GLES3), uniform alignment discipline, and Bevy integration."
+has_reference = true
+
+[[language]]
+slug = "zig"
+name = "Zig"
+scope = "Write or review Zig code in Matt's Tiger Style: safety-first Zig standard with explicit contracts, error-union handling, bounded work, and disciplined allocator ownership."
+has_reference = true

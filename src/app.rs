@@ -1,6 +1,13 @@
 use crate::pages::{
-    about::About, contact::Contact, cv::Cv, home::Home, on_ai::OnAi, project::ProjectDispatch, projects::Projects,
+    about::About,
+    contact::Contact,
+    cv::Cv,
+    home::Home,
+    on_ai::OnAi,
+    project::ProjectDispatch,
+    projects::Projects,
     research::Research,
+    tiger_style::{TigerStyle, TigerStyleDispatch},
 };
 use leptos::prelude::*;
 use leptos_meta::{provide_meta_context, MetaTags, Stylesheet, Title};
@@ -55,6 +62,7 @@ fn Header() -> impl IntoView {
                     <A href="/research">"Research"</A>
                     <A href="/projects">"Projects"</A>
                     <A href="/on-ai">"On AI"</A>
+                    <A href="/tiger-style">"Tiger Style"</A>
                     <A href="/cv">"CV"</A>
                     <A href="/about">"About"</A>
                     <A href="/contact">"Contact"</A>
@@ -177,6 +185,8 @@ pub fn App() -> impl IntoView {
                     <Route path=path!("/cv") view=Cv />
                     <Route path=path!("/projects") view=Projects />
                     <Route path=path!("/on-ai") view=OnAi />
+                    <Route path=path!("/tiger-style") view=TigerStyle />
+                    <Route path=path!("/tiger-style/:slug") view=TigerStyleDispatch />
                     <Route path=path!("/projects/:slug") view=ProjectDispatch />
                     <Route path=path!("/research") view=Research />
                 </Routes>

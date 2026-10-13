@@ -106,3 +106,29 @@ test('on-ai page renders all three tracks and the filters work', async ({ page }
   await page.waitForLoadState('networkidle');
   expect(errors).toEqual([]);
 });
+
+test('tiger style page renders the standing orders with 17 chapters', async ({ page }) => {
+  const errors: string[] = [];
+  page.on('pageerror', (error) => errors.push(`pageerror: ${error.message}`));
+  page.on('console', (message) => {
+    if (message.type() === 'error') {
+      errors.push(`console: ${message.text()}`);
+    }
+  });
+  await page.goto('/tiger-style');
+  await expect(page.getByRole('heading', { name: 'Tiger Style' })).toBeVisible();
+  await expect(page.locator('.ts-subhead')).toHaveText('The orders the work is done under.');
+  await expect(page.locator('.ts-chapter')).toHaveCount(17);
+  // A chapter expands in place (native details, no JS needed).
+  const rust = page.locator('#chapter-rust');
+  await expect(rust.locator('.ts-guide')).toBeHidden();
+  await rust.locator('summary').click();
+  await expect(rust.locator('.ts-guide')).toBeVisible();
+  await expect(rust.locator('.ts-guide')).toContainText('Bound everything');
+  // The full reference is a quiet standalone page linked from the chapter.
+  await expect(rust.locator('.ts-ref-link a')).toHaveAttribute('href', '/tiger-style/rust');
+  await page.goto('/tiger-style/rust');
+  await expect(page.locator('.ts-guide')).toContainText('Tiger Style for Rust');
+  await page.waitForLoadState('networkidle');
+  expect(errors).toEqual([]);
+});

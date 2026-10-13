@@ -7,6 +7,7 @@ pub mod app;
 pub mod orcid_data;
 pub mod pages;
 pub mod project_data;
+pub mod tiger_data;
 pub mod tracker_data;
 
 #[cfg(feature = "hydrate")]

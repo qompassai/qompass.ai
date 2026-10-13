@@ -6,3 +6,4 @@ pub mod on_ai;
 pub mod project;
 pub mod projects;
 pub mod research;
+pub mod tiger_style;
