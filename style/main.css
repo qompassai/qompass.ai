@@ -549,6 +549,30 @@ h3 {
   font-size: 0.85rem;
 }
 
+/* — Research page: centered column ——————— */
+.research-page .entry {
+  text-align: center;
+}
+.research-page .entry-list {
+  margin-inline: auto;
+  max-width: 54rem;
+}
+.research-page .record-blurb {
+  margin-inline: auto;
+  text-align: center;
+}
+.research-page .record-head,
+.research-page .record-meta {
+  text-align: center;
+}
+.research-page .record-item {
+  text-align: center;
+}
+.research-page .record-list {
+  margin-inline: auto;
+  max-width: 46rem;
+}
+
 /* — CV ——————————————————————————————————— */
 .cv-title {
   font-family: var(--font-display);

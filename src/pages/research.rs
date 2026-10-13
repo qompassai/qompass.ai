@@ -9,7 +9,7 @@ use leptos_meta::Title;
 pub fn Research() -> impl IntoView {
     view! {
         <Title text="Research - Qompass AI" />
-        <section class="page">
+        <section class="page research-page">
             <p class="page-bearing">"ODYSSEY — PUBLICATIONS & PREPRINTS"</p>
             <h1>"Research"</h1>
             <p class="page-lede">
