@@ -8,7 +8,12 @@ all-features = true
 version = 2
 yanked = "deny"
 ignore = [
-    # (none yet — an ignore may only land here with a reason and a removal TODO)
+    # RUSTSEC-2024-0436 — `paste` is unmaintained (author archived it), not
+    # vulnerable. It reaches this tree only transitively (leptos ->
+    # either_of -> paste) as a compile-time proc-macro; no fixed release
+    # exists. TODO: remove this ignore when leptos drops the paste
+    # dependency (or moves to the pastey fork).
+    "RUSTSEC-2024-0436",
 ]
 
 [licenses]
