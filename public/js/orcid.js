@@ -1,8 +1,9 @@
-// Live ORCID refresh: the page ships with a build-time snapshot of the works
-// lists (real HTML, good for no-JS and crawlers); this island then re-fetches
-// the public record and re-renders the lists if ORCID has anything newer.
-// Works are split the same way the snapshot is: publications in #orcid-works,
-// software (self-published, DOI'd) in #orcid-software.
+// Live ORCID refresh: the page ships with a build-time snapshot of the
+// software list (real HTML, good for no-JS and crawlers); this island then
+// re-fetches the public record and re-renders that list if ORCID has
+// anything newer. Publications render as cards from the same snapshot
+// (src/pages/research.rs) and are not refreshed here; only the software
+// list (#orcid-software, self-published, DOI'd) is live.
 // Source: ORCID public API v3.0 — no key, CORS-open for public data.
 //
 // Hydration coordination: the re-render below replaces the lists
@@ -17,7 +18,6 @@
 // delayed fallback starts the refresh anyway — with no walk in
 // flight there is nothing to race.
 const ORCID_ID = "0000-0002-0302-4812";
-const list = document.getElementById("orcid-works");
 const softwareList = document.getElementById("orcid-software");
 const status = document.getElementById("orcid-status");
 
@@ -64,7 +64,7 @@ function workItem(w, withDoi) {
 }
 
 function refreshFromOrcid() {
-  if (list) {
+  if (softwareList) {
     fetch(`https://pub.orcid.org/v3.0/${ORCID_ID}/works`, {
     headers: { Accept: "application/json" },
   })
@@ -99,9 +99,6 @@ function refreshFromOrcid() {
         works.push({ title, venue, year, type, doi, url: url || `https://orcid.org/${ORCID_ID}` });
       }
       works.sort((a, b) => (b.year || "").localeCompare(a.year || ""));
-      list.replaceChildren(
-        ...works.filter((w) => w.type !== "software").map((w) => workItem(w, false))
-      );
       if (softwareList) {
         softwareList.replaceChildren(
           ...works.filter((w) => w.type === "software").map((w) => workItem(w, true))
