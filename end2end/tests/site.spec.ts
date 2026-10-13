@@ -195,6 +195,7 @@ const ALL_ROUTES = [
   '/cv',
   '/about',
   '/contact',
+  '/privacy',
 ];
 
 test('security headers are set on every route', async ({ request }) => {
@@ -366,5 +367,20 @@ test('tiger style page renders the standing orders with 17 chapters', async ({ p
   await page.goto('/tiger-style/rust');
   await expect(page.locator('.ts-guide')).toContainText('Tiger Style for Rust');
   await page.waitForLoadState('networkidle');
+  expect(errors).toEqual([]);
+});
+
+test('privacy page is linked from the footer and states the policy', async ({ page }) => {
+  const errors: string[] = [];
+  page.on('pageerror', (err) => errors.push(`pageerror: ${err.message}`));
+  await page.goto('/');
+  const link = page.locator('.site-footer a[href="/privacy"]');
+  await expect(link).toHaveCount(1);
+  await link.click();
+  await expect(page).toHaveURL(/\/privacy$/);
+  await expect(page.getByRole('heading', { name: 'Privacy Policy' })).toBeVisible();
+  await expect(page.locator('.prose')).toContainText('collects no personal data');
+  await expect(page.locator('.prose')).toContainText('ai.qompass.lightshow');
+  await expect(page.locator('.prose a[href="mailto:map@qompass.ai"]')).toHaveCount(1);
   expect(errors).toEqual([]);
 });

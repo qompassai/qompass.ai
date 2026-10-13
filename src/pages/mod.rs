@@ -3,6 +3,7 @@ pub mod contact;
 pub mod cv;
 pub mod home;
 pub mod on_ai;
+pub mod privacy;
 pub mod project;
 pub mod projects;
 pub mod research;

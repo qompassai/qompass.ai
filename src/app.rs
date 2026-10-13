@@ -4,6 +4,7 @@ use crate::pages::{
     cv::Cv,
     home::Home,
     on_ai::OnAi,
+    privacy::Privacy,
     project::ProjectDispatch,
     projects::Projects,
     research::Research,
@@ -156,7 +157,8 @@ fn Footer() -> impl IntoView {
                     </a>
                 </p>
                 <p class="footer-note">
-                    "Built with Leptos · Served by vongola · Post-quantum by design"
+                    <A href="/privacy">"Privacy"</A>
+                    " · Built with Leptos · Served by vongola · Post-quantum by design"
                 </p>
             </div>
         </footer>
@@ -183,6 +185,7 @@ pub fn App() -> impl IntoView {
                     <Route path=path!("/about") view=About />
                     <Route path=path!("/contact") view=Contact />
                     <Route path=path!("/cv") view=Cv />
+                    <Route path=path!("/privacy") view=Privacy />
                     <Route path=path!("/projects") view=Projects />
                     <Route path=path!("/on-ai") view=OnAi />
                     <Route path=path!("/tiger-style") view=TigerStyle />

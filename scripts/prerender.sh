@@ -7,7 +7,7 @@ cd "$(dirname "$0")/.."
 BIN="target/release/qompass-ai"
 SITE="target/site"
 DIST="dist"
-ROUTES=("/" "/research" "/projects" "/on-ai" "/tiger-style" "/cv" "/about" "/contact")
+ROUTES=("/" "/research" "/projects" "/on-ai" "/tiger-style" "/cv" "/about" "/contact" "/privacy")
 
 # Tiger Style full references: one quiet page per imported reference,
 # linked only from its chapter on /tiger-style.
