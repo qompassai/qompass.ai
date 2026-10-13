@@ -613,6 +613,72 @@ h3 {
   margin: 0.8rem 0 0;
 }
 
+/* — Download boxes ————————————————————————
+   Four platform boxes per solution, rendered from the one downloads
+   source (content/downloads.toml). A platform with a recorded binary
+   URL is a live link; without one the box is a disabled span carrying
+   a "Coming soon" state — visible, muted, and never a dead link.
+   Motion lives in the prefers-reduced-motion: no-preference block
+   below: a live box lifts and glows only while hovered, focused, or
+   pressed (the state a tap leaves it in) and rests still; a disabled
+   box never moves. */
+.download-boxes {
+  display: grid;
+  gap: 0.55rem;
+  grid-template-columns: repeat(2, 1fr);
+  margin-top: 1rem;
+}
+@media (min-width: 641px) {
+  .download-boxes {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+.download-box {
+  background: var(--chart-raise);
+  border: 1px solid var(--chart-line);
+  border-radius: 4px;
+  display: block;
+  padding: 0.6rem 0.75rem;
+  text-decoration: none;
+}
+.download-platform {
+  color: var(--starlight);
+  display: block;
+  font-family: var(--font-mono);
+  font-size: 0.82rem;
+  letter-spacing: 0.04em;
+}
+.download-state {
+  color: var(--fog);
+  display: block;
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.14em;
+  margin-top: 0.15rem;
+  text-transform: uppercase;
+}
+a.download-box .download-state {
+  color: var(--brass);
+}
+.download-box.is-soon {
+  opacity: 0.55;
+}
+@media (prefers-reduced-motion: no-preference) {
+  a.download-box {
+    transition:
+      transform 0.18s ease,
+      border-color 0.18s ease,
+      box-shadow 0.18s ease;
+  }
+  a.download-box:hover,
+  a.download-box:focus-visible,
+  a.download-box:active {
+    border-color: var(--cherenkov);
+    box-shadow: 0 0 14px rgba(91, 140, 255, 0.35);
+    transform: translateY(-2px);
+  }
+}
+
 /* — Project study pages —————————————————— */
 .project-article {
   margin-inline: auto;

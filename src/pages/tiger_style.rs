@@ -412,7 +412,7 @@ pub fn TigerStyle() -> impl IntoView {
             <p class="ts-closing">
                 "These orders are standing: they do not expire between releases, "
                 "and they are not suspended for deadlines. Every project on the "
-                <a href="/projects">"projects page"</a>
+                <a href="/solutions">"solutions page"</a>
                 " was built under them — that is what the phrase means when it "
                 "appears in a repository: the work was done under these orders."
             </p>

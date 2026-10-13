@@ -2,7 +2,7 @@
 //!
 //! The data comes from `content/projects/*.toml`. Only pages flagged
 //! `ready` are emitted: the router registers a route for exactly these
-//! slugs and the /projects index links exactly these pages, so a study
+//! slugs and the /solutions index links exactly these pages, so a study
 //! ships by flipping one flag on verified content — never as a stub.
 include!(concat!(env!("OUT_DIR"), "/project_data.rs"));
 

@@ -2,7 +2,7 @@ use leptos::prelude::*;
 use leptos_meta::Title;
 
 /// One project in the quick-start picker. Copy is condensed from the
-/// /projects entries; `repo` is the GitHub repository name under
+/// /solutions entries; `repo` is the GitHub repository name under
 /// github.com/qompassai and drives the clone command.
 #[derive(Clone, Copy)]
 struct FleetEntry {
@@ -177,7 +177,7 @@ pub fn Home() -> impl IntoView {
                     "research, and deployment tooling, measured, not marketed."
                 </p>
                 <p class="hero-ctas">
-                    <a class="cta cta-brass" href="/projects">
+                    <a class="cta cta-brass" href="/solutions">
                         "See the work"
                     </a>
                     <a class="cta cta-quiet" href="/research">

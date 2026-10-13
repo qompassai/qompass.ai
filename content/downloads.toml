@@ -1,0 +1,65 @@
+# Download artifacts for the /solutions platform boxes, keyed by
+# project slug. This file is the single source for every download box
+# on the site: the grid cards and the study pages render from it via
+# build.rs (src/download_data.rs).
+#
+# A box is a live download link ONLY when its platform URL is recorded
+# here. Record only the URL of a real published binary for that exact
+# platform — never a releases page, never a source archive. An absent
+# URL renders the box disabled with a "Coming soon" annotation.
+#
+# As of 2026-10-13 no project publishes platform binaries anywhere
+# (every GitHub release is source-only), so every table below is
+# intentionally empty and all 32 boxes ship as "Coming soon". Adding
+# a URL here is the whole rollout — no code change.
+#
+# Platform keys, in the order the boxes render:
+#   linux_x86_64, linux_aarch64, windows, android
+
+[projects.bunker]
+# android = "https://..."
+# linux_aarch64 = "https://..."
+# linux_x86_64 = "https://..."
+# windows = "https://..."
+
+[projects.diver]
+# android = "https://..."
+# linux_aarch64 = "https://..."
+# linux_x86_64 = "https://..."
+# windows = "https://..."
+
+[projects.fathom]
+# android = "https://..."
+# linux_aarch64 = "https://..."
+# linux_x86_64 = "https://..."
+# windows = "https://..."
+
+[projects.ghost]
+# android = "https://..."
+# linux_aarch64 = "https://..."
+# linux_x86_64 = "https://..."
+# windows = "https://..."
+
+[projects.light-show]
+# android = "https://..."
+# linux_aarch64 = "https://..."
+# linux_x86_64 = "https://..."
+# windows = "https://..."
+
+[projects.phlow]
+# android = "https://..."
+# linux_aarch64 = "https://..."
+# linux_x86_64 = "https://..."
+# windows = "https://..."
+
+[projects.volta]
+# android = "https://..."
+# linux_aarch64 = "https://..."
+# linux_x86_64 = "https://..."
+# windows = "https://..."
+
+[projects.vongola]
+# android = "https://..."
+# linux_aarch64 = "https://..."
+# linux_x86_64 = "https://..."
+# windows = "https://..."

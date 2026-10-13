@@ -1,3 +1,4 @@
+use crate::pages::project::DownloadBoxes;
 use leptos::prelude::*;
 use leptos_meta::Title;
 
@@ -9,7 +10,7 @@ fn StudyLink(slug: &'static str) -> impl IntoView {
     crate::project_data::project_page(slug).map(|_| {
         view! {
             <p class="study-link">
-                <a href=format!("/projects/{slug}")>"Read the study →"</a>
+                <a href=format!("/solutions/{slug}")>"Read the study →"</a>
             </p>
         }
     })
@@ -18,10 +19,10 @@ fn StudyLink(slug: &'static str) -> impl IntoView {
 #[component]
 pub fn Projects() -> impl IntoView {
     view! {
-        <Title text="Projects - Qompass AI" />
+        <Title text="Solutions - Qompass AI" />
         <section class="page">
             <p class="page-bearing">"CHART — THE FLEET"</p>
-            <h1>"Projects"</h1>
+            <h1>"Solutions"</h1>
             <p class="page-lede">
                 "Open source, Apache-2.0, built in the open at "
                 <a href="https://github.com/qompassai">"github.com/qompassai"</a>
@@ -38,6 +39,7 @@ pub fn Projects() -> impl IntoView {
                         "Post-quantum hybrid TLS reverse proxy on Pingora, with built-in ACME. "
                         "It serves this site."
                     </p>
+                    <DownloadBoxes slug="vongola" />
                     <StudyLink slug="vongola" />
                 </article>
                 <article class="entry">
@@ -51,6 +53,7 @@ pub fn Projects() -> impl IntoView {
                         "post-quantum ambitions: ML-KEM/ML-DSA throughout, WebAuthn-class "
                         "authentication, no deprecated algorithms. Live at keys.qompass.ai."
                     </p>
+                    <DownloadBoxes slug="volta" />
                     <StudyLink slug="volta" />
                 </article>
                 <article class="entry">
@@ -64,6 +67,7 @@ pub fn Projects() -> impl IntoView {
                         "narinfo signing — packages signed for the post-quantum era, served "
                         "from cache.qompass.ai."
                     </p>
+                    <DownloadBoxes slug="bunker" />
                     <StudyLink slug="bunker" />
                 </article>
                 <article class="entry">
@@ -75,6 +79,7 @@ pub fn Projects() -> impl IntoView {
                         "key picker, Tor transport, and key lookup against volta. Heading to "
                         "F-Droid."
                     </p>
+                    <DownloadBoxes slug="ghost" />
                     <StudyLink slug="ghost" />
                 </article>
                 <article class="entry">
@@ -88,6 +93,7 @@ pub fn Projects() -> impl IntoView {
                         "LSP coverage, in-editor AI — the cockpit the rest of the fleet is "
                         "built from."
                     </p>
+                    <DownloadBoxes slug="diver" />
                     <StudyLink slug="diver" />
                 </article>
                 <article class="entry">
@@ -101,6 +107,7 @@ pub fn Projects() -> impl IntoView {
                         "by CLI, TUI, and MCP, with operator-approved checks and an "
                         "ATLAS-mapped adversarial test program."
                     </p>
+                    <DownloadBoxes slug="phlow" />
                     <StudyLink slug="phlow" />
                 </article>
                 <article class="entry">
@@ -113,6 +120,7 @@ pub fn Projects() -> impl IntoView {
                         "A fiber-optic cabling puzzle game — route the light, validate the "
                         "signal. Coming to Google Play, F-Droid, and Windows."
                     </p>
+                    <DownloadBoxes slug="light-show" />
                     <StudyLink slug="light-show" />
                 </article>
                 <article class="entry">
@@ -125,6 +133,7 @@ pub fn Projects() -> impl IntoView {
                         "A clean-room Rust port of the REA MCP reverse-engineering server — "
                         "depth-sounding for binaries."
                     </p>
+                    <DownloadBoxes slug="fathom" />
                     <StudyLink slug="fathom" />
                 </article>
             </div>

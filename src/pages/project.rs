@@ -1,4 +1,4 @@
-//! Project study pages — `/projects/<slug>`.
+//! Project study pages — `/solutions/<slug>`.
 //!
 //! A study page is an `IMRaD` write-up (abstract, methods, results,
 //! discussion, conclusion) rendered from the compiled-in content model
@@ -67,6 +67,55 @@ fn BenchTable(bench: &'static Benchmark) -> impl IntoView {
             {(!bench.note.is_empty())
                 .then(|| view! { <figcaption class="bench-note">{bench.note}</figcaption> })}
         </figure>
+    }
+}
+
+/// The four platform download boxes for one project, in the house
+/// order: Linux x86_64, Linux aarch64, Windows, Android.
+///
+/// The boxes render from `crate::download_data` — the single source,
+/// `content/downloads.toml`. A platform with a recorded URL is a real
+/// download anchor; a platform without one is a disabled span with
+/// `aria-disabled` and a "Coming soon" annotation, never a link. The
+/// grid cards on /solutions and the study pages render this same
+/// component, so the two surfaces cannot disagree.
+#[component]
+pub fn DownloadBoxes(slug: &'static str) -> impl IntoView {
+    let downloads = crate::download_data::downloads_for(slug);
+    let platforms = [
+        ("Linux x86_64", downloads.linux_x86_64),
+        ("Linux aarch64", downloads.linux_aarch64),
+        ("Windows", downloads.windows),
+        ("Android", downloads.android),
+    ];
+    view! {
+        <div class="download-boxes">
+            {platforms
+                .into_iter()
+                .map(|(label, url)| {
+                    url.map_or_else(
+                        || {
+                            view! {
+                                <span class="download-box is-soon" aria-disabled="true">
+                                    <span class="download-platform">{label}</span>
+                                    <span class="download-state">"Coming soon"</span>
+                                </span>
+                            }
+                            .into_any()
+                        },
+                        |url| {
+                            view! {
+                                <a class="download-box" href=url download>
+                                    <span class="download-platform">{label}</span>
+                                    <span class="download-state">"Download"</span>
+                                </a>
+                            }
+                            .into_any()
+                        },
+                    )
+                })
+                .collect_view()}
+        </div>
     }
 }
 
@@ -204,7 +253,7 @@ fn ProjectGraphic(id: &'static str) -> impl IntoView {
     }
 }
 
-/// Route entry for `/projects/:slug`. The slug is dispatched against
+/// Route entry for `/solutions/:slug`. The slug is dispatched against
 /// the compiled-in (ready-only) page list: a match renders the study,
 /// anything else renders the same "Off chart" fallback as any unknown
 /// bearing on the site — a non-ready project has no page here.
@@ -263,6 +312,10 @@ pub fn ProjectStudy(slug: &'static str) -> impl IntoView {
                             })}
                     </p>
                 </header>
+                <section class="study-section">
+                    <p class="band-label">"DOWNLOADS"</p>
+                    <DownloadBoxes slug={page.slug} />
+                </section>
                 {(!page.graphic.is_empty()).then(|| view! { <ProjectGraphic id={page.graphic} /> })}
                 {(!page.abstract_text.is_empty())
                     .then(|| {

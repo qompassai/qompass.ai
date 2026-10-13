@@ -7,7 +7,7 @@ cd "$(dirname "$0")/.."
 BIN="target/release/qompass-ai"
 SITE="target/site"
 DIST="dist"
-ROUTES=("/" "/research" "/projects" "/on-ai" "/standards" "/about" "/contact" "/privacy")
+ROUTES=("/" "/research" "/solutions" "/on-ai" "/standards" "/about" "/contact" "/privacy")
 
 # Tiger Style full references: one quiet page per imported reference,
 # linked only from its chapter on /standards.
@@ -23,7 +23,7 @@ done
 for toml in content/projects/*.toml; do
     [ -e "$toml" ] || continue
     if grep -qE '^[[:space:]]*ready[[:space:]]*=[[:space:]]*true' "$toml"; then
-        ROUTES+=("/projects/$(basename "$toml" .toml)")
+        ROUTES+=("/solutions/$(basename "$toml" .toml)")
     fi
 done
 
@@ -95,6 +95,18 @@ done
 # (identifiers) on 2026-10-13: the standalone page is retired, the old
 # address lands on the page that now carries the record.
 write_redirect "/cv" "/about" "About - Qompass AI" "About"
+
+# Same treatment for the fleet index, renamed from Projects to
+# Solutions on 2026-10-13: the grid and every ready study page moved
+# under /solutions, and the old addresses land on their new homes.
+write_redirect "/projects" "/solutions" "Solutions - Qompass AI" "Solutions"
+for toml in content/projects/*.toml; do
+    [ -e "$toml" ] || continue
+    if grep -qE '^[[:space:]]*ready[[:space:]]*=[[:space:]]*true' "$toml"; then
+        slug="$(basename "$toml" .toml)"
+        write_redirect "/projects/$slug" "/solutions/$slug" "Solutions - Qompass AI" "Solutions"
+    fi
+done
 
 # The web server reads dist/ as an unprivileged user, so every deployed
 # file must be world-readable and every directory world-traversable.

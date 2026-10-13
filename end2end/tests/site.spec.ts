@@ -39,11 +39,18 @@ test('home page loads with zero page errors and zero console errors', async ({ p
   expect(errors).toEqual([]);
 });
 
-test('projects index links exactly the ready study pages', async ({ page }) => {
-  await page.goto('/projects');
+test('solutions index links exactly the ready study pages', async ({ page }) => {
+  await page.goto('/solutions');
   const links = page.locator('.study-link a');
   await expect(links).toHaveCount(1);
-  await expect(links.first()).toHaveAttribute('href', '/projects/phlow');
+  await expect(links.first()).toHaveAttribute('href', '/solutions/phlow');
+  // Download boxes: four platforms per project, and until a real
+  // binary URL is recorded in content/downloads.toml every box is a
+  // disabled "Coming soon" span — never a link.
+  await expect(page.locator('.download-box')).toHaveCount(32);
+  await expect(page.locator('a.download-box')).toHaveCount(0);
+  await expect(page.locator('.download-box.is-soon')).toHaveCount(32);
+  await expect(page.locator('.download-state', { hasText: 'Coming soon' })).toHaveCount(32);
 });
 
 test('phlow study page renders all five sections with KaTeX math', async ({ page }) => {
@@ -54,7 +61,7 @@ test('phlow study page renders all five sections with KaTeX math', async ({ page
       errors.push(`console: ${message.text()}`);
     }
   });
-  await page.goto('/projects/phlow');
+  await page.goto('/solutions/phlow');
   for (const label of ['ABSTRACT', 'METHODS', 'RESULTS', 'DISCUSSION', 'CONCLUSION']) {
     await expect(page.locator('.band-label', { hasText: label }).first()).toBeVisible();
   }
@@ -186,8 +193,8 @@ test('about page closes with the Phaedrus coda', async ({ page }) => {
 const ALL_ROUTES = [
   '/',
   '/research',
-  '/projects',
-  '/projects/phlow',
+  '/solutions',
+  '/solutions/phlow',
   '/on-ai',
   '/standards',
   '/standards/rust',
@@ -273,8 +280,8 @@ test('no CSP violations on any route, including interactions', async ({ page }) 
     await page.waitForTimeout(2000);
     await expect(page.locator('#orcid-works')).toBeAttached();
   });
-  await sweep('/projects');
-  await sweep('/projects/phlow', async () => {
+  await sweep('/solutions');
+  await sweep('/solutions/phlow', async () => {
     const slider = page.locator('.ix-slider');
     await slider.fill('2');
     await expect(page.locator('[data-ix="success"]')).toHaveText('0.774 ± 0.006');
@@ -301,7 +308,7 @@ test('no CSP violations on any route, including interactions', async ({ page }) 
 });
 
 test('phlow explorer passes data to the DOM only as text', async ({ page }) => {
-  await page.goto('/projects/phlow');
+  await page.goto('/solutions/phlow');
   const slot = page.locator('[data-interactive="phlow-stale-explorer"]');
   await expect(slot.locator('.ix-slider')).toBeAttached();
   // The mount builds no active elements, and the plot labels (set via
@@ -324,7 +331,7 @@ test('phlow explorer passes data to the DOM only as text', async ({ page }) => {
 });
 
 test('KaTeX renders hostile equation source inertly (trust: false)', async ({ page }) => {
-  await page.goto('/projects/phlow');
+  await page.goto('/solutions/phlow');
   await expect(page.locator('.math-block .katex').first()).toBeAttached();
   const verdict = await page.evaluate(() => {
     const article = document.querySelector('.project-article');
