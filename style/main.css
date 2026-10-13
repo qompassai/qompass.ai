@@ -1266,12 +1266,19 @@ h3 {
   max-width: 54rem;
 }
 @media (prefers-reduced-motion: no-preference) {
-  .ts-icon-ring {
+  /* Chapter icons rest still; the orbit ring and halo move only
+     while the summary is hovered or keyboard-focused, or while
+     the chapter stands open — the state a tap leaves it in. */
+  .ts-summary:hover .ts-icon-ring,
+  .ts-summary:focus-visible .ts-icon-ring,
+  .ts-chapter[open ] > .ts-summary .ts-icon-ring {
     animation: ts-icon-spin 26s linear infinite;
     transform-box: fill-box;
     transform-origin: center;
   }
-  .ts-icon-halo {
+  .ts-summary:hover .ts-icon-halo,
+  .ts-summary:focus-visible .ts-icon-halo,
+  .ts-chapter[open ] > .ts-summary .ts-icon-halo {
     animation: ts-icon-pulse 5s ease-in-out infinite alternate;
   }
   .ts-summary::after {
