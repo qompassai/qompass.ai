@@ -226,7 +226,7 @@ url = "https://huggingface.co/qompass"
 [[identifiers]]
 label = "Loop profile"
 value = "2230223"
-url = "https://loop.frontiersin.org/people/2230223/bio"
+url = "https://loop.frontiersin.org/people/2230223/overview?referrer=orcid_profile"
 
 [[identifiers]]
 label = "ORCID"
@@ -246,7 +246,7 @@ url = "https://sciprofiles.com/profile/2835041"
 [[identifiers]]
 label = "Scopus Author ID"
 value = "57385910700"
-url = "https://www.scopus.com/authid/detail.uri?authorId=57385910700"
+url = "https://www.scopus.com/inward/authorDetails.url?authorID=57385910700&partnerID=MN8TOARS"
 
 [[identifiers]]
 label = "YouTube"
