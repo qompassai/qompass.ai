@@ -56,15 +56,6 @@ pub fn Research() -> impl IntoView {
                     </p>
                 </article>
                 <article class="entry">
-                    <p class="entry-kind">"POSITION PAPER"</p>
-                    <h2>"First, Do No Harm"</h2>
-                    <p>
-                        "A pragmatic standard for safe, secure, and trustworthy AI: drawn from "
-                        "clinical medicine's oldest rule and a red teamer's threat model, and "
-                        "written to be applied, not admired."
-                    </p>
-                </article>
-                <article class="entry">
                     <p class="entry-kind">
                         "PEER-REVIEWED LETTER — CLINICAL ORTHOPAEDICS AND RELATED RESEARCH (2024)"
                     </p>
@@ -73,6 +64,12 @@ pub fn Research() -> impl IntoView {
                         "On what generative AI actually changes in value-based care — where it "
                         "earns its cost, where it does not, and the evidence bar it should be "
                         "held to before it touches a patient."
+                    </p>
+                    <p>
+                        "DOI: "
+                        <a href="https://doi.org/10.1097/corr.0000000000003001">
+                            "10.1097/corr.0000000000003001"
+                        </a>
                     </p>
                 </article>
                 <article class="entry">
