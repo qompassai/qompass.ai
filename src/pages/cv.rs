@@ -157,6 +157,33 @@ pub fn Cv() -> impl IntoView {
             </ul>
             <h2 class="cv-head">"Off Watch"</h2>
             <p>{CV_PERSONAL_LINE}</p>
+            {CV_CODA.as_ref().map(|c| {
+                view! {
+                    <div class="cv-coda">
+                        <p class="page-bearing">{c.eyebrow}</p>
+                        <figure class="phaedrus-frame">
+                            <span class="phaedrus-ring" aria-hidden="true"></span>
+                            <span class="phaedrus-pulse" aria-hidden="true"></span>
+                            <img class="phaedrus-img" src={c.image} alt={c.alt} loading="lazy" />
+                            <svg
+                                class="phaedrus-route"
+                                viewBox="0 0 600 24"
+                                preserveAspectRatio="none"
+                                aria-hidden="true"
+                            >
+                                <path
+                                    pathLength="100"
+                                    d="M4 14 C 120 4, 240 22, 360 12 S 560 10, 596 14"
+                                ></path>
+                            </svg>
+                            <figcaption class="phaedrus-caption">
+                                <span class="phaedrus-name">{c.caption}</span>
+                                <span class="phaedrus-note">{c.note}</span>
+                            </figcaption>
+                        </figure>
+                    </div>
+                }
+            })}
             <p class="cv-print-note">"Print this page (or save as PDF) for the paper copy — it is styled to travel."</p>
         </section>
     }

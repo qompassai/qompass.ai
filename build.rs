@@ -7,6 +7,8 @@ struct Cv {
     #[serde(default)]
     awards: Vec<SkillGroup>,
     #[serde(default)]
+    coda: Option<Coda>,
+    #[serde(default)]
     certifications: Vec<SkillGroup>,
     #[serde(default)]
     education: Vec<Item>,
@@ -20,6 +22,15 @@ struct Cv {
     #[serde(default)]
     service: Vec<Item>,
     skills: Skills,
+}
+
+#[derive(Deserialize)]
+struct Coda {
+    alt: String,
+    caption: String,
+    eyebrow: String,
+    image: String,
+    note: String,
 }
 
 #[derive(Deserialize)]
@@ -461,7 +472,8 @@ fn emit_cv() -> Result<(), Box<dyn std::error::Error>> {
          pub struct CvItem { pub item: &'static str, pub org: &'static str, pub period: &'static str, pub detail: &'static str }\n\
          pub struct CvSkillGroup { pub label: &'static str, pub items: &'static [&'static str] }\n\
          pub struct CvIdentifier { pub label: &'static str, pub value: &'static str, pub url: &'static str }\n\
-         pub struct CvPress { pub date: &'static str, pub note: &'static str, pub outlet: &'static str, pub title: &'static str, pub url: &'static str }\n",
+         pub struct CvPress { pub date: &'static str, pub note: &'static str, pub outlet: &'static str, pub title: &'static str, pub url: &'static str }\n\
+         pub struct CvCoda { pub alt: &'static str, pub caption: &'static str, pub eyebrow: &'static str, pub image: &'static str, pub note: &'static str }\n",
     );
     let _ = writeln!(
         out,
@@ -531,6 +543,20 @@ fn emit_cv() -> Result<(), Box<dyn std::error::Error>> {
             write!(out, "CvIdentifier {{ label: {}, value: {}, url: {} }},", lit(&i.label), lit(&i.value), lit(&i.url));
     }
     out.push_str("];\n");
+    match &cv.coda {
+        Some(c) => {
+            let _ = writeln!(
+                out,
+                "pub static CV_CODA: Option<CvCoda> = Some(CvCoda {{ alt: {}, caption: {}, eyebrow: {}, image: {}, note: {} }});",
+                lit(&c.alt),
+                lit(&c.caption),
+                lit(&c.eyebrow),
+                lit(&c.image),
+                lit(&c.note)
+            );
+        }
+        None => out.push_str("pub static CV_CODA: Option<CvCoda> = None;\n"),
+    }
 
     let dest = std::path::Path::new(&std::env::var("OUT_DIR")?).join("cv_data.rs");
     std::fs::write(dest, out)?;

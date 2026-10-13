@@ -107,6 +107,34 @@ test('on-ai page renders all three tracks and the filters work', async ({ page }
   expect(errors).toEqual([]);
 });
 
+test('cv page closes with the Phaedrus coda', async ({ page }) => {
+  const errors: string[] = [];
+  page.on('pageerror', (err) => errors.push(err.message));
+  page.on('console', (msg) => {
+    if (msg.type() === 'error') errors.push(msg.text());
+  });
+  await page.goto('/cv');
+  await expect(page).toHaveTitle(/CV/);
+  const coda = page.locator('.cv-coda');
+  await expect(coda).toBeVisible();
+  await expect(coda.locator('.page-bearing')).toHaveText('OFF THE CHART');
+  const img = coda.locator('.phaedrus-img');
+  await img.scrollIntoViewIfNeeded();
+  await expect(img).toBeVisible();
+  await expect
+    .poll(async () => img.evaluate((el: HTMLImageElement) => el.naturalWidth))
+    .toBeGreaterThan(0);
+  await expect(coda.locator('.phaedrus-name')).toContainText('Phaedrus');
+  await expect(coda.locator('.phaedrus-name')).toContainText('Milwaukee-Eight 117');
+  await expect(coda.locator('.phaedrus-ring')).toHaveCount(1);
+  await expect(coda.locator('.phaedrus-route path')).toHaveCount(1);
+  const anim = await coda
+    .locator('.phaedrus-ring')
+    .evaluate((el) => getComputedStyle(el).animationName);
+  expect(anim).toContain('phaedrus-spin');
+  expect(errors).toEqual([]);
+});
+
 test('tiger style page renders the standing orders with 17 chapters', async ({ page }) => {
   const errors: string[] = [];
   page.on('pageerror', (error) => errors.push(`pageerror: ${error.message}`));

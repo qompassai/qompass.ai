@@ -1514,6 +1514,10 @@ h3 {
       box-shadow: 0 -2px 14px rgba(91, 140, 255, 0.28);
     }
   }
+  .phaedrus-ring { animation: phaedrus-spin 140s linear infinite; }
+  .phaedrus-pulse { animation: phaedrus-pulse 8s ease-out infinite; }
+  .phaedrus-img { animation: phaedrus-rim 9s ease-in-out infinite; }
+  .phaedrus-route path { stroke-dasharray: 100; animation: phaedrus-draw 16s ease-out infinite; }
   .social-link:hover .icon-github,
   .social-link:focus-visible .icon-github {
     animation: icon-wave 0.8s ease-in-out;
@@ -1621,4 +1625,96 @@ h3 {
   .page {
     padding: 0;
   }
+}
+
+/* CV coda — Phaedrus in a compass field. CSS-only motion, all of it
+   inside the prefers-reduced-motion: no-preference block below; the
+   static state (ring, dashed route, framed art) is complete without it. */
+.cv-coda { margin-top: 2.75rem; }
+.cv-coda .page-bearing { color: var(--brass); }
+.phaedrus-frame {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 1rem 0 0;
+  padding: 2.25rem 0 0;
+}
+.phaedrus-ring {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: min(94%, 36rem);
+  aspect-ratio: 1;
+  border: 1px solid var(--chart-line);
+  border-radius: 50%;
+  transform: translate(-50%, -58%);
+  background: repeating-conic-gradient(from 0deg, var(--chart-line) 0deg 1.5deg, transparent 1.5deg 15deg);
+  -webkit-mask: radial-gradient(closest-side, transparent 84%, #000 85%, #000 96%, transparent 97%);
+  mask: radial-gradient(closest-side, transparent 84%, #000 85%, #000 96%, transparent 97%);
+  opacity: .55;
+  pointer-events: none;
+}
+.phaedrus-pulse {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: min(94%, 36rem);
+  aspect-ratio: 1;
+  border: 1px solid var(--cherenkov);
+  border-radius: 50%;
+  transform: translate(-50%, -58%);
+  opacity: 0;
+  pointer-events: none;
+}
+.phaedrus-img {
+  position: relative;
+  width: min(100%, 34rem);
+  height: auto;
+  border: 1px solid var(--chart-line);
+  border-radius: .5rem;
+}
+.phaedrus-route { width: min(100%, 34rem); height: 1.5rem; margin-top: .35rem; }
+.phaedrus-route path {
+  fill: none;
+  stroke: var(--brass);
+  stroke-width: 1.6;
+  stroke-linecap: round;
+  stroke-dasharray: 5 4;
+  opacity: .8;
+}
+.phaedrus-caption {
+  position: relative;
+  max-width: 34rem;
+  margin-top: .9rem;
+  text-align: center;
+}
+.phaedrus-name {
+  display: block;
+  font-family: "Space Grotesk", sans-serif;
+  font-size: 1.05rem;
+  color: var(--starlight);
+}
+.phaedrus-note {
+  display: block;
+  margin-top: .35rem;
+  font-size: .92rem;
+  line-height: 1.6;
+  color: var(--fog);
+}
+@keyframes phaedrus-draw {
+  0% { stroke-dashoffset: 100; }
+  35%, 100% { stroke-dashoffset: 0; }
+}
+@keyframes phaedrus-pulse {
+  0% { transform: translate(-50%, -58%) scale(.86); opacity: 0; }
+  18% { opacity: .45; }
+  60%, 100% { transform: translate(-50%, -58%) scale(1.04); opacity: 0; }
+}
+@keyframes phaedrus-rim {
+  0%, 100% { filter: brightness(1) drop-shadow(0 0 10px rgba(91, 140, 255, .18)); }
+  50% { filter: brightness(1.07) drop-shadow(0 0 22px rgba(91, 140, 255, .38)); }
+}
+@keyframes phaedrus-spin {
+  to { transform: translate(-50%, -58%) rotate(360deg); }
 }

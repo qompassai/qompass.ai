@@ -250,3 +250,10 @@ url = "https://www.youtube.com/@QompassAI"
 
 [personal]
 line = "Motorcycles, programming, and time with my wife Katy and our dogs Dempsey and Zen."
+
+[coda]
+eyebrow = "OFF THE CHART"
+image = "/img/cv/phaedrus.webp"
+alt = "Phaedrus, a black Harley-Davidson cruiser with a Milwaukee-Eight 117, drawn in Cherenkov-blue line work on a deep navy ground"
+caption = "Phaedrus — a Harley-Davidson running the Milwaukee-Eight 117."
+note = "The name is Pirsig's: Phaedrus is the narrator of Zen and the Art of Motorcycle Maintenance, the book quoted at the head of the Odyssey research programme. This is the machine the maintenance gets done on, by hand."
