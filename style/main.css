@@ -572,6 +572,27 @@ h3 {
   margin-inline: auto;
   max-width: 46rem;
 }
+.entry-mark {
+  display: block;
+  height: 64px;
+  margin: 0 auto 0.8rem;
+  object-fit: contain;
+  width: 64px;
+}
+.project-mark {
+  display: block;
+  height: 96px;
+  margin: 0 auto 1rem;
+  object-fit: contain;
+  width: 96px;
+}
+.tracker-mark {
+  display: block;
+  height: 48px;
+  margin: 0 auto 0.6rem;
+  object-fit: contain;
+  width: 48px;
+}
 
 /* — CV ——————————————————————————————————— */
 .cv-title {
