@@ -30,7 +30,7 @@ const FLEET: [FleetEntry; 8] = [
         repo: "diver",
     },
     FleetEntry {
-        blurb: "A clean-room Rust port of the REA MCP reverse-engineering \
+        blurb: "A Rust port of the REA MCP reverse-engineering \
             server — depth-sounding for binaries.",
         kind: "REVERSE ENGINEERING — RUST",
         name: "fathom",

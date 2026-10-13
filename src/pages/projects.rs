@@ -130,7 +130,7 @@ pub fn Projects() -> impl IntoView {
                         <a href="https://github.com/qompassai/fathom">"fathom"</a>
                     </h2>
                     <p>
-                        "A clean-room Rust port of the REA MCP reverse-engineering server — "
+                        "A Rust port of the REA MCP reverse-engineering server — "
                         "depth-sounding for binaries."
                     </p>
                     <DownloadBoxes slug="fathom" />
