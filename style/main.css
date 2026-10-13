@@ -1204,8 +1204,8 @@ a.download-box .download-state {
 }
 .ts-icon {
   display: block;
-  height: 44px;
-  width: 44px;
+  height: 88px;
+  width: 88px;
 }
 .ts-icon-text {
   fill: var(--starlight);
