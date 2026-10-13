@@ -1554,14 +1554,16 @@ a.download-box .download-state {
 .footer-inner {
   max-width: var(--measure);
   margin: 0 auto;
-  padding: 2rem 1.25rem 2.6rem;
+  padding: 1.75rem 1.25rem 2rem;
   color: var(--fog);
   font-size: 0.95rem;
+  text-align: center;
 }
 .footer-social {
   align-items: center;
   display: flex;
   gap: 1.1rem;
+  justify-content: center;
 }
 .social-link {
   color: var(--fog);
@@ -1584,6 +1586,7 @@ a.download-box .download-state {
   font-family: var(--font-mono);
   font-size: 0.8rem;
   letter-spacing: 0.08em;
+  text-align: center;
 }
 
 /* — Motion & print ——————————————————————— */

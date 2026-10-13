@@ -160,7 +160,6 @@ fn Footer() -> impl IntoView {
                     <A href="/privacy">"Privacy"</A>
                     " · "
                     <A href="/legal">"Legal"</A>
-                    " · Built with Leptos · Served by vongola · Post-quantum by design"
                 </p>
             </div>
         </footer>
