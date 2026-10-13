@@ -74,6 +74,11 @@ if (list) {
         if (!url && doi) {
           url = "https://doi.org/" + doi;
         }
+        // Same normalization as scripts/fetch-orcid.py: ORCID records can
+        // carry http:// URLs (e.g. Scopus); the site is https-only.
+        if (url.startsWith("http://")) {
+          url = "https://" + url.slice("http://".length);
+        }
         if (!doi && url) {
           const m = url.match(/^https?:\/\/doi\.org\/(.+)$/);
           if (m) doi = m[1];

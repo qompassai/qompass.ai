@@ -52,6 +52,10 @@ def main() -> int:
                     break
         if not url:
             url = f"https://orcid.org/{ORCID}"
+        # ORCID records can carry http:// URLs (e.g. Scopus record links);
+        # the site is https-only, so upgrade the emitted work URL.
+        if url.startswith("http://"):
+            url = "https://" + url[len("http://"):]
         if not doi:
             for prefix in ("https://doi.org/", "http://doi.org/"):
                 if url.startswith(prefix):

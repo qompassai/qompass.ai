@@ -101,7 +101,7 @@ pub static WORKS: &[Work] = &[
     },
     Work {
         title: "Evaluation of the Safety of Uninterrupted Warfarin Anticoagulation With Tranexamic Acid in Total Joint Arthroplasty",
-        url: "http://www.scopus.com/inward/record.url?eid=2-s2.0-85199815794&partnerID=MN8TOARS",
+        url: "https://www.scopus.com/inward/record.url?eid=2-s2.0-85199815794&partnerID=MN8TOARS",
         venue: "Orthopedics",
         year: "2024",
         doi: "10.3928/01477447-20240304-04",
