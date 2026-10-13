@@ -397,6 +397,96 @@ fn adapt_links(md: &str, slug: &str) -> String {
     out
 }
 
+/// Sanitize rendered guide HTML before it is baked into the binary.
+///
+/// pulldown-cmark passes raw HTML in the source straight through, and the
+/// guides are injected with `inner_html` at render time — so without this
+/// step, a `<script>`, an event-handler attribute, or a `javascript:` URL
+/// in a guide would ship as live markup. (The Lua reference's toggle demo
+/// did exactly this on purpose; it degrades to its own documented no-JS
+/// state — note readable, script gone.) ammonia's defaults strip all of
+/// that (scripts, handlers, dangerous URL schemes) while keeping the
+/// document tags the guides actually use; `<details>`/`<summary>` (the
+/// house collapsible style) and tasklist `<input>`s are preserved
+/// explicitly. This is a build-time guarantee, not a runtime hope: every
+/// build also pushes `tests/fixtures/hostile-tiger.md` through the same
+/// path and fails if anything active survives (see `check_fixture`).
+fn sanitize_html(html: &str) -> String {
+    ammonia::Builder::default()
+        .add_tags(["button", "details", "input", "summary"])
+        .add_tag_attributes("button", ["type"])
+        .add_tag_attributes("details", ["open"])
+        .add_tag_attributes("input", ["checked", "disabled", "type"])
+        .clean(html)
+        .to_string()
+}
+
+/// Does this HTML carry active content? Used by the build-time fixture
+/// check below; the unit tests in `src/tiger_data.rs` apply the same
+/// rules to the emitted statics.
+fn has_active_content(html: &str) -> bool {
+    let lower = html.to_ascii_lowercase();
+    if lower.contains("<script") || lower.contains("<iframe") {
+        return true;
+    }
+    // Dangerous URL schemes count only in attribute context — the words
+    // "javascript:" as inert visible text (e.g. a guide discussing the
+    // scheme) are not active content.
+    for attr in ["href=\"javascript:", "href='javascript:", "src=\"javascript:", "src='javascript:"] {
+        if lower.contains(attr) {
+            return true;
+        }
+    }
+    // Event-handler attributes (`onclick=`, ...) inside any tag. Quoted
+    // attribute values are blanked first so prose inside a value cannot
+    // pose as an attribute name.
+    lower.split('<').skip(1).map(|segment| segment.split('>').next().unwrap_or_default()).any(tag_has_handler)
+}
+
+/// Does one tag (the text between `<` and `>`) carry an `on*=` handler?
+fn tag_has_handler(tag: &str) -> bool {
+    let mut cleaned = String::with_capacity(tag.len());
+    let mut quote: Option<char> = None;
+    for c in tag.chars() {
+        match quote {
+            Some(q) => {
+                if c == q {
+                    quote = None;
+                }
+            }
+            None => {
+                if c == '"' || c == '\'' {
+                    quote = Some(c);
+                    cleaned.push(' ');
+                } else {
+                    cleaned.push(c);
+                }
+            }
+        }
+    }
+    cleaned.split(char::is_whitespace).filter_map(|token| token.split_once('=').map(|(name, _)| name)).any(|name| {
+        name.len() > 2 && name.starts_with("on") && name.chars().all(|c| c.is_ascii_alphanumeric() || c == '-')
+    })
+}
+
+/// Push the hostile fixture through the same render path as the guides
+/// and fail the build if anything active survives sanitization. The
+/// rendered fixture is also emitted for the unit tests.
+fn check_fixture() -> Result<String, Box<dyn std::error::Error>> {
+    println!("cargo:rerun-if-changed=tests/fixtures/hostile-tiger.md");
+    let fixture = std::fs::read_to_string("tests/fixtures/hostile-tiger.md")?;
+    let html = render_markdown(&fixture);
+    if has_active_content(&html) {
+        return Err(format!("hostile fixture survived sanitization: {html}").into());
+    }
+    for kept in ["<details", "<summary", "<strong"] {
+        if !html.contains(kept) {
+            return Err(format!("sanitizer ate a legitimate tag ({kept}) from the fixture: {html}").into());
+        }
+    }
+    Ok(html)
+}
+
 fn render_markdown(md: &str) -> String {
     let options = pulldown_cmark::Options::ENABLE_TABLES
         | pulldown_cmark::Options::ENABLE_STRIKETHROUGH
@@ -405,7 +495,7 @@ fn render_markdown(md: &str) -> String {
     let parser = pulldown_cmark::Parser::new_ext(md, options);
     let mut html = String::new();
     pulldown_cmark::html::push_html(&mut html, parser);
-    html
+    sanitize_html(&html)
 }
 
 /// Emit `tiger_style_data.rs` from the imported guides.
@@ -454,6 +544,10 @@ fn emit_tiger_style() -> Result<(), Box<dyn std::error::Error>> {
         );
     }
     out.push_str("];\n");
+    // The hostile-fixture render, emitted for the unit tests in
+    // src/tiger_data.rs (test-only; not referenced by any page).
+    let fixture_html = check_fixture()?;
+    let _ = writeln!(out, "#[cfg(test)] pub static HOSTILE_FIXTURE_HTML: &str = {};", lit(&fixture_html));
     let dest = std::path::Path::new(&std::env::var("OUT_DIR")?).join("tiger_style_data.rs");
     std::fs::write(dest, out)?;
     Ok(())

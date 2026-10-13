@@ -1,0 +1,47 @@
+# qompass.ai — Caddy configuration for the Oracle box.
+#
+# This file is the source of truth for the edge config; it is deployed to
+# /etc/caddy/Caddyfile (with a working copy at /home/ubuntu/Caddyfile).
+# The security headers below are mirrored by the SSR server in
+# src/main.rs so the end-to-end suite can assert them locally — KEEP THE
+# VALUES IN SYNC, especially the Content-Security-Policy.
+#
+# CSP notes: script-src pins Leptos' inline hydration bootstrap by
+# sha256 hash (its bodies are byte-identical on every page) instead of
+# 'unsafe-inline'. 'wasm-unsafe-eval' is present because the WASM
+# hydration bundle cannot instantiate without it (proven by the e2e CSP
+# sweep; plain 'unsafe-eval' is never acceptable). Style attributes are
+# the accepted residual: KaTeX lays out math with inline style
+# attributes, so style-src-attr is 'unsafe-inline' while style elements
+# stay 'self'-only — style injection is tolerated, script injection is
+# not. connect-src names pub.orcid.org because /js/orcid.js refreshes
+# the research record from the ORCID public API in the browser.
+{
+	email map@qompass.ai
+}
+
+qompass.ai {
+	root * /var/www/qompass.ai
+	file_server
+	encode gzip
+
+	header {
+		Content-Security-Policy "default-src 'self'; script-src 'self' 'wasm-unsafe-eval' 'sha256-ErLwLzrp0nVL4JLFLg4KRpX9lYoIOvcxQy36WvA5dGA=' 'sha256-2e+rGxtst+bbxdLf6Dp32aL0uyPdikvr0awq53hVU58=' 'sha256-PEoA+SZ6ZbFCusLsUEMftpXvTp6Abhw9kvgQnCC8l3U=' 'sha256-47DEQpj8HBSa+/TImW+5JCeuQeRkm5NMpJWZG3hSuFU='; object-src 'none'; base-uri 'self'; form-action 'self'; frame-ancestors 'none'; img-src 'self' data:; font-src 'self'; style-src 'self'; style-src-elem 'self'; style-src-attr 'unsafe-inline'; connect-src 'self' https://pub.orcid.org; worker-src 'self'; manifest-src 'self'"
+		Cross-Origin-Opener-Policy "same-origin"
+		Cross-Origin-Resource-Policy "same-origin"
+		Permissions-Policy "camera=(), microphone=(), geolocation=(), payment=(), usb=(), interest-cohort=()"
+		Referrer-Policy "strict-origin-when-cross-origin"
+		Strict-Transport-Security "max-age=31536000; includeSubDomains"
+		X-Content-Type-Options "nosniff"
+		X-Frame-Options "DENY"
+		-Server
+	}
+
+	log {
+		output file /var/log/caddy/qompass.ai.log
+	}
+}
+
+www.qompass.ai {
+	redir https://qompass.ai{uri} permanent
+}

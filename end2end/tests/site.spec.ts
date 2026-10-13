@@ -183,6 +183,166 @@ test('cv page closes with the Phaedrus coda', async ({ page }) => {
   expect(errors).toEqual([]);
 });
 
+const ALL_ROUTES = [
+  '/',
+  '/research',
+  '/projects',
+  '/projects/phlow',
+  '/on-ai',
+  '/tiger-style',
+  '/tiger-style/rust',
+  '/tiger-style/lua',
+  '/cv',
+  '/about',
+  '/contact',
+];
+
+test('security headers are set on every route', async ({ request }) => {
+  for (const route of ALL_ROUTES) {
+    const res = await request.get(route);
+    expect(res.status(), route).toBe(200);
+    const h = res.headers();
+    expect(h['strict-transport-security'], route).toContain('max-age=31536000');
+    expect(h['x-content-type-options'], route).toBe('nosniff');
+    expect(h['x-frame-options'], route).toBe('DENY');
+    expect(h['referrer-policy'], route).toBe('strict-origin-when-cross-origin');
+    expect(h['cross-origin-opener-policy'], route).toBe('same-origin');
+    expect(h['cross-origin-resource-policy'], route).toBe('same-origin');
+    expect(h['permissions-policy'], route).toContain('camera=()');
+    expect(h['permissions-policy'], route).toContain('interest-cohort=()');
+    const csp = h['content-security-policy'] ?? '';
+    for (const directive of [
+      "default-src 'self'",
+      "object-src 'none'",
+      "base-uri 'self'",
+      "form-action 'self'",
+      "frame-ancestors 'none'",
+      "img-src 'self' data:",
+      "font-src 'self'",
+      "connect-src 'self' https://pub.orcid.org",
+    ]) {
+      expect(csp, `${route}: ${directive}`).toContain(directive);
+    }
+    // Script injection stays impossible: the script-src directive itself
+    // carries no unsafe-* escape hatches (style attributes are the one
+    // scoped exception, and they live in style-src-attr, not here).
+    const scriptSrc = csp
+      .split(';')
+      .map((s) => s.trim())
+      .find((s) => s.startsWith('script-src'));
+    expect(scriptSrc, route).toBeDefined();
+    // Quoted tokens: 'wasm-unsafe-eval' is present on evidence and must
+    // not trip these — the bare 'unsafe-eval'/'unsafe-inline' sources are
+    // what is forbidden.
+    expect(scriptSrc, route).not.toContain("'unsafe-inline'");
+    expect(scriptSrc, route).not.toContain("'unsafe-eval'");
+  }
+});
+
+test('no CSP violations on any route, including interactions', async ({ page }) => {
+  const violations: string[] = [];
+  const pageErrors: string[] = [];
+  let where = '';
+  page.on('console', (message) => {
+    if (message.type() === 'error' && /content security policy/i.test(message.text())) {
+      violations.push(`${where}: ${message.text()}`);
+    }
+  });
+  page.on('pageerror', (error) => pageErrors.push(`${where}: ${error.message}`));
+  await page.context().grantPermissions(['clipboard-read', 'clipboard-write']);
+
+  const sweep = async (route: string, interact?: () => Promise<void>) => {
+    where = route;
+    await page.goto(route);
+    await page.waitForLoadState('networkidle');
+    if (interact) await interact();
+    await page.waitForLoadState('networkidle');
+  };
+
+  await sweep('/', async () => {
+    // Quickstart is hydration-driven: the active chip moving proves the
+    // WASM bundle instantiated and hydrated under the CSP.
+    const chips = page.locator('.qs-chip');
+    await chips.nth(1).click();
+    await expect(chips.nth(1)).toHaveClass(/qs-chip-active/);
+    await page.locator('.qs-copy').click();
+    await expect(page.locator('#qompass-hero')).toBeAttached();
+  });
+  await sweep('/research', async () => {
+    // The ORCID island refreshes from pub.orcid.org (connect-src).
+    await page.waitForTimeout(2000);
+    await expect(page.locator('#orcid-works')).toBeAttached();
+  });
+  await sweep('/projects');
+  await sweep('/projects/phlow', async () => {
+    const slider = page.locator('.ix-slider');
+    await slider.fill('2');
+    await expect(page.locator('[data-ix="success"]')).toHaveText('0.774 ± 0.006');
+    await slider.fill('0');
+    await page.locator('[data-ix="noise"]').check();
+  });
+  await sweep('/on-ai', async () => {
+    await page.locator('.tl-filter[data-filter="law"]').click();
+    await page.locator('.tl-filter[data-filter="all"]').click();
+  });
+  await sweep('/tiger-style', async () => {
+    await page.locator('#chapter-rust summary').click();
+    await expect(page.locator('#chapter-rust .ts-guide')).toBeVisible();
+  });
+  await sweep('/tiger-style/rust');
+  await sweep('/tiger-style/lua');
+  await sweep('/cv', async () => {
+    await page.locator('.cv-coda').scrollIntoViewIfNeeded();
+  });
+  await sweep('/about');
+  await sweep('/contact');
+
+  expect(violations).toEqual([]);
+  expect(pageErrors).toEqual([]);
+});
+
+test('phlow explorer passes data to the DOM only as text', async ({ page }) => {
+  await page.goto('/projects/phlow');
+  const slot = page.locator('[data-interactive="phlow-stale-explorer"]');
+  await expect(slot.locator('.ix-slider')).toBeAttached();
+  // The mount builds no active elements, and the plot labels (set via
+  // textContent after mount) carry the measured points.
+  expect(await slot.locator('script, img, iframe, object, embed, form').count()).toBe(0);
+  await expect(slot.locator('[data-ix-point-label="1"]')).toHaveText('p = 0.10');
+  const slider = slot.locator('.ix-slider');
+  for (const value of ['0', '1', '2']) {
+    await slider.fill(value);
+    for (const key of ['success', 'rounds', 'note', 'plabel']) {
+      const kids = await slot.locator(`[data-ix="${key}"]`).evaluate((el) => el.childElementCount);
+      expect(kids, `${key} at slider ${value}`).toBe(0);
+    }
+  }
+  await slider.fill('0');
+  await slot.locator('[data-ix="noise"]').check();
+  await expect(slot.locator('[data-ix="note"]')).toContainText('Perception noise');
+  const noteKids = await slot.locator('[data-ix="note"]').evaluate((el) => el.childElementCount);
+  expect(noteKids).toBe(0);
+});
+
+test('KaTeX renders hostile equation source inertly (trust: false)', async ({ page }) => {
+  await page.goto('/projects/phlow');
+  await expect(page.locator('.math-block .katex').first()).toBeAttached();
+  const verdict = await page.evaluate(() => {
+    const article = document.querySelector('.project-article');
+    if (!article) return 'no article element';
+    const span = document.createElement('span');
+    span.textContent = String.raw`\(\htmlClass{pwned}{x}\) \[\href{javascript:alert(1)}{y}\]`;
+    article.appendChild(span);
+    const render = (window as unknown as { renderMath?: () => boolean }).renderMath;
+    if (typeof render !== 'function') return 'renderMath not exposed';
+    render();
+    if (article.querySelector('.pwned')) return 'htmlClass reached the DOM';
+    if (article.querySelector('a[href^="javascript:"]')) return 'javascript: link reached the DOM';
+    return 'inert';
+  });
+  expect(verdict).toBe('inert');
+});
+
 test('tiger style page renders the standing orders with 17 chapters', async ({ page }) => {
   const errors: string[] = [];
   page.on('pageerror', (error) => errors.push(`pageerror: ${error.message}`));

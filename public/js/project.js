@@ -26,6 +26,11 @@ function renderMath() {
       { left: "\\(", right: "\\)", display: false },
     ],
     throwOnError: false,
+    // Explicit, not default-by-luck: with trust on, \htmlClass, \htmlId,
+    // \htmlStyle and \href would let equation source emit raw HTML and
+    // javascript: URLs into the page. Equations are content data; they
+    // must never become markup.
+    trust: false,
   });
   return !mathPending(article);
 }
@@ -54,6 +59,13 @@ window.addEventListener("load", renderMath);
 // — Interactives —————————————————————————————————————————————————————————
 // Registry keyed by the `interactive` id in content/projects/<slug>.toml.
 // Each mount receives the slot element and builds its own DOM inside it.
+//
+// DOM-injection contract: data values (labels, readouts, notes) reach the
+// page ONLY through textContent, never through innerHTML. A mount may use
+// innerHTML for its static skeleton, but that template may interpolate
+// nothing but numbers computed from literals (plot geometry) — no string
+// data. If a future interactive takes data from anywhere else, it still
+// enters through textContent.
 const INTERACTIVES = {
   // Phlow stale-frame explorer: cross-play success vs the probability that
   // an agent's snapshot is one workspace-change stale. Exactly the three
@@ -101,7 +113,7 @@ const INTERACTIVES = {
         ? `<line class="ix-err" x1="${XS[i]}" y1="${cy - ey}" x2="${XS[i]}" y2="${cy + ey}"/>`
         : "";
       return `${bar}<circle class="ix-point" data-ix-point="${i}" cx="${XS[i]}" cy="${cy}" r="6"/>` +
-        `<text class="ix-plot-text" x="${XS[i]}" y="238" text-anchor="middle">p = ${pt.p}</text>`;
+        `<text class="ix-plot-text" data-ix-point-label="${i}" x="${XS[i]}" y="238" text-anchor="middle"></text>`;
     }).join("");
     slot.innerHTML =
       `<div class="ix-controls">` +
@@ -133,6 +145,10 @@ const INTERACTIVES = {
       `<span class="ix-stat-value" data-ix="rounds">0.55</span></div>` +
       `</div>` +
       `<p class="ix-note" data-ix="note"></p>`;
+    // Point labels are data strings: in via textContent, per the contract.
+    slot.querySelectorAll("[data-ix-point-label]").forEach((el) => {
+      el.textContent = `p = ${POINTS[Number(el.getAttribute("data-ix-point-label"))].p}`;
+    });
     const slider = slot.querySelector('[data-ix="slider"]');
     const noise = slot.querySelector('[data-ix="noise"]');
     const plabel = slot.querySelector('[data-ix="plabel"]');
