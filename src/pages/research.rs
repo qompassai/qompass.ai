@@ -10,7 +10,7 @@ pub fn Research() -> impl IntoView {
     view! {
         <Title text="Research - Qompass AI" />
         <section class="page">
-            <p class="page-bearing">"CHART — PUBLICATIONS & PREPRINTS"</p>
+            <p class="page-bearing">"ODYSSEY — PUBLICATIONS & PREPRINTS"</p>
             <h1>"Research"</h1>
             <p class="page-lede">
                 "Peer-reviewed work, preprints, and benchmark studies. The complete record "
@@ -58,7 +58,7 @@ pub fn Research() -> impl IntoView {
                     </p>
                 </article>
             </div>
-            <h2 class="record-head">"On the Chart — Research in Progress"</h2>
+            <h2 class="record-head">"On the Odyssey — Research in Progress"</h2>
             <p class="record-meta">
                 "The working log, published as it goes. Only entries flagged public appear "
                 "here; abstracts appear only when flagged ready for daylight."
