@@ -3,6 +3,7 @@
 The qompass.ai website: a Leptos (Rust/WebAssembly) static site with islands,
 served by vongola. Design: a compass for the quantum deep — abyssal charts,
 Cherenkov blue, brass instruments.
+<a href="./LICENSE"><img src="https://img.shields.io/badge/License-Apache%202.0-blue.svg" alt="License: Apache 2.0"></a>
 
 ## Layout
 
@@ -18,3 +19,7 @@ Cherenkov blue, brass instruments.
 python3 scripts/fetch-orcid.py   # refresh the ORCID snapshot
 cargo leptos build --release     # needs cargo-leptos + the wasm32 target
 ```
+
+## License
+
+This project is licensed under the [Apache License, Version 2.0](./LICENSE).
