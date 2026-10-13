@@ -55,4 +55,21 @@ done
 
 kill "$SERVER_PID"
 trap - EXIT
+
+# The web server reads dist/ as an unprivileged user, so every deployed
+# file must be world-readable and every directory world-traversable.
+# Source assets have arrived with owner-only modes before now (600/640
+# on the project marks, the CV image, and the page JS — agent-copied
+# files), and cp/rsync preserve those modes faithfully: on 2026-10-12
+# Caddy answered 403 with an empty body for every project mark while
+# the pages themselves served fine. Normalize here, in the one step
+# every deploy runs, and refuse to ship a dist the server cannot read.
+chmod -R a+rX "$DIST"
+unreadable="$(find "$DIST" -type f ! -perm -o=r -print)"
+if [ -n "$unreadable" ]; then
+    echo "prerender: dist contains files the web server cannot read:" >&2
+    printf '%s\n' "$unreadable" >&2
+    exit 1
+fi
+
 echo "dist/ ready: $(du -sh "$DIST" | cut -f1)"
