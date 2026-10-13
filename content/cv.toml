@@ -299,6 +299,11 @@ value = "57385910700"
 url = "https://www.scopus.com/inward/authorDetails.url?authorID=57385910700&partnerID=MN8TOARS"
 
 [[identifiers]]
+label = "Washington L&I"
+value = "PORTEM*744M3"
+url = "https://secure.lni.wa.gov/verify/Detail.aspx?UBI=&LIC=PORTEM*744M3&SAW="
+
+[[identifiers]]
 label = "YouTube"
 value = "@QompassAI"
 url = "https://www.youtube.com/@QompassAI"

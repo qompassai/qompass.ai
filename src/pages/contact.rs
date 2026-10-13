@@ -32,10 +32,12 @@ const ICON_ZENODO: &str = "M23.82698 11.163a2.2419 2.2419 0 00-.46698-.68697 2.1
 /// public/img/icons/: Frontiers' concentric-target glyph for
 /// Loop, MDPI's "Sci" bubble for `SciProfiles`, Authenticus' "a"
 /// ring, Doximity's arcs-and-"d", the Knowledge Commons swirl
-/// hcommons.org serves for Humanities Commons, and the Microsoft
+/// hcommons.org serves for Humanities Commons, the Microsoft
 /// four-squares learn.microsoft.com serves for Microsoft Learn
 /// (simple-icons carries neither `microsoftlearn` nor
-/// `microsoft`). `OpenAlex` has no simple-icons mark either: its
+/// `microsoft`), and the state-profile favicon
+/// secure.lni.wa.gov serves for `Washington L&I`.
+/// `OpenAlex` has no simple-icons mark either: its
 /// icon is the tricon openalex.org itself serves, tinted
 /// Cherenkov like the paths above — the served original is a
 /// black silhouette that would vanish on the abyss ground.
@@ -115,6 +117,15 @@ fn identity_icon(label: &str) -> AnyView {
             <img
                 class="cv-id-icon"
                 src="/img/icons/sciprofiles.png"
+                alt=""
+                aria-hidden="true"
+            />
+        }
+        .into_any(),
+        "Washington L&I" => view! {
+            <img
+                class="cv-id-icon"
+                src="/img/icons/washington-lni.png"
                 alt=""
                 aria-hidden="true"
             />
