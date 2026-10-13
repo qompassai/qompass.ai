@@ -50,7 +50,7 @@ windows = "https://github.com/qompassai/fathom/releases/download/v2026-10-13/fat
 # android = "https://..."
 linux_aarch64 = "https://github.com/qompassai/phlow/releases/download/v2026-09-10/phlow-aarch64-unknown-linux-gnu.tar.gz"
 linux_x86_64 = "https://github.com/qompassai/phlow/releases/download/v2026-09-10/phlow-x86_64-unknown-linux-gnu.tar.gz"
-# windows = "https://..."
+windows = "https://github.com/qompassai/phlow/releases/download/v2026-09-10/phlow-x86_64-pc-windows-gnu.zip"
 
 [projects.volta]
 # android = "https://..."
