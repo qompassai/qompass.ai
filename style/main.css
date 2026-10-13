@@ -680,11 +680,27 @@ h3 {
   color: var(--fog);
   font-size: 0.95rem;
 }
-.footer-links {
+.footer-social {
+  align-items: center;
   display: flex;
-  gap: 1.3rem;
-  font-family: var(--font-mono);
-  font-size: 0.85rem;
+  gap: 1.1rem;
+}
+.social-link {
+  color: var(--fog);
+  display: inline-flex;
+  transition: color 0.25s ease;
+}
+.social-link:hover,
+.social-link:focus-visible {
+  color: var(--starlight);
+}
+.social-icon {
+  display: block;
+  fill: currentColor;
+  height: 20px;
+  transform-box: fill-box;
+  transform-origin: center;
+  width: 20px;
 }
 .footer-note {
   font-family: var(--font-mono);
@@ -705,6 +721,75 @@ h3 {
     to {
       opacity: 1;
       transform: none;
+    }
+  }
+  .social-link:hover .icon-github,
+  .social-link:focus-visible .icon-github {
+    animation: icon-wave 0.8s ease-in-out;
+  }
+  .social-link:hover .icon-huggingface,
+  .social-link:focus-visible .icon-huggingface {
+    animation: icon-hug 0.8s ease-in-out;
+  }
+  .social-link:hover .icon-orcid,
+  .social-link:focus-visible .icon-orcid {
+    animation: icon-flip 0.9s ease-in-out;
+  }
+  .social-link:hover .icon-youtube,
+  .social-link:focus-visible .icon-youtube {
+    animation: icon-press 0.7s ease-in-out;
+  }
+  @keyframes icon-flip {
+    from {
+      transform: rotateY(0deg);
+    }
+    to {
+      transform: rotateY(360deg);
+    }
+  }
+  @keyframes icon-hug {
+    0% {
+      transform: scale(1, 1);
+    }
+    35% {
+      transform: scale(1.08, 0.9);
+    }
+    70% {
+      transform: scale(0.96, 1.04);
+    }
+    100% {
+      transform: scale(1, 1);
+    }
+  }
+  @keyframes icon-press {
+    0% {
+      transform: scale(1);
+    }
+    30% {
+      transform: scale(1.15);
+    }
+    55% {
+      transform: scale(1);
+    }
+    80% {
+      transform: scale(1.12);
+    }
+    100% {
+      transform: scale(1);
+    }
+  }
+  @keyframes icon-wave {
+    0% {
+      transform: rotate(0deg) translateY(0);
+    }
+    30% {
+      transform: rotate(-8deg) translateY(-1.5px);
+    }
+    60% {
+      transform: rotate(6deg) translateY(-1px);
+    }
+    100% {
+      transform: rotate(0deg) translateY(0);
     }
   }
 }
