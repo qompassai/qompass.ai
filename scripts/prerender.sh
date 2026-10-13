@@ -9,6 +9,16 @@ SITE="target/site"
 DIST="dist"
 ROUTES=("/" "/research" "/projects" "/cv" "/about" "/contact")
 
+# Project study pages: one route per content/projects/*.toml flagged
+# ready = true. build.rs enforces file stem == slug, so the stem IS the
+# route's last segment.
+for toml in content/projects/*.toml; do
+    [ -e "$toml" ] || continue
+    if grep -qE '^[[:space:]]*ready[[:space:]]*=[[:space:]]*true' "$toml"; then
+        ROUTES+=("/projects/$(basename "$toml" .toml)")
+    fi
+done
+
 rm -rf "$DIST"
 mkdir -p "$DIST"
 cp -r "$SITE"/. "$DIST"/

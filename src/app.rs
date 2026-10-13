@@ -1,4 +1,7 @@
-use crate::pages::{about::About, contact::Contact, cv::Cv, home::Home, projects::Projects, research::Research};
+use crate::pages::{
+    about::About, contact::Contact, cv::Cv, home::Home, project::ProjectDispatch, projects::Projects,
+    research::Research,
+};
 use leptos::prelude::*;
 use leptos_meta::{provide_meta_context, MetaTags, Stylesheet, Title};
 use leptos_router::{
@@ -172,6 +175,7 @@ pub fn App() -> impl IntoView {
                     <Route path=path!("/contact") view=Contact />
                     <Route path=path!("/cv") view=Cv />
                     <Route path=path!("/projects") view=Projects />
+                    <Route path=path!("/projects/:slug") view=ProjectDispatch />
                     <Route path=path!("/research") view=Research />
                 </Routes>
             </main>

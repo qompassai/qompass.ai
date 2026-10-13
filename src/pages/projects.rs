@@ -1,6 +1,20 @@
 use leptos::prelude::*;
 use leptos_meta::Title;
 
+/// Link to a project's study page, rendered only when a ready study page
+/// exists for the slug — the rollout mechanism. No stub pages, no dead
+/// links: the link appears exactly when the page does.
+#[component]
+fn StudyLink(slug: &'static str) -> impl IntoView {
+    crate::project_data::project_page(slug).map(|_| {
+        view! {
+            <p class="study-link">
+                <a href=format!("/projects/{slug}")>"Read the study →"</a>
+            </p>
+        }
+    })
+}
+
 #[component]
 pub fn Projects() -> impl IntoView {
     view! {
@@ -24,6 +38,7 @@ pub fn Projects() -> impl IntoView {
                         "Post-quantum hybrid TLS reverse proxy on Pingora, with built-in ACME. "
                         "It serves this site."
                     </p>
+                    <StudyLink slug="vongola" />
                 </article>
                 <article class="entry">
                     <img class="project-mark" src="/img/projects/volta.webp" alt="volta" />
@@ -36,6 +51,7 @@ pub fn Projects() -> impl IntoView {
                         "post-quantum ambitions: ML-KEM/ML-DSA throughout, WebAuthn-class "
                         "authentication, no deprecated algorithms. Live at keys.qompass.ai."
                     </p>
+                    <StudyLink slug="volta" />
                 </article>
                 <article class="entry">
                     <img class="project-mark" src="/img/projects/bunker.webp" alt="bunker" />
@@ -48,6 +64,7 @@ pub fn Projects() -> impl IntoView {
                         "narinfo signing — packages signed for the post-quantum era, served "
                         "from cache.qompass.ai."
                     </p>
+                    <StudyLink slug="bunker" />
                 </article>
                 <article class="entry">
                     <img class="project-mark" src="/img/projects/ghost.webp" alt="ghost" />
@@ -58,6 +75,7 @@ pub fn Projects() -> impl IntoView {
                         "key picker, Tor transport, and key lookup against volta. Heading to "
                         "F-Droid."
                     </p>
+                    <StudyLink slug="ghost" />
                 </article>
                 <article class="entry">
                     <img class="project-mark" src="/img/projects/diver.webp" alt="diver" />
@@ -70,6 +88,7 @@ pub fn Projects() -> impl IntoView {
                         "LSP coverage, in-editor AI — the cockpit the rest of the fleet is "
                         "built from."
                     </p>
+                    <StudyLink slug="diver" />
                 </article>
                 <article class="entry">
                     <img class="project-mark" src="/img/projects/phlow.webp" alt="phlow" />
@@ -82,6 +101,7 @@ pub fn Projects() -> impl IntoView {
                         "by CLI, TUI, and MCP, with operator-approved checks and an "
                         "ATLAS-mapped adversarial test program."
                     </p>
+                    <StudyLink slug="phlow" />
                 </article>
                 <article class="entry">
                     <img class="project-mark" src="/img/projects/light-show.webp" alt="light-show" />
@@ -93,6 +113,7 @@ pub fn Projects() -> impl IntoView {
                         "A fiber-optic cabling puzzle game — route the light, validate the "
                         "signal. Coming to Google Play, F-Droid, and Windows."
                     </p>
+                    <StudyLink slug="light-show" />
                 </article>
                 <article class="entry">
                     <img class="project-mark" src="/img/projects/fathom.webp" alt="fathom" />
@@ -104,6 +125,7 @@ pub fn Projects() -> impl IntoView {
                         "A clean-room Rust port of the REA MCP reverse-engineering server — "
                         "depth-sounding for binaries."
                     </p>
+                    <StudyLink slug="fathom" />
                 </article>
             </div>
         </section>

@@ -1,0 +1,4 @@
+KaTeX v0.16.11 (official release tarball, github.com/KaTeX/KaTeX)
+tarball sha256: b968d389d7b9455e191605e4984c52faf3123213271880b02abc45e6ad4bbf43
+Vendored: katex.min.css, katex.min.js, contrib/auto-render.min.js, fonts (woff2 + woff; ttf pruned).
+Self-hosted per site policy: no CDN. Loaded only on project study pages.

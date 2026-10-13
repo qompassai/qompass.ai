@@ -607,6 +607,276 @@ h3 {
   object-fit: contain;
   width: 48px;
 }
+.study-link {
+  font-family: var(--font-mono);
+  font-size: 0.88rem;
+  margin: 0.8rem 0 0;
+}
+
+/* — Project study pages —————————————————— */
+.project-article {
+  margin-inline: auto;
+  max-width: 54rem;
+}
+.study-head {
+  text-align: center;
+}
+.study-meta {
+  color: var(--fog);
+  display: flex;
+  flex-wrap: wrap;
+  font-family: var(--font-mono);
+  font-size: 0.86rem;
+  gap: 0.4rem 1.4rem;
+  justify-content: center;
+}
+.study-section {
+  margin-top: 3rem;
+}
+.study-section > .band-label {
+  text-align: center;
+}
+.study-section p {
+  color: var(--fog);
+}
+.study-subhead {
+  font-size: 1.3rem;
+  margin: 1.9rem 0 0.6rem;
+}
+.math-block {
+  background: var(--chart);
+  border: 1px solid var(--chart-line);
+  border-radius: 4px;
+  margin: 1.1rem 0;
+  overflow-x: auto;
+  padding: 1rem 1.2rem;
+  text-align: center;
+}
+.math-source {
+  color: var(--brass);
+  font-family: var(--font-mono);
+  font-size: 0.95rem;
+}
+.math-block .katex-display {
+  margin: 0;
+}
+.math-block .katex {
+  color: var(--starlight);
+  font-size: 1.05em;
+}
+.bench {
+  margin: 1.6rem 0;
+}
+.bench-title {
+  font-family: var(--font-display);
+  font-size: 1.08rem;
+  margin: 0 0 0.6rem;
+}
+.bench-scroll {
+  border: 1px solid var(--chart-line);
+  border-radius: 4px;
+  overflow-x: auto;
+}
+.bench-table {
+  background: var(--chart);
+  border-collapse: collapse;
+  font-size: 0.94rem;
+  width: 100%;
+}
+.bench-table th {
+  background: var(--chart-raise);
+  border-bottom: 1px solid var(--brass-dim);
+  color: var(--brass);
+  font-family: var(--font-mono);
+  font-size: 0.74rem;
+  letter-spacing: 0.12em;
+  padding: 0.65rem 0.9rem;
+  text-align: left;
+  text-transform: uppercase;
+}
+.bench-table td {
+  border-bottom: 1px solid var(--chart-line);
+  color: var(--starlight);
+  font-variant-numeric: tabular-nums;
+  padding: 0.6rem 0.9rem;
+}
+.bench-table td:first-child {
+  color: var(--fog);
+}
+.bench-table tr:last-child td {
+  border-bottom: none;
+}
+.bench-note,
+.figures-note {
+  color: var(--fog);
+  font-size: 0.92rem;
+}
+.bench-note {
+  margin-top: 0.6rem;
+}
+.figures-note {
+  margin: 1rem 0 0;
+}
+.study-graphic {
+  margin: 2.2rem auto 0;
+  max-width: 48rem;
+}
+.gfx {
+  display: block;
+  height: auto;
+  width: 100%;
+}
+.study-graphic-caption {
+  color: var(--fog);
+  font-size: 0.92rem;
+  margin-top: 0.8rem;
+  text-align: center;
+}
+.gfx-panel {
+  fill: var(--chart);
+  stroke: var(--chart-line);
+}
+.gfx-head {
+  fill: var(--brass);
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.18em;
+}
+.gfx-text {
+  fill: var(--starlight);
+  font-family: var(--font-mono);
+  font-size: 11.5px;
+}
+.gfx-note {
+  fill: var(--fog);
+  font-family: var(--font-mono);
+  font-size: 10.5px;
+}
+.gfx-bar {
+  fill: var(--cherenkov);
+}
+.gfx-bar-top {
+  fill: var(--brass);
+}
+.gfx-arrow {
+  stroke: var(--brass-dim);
+  stroke-width: 1.5;
+}
+.gfx-pulse {
+  fill: var(--brass);
+}
+.gfx-badge {
+  fill: var(--chart-raise);
+  stroke: var(--brass-dim);
+}
+.gfx-badge-text {
+  fill: var(--brass);
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.1em;
+}
+.interactive-slot {
+  background: var(--chart);
+  border: 1px solid var(--chart-line);
+  border-radius: 4px;
+  border-top: 2px solid var(--brass);
+  margin-top: 1.2rem;
+  padding: 1.4rem 1.5rem;
+}
+.interactive-fallback {
+  color: var(--fog);
+  margin: 0;
+}
+.ix-controls {
+  display: grid;
+  gap: 0.7rem;
+  margin-bottom: 0.6rem;
+}
+.ix-slider-row {
+  align-items: center;
+  display: flex;
+  gap: 1rem;
+}
+.ix-slider {
+  accent-color: var(--cherenkov);
+  flex: 1;
+}
+.ix-p-label {
+  color: var(--brass);
+  font-family: var(--font-mono);
+  min-width: 9ch;
+}
+.ix-marks {
+  color: var(--fog);
+  display: flex;
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+  justify-content: space-between;
+}
+.ix-noise {
+  align-items: center;
+  color: var(--fog);
+  display: flex;
+  font-size: 0.92rem;
+  gap: 0.5rem;
+}
+.ix-plot {
+  display: block;
+  height: auto;
+  margin-top: 0.6rem;
+  width: 100%;
+}
+.ix-axis {
+  stroke: var(--chart-line);
+}
+.ix-band {
+  fill: rgba(124, 92, 255, 0.13);
+}
+.ix-chance {
+  stroke: var(--brass-dim);
+  stroke-dasharray: 4 4;
+}
+.ix-point {
+  fill: var(--fog);
+}
+.ix-point-active {
+  fill: var(--brass);
+  stroke: var(--starlight);
+  stroke-width: 1.5;
+}
+.ix-err {
+  stroke: var(--fog);
+  stroke-width: 1.2;
+}
+.ix-plot-text {
+  fill: var(--fog);
+  font-family: var(--font-mono);
+  font-size: 10.5px;
+}
+.ix-readout {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.6rem 2.2rem;
+  margin-top: 1rem;
+}
+.ix-stat-label {
+  color: var(--fog);
+  display: block;
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+.ix-stat-value {
+  color: var(--starlight);
+  font-family: var(--font-display);
+  font-size: 1.6rem;
+}
+.ix-note {
+  color: var(--fog);
+  font-size: 0.92rem;
+  margin: 0.8rem 0 0;
+}
 
 /* — CV ——————————————————————————————————— */
 .cv-title {
@@ -787,6 +1057,61 @@ h3 {
     to {
       opacity: 1;
       transform: none;
+    }
+  }
+  .gfx-bar {
+    animation: gfx-grow 6s ease-in-out infinite;
+    transform-box: fill-box;
+    transform-origin: left center;
+  }
+  .gfx-pulse {
+    animation: gfx-travel 6s ease-in-out infinite;
+  }
+  .gfx-decide {
+    animation: gfx-decide 6s ease-in-out infinite;
+    transform-box: fill-box;
+    transform-origin: center;
+  }
+  @keyframes gfx-grow {
+    0% {
+      opacity: 0.35;
+      transform: scaleX(0);
+    }
+    25%,
+    86% {
+      opacity: 1;
+      transform: scaleX(1);
+    }
+    100% {
+      opacity: 0.35;
+      transform: scaleX(1);
+    }
+  }
+  @keyframes gfx-travel {
+    0% {
+      opacity: 0;
+      transform: translateX(0);
+    }
+    10% {
+      opacity: 1;
+    }
+    32%,
+    100% {
+      opacity: 0;
+      transform: translateX(32px);
+    }
+  }
+  @keyframes gfx-decide {
+    0%,
+    55% {
+      transform: scale(1);
+    }
+    70% {
+      transform: scale(1.045);
+    }
+    85%,
+    100% {
+      transform: scale(1);
     }
   }
   .social-link:hover .icon-github,
