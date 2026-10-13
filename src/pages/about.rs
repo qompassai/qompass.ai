@@ -47,7 +47,7 @@ pub fn About() -> impl IntoView {
             <p class="cv-meta">{CV_PROFILE.location}</p>
             <p class="page-lede">{CV_PROFILE.summary}</p>
             <p class="cv-download">
-                <a href="/files/matt-porter-cv.pdf">"Download CV (PDF)"</a>
+                <a href="/files/matt-porter-cv.pdf" rel="external">"Download CV (PDF)"</a>
             </p>
 
             <h2 class="cv-head">"Experience"</h2>
