@@ -3,7 +3,7 @@ use leptos_meta::Title;
 
 include!(concat!(env!("OUT_DIR"), "/cv_data.rs"));
 
-// The founder's record folded in from the retired /cv page: the data
+// Matt's record folded in from the retired /cv page: the data
 // still comes from content/cv.toml (compiled in by build.rs) — this
 // page renders every section except Identifiers, which live on
 // /contact with the other identity links.
@@ -12,31 +12,31 @@ pub fn About() -> impl IntoView {
     view! {
         <Title text="About - Qompass AI" />
         <section class="page">
-            <p class="page-bearing">"CHART — THE COMPANY"</p>
+            <p class="page-bearing">"CHART — THE WORK"</p>
             <h1>"About"</h1>
             <div class="prose">
                 <p>
                     "The name is the mission. A compass does not move the ship — it tells the "
-                    "truth about where the ship is, in any weather. Qompass AI builds truthful "
-                    "instruments for the quantum transition: benchmarks that measure "
-                    "post-quantum cryptography instead of marketing it, infrastructure that "
-                    "refuses deprecated algorithms by design, and AI systems held to the "
+                    "truth about where the ship is, in any weather. Under the name Qompass AI, "
+                    "I build truthful instruments for the quantum transition: benchmarks that "
+                    "measure post-quantum cryptography instead of marketing it, infrastructure "
+                    "that refuses deprecated algorithms by design, and AI systems held to the "
                     "oldest safety standard in medicine — first, do no harm."
                 </p>
                 <p>
-                    "The founder's route to deep tech ran through two other professions that "
+                    "My route to deep tech ran through two other professions that "
                     "punish sloppy evidence: military intelligence — a decade on active duty, "
                     "from a tactical cell on the Korean DMZ to brigade intelligence director, "
                     "decorated with the Bronze Star — and medicine, with years of study at "
                     "WSU's Elson S. Floyd College of Medicine, orthopaedic publications, and "
                     "journal peer review continuing alongside the engineering. The red "
                     "teamer's habit runs through all of it: threat-model first, publish the "
-                    "negative results, and let the measurements argue. His full record is "
+                    "negative results, and let the measurements argue. My full record is "
                     "set out below."
                 </p>
                 <p>
-                    "Everything we ship is open source under Apache-2.0, archived with DOIs, "
-                    "and — as of this site — served by our own stack: vongola at the edge, "
+                    "Everything I ship is open source under Apache-2.0, archived with DOIs, "
+                    "and — as of this site — served by my own stack: vongola at the edge, "
                     "volta for keys, bunker for packages."
                 </p>
             </div>
@@ -46,6 +46,9 @@ pub fn About() -> impl IntoView {
             <p class="cv-title">{CV_PROFILE.title}</p>
             <p class="cv-meta">{CV_PROFILE.location}</p>
             <p class="page-lede">{CV_PROFILE.summary}</p>
+            <p class="cv-download">
+                <a href="/files/matt-porter-cv.pdf">"Download CV (PDF)"</a>
+            </p>
 
             <h2 class="cv-head">"Experience"</h2>
             {CV_EXPERIENCE

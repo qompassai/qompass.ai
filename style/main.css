@@ -1393,6 +1393,23 @@ a.download-box .download-state {
   font-size: 0.9rem;
   color: var(--fog);
 }
+.cv-download {
+  margin: 1rem 0 0;
+}
+.cv-download a {
+  border-bottom: 1px solid var(--brass-dim);
+  color: var(--brass);
+  font-family: var(--font-mono);
+  font-size: 0.9rem;
+  letter-spacing: 0.04em;
+  padding-bottom: 0.15rem;
+  text-decoration: none;
+}
+.cv-download a:hover,
+.cv-download a:focus-visible {
+  border-bottom-color: var(--cherenkov);
+  color: var(--cherenkov-soft);
+}
 .cv-head {
   margin-top: 2.6rem;
   padding-bottom: 0.4rem;

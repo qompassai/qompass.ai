@@ -6,10 +6,10 @@
 
 [profile]
 name = "Matthew (Matt) Anthony Porter"
-title = "Service-Disabled Veteran · Deep-Tech Founder & CEO, Qompass AI"
+title = "Service-Disabled Veteran · Deep-Tech Researcher & Engineer"
 location = "Spokane, WA"
 email = "map@qompass.ai"
-summary = "West Point graduate and former Army intelligence officer (Bronze Star) who moved through medicine into deep tech: founder of Qompass AI, post-quantum cryptography researcher, certified Python instructor, and field service technician — the rare profile that runs from brigade intelligence staff to fiber splice tray."
+summary = "West Point graduate and former Army intelligence officer (Bronze Star) who moved through medicine into deep tech: post-quantum cryptography researcher, certified Python instructor, and field service technician — the rare profile that runs from brigade intelligence staff to fiber splice tray."
 
 [[experience]]
 role = "Field Service Technician"
@@ -23,12 +23,12 @@ bullets = [
 ]
 
 [[experience]]
-role = "Founder & Chief Executive Officer"
+role = "Independent Researcher & Engineer"
 org = "Qompass AI — Spokane, WA"
 period = "03/2023 — Present"
 location = "Spokane, WA"
 bullets = [
-  "Service-disabled veteran deep-tech startup: post-quantum cryptography benchmarking, AI safety research, and a Rust infrastructure fleet (vongola, volta, bunker, phlow, diver).",
+  "Service-disabled veteran deep-tech project: post-quantum cryptography benchmarking, AI safety research, and a Rust infrastructure fleet (vongola, volta, bunker, phlow, diver).",
   "Consulting: awarded a $30,000 Zimmer Biomet Foundation grant for the first national GenAI medical-education pilot with para-access capabilities.",
   "Teaching: awarded a $2,000 Greater Spokane Incorporated grant for the PathFinder intern program; trained 12 interns.",
   "Selected as an American Association of Medical Colleges AI Community Champion for educational expertise.",
