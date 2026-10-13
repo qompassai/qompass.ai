@@ -1,0 +1,8 @@
+# ZAP baseline thresholds: rule ID, threshold, name (tab-separated).
+# FAIL is reserved for the controls this site has deliberately hardened
+# (Phase 1) and for high-risk findings; everything not listed here keeps
+# the baseline default (WARN — reported, not failing).
+10020	FAIL	Anti-Clickjacking Header (X-Frame-Options / frame-ancestors)
+10021	FAIL	X-Content-Type-Options Header Missing
+10035	FAIL	Strict-Transport-Security Header Not Set
+10038	FAIL	Content Security Policy (CSP) Header Not Set
