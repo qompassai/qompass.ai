@@ -288,6 +288,11 @@ label = "YouTube"
 value = "@QompassAI"
 url = "https://www.youtube.com/@QompassAI"
 
+[[identifiers]]
+label = "Zenodo"
+value = "qompassai"
+url = "https://zenodo.org/communities/qompassai"
+
 [personal]
 line = "Motorcycles, programming, and time with my wife Katy and our dogs Dempsey and Zen."
 
