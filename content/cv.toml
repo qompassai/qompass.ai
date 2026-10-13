@@ -115,6 +115,10 @@ period = "01/2019 — 03/2019"
 detail = "EMT-Basic (EMS ID 3725-5746-8319), 03/2019–03/2021."
 
 [[certifications]]
+label = "Licensure"
+items = ["Electrical Administrator — Telecommunications (09), Washington State Department of Labor & Industries, License No. PORTEM*744M3"]
+
+[[certifications]]
 label = "Instruction"
 items = ["Anaconda Certified Python Instructor (04/2024 — current)", "Microsoft Certified Educator"]
 
@@ -135,7 +139,7 @@ label = "Professional"
 items = [
   "2026 TDS Field Service Top Notch Award",
   "2024 Zimmer Biomet Startup Pre-Seed Grant ($30,000)",
-  "2024 VIP Foster Teamwork Award (x2)",
+  "2x 2026 TDS VIP Foster Teamwork Award",
   "2024 Evergreen Internship Development Incentive ($2,000)",
   "2023 Perry Initiative Orthopaedics in Action Grant ($2,000)",
   "2022 Health Sciences Chancellor's Excellence Award for Leadership ($1,000)",
