@@ -370,8 +370,8 @@ struct TigerLanguage {
 
 /// Adapt a guide's repo-relative links for the web.
 ///
-/// Its own full reference lives at `/tiger-style/<slug>`, and sibling
-/// guides are chapters of `/tiger-style`. Link targets only — the
+/// Its own full reference lives at `/standards/<slug>`, and sibling
+/// guides are chapters of `/standards`. Link targets only — the
 /// text is verbatim, copied from `~/workspace/skills/tiger-style-*/`.
 fn adapt_links(md: &str, slug: &str) -> String {
     let mut out = String::with_capacity(md.len());
@@ -385,9 +385,9 @@ fn adapt_links(md: &str, slug: &str) -> String {
         };
         let url = &rest[..end];
         if url.starts_with("references/") {
-            let _ = write!(out, "/tiger-style/{slug}");
+            let _ = write!(out, "/standards/{slug}");
         } else if let Some(sib) = url.strip_prefix("../tiger-style-").and_then(|s| s.strip_suffix("/SKILL.md")) {
-            let _ = write!(out, "/tiger-style#chapter-{sib}");
+            let _ = write!(out, "/standards#chapter-{sib}");
         } else {
             out.push_str(url);
         }

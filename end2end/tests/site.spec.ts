@@ -189,9 +189,9 @@ const ALL_ROUTES = [
   '/projects',
   '/projects/phlow',
   '/on-ai',
-  '/tiger-style',
-  '/tiger-style/rust',
-  '/tiger-style/lua',
+  '/standards',
+  '/standards/rust',
+  '/standards/lua',
   '/cv',
   '/about',
   '/contact',
@@ -286,12 +286,12 @@ test('no CSP violations on any route, including interactions', async ({ page }) 
     await page.locator('.tl-filter[data-filter="law"]').click();
     await page.locator('.tl-filter[data-filter="all"]').click();
   });
-  await sweep('/tiger-style', async () => {
+  await sweep('/standards', async () => {
     await page.locator('#chapter-rust summary').click();
     await expect(page.locator('#chapter-rust .ts-guide')).toBeVisible();
   });
-  await sweep('/tiger-style/rust');
-  await sweep('/tiger-style/lua');
+  await sweep('/standards/rust');
+  await sweep('/standards/lua');
   await sweep('/cv', async () => {
     await page.locator('.cv-coda').scrollIntoViewIfNeeded();
   });
@@ -344,7 +344,7 @@ test('KaTeX renders hostile equation source inertly (trust: false)', async ({ pa
   expect(verdict).toBe('inert');
 });
 
-test('tiger style page renders the standing orders with 17 chapters', async ({ page }) => {
+test('standards page renders the standing orders with 17 chapters', async ({ page }) => {
   const errors: string[] = [];
   page.on('pageerror', (error) => errors.push(`pageerror: ${error.message}`));
   page.on('console', (message) => {
@@ -352,8 +352,8 @@ test('tiger style page renders the standing orders with 17 chapters', async ({ p
       errors.push(`console: ${message.text()}`);
     }
   });
-  await page.goto('/tiger-style');
-  await expect(page.getByRole('heading', { name: 'Tiger Style' })).toBeVisible();
+  await page.goto('/standards');
+  await expect(page.getByRole('heading', { name: 'Standards' })).toBeVisible();
   await expect(page.locator('.ts-subhead')).toHaveText('The orders the work is done under.');
   await expect(page.locator('.ts-chapter')).toHaveCount(17);
   // A chapter expands in place (native details, no JS needed).
@@ -363,8 +363,8 @@ test('tiger style page renders the standing orders with 17 chapters', async ({ p
   await expect(rust.locator('.ts-guide')).toBeVisible();
   await expect(rust.locator('.ts-guide')).toContainText('Bound everything');
   // The full reference is a quiet standalone page linked from the chapter.
-  await expect(rust.locator('.ts-ref-link a')).toHaveAttribute('href', '/tiger-style/rust');
-  await page.goto('/tiger-style/rust');
+  await expect(rust.locator('.ts-ref-link a')).toHaveAttribute('href', '/standards/rust');
+  await page.goto('/standards/rust');
   await expect(page.locator('.ts-guide')).toContainText('Tiger Style for Rust');
   await page.waitForLoadState('networkidle');
   expect(errors).toEqual([]);

@@ -1,4 +1,4 @@
-//! "Tiger Style" — the standing orders page, `/tiger-style`.
+//! "Standards" — the standing orders page, `/standards`.
 //!
 //! One editorial page: manifesto, lineage, principles, then all
 //! seventeen language guides as expandable chapters rendered from
@@ -184,10 +184,10 @@ fn chapter_references(slug: &str) -> &'static [(&'static str, &'static str)] {
 #[component]
 pub fn TigerStyle() -> impl IntoView {
     view! {
-        <Title text="Tiger Style - Qompass AI" />
+        <Title text="Standards - Qompass AI" />
         <section class="page tiger-page">
             <p class="page-bearing">"STANDING ORDERS"</p>
-            <h1>"Tiger Style"</h1>
+            <h1>"Standards"</h1>
             <p class="ts-subhead">"The orders the work is done under."</p>
             <p class="page-lede">
                 "Tiger Style is Qompass AI's standing orders for code. Safety first, "
@@ -398,7 +398,7 @@ pub fn TigerStyle() -> impl IntoView {
                                 .then(|| {
                                     view! {
                                         <p class="ts-ref-link">
-                                            <a href={format!("/tiger-style/{}", g.slug)}>
+                                            <a href={format!("/standards/{}", g.slug)}>
                                                 {format!("Read the full {} reference →", g.name)}
                                             </a>
                                         </p>
@@ -421,7 +421,7 @@ pub fn TigerStyle() -> impl IntoView {
 }
 
 /// Quiet standalone page for one language's full reference, linked
-/// only from its chapter on `/tiger-style`. Unknown slugs get the
+/// only from its chapter on `/standards`. Unknown slugs get the
 /// site's standard fallback.
 #[component]
 pub fn TigerStyleDispatch() -> impl IntoView {
@@ -444,11 +444,11 @@ pub fn TigerStyleDispatch() -> impl IntoView {
                     <p class="page-bearing">"STANDING ORDERS — FULL REFERENCE"</p>
                     <h1>{format!("{} — the full reference", reference.name)}</h1>
                     <p class="ts-back">
-                        <a href="/tiger-style">"← The standing orders"</a>
+                        <a href="/standards">"← The standing orders"</a>
                     </p>
                     <div class="ts-guide" inner_html={reference.html}></div>
                     <p class="ts-back">
-                        <a href="/tiger-style">"← The standing orders"</a>
+                        <a href="/standards">"← The standing orders"</a>
                     </p>
                 </section>
             }

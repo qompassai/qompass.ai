@@ -7,14 +7,14 @@ cd "$(dirname "$0")/.."
 BIN="target/release/qompass-ai"
 SITE="target/site"
 DIST="dist"
-ROUTES=("/" "/research" "/projects" "/on-ai" "/tiger-style" "/cv" "/about" "/contact" "/privacy")
+ROUTES=("/" "/research" "/projects" "/on-ai" "/standards" "/cv" "/about" "/contact" "/privacy")
 
 # Tiger Style full references: one quiet page per imported reference,
-# linked only from its chapter on /tiger-style.
+# linked only from its chapter on /standards.
 for ref in content/tiger-style/*-reference.md; do
     [ -e "$ref" ] || continue
     slug="$(basename "$ref" -reference.md)"
-    ROUTES+=("/tiger-style/$slug")
+    ROUTES+=("/standards/$slug")
 done
 
 # Project study pages: one route per content/projects/*.toml flagged
@@ -55,6 +55,40 @@ done
 
 kill "$SERVER_PID"
 trap - EXIT
+
+# Redirect pages for the 2026-10-13 rename: the standing-orders page
+# moved from /tiger-style to /standards so the standards collection
+# can grow past the one lineage. The deployed site is static files
+# with no server-side redirect rule for these paths, so each old
+# address keeps a small page that meta-refreshes to the new one and
+# names it canonical.
+write_redirect() {
+    local from="$1" to="$2"
+    mkdir -p "$DIST$from"
+    cat > "$DIST$from/index.html" <<EOF
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<title>Standards - Qompass AI</title>
+<link rel="canonical" href="https://qompass.ai$to" />
+<meta http-equiv="refresh" content="0; url=$to" />
+<meta name="robots" content="noindex" />
+</head>
+<body>
+<p>This page moved to <a href="$to">Standards</a>.</p>
+</body>
+</html>
+EOF
+    echo "redirect $from -> $to"
+}
+
+write_redirect "/tiger-style" "/standards"
+for ref in content/tiger-style/*-reference.md; do
+    [ -e "$ref" ] || continue
+    slug="$(basename "$ref" -reference.md)"
+    write_redirect "/tiger-style/$slug" "/standards/$slug"
+done
 
 # The web server reads dist/ as an unprivileged user, so every deployed
 # file must be world-readable and every directory world-traversable.
