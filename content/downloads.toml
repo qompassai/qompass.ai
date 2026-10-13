@@ -54,12 +54,12 @@ windows = "https://github.com/qompassai/fathom/releases/download/v2026-10-13/fat
 
 [projects.volta]
 # android = "https://..."
-# linux_aarch64 = "https://..."
+linux_aarch64 = "https://github.com/qompassai/volta/releases/download/v2025-08-20/volta-aarch64-unknown-linux-gnu.tar.gz"
 linux_x86_64 = "https://github.com/qompassai/volta/releases/download/v2025-08-20/volta-x86_64-unknown-linux-gnu.tar.gz"
 # windows = "https://..."
 
 [projects.vongola]
 # android = "https://..."
-# linux_aarch64 = "https://..."
+linux_aarch64 = "https://github.com/qompassai/vongola/releases/download/v2026-09-29/vongola-aarch64-unknown-linux-gnu.tar.gz"
 linux_x86_64 = "https://github.com/qompassai/vongola/releases/download/v2026-09-29/vongola-x86_64-unknown-linux-gnu.tar.gz"
 # windows = "https://..."
