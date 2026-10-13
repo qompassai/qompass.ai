@@ -34,9 +34,16 @@ pub fn Research() -> impl IntoView {
                 <a href="https://orcid.org/0000-0002-0302-4812">"ORCID 0000-0002-0302-4812"</a>
                 " — when the ORCID record changes, this page follows."
             </p>
-            <p class="page-motto">
-                "Quality is not a claim. It is what remains after the check."
-            </p>
+            <blockquote class="page-motto">
+                <p>
+                    "Quality is a characteristic of thought and statement that is recognized "
+                    "by a nonthinking process. Because definitions are a product of rigid, "
+                    "formal thinking, quality cannot be defined."
+                </p>
+                <cite class="motto-cite">
+                    "— Robert M. Pirsig, Zen and the Art of Motorcycle Maintenance"
+                </cite>
+            </blockquote>
             <div class="entry-list">
                 <article class="entry">
                     <p class="entry-kind">"BENCHMARK STUDY"</p>
