@@ -783,6 +783,10 @@ h3 {
   .social-link:focus-visible .icon-huggingface {
     animation: icon-hug 0.8s ease-in-out;
   }
+  .social-link:hover .icon-opencollective,
+  .social-link:focus-visible .icon-opencollective {
+    animation: icon-ring 0.9s ease-in-out;
+  }
   .social-link:hover .icon-orcid,
   .social-link:focus-visible .icon-orcid {
     animation: icon-flip 0.9s ease-in-out;
@@ -828,6 +832,14 @@ h3 {
     }
     100% {
       transform: scale(1);
+    }
+  }
+  @keyframes icon-ring {
+    from {
+      transform: rotate(0deg);
+    }
+    to {
+      transform: rotate(360deg);
     }
   }
   @keyframes icon-wave {
