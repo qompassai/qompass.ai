@@ -484,6 +484,11 @@ h3 {
 .prose h2[id] {
   scroll-margin-top: 5.5rem;
 }
+@media (max-width: 640px) {
+  .prose h2[id] {
+    scroll-margin-top: 10rem;
+  }
+}
 
 /* — Entries & records ———————————————————— */
 .entry-list {
