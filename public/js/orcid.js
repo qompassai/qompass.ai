@@ -4,6 +4,18 @@
 // Works are split the same way the snapshot is: publications in #orcid-works,
 // software (self-published, DOI'd) in #orcid-software.
 // Source: ORCID public API v3.0 — no key, CORS-open for public data.
+//
+// Hydration coordination: the re-render below replaces the lists
+// wholesale (replaceChildren), which destroys the tachys region
+// markers Leptos hydration consumes as it walks the SSR DOM. If the
+// fetch resolves mid-walk, the walker meets a node of the wrong type
+// where a marker belongs and panics (tachys hydration
+// failed_to_cast_marker_node). So the refresh only starts once the
+// WASM bundle signals the walk is done (the "qompass:hydrated" event
+// / window.__qompassHydrated flag set at the end of src/lib.rs
+// hydrate()). If hydration never runs (WASM blocked or failed), a
+// delayed fallback starts the refresh anyway — with no walk in
+// flight there is nothing to race.
 const ORCID_ID = "0000-0002-0302-4812";
 const list = document.getElementById("orcid-works");
 const softwareList = document.getElementById("orcid-software");
@@ -51,8 +63,9 @@ function workItem(w, withDoi) {
   return li;
 }
 
-if (list) {
-  fetch(`https://pub.orcid.org/v3.0/${ORCID_ID}/works`, {
+function refreshFromOrcid() {
+  if (list) {
+    fetch(`https://pub.orcid.org/v3.0/${ORCID_ID}/works`, {
     headers: { Accept: "application/json" },
   })
     .then((r) => {
@@ -101,4 +114,18 @@ if (list) {
     .catch(() => {
       if (status) status.textContent = "Showing the build-time snapshot (live refresh unavailable).";
     });
+  }
+}
+
+let refreshStarted = false;
+function startRefresh() {
+  if (refreshStarted) return;
+  refreshStarted = true;
+  refreshFromOrcid();
+}
+if (window.__qompassHydrated) {
+  startRefresh();
+} else {
+  window.addEventListener("qompass:hydrated", startRefresh, { once: true });
+  window.addEventListener("load", () => setTimeout(startRefresh, 4000));
 }
