@@ -224,6 +224,11 @@ value = "qompassai · PhaedrusFlow"
 url = "https://github.com/qompassai"
 
 [[identifiers]]
+label = "GitLab"
+value = "PhaedrusFlow"
+url = "https://gitlab.com/PhaedrusFlow"
+
+[[identifiers]]
 label = "HackerOne"
 value = "phaedrusflow"
 url = "https://hackerone.com/phaedrusflow"
