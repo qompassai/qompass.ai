@@ -1,6 +1,5 @@
 pub mod about;
 pub mod contact;
-pub mod cv;
 pub mod home;
 pub mod on_ai;
 pub mod privacy;

@@ -7,7 +7,7 @@ cd "$(dirname "$0")/.."
 BIN="target/release/qompass-ai"
 SITE="target/site"
 DIST="dist"
-ROUTES=("/" "/research" "/projects" "/on-ai" "/standards" "/cv" "/about" "/contact" "/privacy")
+ROUTES=("/" "/research" "/projects" "/on-ai" "/standards" "/about" "/contact" "/privacy")
 
 # Tiger Style full references: one quiet page per imported reference,
 # linked only from its chapter on /standards.
@@ -64,19 +64,20 @@ trap - EXIT
 # names it canonical.
 write_redirect() {
     local from="$1" to="$2"
+    local title="${3:-Standards - Qompass AI}" label="${4:-Standards}"
     mkdir -p "$DIST$from"
     cat > "$DIST$from/index.html" <<EOF
 <!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="utf-8" />
-<title>Standards - Qompass AI</title>
+<title>$title</title>
 <link rel="canonical" href="https://qompass.ai$to" />
 <meta http-equiv="refresh" content="0; url=$to" />
 <meta name="robots" content="noindex" />
 </head>
 <body>
-<p>This page moved to <a href="$to">Standards</a>.</p>
+<p>This page moved to <a href="$to">$label</a>.</p>
 </body>
 </html>
 EOF
@@ -89,6 +90,11 @@ for ref in content/tiger-style/*-reference.md; do
     slug="$(basename "$ref" -reference.md)"
     write_redirect "/tiger-style/$slug" "/standards/$slug"
 done
+
+# Same treatment for the CV, folded into /about (record) and /contact
+# (identifiers) on 2026-10-13: the standalone page is retired, the old
+# address lands on the page that now carries the record.
+write_redirect "/cv" "/about" "About - Qompass AI" "About"
 
 # The web server reads dist/ as an unprivileged user, so every deployed
 # file must be world-readable and every directory world-traversable.

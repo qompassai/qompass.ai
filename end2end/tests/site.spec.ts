@@ -18,8 +18,8 @@ test('stylesheet is applied: body background is the abyss token', async ({ page 
   expect(background).toBe('rgb(4, 7, 15)');
 });
 
-test('cv page renders the Coverage section with press cards', async ({ page }) => {
-  await page.goto('/cv');
+test('about page renders the Coverage section with press cards', async ({ page }) => {
+  await page.goto('/about');
   await expect(page.getByRole('heading', { name: 'Coverage' })).toBeVisible();
   const cards = page.locator('.press-card');
   await expect(cards.first()).toBeVisible();
@@ -155,14 +155,14 @@ test('on-ai diagrams stay legible at phone width', async ({ page }) => {
   expect(errors).toEqual([]);
 });
 
-test('cv page closes with the Phaedrus coda', async ({ page }) => {
+test('about page closes with the Phaedrus coda', async ({ page }) => {
   const errors: string[] = [];
   page.on('pageerror', (err) => errors.push(err.message));
   page.on('console', (msg) => {
     if (msg.type() === 'error') errors.push(msg.text());
   });
-  await page.goto('/cv');
-  await expect(page).toHaveTitle(/CV/);
+  await page.goto('/about');
+  await expect(page).toHaveTitle(/About/);
   const coda = page.locator('.cv-coda');
   await expect(coda).toBeVisible();
   await expect(coda.locator('.page-bearing')).toHaveText('OFF THE CHART');
@@ -192,7 +192,6 @@ const ALL_ROUTES = [
   '/standards',
   '/standards/rust',
   '/standards/lua',
-  '/cv',
   '/about',
   '/contact',
   '/privacy',
@@ -292,10 +291,9 @@ test('no CSP violations on any route, including interactions', async ({ page }) 
   });
   await sweep('/standards/rust');
   await sweep('/standards/lua');
-  await sweep('/cv', async () => {
+  await sweep('/about', async () => {
     await page.locator('.cv-coda').scrollIntoViewIfNeeded();
   });
-  await sweep('/about');
   await sweep('/contact');
 
   expect(violations).toEqual([]);

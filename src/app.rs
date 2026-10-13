@@ -1,7 +1,6 @@
 use crate::pages::{
     about::About,
     contact::Contact,
-    cv::Cv,
     home::Home,
     on_ai::OnAi,
     privacy::Privacy,
@@ -64,7 +63,6 @@ fn Header() -> impl IntoView {
                     <A href="/projects">"Projects"</A>
                     <A href="/on-ai">"On AI"</A>
                     <A href="/standards">"Standards"</A>
-                    <A href="/cv">"CV"</A>
                     <A href="/about">"About"</A>
                     <A href="/contact">"Contact"</A>
                 </nav>
@@ -184,7 +182,6 @@ pub fn App() -> impl IntoView {
                     <Route path=path!("/") view=Home />
                     <Route path=path!("/about") view=About />
                     <Route path=path!("/contact") view=Contact />
-                    <Route path=path!("/cv") view=Cv />
                     <Route path=path!("/privacy") view=Privacy />
                     <Route path=path!("/projects") view=Projects />
                     <Route path=path!("/on-ai") view=OnAi />
