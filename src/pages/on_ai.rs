@@ -555,6 +555,288 @@ fn TimelineEntry(e: &'static Entry) -> impl IntoView {
     }
 }
 
+/// The agent stack as a true diagram: five layers on a foundation slab,
+/// a request path flowing down the left, and agent nodes talking
+/// sideways on the A2A layer.
+#[component]
+fn StackDiagram() -> impl IntoView {
+    view! {
+        <figure class="fig fig-slim">
+            <svg viewBox="0 0 412 408" role="img" aria-label="Diagram of the agent stack: Models, Tools over MCP, Agent-to-agent over A2A, Payments over AP2, all on a Governance foundation; a request path flows from the user down through the model to its tools">
+                <title>"The agent stack"</title>
+                <desc>"Five horizontal layers — Models, Tools (MCP), Agent-to-agent (A2A), Payments (AP2) — on a Governance foundation slab. A vertical arrow at the left carries a request from the user through the model to its tools; two agent nodes exchange a double-headed arrow on the A2A layer."</desc>
+                <defs>
+                    <marker id="sd-arr" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto-start-reverse">
+                        <path d="M0 0 L7 3 L0 6 z" class="mk-arr"></path>
+                    </marker>
+                </defs>
+                <text x="2" y="20" class="f-mono f-brass" font-size="13">"USER"</text>
+                <circle cx="24" cy="36" r="5" class="dot-cher"></circle>
+                <path d="M24 44 V148" class="ln-arrow ln-flow" marker-end="url(#sd-arr)"></path>
+                <circle cx="24" cy="62" r="2.5" class="dot-cher"></circle>
+                <rect x="56" y="30" width="340" height="64" rx="5" class="box"></rect>
+                <rect x="56" y="30" width="4" height="64" class="acc"></rect>
+                <text x="72" y="58" class="f-name" font-size="16">"Models"</text>
+                <text x="72" y="81" class="f-dim" font-size="13">"Frontier models that plan, write, and decide."</text>
+                <rect x="56" y="102" width="340" height="64" rx="5" class="box"></rect>
+                <rect x="56" y="102" width="4" height="64" class="acc"></rect>
+                <text x="72" y="130" class="f-name" font-size="16">"Tools — MCP"</text>
+                <text x="72" y="153" class="f-dim" font-size="13">"One standard way to reach tools and data."</text>
+                <rect x="56" y="174" width="340" height="88" rx="5" class="box"></rect>
+                <rect x="56" y="174" width="4" height="88" class="acc-soft"></rect>
+                <text x="72" y="202" class="f-name" font-size="16">"Agent-to-agent — A2A"</text>
+                <text x="72" y="225" class="f-dim" font-size="13">"Agents discover each other — and delegate work."</text>
+                <rect x="72" y="234" width="86" height="24" rx="4" class="box-raise"></rect>
+                <text x="115" y="250" class="f-mid" font-size="13">"Agent A"</text>
+                <line x1="162" y1="246" x2="196" y2="246" class="ln-arrow ln-flow" marker-start="url(#sd-arr)" marker-end="url(#sd-arr)"></line>
+                <rect x="200" y="234" width="86" height="24" rx="4" class="box-raise"></rect>
+                <text x="243" y="250" class="f-mid" font-size="13">"Agent B"</text>
+                <rect x="56" y="270" width="340" height="64" rx="5" class="box"></rect>
+                <rect x="56" y="270" width="4" height="64" class="acc-violet"></rect>
+                <text x="72" y="298" class="f-name" font-size="16">"Payments — AP2"</text>
+                <text x="72" y="321" class="f-dim" font-size="13">"Signed mandates: agents transact, not just talk."</text>
+                <rect x="40" y="342" width="364" height="58" rx="5" class="box-raise slab"></rect>
+                <text x="68" y="369" class="f-name" font-size="16">"Governance"</text>
+                <text x="68" y="390" class="f-dim" font-size="13">"Stewarded by the Linux Foundation's AAIF."</text>
+            </svg>
+            <figcaption>
+                "One request path, five layers: a user's request flows down through the "
+                "model to its tools (left), agents coordinate sideways over A2A, payments "
+                "settle over AP2 — and the whole stack sits on foundation governance, the "
+                "Linux Foundation's Agentic AI Foundation."
+            </figcaption>
+        </figure>
+    }
+}
+
+/// MCP vs A2A: complements, not rivals — horizontal agent-to-agent
+/// traffic over A2A, vertical agent-to-tools spokes over MCP.
+#[component]
+fn McpA2aDiagram() -> impl IntoView {
+    view! {
+        <figure class="fig fig-slim">
+            <svg viewBox="0 0 412 252" role="img" aria-label="Diagram: two agents linked horizontally by A2A, each with a vertical MCP spoke down to a shared tools and data box">
+                <title>"MCP and A2A are complements"</title>
+                <desc>"Two agent boxes face each other across a double-headed horizontal arrow labelled A2A — agents to agents. From each agent a vertical arrow labelled MCP runs down to one wide box labelled Tools and data."</desc>
+                <defs>
+                    <marker id="md-arr" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto-start-reverse">
+                        <path d="M0 0 L7 3 L0 6 z" class="mk-arr"></path>
+                    </marker>
+                </defs>
+                <text x="206" y="22" class="f-mid f-cher f-name" font-size="14">"A2A — agents to agents"</text>
+                <rect x="30" y="34" width="140" height="54" rx="5" class="box agent"></rect>
+                <text x="100" y="67" class="f-mid f-name" font-size="15.5">"Agent A"</text>
+                <rect x="242" y="34" width="140" height="54" rx="5" class="box agent"></rect>
+                <text x="312" y="67" class="f-mid f-name" font-size="15.5">"Agent B"</text>
+                <line x1="176" y1="61" x2="236" y2="61" class="ln-arrow ln-flow" marker-start="url(#md-arr)" marker-end="url(#md-arr)"></line>
+                <path d="M100 88 V166" class="ln-arrow ln-flow" marker-end="url(#md-arr)"></path>
+                <path d="M312 88 V166" class="ln-arrow ln-flow" marker-end="url(#md-arr)"></path>
+                <text x="110" y="132" class="f-mono f-brass" font-size="13">"MCP"</text>
+                <text x="322" y="132" class="f-mono f-brass" font-size="13">"MCP"</text>
+                <rect x="30" y="168" width="352" height="56" rx="5" class="box"></rect>
+                <text x="206" y="193" class="f-mid f-name" font-size="15">"Tools & data"</text>
+                <text x="206" y="213" class="f-mid f-dim" font-size="13">"Files, APIs, databases, services"</text>
+            </svg>
+            <figcaption>
+                "A2A for agent-to-agent across boundaries, MCP for agent-to-tools-and-data — "
+                "the complementarity the Linux Foundation restates. Neither replaces the "
+                "other; a working agent uses both at once."
+            </figcaption>
+        </figure>
+    }
+}
+
+/// Four eras on one arrow, 2022 to 2026+. Wide horizontal variant for
+/// desktop, vertical variant for phones — same facts, both labelled.
+#[component]
+fn EraDiagram() -> impl IntoView {
+    view! {
+        <figure class="fig">
+            <svg class="fig-wide" viewBox="0 0 860 216" role="img" aria-label="Timeline arrow 2022 to 2026 plus with four eras: Chatbots, Copilots and multimodal, Reasoners, Agents and protocols, each with two anchor events">
+                <title>"Four eras, 2022 to 2026+"</title>
+                <desc>"A horizontal arrow from 2022 to 2026 and beyond carries four era nodes: Chatbots (ChatGPT, GPT-4), Copilots and multimodal (Claude 3, GPT-4o), Reasoners (o1-preview, DeepSeek R1), Agents and protocols (A2A, AP2)."</desc>
+                <defs>
+                    <marker id="ed-arr" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto-start-reverse">
+                        <path d="M0 0 L7 3 L0 6 z" class="mk-fog"></path>
+                    </marker>
+                </defs>
+                <path d="M16 108 H836" class="ln-axis" marker-end="url(#ed-arr)"></path>
+                <line x1="36" y1="100" x2="36" y2="116" class="grid"></line>
+                <line x1="232" y1="100" x2="232" y2="116" class="grid"></line>
+                <line x1="428" y1="100" x2="428" y2="116" class="grid"></line>
+                <line x1="624" y1="100" x2="624" y2="116" class="grid"></line>
+                <line x1="812" y1="100" x2="812" y2="116" class="grid"></line>
+                <text x="36" y="200" class="f-mid f-mono f-dim" font-size="12.5">"2022"</text>
+                <text x="232" y="200" class="f-mid f-mono f-dim" font-size="12.5">"2023"</text>
+                <text x="428" y="200" class="f-mid f-mono f-dim" font-size="12.5">"2024"</text>
+                <text x="624" y="200" class="f-mid f-mono f-dim" font-size="12.5">"2025"</text>
+                <text x="812" y="200" class="f-mid f-mono f-dim" font-size="12.5">"2026+"</text>
+                <text x="134" y="50" class="f-mid f-name" font-size="16.5">"Chatbots"</text>
+                <text x="134" y="72" class="f-mid f-mono f-dim" font-size="12">"2022–23"</text>
+                <circle cx="134" cy="108" r="8" class="node"></circle>
+                <text x="134" y="150" class="f-mid f-dim" font-size="13">"ChatGPT · Nov '22"</text>
+                <text x="134" y="172" class="f-mid f-dim" font-size="13">"GPT-4 · Mar '23"</text>
+                <text x="330" y="50" class="f-mid f-name" font-size="16.5">"Copilots & multimodal"</text>
+                <text x="330" y="72" class="f-mid f-mono f-dim" font-size="12">"2023–24"</text>
+                <circle cx="330" cy="108" r="8" class="node"></circle>
+                <text x="330" y="150" class="f-mid f-dim" font-size="13">"Claude 3 · Mar '24"</text>
+                <text x="330" y="172" class="f-mid f-dim" font-size="13">"GPT-4o · May '24"</text>
+                <text x="526" y="50" class="f-mid f-name" font-size="16.5">"Reasoners"</text>
+                <text x="526" y="72" class="f-mid f-mono f-dim" font-size="12">"2024–25"</text>
+                <circle cx="526" cy="108" r="8" class="node"></circle>
+                <text x="526" y="150" class="f-mid f-dim" font-size="13">"o1-preview · Sep '24"</text>
+                <text x="526" y="172" class="f-mid f-dim" font-size="13">"DeepSeek R1 · Jan '25"</text>
+                <text x="722" y="50" class="f-mid f-name" font-size="16.5">"Agents & protocols"</text>
+                <text x="722" y="72" class="f-mid f-mono f-dim" font-size="12">"2025– "</text>
+                <circle cx="722" cy="108" r="8" class="node-now fig-pulse"></circle>
+                <text x="722" y="150" class="f-mid f-dim" font-size="13">"A2A · Apr '25"</text>
+                <text x="722" y="172" class="f-mid f-dim" font-size="13">"AP2 · Sep '25"</text>
+            </svg>
+            <svg class="fig-narrow" viewBox="0 0 360 452" role="img" aria-label="Vertical timeline 2022 to 2026 plus with four eras: Chatbots, Copilots and multimodal, Reasoners, Agents and protocols, each with two anchor events">
+                <title>"Four eras, 2022 to 2026+ (vertical)"</title>
+                <desc>"The same four eras on a vertical arrow for narrow screens: Chatbots, Copilots and multimodal, Reasoners, Agents and protocols, each annotated with two anchor events from the timeline."</desc>
+                <defs>
+                    <marker id="edn-arr" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto-start-reverse">
+                        <path d="M0 0 L7 3 L0 6 z" class="mk-fog"></path>
+                    </marker>
+                </defs>
+                <path d="M40 14 V430" class="ln-axis" marker-end="url(#edn-arr)"></path>
+                <text x="2" y="26" class="f-mono f-dim" font-size="12">"2022"</text>
+                <text x="2" y="442" class="f-mono f-dim" font-size="12">"2026+"</text>
+                <circle cx="40" cy="64" r="7" class="node"></circle>
+                <text x="62" y="54" class="f-name" font-size="15.5">"Chatbots"</text>
+                <text x="352" y="54" class="f-end f-mono f-dim" font-size="12">"2022–23"</text>
+                <text x="62" y="80" class="f-dim" font-size="12.5">"ChatGPT · Nov '22"</text>
+                <text x="62" y="102" class="f-dim" font-size="12.5">"GPT-4 · Mar '23"</text>
+                <circle cx="40" cy="172" r="7" class="node"></circle>
+                <text x="62" y="162" class="f-name" font-size="15.5">"Copilots & multimodal"</text>
+                <text x="352" y="162" class="f-end f-mono f-dim" font-size="12">"2023–24"</text>
+                <text x="62" y="188" class="f-dim" font-size="12.5">"Claude 3 · Mar '24"</text>
+                <text x="62" y="210" class="f-dim" font-size="12.5">"GPT-4o · May '24"</text>
+                <circle cx="40" cy="280" r="7" class="node"></circle>
+                <text x="62" y="270" class="f-name" font-size="15.5">"Reasoners"</text>
+                <text x="352" y="270" class="f-end f-mono f-dim" font-size="12">"2024–25"</text>
+                <text x="62" y="296" class="f-dim" font-size="12.5">"o1-preview · Sep '24"</text>
+                <text x="62" y="318" class="f-dim" font-size="12.5">"DeepSeek R1 · Jan '25"</text>
+                <circle cx="40" cy="388" r="7" class="node-now fig-pulse"></circle>
+                <text x="62" y="378" class="f-name" font-size="15.5">"Agents & protocols"</text>
+                <text x="352" y="378" class="f-end f-mono f-dim" font-size="12">"2025– "</text>
+                <text x="62" y="404" class="f-dim" font-size="12.5">"A2A · Apr '25"</text>
+                <text x="62" y="426" class="f-dim" font-size="12.5">"AP2 · Sep '25"</text>
+            </svg>
+            <figcaption>
+                "Four eras in five years — the anchor releases for each era are entries "
+                "on the timeline below."
+            </figcaption>
+        </figure>
+    }
+}
+
+/// The law on one axis: a Gantt over 2023–2027 with EU, US federal, and
+/// US states swimlanes. Every date matches a verified timeline entry.
+#[component]
+fn LawDiagram() -> impl IntoView {
+    view! {
+        <figure class="fig">
+            <svg class="fig-wide" viewBox="0 0 860 322" role="img" aria-label="Gantt chart of AI law 2023 to 2027: EU AI Act phases, US federal executive orders with the 2025 revocation, and US state laws signed 2024 to 2025 and effective 2026">
+                <title>"The law on one axis, 2023–2027"</title>
+                <desc>"Three swimlanes on a 2023 to 2027 axis. EU AI Act: in force August 2024, GPAI obligations August 2025, most obligations August 2 2026, high-risk phase 2027. US federal: Executive Order 14110 of October 2023, revoked January 2025, EO 14179 the same month, the AI Action Plan and accompanying orders July 2025. US states: Colorado signed May 2024, Texas June 2025, California SB 53 September 2025, the state laws taking effect through 2026."</desc>
+                <line x1="128" y1="30" x2="128" y2="302" class="grid"></line>
+                <line x1="297" y1="30" x2="297" y2="302" class="grid"></line>
+                <line x1="466" y1="30" x2="466" y2="302" class="grid"></line>
+                <line x1="634" y1="30" x2="634" y2="302" class="grid"></line>
+                <line x1="802" y1="30" x2="802" y2="302" class="grid"></line>
+                <text x="128" y="20" class="f-mid f-mono f-dim" font-size="12.5">"2023"</text>
+                <text x="297" y="20" class="f-mid f-mono f-dim" font-size="12.5">"2024"</text>
+                <text x="466" y="20" class="f-mid f-mono f-dim" font-size="12.5">"2025"</text>
+                <text x="634" y="20" class="f-mid f-mono f-dim" font-size="12.5">"2026"</text>
+                <text x="802" y="20" class="f-mid f-mono f-dim" font-size="12.5">"2027"</text>
+                <line x1="767" y1="28" x2="767" y2="302" class="ln-today"></line>
+                <text x="767" y="314" class="f-mid f-brass" font-size="11.5">"Oct '26 — today"</text>
+                <text x="2" y="80" class="f-mono f-brass" font-size="12.5">"EU AI ACT"</text>
+                <rect x="396" y="60" width="167" height="28" class="seg seg-a"></rect>
+                <rect x="563" y="60" width="170" height="28" class="seg seg-b"></rect>
+                <rect x="733" y="60" width="69" height="28" class="seg seg-c"></rect>
+                <rect x="802" y="60" width="42" height="28" class="seg seg-d"></rect>
+                <text x="856" y="50" class="f-end" font-size="12">"High-risk phase · 2027"</text>
+                <text x="396" y="104" class="f-dim" font-size="12">"In force · Aug '24"</text>
+                <text x="563" y="104" class="f-dim" font-size="12">"GPAI · Aug '25"</text>
+                <text x="856" y="104" class="f-end f-dim" font-size="12">"Most obligations · Aug 2, '26"</text>
+                <text x="2" y="152" class="f-mono f-brass" font-size="12.5">"US — FEDERAL"</text>
+                <text x="261" y="116" font-size="12">"EO 14110 · Oct '23"</text>
+                <rect x="261" y="124" width="212" height="9" class="seg seg-e"></rect>
+                <path d="M467 120 L479 136 M479 120 L467 136" class="ln-x"></path>
+                <text x="487" y="133" class="f-violet" font-size="12">"revoked Jan '25"</text>
+                <circle cx="473" cy="156" r="4.5" class="dot-cher"></circle>
+                <text x="483" y="160" font-size="12">"EO 14179 · Jan '25"</text>
+                <circle cx="556" cy="182" r="4.5" class="dot-cher"></circle>
+                <text x="566" y="186" font-size="12">"AI Action Plan + EOs · Jul '25"</text>
+                <text x="2" y="264" class="f-mono f-brass" font-size="12.5">"US — STATES"</text>
+                <text x="359" y="222" font-size="12">"Colorado AI Act · signed May '24"</text>
+                <rect x="359" y="228" width="358" height="8" class="seg seg-f"></rect>
+                <text x="723" y="235" class="f-dim" font-size="11.5">"effective '26"</text>
+                <text x="543" y="258" font-size="12">"Texas TRAIGA · signed Jun '25"</text>
+                <rect x="543" y="264" width="91" height="8" class="seg seg-g"></rect>
+                <text x="640" y="271" class="f-dim" font-size="11.5">"eff. Jan '26"</text>
+                <text x="585" y="288" font-size="12">"California SB 53 · Sep '25"</text>
+                <rect x="585" y="294" width="49" height="8" class="seg seg-g"></rect>
+            </svg>
+            <svg class="fig-narrow" viewBox="0 0 360 420" role="img" aria-label="The law on one axis, stacked for narrow screens: EU AI Act phases, US federal executive orders with the 2025 revocation, and US state laws effective 2026">
+                <title>"The law on one axis (stacked)"</title>
+                <desc>"The same Gantt as three stacked bands with their own 2023 to 2027 axes: the EU AI Act phase-in, US federal executive action including the January 2025 revocation of EO 14110, and US state statutes signed 2024 to 2025, effective 2026."</desc>
+                <text x="8" y="16" class="f-mono f-brass" font-size="12.5">"EU AI ACT"</text>
+                <line x1="8" y1="30" x2="352" y2="30" class="grid"></line>
+                <text x="8" y="44" class="f-mono f-dim" font-size="11.5">"2023"</text>
+                <text x="89" y="44" class="f-mid f-mono f-dim" font-size="11.5">"2024"</text>
+                <text x="170" y="44" class="f-mid f-mono f-dim" font-size="11.5">"2025"</text>
+                <text x="251" y="44" class="f-mid f-mono f-dim" font-size="11.5">"2026"</text>
+                <text x="352" y="44" class="f-end f-mono f-dim" font-size="11.5">"2027"</text>
+                <rect x="137" y="54" width="83" height="20" class="seg seg-a"></rect>
+                <rect x="220" y="54" width="81" height="20" class="seg seg-b"></rect>
+                <rect x="301" y="54" width="31" height="20" class="seg seg-c"></rect>
+                <rect x="332" y="54" width="20" height="20" class="seg seg-d"></rect>
+                <text x="178" y="68" class="f-mid" font-size="11.5">"In force"</text>
+                <text x="260" y="68" class="f-mid" font-size="11.5">"GPAI"</text>
+                <text x="356" y="92" class="f-end f-dim" font-size="11.5">"Most obligations · Aug 2, '26"</text>
+                <text x="356" y="108" class="f-end f-dim" font-size="11.5">"High-risk phase · 2027"</text>
+                <text x="8" y="140" class="f-mono f-brass" font-size="12.5">"US — FEDERAL"</text>
+                <line x1="8" y1="154" x2="352" y2="154" class="grid"></line>
+                <text x="8" y="168" class="f-mono f-dim" font-size="11.5">"2023"</text>
+                <text x="89" y="168" class="f-mid f-mono f-dim" font-size="11.5">"2024"</text>
+                <text x="170" y="168" class="f-mid f-mono f-dim" font-size="11.5">"2025"</text>
+                <text x="251" y="168" class="f-mid f-mono f-dim" font-size="11.5">"2026"</text>
+                <text x="352" y="168" class="f-end f-mono f-dim" font-size="11.5">"2027"</text>
+                <rect x="72" y="178" width="102" height="8" class="seg seg-e"></rect>
+                <path d="M169 175 L179 189 M179 175 L169 189" class="ln-x"></path>
+                <text x="8" y="204" class="f-dim" font-size="11.5">"EO 14110 · Oct '23 — revoked Jan '25"</text>
+                <circle cx="174" cy="222" r="4" class="dot-cher"></circle>
+                <text x="182" y="226" font-size="11.5">"EO 14179 · Jan '25"</text>
+                <circle cx="222" cy="244" r="4" class="dot-cher"></circle>
+                <text x="8" y="266" font-size="11.5">"AI Action Plan + EOs · Jul '25"</text>
+                <text x="8" y="280" class="f-mono f-brass" font-size="12.5">"US — STATES"</text>
+                <line x1="8" y1="294" x2="352" y2="294" class="grid"></line>
+                <text x="8" y="308" class="f-mono f-dim" font-size="11.5">"2023"</text>
+                <text x="89" y="308" class="f-mid f-mono f-dim" font-size="11.5">"2024"</text>
+                <text x="170" y="308" class="f-mid f-mono f-dim" font-size="11.5">"2025"</text>
+                <text x="251" y="308" class="f-mid f-mono f-dim" font-size="11.5">"2026"</text>
+                <text x="352" y="308" class="f-end f-mono f-dim" font-size="11.5">"2027"</text>
+                <text x="8" y="330" class="f-dim" font-size="11.5">"Colorado — signed May '24 · effective '26"</text>
+                <rect x="119" y="336" width="169" height="7" class="seg seg-f"></rect>
+                <text x="8" y="362" class="f-dim" font-size="11.5">"Texas — signed Jun '25 · effective Jan '26"</text>
+                <rect x="208" y="368" width="43" height="7" class="seg seg-g"></rect>
+                <text x="8" y="394" class="f-dim" font-size="11.5">"California — signed Sep '25 · effective Jan '26"</text>
+                <rect x="235" y="400" width="16" height="7" class="seg seg-g"></rect>
+            </svg>
+            <figcaption>
+                "The law on one axis: the EU phases in by date certain; US federal policy "
+                "turns on executive action — one order revoked, its replacement and an "
+                "action plan inside 2025 — and the states sign in 2024–25 and switch on "
+                "through 2026."
+            </figcaption>
+        </figure>
+    }
+}
+
 #[component]
 pub fn OnAi() -> impl IntoView {
     let entries = all_entries();
@@ -579,48 +861,11 @@ pub fn OnAi() -> impl IntoView {
                 "no hype: what happened, when, and where it is going."
             </p>
 
-            <div class="era-strip" role="img" aria-label="Four eras: Chatbots 2022 to 2023, Copilots and multimodal 2023 to 2024, Reasoners 2024 to 2025, Agents and protocols 2025 onward">
-                <div class="era">
-                    <span class="era-name">"Chatbots"</span>
-                    <span class="era-range">"2022–23"</span>
-                </div>
-                <div class="era">
-                    <span class="era-name">"Copilots & multimodal"</span>
-                    <span class="era-range">"2023–24"</span>
-                </div>
-                <div class="era">
-                    <span class="era-name">"Reasoners"</span>
-                    <span class="era-range">"2024–25"</span>
-                </div>
-                <div class="era era-now">
-                    <span class="era-name">"Agents & protocols"</span>
-                    <span class="era-range">"2025– "</span>
-                </div>
-            </div>
+            <EraDiagram />
 
             <h2 class="band-label">"THE AGENT STACK"</h2>
-            <div class="stack">
-                <div class="stack-layer">
-                    <span class="stack-name">"Models"</span>
-                    <span class="stack-gloss">"The reasoning engines — frontier models that plan, write, and decide."</span>
-                </div>
-                <div class="stack-layer">
-                    <span class="stack-name">"Tools — MCP"</span>
-                    <span class="stack-gloss">"The Model Context Protocol: one standard way for a model to reach tools and data."</span>
-                </div>
-                <div class="stack-layer">
-                    <span class="stack-name">"Agent-to-agent — A2A"</span>
-                    <span class="stack-gloss">"Agents from different vendors discover each other and delegate work."</span>
-                </div>
-                <div class="stack-layer">
-                    <span class="stack-name">"Payments — AP2"</span>
-                    <span class="stack-gloss">"Cryptographically signed mandates let agents transact, not just talk."</span>
-                </div>
-                <div class="stack-layer">
-                    <span class="stack-name">"Governance"</span>
-                    <span class="stack-gloss">"Foundations steward the specs — the Linux Foundation's Agentic AI Foundation."</span>
-                </div>
-            </div>
+            <StackDiagram />
+            <McpA2aDiagram />
 
             <h2 class="band-label">"THE TIMELINE"</h2>
             <div class="tl-filters" role="group" aria-label="Filter timeline by track">
@@ -652,31 +897,7 @@ pub fn OnAi() -> impl IntoView {
                 "stages from 2025 to 2027. The US picture is executive action at "
                 "the federal level and statutes in the states."
             </p>
-            <div class="phase-bar" role="img" aria-label="Regulation phases: EU AI Act in force August 2024, GPAI obligations 2025, high-risk obligations 2026 to 2027; US executive action 2023 to 2025; US state laws from 2024, taking effect 2026">
-                <div class="phase-row">
-                    <span class="phase-label">"EU AI Act"</span>
-                    <div class="phase-track">
-                        <span class="phase-seg">"2024 · in force"</span>
-                        <span class="phase-seg">"2025 · GPAI obligations"</span>
-                        <span class="phase-seg phase-seg-long">"2026–27 · high-risk obligations"</span>
-                    </div>
-                </div>
-                <div class="phase-row">
-                    <span class="phase-label">"US — executive"</span>
-                    <div class="phase-track">
-                        <span class="phase-seg">"2023 · EO 14110"</span>
-                        <span class="phase-seg">"2025 · revoked; EO 14179 + AI Action Plan"</span>
-                    </div>
-                </div>
-                <div class="phase-row">
-                    <span class="phase-label">"US — states"</span>
-                    <div class="phase-track">
-                        <span class="phase-seg">"2024 · Colorado AI Act"</span>
-                        <span class="phase-seg">"2025 · Texas TRAIGA · California SB 53"</span>
-                        <span class="phase-seg">"2026 · state laws take effect"</span>
-                    </div>
-                </div>
-            </div>
+            <LawDiagram />
 
             <h2 class="band-label">"WHERE IT'S GOING"</h2>
             <p class="on-ai-note">

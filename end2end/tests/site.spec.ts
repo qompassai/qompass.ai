@@ -92,10 +92,23 @@ test('on-ai page renders all three tracks and the filters work', async ({ page }
   await expect(page.locator('.tl-entry[data-track="protocols"]').first()).toBeVisible();
   await expect(page.locator('.tl-entry[data-track="models"]').first()).toBeVisible();
   await expect(page.locator('.tl-entry[data-track="law"]').first()).toBeVisible();
-  // Infographics present.
-  await expect(page.locator('.era-strip .era')).toHaveCount(4);
-  await expect(page.locator('.stack .stack-layer')).toHaveCount(5);
-  await expect(page.locator('.phase-bar .phase-row')).toHaveCount(3);
+  // Real SVG diagrams present: four figures, each with a caption and a
+  // visibly dimensioned SVG (wide/narrow variants swap by viewport).
+  await expect(page.locator('figure.fig')).toHaveCount(4);
+  await expect(page.locator('figure.fig figcaption')).toHaveCount(4);
+  const visibleSvgs = page.locator('figure.fig svg:visible');
+  await expect(visibleSvgs).toHaveCount(4);
+  for (const svg of await visibleSvgs.all()) {
+    const box = await svg.boundingBox();
+    expect(box).not.toBeNull();
+    expect(box!.width).toBeGreaterThan(200);
+    expect(box!.height).toBeGreaterThan(60);
+  }
+  // The stack diagram (second figure) carries all five layers as SVG text.
+  const stackText = await page.locator('figure.fig').nth(1).locator('svg:visible').textContent();
+  for (const layer of ['Models', 'Tools — MCP', 'Agent-to-agent — A2A', 'Payments — AP2', 'Governance']) {
+    expect(stackText).toContain(layer);
+  }
   // Filter interaction: Law & Policy only.
   await page.locator('.tl-filter[data-filter="law"]').click();
   await expect(page.locator('.tl-entry[data-track="law"]').first()).toBeVisible();
@@ -104,6 +117,41 @@ test('on-ai page renders all three tracks and the filters work', async ({ page }
   await page.locator('.tl-filter[data-filter="all"]').click();
   await expect(page.locator('.tl-entry[data-track="models"]').first()).toBeVisible();
   await page.waitForLoadState('networkidle');
+  expect(errors).toEqual([]);
+});
+
+test('on-ai diagrams stay legible at phone width', async ({ page }) => {
+  const errors: string[] = [];
+  page.on('pageerror', (error) => errors.push(`pageerror: ${error.message}`));
+  page.on('console', (message) => {
+    if (message.type() === 'error') {
+      errors.push(`console: ${message.text()}`);
+    }
+  });
+  await page.setViewportSize({ width: 390, height: 844 });
+  await page.goto('/on-ai');
+  // Narrow variants swap in: still exactly four visible diagram SVGs.
+  await expect(page.locator('figure.fig svg:visible')).toHaveCount(4);
+  const overflow = await page.evaluate(
+    () => document.documentElement.scrollWidth - document.documentElement.clientWidth,
+  );
+  expect(overflow).toBeLessThanOrEqual(0);
+  // Effective label size: authored font size scaled by the rendered
+  // width over viewBox width must stay at reading size on the phone.
+  const minEffective = await page.evaluate(() => {
+    let min = Number.POSITIVE_INFINITY;
+    document.querySelectorAll<SVGSVGElement>('figure.fig svg').forEach((svg) => {
+      const rendered = svg.getBoundingClientRect().width;
+      if (rendered === 0) return;
+      const scale = rendered / svg.viewBox.baseVal.width;
+      svg.querySelectorAll('text').forEach((t) => {
+        const size = parseFloat(getComputedStyle(t).fontSize);
+        min = Math.min(min, size * scale);
+      });
+    });
+    return min;
+  });
+  expect(minEffective).toBeGreaterThanOrEqual(10.8);
   expect(errors).toEqual([]);
 });
 

@@ -882,68 +882,58 @@ h3 {
 .on-ai-note {
   color: var(--fog);
 }
-.era-strip {
-  display: grid;
-  gap: 0.5rem;
-  grid-template-columns: repeat(4, 1fr);
-  margin: 2rem 0 2.6rem;
+/* — On AI diagrams: true inline SVG figures. Text is real SVG text,
+   fills/strokes are design tokens; narrow variants swap in under
+   640px so labels never shrink below legibility. */
+.fig { margin: 1.4rem 0 2.6rem; }
+.fig-slim { margin-inline: auto; max-width: 32rem; }
+.fig svg { display: block; height: auto; width: 100%; }
+.fig .fig-narrow { display: none; }
+@media (max-width: 640px) {
+  .fig .fig-wide { display: none; }
+  .fig .fig-narrow { display: block; }
 }
-.era {
-  background: var(--chart);
-  border: 1px solid var(--chart-line);
-  border-radius: 4px;
-  border-top: 2px solid var(--brass-dim);
-  padding: 0.8rem 0.9rem;
-}
-.era-now {
-  border-top-color: var(--brass);
-}
-.era-name {
-  color: var(--starlight);
-  display: block;
-  font-family: var(--font-display);
-  font-size: 1.02rem;
-}
-.era-range {
+.fig figcaption {
   color: var(--fog);
-  display: block;
-  font-family: var(--font-mono);
-  font-size: 0.8rem;
-  margin-top: 0.25rem;
+  font-size: 0.92rem;
+  line-height: 1.55;
+  margin-top: 0.75rem;
+  max-width: 46rem;
 }
-.stack {
-  display: grid;
-  gap: 0.45rem;
-  margin: 1.2rem 0 2.6rem;
-}
-.stack-layer {
-  align-items: baseline;
-  background: var(--chart);
-  border: 1px solid var(--chart-line);
-  border-left: 2px solid var(--cherenkov);
-  border-radius: 4px;
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.3rem 1.1rem;
-  padding: 0.75rem 1rem;
-}
-.stack-layer:nth-child(4) {
-  border-left-color: var(--violet);
-}
-.stack-layer:nth-child(5) {
-  border-left-color: var(--brass);
-}
-.stack-name {
-  color: var(--brass);
-  font-family: var(--font-mono);
-  font-size: 0.86rem;
-  letter-spacing: 0.08em;
-  min-width: 11.5rem;
-  text-transform: uppercase;
-}
-.stack-gloss {
-  color: var(--fog);
-}
+.fig text { fill: var(--starlight); font-family: var(--font-body); }
+.fig .f-name { font-family: var(--font-display); font-weight: 600; }
+.fig .f-mono { font-family: var(--font-mono); }
+.fig .f-dim { fill: var(--fog); }
+.fig .f-brass { fill: var(--brass); }
+.fig .f-cher { fill: var(--cherenkov-soft); }
+.fig .f-violet { fill: var(--violet); }
+.fig .f-mid { text-anchor: middle; }
+.fig .f-end { text-anchor: end; }
+.fig .box { fill: var(--chart); stroke: var(--chart-line); }
+.fig .box-raise { fill: var(--chart-raise); stroke: var(--chart-line); }
+.fig .agent { stroke: var(--cherenkov); }
+.fig .slab { stroke: var(--brass); }
+.fig .acc { fill: var(--cherenkov); }
+.fig .acc-soft { fill: var(--cherenkov-soft); }
+.fig .acc-violet { fill: var(--violet); }
+.fig .ln-arrow { fill: none; stroke: var(--cherenkov); stroke-width: 1.6; }
+.fig .ln-axis { fill: none; stroke: var(--fog); stroke-width: 1.6; }
+.fig .ln-x { fill: none; stroke: var(--violet); stroke-width: 2; }
+.fig .ln-today { stroke: var(--brass); stroke-dasharray: 3 4; stroke-width: 1.2; }
+.fig .grid { stroke: var(--chart-line); stroke-width: 1; }
+.fig .dot-cher { fill: var(--cherenkov); }
+.fig .node { fill: var(--chart); stroke: var(--brass); stroke-width: 2; }
+.fig .node-now { fill: var(--cherenkov); stroke: var(--cherenkov-soft); stroke-width: 2; }
+.fig .seg { stroke: var(--chart-line); }
+.fig .seg-a { fill: color-mix(in srgb, var(--cherenkov) 30%, transparent); }
+.fig .seg-b { fill: color-mix(in srgb, var(--cherenkov) 20%, transparent); }
+.fig .seg-c { fill: color-mix(in srgb, var(--cherenkov) 12%, transparent); }
+.fig .seg-d { fill: color-mix(in srgb, var(--brass) 30%, transparent); }
+.fig .seg-e { fill: color-mix(in srgb, var(--fog) 45%, transparent); }
+.fig .seg-f { fill: color-mix(in srgb, var(--fog) 30%, transparent); }
+.fig .seg-g { fill: color-mix(in srgb, var(--cherenkov) 35%, transparent); }
+.fig .mk-arr { fill: var(--cherenkov); }
+.fig .mk-fog { fill: var(--fog); }
 .tl-filters {
   display: flex;
   flex-wrap: wrap;
@@ -1030,41 +1020,6 @@ h3 {
   font-family: var(--font-mono);
   font-size: 0.8rem;
   margin: 0.35rem 0 0;
-}
-.phase-bar {
-  display: grid;
-  gap: 0.6rem;
-  margin: 1.2rem 0 2.6rem;
-}
-.phase-row {
-  align-items: stretch;
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.5rem;
-}
-.phase-label {
-  align-self: center;
-  color: var(--brass);
-  font-family: var(--font-mono);
-  font-size: 0.8rem;
-  letter-spacing: 0.1em;
-  min-width: 8.5rem;
-  text-transform: uppercase;
-}
-.phase-track {
-  display: flex;
-  flex: 1;
-  flex-wrap: wrap;
-  gap: 0.4rem;
-}
-.phase-seg {
-  background: var(--chart-raise);
-  border: 1px solid var(--chart-line);
-  border-radius: 4px;
-  color: var(--starlight);
-  font-family: var(--font-mono);
-  font-size: 0.76rem;
-  padding: 0.5rem 0.7rem;
 }
 .outlook {
   color: var(--fog);
@@ -1252,12 +1207,6 @@ h3 {
   max-width: 54rem;
 }
 @media (max-width: 640px) {
-  .era-strip {
-    grid-template-columns: repeat(2, 1fr);
-  }
-  .stack-name {
-    min-width: 0;
-  }
   /* Six nav links (On AI added) no longer fit one phone-width row. */
   .site-nav {
     flex-wrap: wrap;
@@ -1502,16 +1451,29 @@ h3 {
       transform: scale(1);
     }
   }
-  .era-now {
-    animation: era-pulse 5s ease-in-out infinite;
+  .fig .fig-pulse {
+    animation: fig-pulse 5s ease-in-out infinite;
+    transform-box: fill-box;
+    transform-origin: center;
   }
-  @keyframes era-pulse {
+  @keyframes fig-pulse {
     0%,
     100% {
-      box-shadow: 0 -2px 10px rgba(91, 140, 255, 0);
+      opacity: 1;
+      transform: scale(1);
     }
     50% {
-      box-shadow: 0 -2px 14px rgba(91, 140, 255, 0.28);
+      opacity: 0.75;
+      transform: scale(1.35);
+    }
+  }
+  .fig .ln-flow {
+    animation: fig-drift 1.8s linear infinite;
+    stroke-dasharray: 6 5;
+  }
+  @keyframes fig-drift {
+    to {
+      stroke-dashoffset: -22;
     }
   }
   .phaedrus-ring { animation: phaedrus-spin 140s linear infinite; }
