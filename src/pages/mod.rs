@@ -1,6 +1,7 @@
 pub mod about;
 pub mod contact;
 pub mod home;
+pub mod legal;
 pub mod on_ai;
 pub mod privacy;
 pub mod project;

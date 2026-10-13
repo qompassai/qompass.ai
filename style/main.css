@@ -481,6 +481,9 @@ h3 {
   max-width: 68ch;
   color: var(--starlight);
 }
+.prose h2[id] {
+  scroll-margin-top: 5.5rem;
+}
 
 /* — Entries & records ———————————————————— */
 .entry-list {
