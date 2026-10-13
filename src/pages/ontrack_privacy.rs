@@ -9,7 +9,7 @@ pub fn OnTrackPrivacy() -> impl IntoView {
             <p class="page-bearing">"CHART — ONTRACK PRIVACY"</p>
             <h1>"ONTrack Privacy Policy"</h1>
             <div class="prose">
-                <p>"Last updated: September 7, 2026."</p>
+                <p>"Last updated: October 13, 2026."</p>
                 <p>
                     "This Privacy Policy explains how ONTrack (“the App”) handles "
                     "information when you use it. By using the App, you agree to the "
@@ -20,6 +20,15 @@ pub fn OnTrackPrivacy() -> impl IntoView {
                 <h3>"1.1 Information You Provide"</h3>
                 <p>"The App collects information that you voluntarily enter, such as:"</p>
                 <p>"Job addresses, stop lists, and route configuration you add to plan a route."</p>
+                <p>
+                    "Job and address lists you import from a file you select (CSV or "
+                    "spreadsheet). The App reads the file on your device to build your "
+                    "stop list — the file itself is never uploaded anywhere — and the "
+                    "addresses it contains are handled exactly like addresses you type, "
+                    "including Section 3 when they are geocoded or routed. On Android, "
+                    "reading a file outside the App's own storage uses the storage "
+                    "permission on API 32 and below."
+                </p>
                 <p>"Feedback you send us by email or other support channels."</p>
                 <p>
                     "All of this data is stored locally on your device inside the App's "
