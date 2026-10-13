@@ -214,9 +214,19 @@ value = "R-00K-KM3"
 url = "https://www.authenticus.pt/R-00K-KM3"
 
 [[identifiers]]
+label = "Doximity"
+value = "Matt A. Porter"
+url = "https://www.doximity.com/profiles/e57f71e8-dddb-4782-b87b-86cc273aab30/view"
+
+[[identifiers]]
 label = "GitHub"
 value = "qompassai · PhaedrusFlow"
 url = "https://github.com/qompassai"
+
+[[identifiers]]
+label = "HackerOne"
+value = "phaedrusflow"
+url = "https://hackerone.com/phaedrusflow"
 
 [[identifiers]]
 label = "Hugging Face"
@@ -224,9 +234,24 @@ value = "qompass"
 url = "https://huggingface.co/qompass"
 
 [[identifiers]]
+label = "Humanities Commons"
+value = "mpcoug"
+url = "https://hcommons.org/members/mpcoug/"
+
+[[identifiers]]
+label = "Kaggle"
+value = "docphaedrus"
+url = "https://www.kaggle.com/docphaedrus"
+
+[[identifiers]]
 label = "Loop profile"
 value = "2230223"
 url = "https://loop.frontiersin.org/people/2230223/overview?referrer=orcid_profile"
+
+[[identifiers]]
+label = "Microsoft Learn"
+value = "phaedrusflow"
+url = "https://learn.microsoft.com/en-us/users/phaedrusflow/"
 
 [[identifiers]]
 label = "ORCID"
@@ -234,9 +259,19 @@ value = "0000-0002-0302-4812"
 url = "https://orcid.org/0000-0002-0302-4812"
 
 [[identifiers]]
+label = "ResearchGate"
+value = "Matt-Porter-7"
+url = "https://www.researchgate.net/profile/Matt-Porter-7/research"
+
+[[identifiers]]
 label = "ResearcherID (Web of Science)"
 value = "HNQ-0292-2023"
 url = "https://www.webofscience.com/wos/author/record/HNQ-0292-2023"
+
+[[identifiers]]
+label = "Salesforce Trailhead"
+value = "qompassai"
+url = "https://www.salesforce.com/trailblazer/qompassai"
 
 [[identifiers]]
 label = "SciProfiles"
