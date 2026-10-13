@@ -7,7 +7,7 @@ cd "$(dirname "$0")/.."
 BIN="target/release/qompass-ai"
 SITE="target/site"
 DIST="dist"
-ROUTES=("/" "/research" "/projects" "/cv" "/about" "/contact")
+ROUTES=("/" "/research" "/projects" "/on-ai" "/cv" "/about" "/contact")
 
 # Project study pages: one route per content/projects/*.toml flagged
 # ready = true. build.rs enforces file stem == slug, so the stem IS the

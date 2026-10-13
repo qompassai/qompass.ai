@@ -77,3 +77,32 @@ test('phlow study page renders all five sections with KaTeX math', async ({ page
   await page.waitForLoadState('networkidle');
   expect(errors).toEqual([]);
 });
+
+test('on-ai page renders all three tracks and the filters work', async ({ page }) => {
+  const errors: string[] = [];
+  page.on('pageerror', (error) => errors.push(`pageerror: ${error.message}`));
+  page.on('console', (message) => {
+    if (message.type() === 'error') {
+      errors.push(`console: ${message.text()}`);
+    }
+  });
+  await page.goto('/on-ai');
+  await expect(page.getByRole('heading', { name: 'On AI' })).toBeVisible();
+  // All three tracks present in the server-rendered timeline.
+  await expect(page.locator('.tl-entry[data-track="protocols"]').first()).toBeVisible();
+  await expect(page.locator('.tl-entry[data-track="models"]').first()).toBeVisible();
+  await expect(page.locator('.tl-entry[data-track="law"]').first()).toBeVisible();
+  // Infographics present.
+  await expect(page.locator('.era-strip .era')).toHaveCount(4);
+  await expect(page.locator('.stack .stack-layer')).toHaveCount(5);
+  await expect(page.locator('.phase-bar .phase-row')).toHaveCount(3);
+  // Filter interaction: Law & Policy only.
+  await page.locator('.tl-filter[data-filter="law"]').click();
+  await expect(page.locator('.tl-entry[data-track="law"]').first()).toBeVisible();
+  await expect(page.locator('.tl-entry[data-track="models"]').first()).toBeHidden();
+  await expect(page.locator('.tl-entry[data-track="protocols"]').first()).toBeHidden();
+  await page.locator('.tl-filter[data-filter="all"]').click();
+  await expect(page.locator('.tl-entry[data-track="models"]').first()).toBeVisible();
+  await page.waitForLoadState('networkidle');
+  expect(errors).toEqual([]);
+});

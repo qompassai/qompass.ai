@@ -1,5 +1,5 @@
 use crate::pages::{
-    about::About, contact::Contact, cv::Cv, home::Home, project::ProjectDispatch, projects::Projects,
+    about::About, contact::Contact, cv::Cv, home::Home, on_ai::OnAi, project::ProjectDispatch, projects::Projects,
     research::Research,
 };
 use leptos::prelude::*;
@@ -54,6 +54,7 @@ fn Header() -> impl IntoView {
                 <nav class="site-nav" aria-label="Primary">
                     <A href="/research">"Research"</A>
                     <A href="/projects">"Projects"</A>
+                    <A href="/on-ai">"On AI"</A>
                     <A href="/cv">"CV"</A>
                     <A href="/about">"About"</A>
                     <A href="/contact">"Contact"</A>
@@ -175,6 +176,7 @@ pub fn App() -> impl IntoView {
                     <Route path=path!("/contact") view=Contact />
                     <Route path=path!("/cv") view=Cv />
                     <Route path=path!("/projects") view=Projects />
+                    <Route path=path!("/on-ai") view=OnAi />
                     <Route path=path!("/projects/:slug") view=ProjectDispatch />
                     <Route path=path!("/research") view=Research />
                 </Routes>
