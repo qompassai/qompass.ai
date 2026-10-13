@@ -38,6 +38,11 @@ const ICON_ZENODO: &str = "M23.82698 11.163a2.2419 2.2419 0 00-.46698-.68697 2.1
 /// icon is the tricon openalex.org itself serves, tinted
 /// Cherenkov like the paths above — the served original is a
 /// black silhouette that would vanish on the abyss ground.
+/// `OpenAIRE` has no simple-icons mark either: its icon is
+/// the ring-and-plus glyph explore.openaire.eu itself
+/// serves, tinted Cherenkov the same way — the served
+/// original sits on an opaque white square and its navy
+/// ring is too dark for the abyss ground.
 /// Every icon is decorative — the label beside it
 /// carries the name.
 fn identity_icon(label: &str) -> AnyView {
@@ -82,6 +87,15 @@ fn identity_icon(label: &str) -> AnyView {
             <img
                 class="cv-id-icon"
                 src="/img/icons/microsoft-learn.png"
+                alt=""
+                aria-hidden="true"
+            />
+        }
+        .into_any(),
+        "OpenAIRE" => view! {
+            <img
+                class="cv-id-icon"
+                src="/img/icons/openaire.png"
                 alt=""
                 aria-hidden="true"
             />

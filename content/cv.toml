@@ -254,6 +254,11 @@ value = "phaedrusflow"
 url = "https://learn.microsoft.com/en-us/users/phaedrusflow/"
 
 [[identifiers]]
+label = "OpenAIRE"
+value = "Matt Porter"
+url = "https://explore.openaire.eu/search/publication?orcid=0000-0002-0302-4812"
+
+[[identifiers]]
 label = "OpenAlex"
 value = "A5013877486"
 url = "https://openalex.org/A5013877486"
