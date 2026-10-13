@@ -1520,9 +1520,9 @@ rendering test document.
 ![Tiger Style Lua architecture](assets/tiger-style-lua.webp)
 ```
 
-Rendered form:
-
-![Tiger Style Lua architecture](assets/tiger-style-lua.webp)
+The examples in this section are templates, not included media: this
+collection bundles no image or video files, so the rendered forms are
+omitted rather than pointed at assets that do not exist.
 
 ### HTML image with explicit dimensions
 
@@ -1534,14 +1534,6 @@ Rendered form:
   loading="lazy"
   decoding="async">
 ```
-
-<img
-  class="tiger-media"
-  src="assets/tiger-style-lua.webp"
-  alt="Tiger Style Lua architecture"
-  width="960"
-  loading="lazy"
-  decoding="async">
 
 ### Responsive `<picture>`
 
@@ -1555,16 +1547,6 @@ Rendered form:
     loading="lazy">
 </picture>
 ```
-
-<picture>
-  <source srcset="assets/tiger-style-lua.avif" type="image/avif">
-  <source srcset="assets/tiger-style-lua.webp" type="image/webp">
-  <img
-    class="tiger-media"
-    src="assets/tiger-style-lua.png"
-    alt="Tiger Style Lua architecture"
-    loading="lazy">
-</picture>
 
 ---
 
@@ -1777,17 +1759,6 @@ Markdown has no universal native video syntax, so use HTML5.
 </video>
 ```
 
-<video
-  class="tiger-media"
-  controls
-  preload="metadata"
-  width="960"
-  poster="assets/tiger-style-demo-poster.webp">
-  <source src="assets/tiger-style-demo.webm" type="video/webm">
-  <source src="assets/tiger-style-demo.mp4" type="video/mp4">
-  Your renderer cannot play this video.
-</video>
-
 ### Recommended video policy
 
 - default to `controls`;
@@ -1803,8 +1774,6 @@ Markdown has no universal native video syntax, so use HTML5.
 ```markdown
 [Open the Tiger Style demo video](assets/tiger-style-demo.webm)
 ```
-
-[Open the Tiger Style demo video](assets/tiger-style-demo.webm)
 
 ---
 
