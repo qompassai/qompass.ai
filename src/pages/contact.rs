@@ -3,10 +3,10 @@ use leptos_meta::Title;
 
 include!(concat!(env!("OUT_DIR"), "/cv_data.rs"));
 
-// The Identifiers entry renders the researcher/profile IDs from
+// The Identities entry is the page's single consolidated list of
+// profiles and researcher IDs: it renders every identifier from
 // content/cv.toml (compiled in by build.rs), folded in from the
-// retired /cv page. ORCID and GitHub are filtered out — the Identity
-// Hub entry above already links both.
+// retired /cv page, each value as a link.
 #[component]
 pub fn Contact() -> impl IntoView {
     view! {
@@ -36,37 +36,16 @@ pub fn Contact() -> impl IntoView {
                     </p>
                 </article>
                 <article class="entry">
-                    <p class="entry-kind">"IDENTITY HUB"</p>
+                    <p class="entry-kind">"IDENTITIES"</p>
                     <h2>"Everywhere else"</h2>
-                    <p>
-                        <a href="https://orcid.org/0000-0002-0302-4812">"ORCID"</a>
-                        " · "
-                        <a href="https://github.com/qompassai">"GitHub"</a>
-                        " · "
-                        <a href="https://huggingface.co/qompass">"Hugging Face"</a>
-                        " · "
-                        <a href="https://ovou.me/qompass">"Ovou"</a>
-                    </p>
-                </article>
-                <article class="entry">
-                    <p class="entry-kind">"IDENTIFIERS"</p>
-                    <h2>"Research IDs"</h2>
                     <ul class="cv-ids">
                         {CV_IDENTIFIERS
                             .iter()
-                            .filter(|i| !matches!(i.label, "ORCID" | "GitHub"))
                             .map(|i| {
                                 view! {
                                     <li>
                                         <span class="cv-id-label">{i.label} ": "</span>
-                                        {if i.url.is_empty() {
-                                            view! { <span>{i.value}</span> }.into_any()
-                                        } else {
-                                            view! {
-                                                <a href={i.url}>{i.value}</a>
-                                            }
-                                                .into_any()
-                                        }}
+                                        <a href={i.url}>{i.value}</a>
                                     </li>
                                 }
                             })

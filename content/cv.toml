@@ -209,39 +209,44 @@ groups = [
 ]
 
 [[identifiers]]
-label = "ORCID"
-value = "0000-0002-0302-4812"
-url = "https://orcid.org/0000-0002-0302-4812"
-
-[[identifiers]]
-label = "Scopus Author ID"
-value = "57385910700"
-url = ""
-
-[[identifiers]]
-label = "ResearcherID (Web of Science)"
-value = "HNQ-0292-2023"
-url = ""
-
-[[identifiers]]
-label = "Loop profile"
-value = "2230223"
-url = ""
-
-[[identifiers]]
 label = "AuthenticusID"
 value = "R-00K-KM3"
-url = ""
-
-[[identifiers]]
-label = "SciProfiles"
-value = "2835041"
-url = ""
+url = "https://www.authenticus.pt/R-00K-KM3"
 
 [[identifiers]]
 label = "GitHub"
 value = "qompassai · PhaedrusFlow"
 url = "https://github.com/qompassai"
+
+[[identifiers]]
+label = "Hugging Face"
+value = "qompass"
+url = "https://huggingface.co/qompass"
+
+[[identifiers]]
+label = "Loop profile"
+value = "2230223"
+url = "https://loop.frontiersin.org/people/2230223/bio"
+
+[[identifiers]]
+label = "ORCID"
+value = "0000-0002-0302-4812"
+url = "https://orcid.org/0000-0002-0302-4812"
+
+[[identifiers]]
+label = "ResearcherID (Web of Science)"
+value = "HNQ-0292-2023"
+url = "https://www.webofscience.com/wos/author/record/HNQ-0292-2023"
+
+[[identifiers]]
+label = "SciProfiles"
+value = "2835041"
+url = "https://sciprofiles.com/profile/2835041"
+
+[[identifiers]]
+label = "Scopus Author ID"
+value = "57385910700"
+url = "https://www.scopus.com/authid/detail.uri?authorId=57385910700"
 
 [[identifiers]]
 label = "YouTube"
