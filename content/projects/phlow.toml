@@ -1,0 +1,152 @@
+# Phlow project study page. Every fact on this page is sourced from the
+# implementation report and its raw harness output (content pack:
+# ~/workspace/project-pages/phlow-content-pack.md). The pack's gap list is
+# binding: unsupported sections are omitted, never filled in.
+slug = "phlow"
+name = "phlow"
+kind_line = "AGENT RUNTIME — RUST"
+repo_url = "https://github.com/qompassai/phlow"
+mark = "/img/projects/phlow.webp"
+status = "Attention protocol landed on main · dispatch gate opt-in, off by default"
+ready = true
+graphic = "phlow-frame"
+interactive = "phlow-stale-explorer"
+
+abstract = """
+Agents that have never worked together cannot rely on conventions they never formed. Phlow, Qompass AI's Rust agent runtime, addresses this with a deterministic joint-attention protocol adapted from MATE (Benintendi et al., arXiv:2610.06025), a method for zero-shot coordination in multi-agent reinforcement learning. Where MATE learns attention, phlow computes it: every agent derives the same saliency snapshot over a workspace's files and symbols from shared inputs — task naming, diagnostics, SCIP reference centrality, recency, editor state — and the snapshot's SHA-256 hash becomes a shared frame. Agents advertise a focus drawn from that snapshot, measure alignment as Jaccard overlap, and serialize deterministically when their top targets collide. Alignment across different frames is an error, and every consumer fails closed. The protocol is implemented as the phlow-attention crate, an opt-in runtime dispatch gate, and four MCP tools. In a Card Alignment analog, the protocol reaches 1.000 cross-play success against 0.145 for mismatched conventions and 0.199 for no-signal play; removing the shared ranking drops success to 0.569. In a two-coder workspace simulation, it cuts the conflict rate from 0.558 to 0.098. We report the ceiling effect behind the perfect score as plainly as the score itself.
+"""
+
+discussion = [
+  "The perfect score is a ceiling effect, and the report says so itself: deference over a shared total order converges in at most one exchange once frames agree. The paper's gradual convergence is a property of learned attention; it is not reproduced here and not claimed.",
+  "The ungrounded ablation is a charitable upper bound — it shares live candidates only, and a learned ungrounded response could do arbitrarily worse. The claim that survives is the gap itself: 43 points between grounded and ungrounded sharing.",
+  "Failing closed has a price, and the stale-frame rows are where it is paid: at 30% frame mismatch the protocol still beats every baseline, but 23 points of success are spent on refusals. Frame freshness is the operational lever — producers should re-snapshot on workspace change rather than republish on a timer.",
+  "The gate is off by default on purpose. It earns its keep when two or more agents share one workspace through phlow serve; until that is the common case, an opt-in gate that can refuse work is the honest default.",
+  "One divergence is disclosed rather than hidden: phlow's MCP catalog now carries seven tools where Python flow's had three, and the golden fixture was regenerated from the Rust server with the divergence documented in the test that pins it.",
+  "The paper's stated limitations carry over. MATE leans on a task-relevant-object detector at training time; the port leans on SCIP and diagnostics instead. And both were evaluated with AI partners only — whether a human can read an agent's attention signal well enough to coordinate with it is an open question this work does not answer.",
+  "Nothing on this page measures latency: no timing exists for snapshot computation, board publish, or the gate's effect on dispatch. Publishing overhead numbers without measuring them would be exactly the failure this research program exists to avoid; they are listed as missing, not estimated.",
+]
+
+conclusion = """
+Phlow's port of MATE keeps the half of the idea that survives contact with a deterministic runtime: not the learned attention, but the discipline around it — one computed frame, foci derived rather than declared, alignment that refuses to exist across frames, and deference that needs no negotiation. Measured on the analog harnesses, that discipline is worth 43 points of cross-play success over ungrounded sharing and cuts workspace conflicts from 0.558 to 0.098. The evidence that would change the picture next is not another harness: it is a live deployment, overhead numbers, and a human in the loop.
+"""
+
+[[methods]]
+heading = "The source mechanism"
+body = """
+MATE (Benintendi et al., arXiv:2610.06025) targets zero-shot coordination: agents that have never met must cooperate without conventions formed in advance. It trains IPPO agents with other-play, and gives each agent its partner's previous-step attention map, re-expressed in its own symmetry frame, together with an object-grounding loss that pulls each agent's attention over detected objects toward the partner's discounted future focus.
+
+Two properties of the paper matter for what follows. Its attention is learned end-to-end — the paper defines no hand-computed saliency function. And it assumes a training loop, which this stack does not have.
+"""
+
+[[methods]]
+heading = "The translation decision"
+body = """
+What transfers from MATE to a deterministic agent runtime is the protocol, not the loss. Phlow replaces learned attention with a saliency snapshot that any agent computes identically from shared inputs: task naming, diagnostics, SCIP reference centrality, recency, and editor state. The snapshot is canonically serialised — sorted keys, fixed float formatting — and its SHA-256 hash is the shared frame.
+
+Focus is derived from the snapshot, never free-typed: an agent advertises its top targets from the ranking it computed. Alignment is defined only between foci that carry the same frame hash; across frames it is an error, and every consumer fails closed.
+"""
+
+[[methods]]
+heading = "Saliency: computed, not learned"
+body = """
+Each target — a file, or a path#symbol pair — is scored from five signals: whether the task names it, its diagnostic error and warning counts, its normalised SCIP inbound-reference centrality, its recency, and whether it is open in the editor (a tie-break epsilon only). Error and warning counts pass through a saturating response, so a count can grow without limit and never exceed its signal's weight. Weights are named constants in one module, and every signal's contribution is individually bounded; that bound is the poisoning defence — a target flooded with errors contributes at most its signal's weight. All inputs are clamped to the unit interval, and non-finite inputs narrow to zero.
+"""
+equations = [
+  '''s(t) = \operatorname{clamp}_{[0,1]}\Bigl( 0.35\,\mathbb{1}[\text{named}] + 0.25\,\frac{e}{e+4} + 0.10\,\frac{w}{w+8} + 0.20\,c + 0.10\,r + 0.01\,\mathbb{1}[\text{open}] \Bigr)''',
+  '''f(n) = \dfrac{n}{n+k}''',
+]
+
+[[methods]]
+heading = "Snapshot, focus, and the board"
+body = """
+Snapshots are bounded at 4096 targets. A focus carries the agent id, the frame hash, a per-agent monotone sequence number, and at most eight targets ordered by descending saliency. The focus board — the rendezvous where agents publish — rejects a payload whose agent does not match the transport caller (anti-spoof), rejects a non-increasing sequence number (anti-replay), and caps the board at 64 agents (anti-flood). Attention tools refuse unidentified callers outright.
+"""
+
+[[methods]]
+heading = "Alignment and the coordination rule"
+body = """
+Alignment between two foci is the Jaccard overlap of their bounded target sets, plus a flag for whether the top target is shared. It is defined only when the frame hashes are equal; any other pairing raises a snapshot-mismatch error.
+
+The coordination rule decides from a pair of foci: hash mismatch → Reject; either focus empty → Parallel; same top target → Serialize, with the holder being the lexicographically smaller agent id and the other agent deferring; otherwise → Parallel. An earlier draft chose the holder by saliency with a lexicographic tie-break, but under a shared snapshot both agents read identical saliency — the comparison is always an exact tie, so only the lexicographic rule does work.
+"""
+equations = [
+  '''A(a,b) = \frac{|T_a \cap T_b|}{|T_a \cup T_b|}, \qquad A = 1.0 \text{ when both foci are empty; } \texttt{top\_shared} \iff \text{top}(a) = \text{top}(b)''',
+]
+
+[[methods]]
+heading = "Runtime wiring"
+body = """
+The protocol ships as the phlow-attention crate, an opt-in dispatch gate in phlow-runtime, and four MCP tools — flow_attention_publish, flow_attention_focus, flow_attention_alignment, flow_attention_decide — sharing one board. The [attention] configuration section defaults to false. When the gate is on, it is consulted after planning; a run that loses contention ends deferred, with the holder named. Every run records an attention object — frame hash, focus, and per-partner decisions — in its report.
+"""
+
+[[methods]]
+heading = "Evaluation harnesses"
+body = """
+Two harnesses carry the evidence. The Card Alignment analog deals five targets with frame-invariant features to two agents drawn from independent runs, each with a private frame permutation; the agents publish foci over seven deliberation rounds, update by grounded deference, and make a final private pick. Cross-play success — both final picks coincide — is measured across run pairs: 200 run-pairs × 25 episodes = 5,000 episodes per condition, seeded throughout.
+
+The workspace simulation puts two coders on 24 files with synthetic SCIP-like centrality, diagnostics, and a task naming a subset; they claim and edit over discrete steps, with and without publishing foci and asking the coordination rule. 200 runs per arm.
+"""
+equations = [
+  '''\mathrm{XP} = \frac{1}{N}\sum_{i=1}^{N} \mathbb{1}\bigl[\text{pick}^{(i)}_a = \text{pick}^{(i)}_b\bigr]''',
+]
+
+
+
+
+
+[results]
+intro = """
+Every number below comes from the implementation report and its raw harness output; none is estimated. Two scope notes belong up front: all coordination results are harness and simulation measurements — the gate ships default-off and no live multi-agent deployment has been measured yet — and the paper's own published results are included, labelled as context, at the end.
+"""
+figures_note = """
+The diagram under the header traces one coordination round; the explorer at the foot of the page plots the stale-frame measurements. A success-vs-saliency-margin curve was specified for the harness but never measured — no such curve is published here, because it does not exist.
+"""
+
+[[results.benchmarks]]
+title = "Card Alignment analog — cross-play success (5,000 episodes per condition)"
+columns = ["Condition", "Success"]
+note = "Self-play control reaches 1.000 by construction. The grounded/ungrounded gap — 1.000 against 0.569 — is the report's headline claim: 43 points."
+rows = [
+  ["Convention self-play (control)", "1.000"],
+  ["Convention cross-play (mismatched conventions)", "0.145 ± 0.025"],
+  ["No-signal / other-play analog (≈ chance 0.2)", "0.199 ± 0.005"],
+  ["MATE analog (shared saliency + deference)", "1.000 ± 0.000"],
+  ["Ungrounded ablation (focus shared, ranking not)", "0.569 ± 0.014"],
+  ["MATE analog, 10% stale frames (p = 0.10)", "0.905 ± 0.004"],
+  ["MATE analog, 30% stale frames (p = 0.30)", "0.774 ± 0.006"],
+  ["MATE analog, perception noise σ = 0.15", "1.000 (rounds-to-agree 0.55 → 0.73)"],
+]
+
+[[results.benchmarks]]
+title = "Workspace simulation — two coders, 24 files, 200 runs"
+columns = ["Metric", "Without protocol", "With protocol"]
+note = "Residual protocol conflicts all come from stale-frame fallback rounds."
+rows = [
+  ["Conflict rate", "0.558 ± 0.008", "0.098 ± 0.005"],
+  ["Wasted agent-rounds", "13.39", "2.36"],
+  ["Rounds-to-complete", "18.7 (ideal 12)", "13.2"],
+  ["Coverage", "1.000", "1.000"],
+]
+
+[[results.benchmarks]]
+title = "Verification gates — workspace at the measured tree"
+columns = ["Gate", "Result"]
+rows = [
+  ["cargo test --workspace", "2653 passed / 0 failed"],
+  ["phlow-attention tests", "36 passed"],
+  ["phlow-config tests", "56 passed"],
+  ["phlow-mcp tests", "51 + 3 passed"],
+  ["phlow-runtime tests", "102 passed"],
+  ["phlow-cli tests", "54 passed"],
+  ["clippy -D warnings (workspace, all targets)", "clean"],
+]
+
+[[results.benchmarks]]
+title = "Context — the paper's published results (MATE, not phlow)"
+columns = ["Benchmark", "MATE self-play", "MATE cross-play"]
+note = "Published by Benintendi et al. (arXiv:2610.06025), not measured by us. In the paper, IPPO/other-play sits at chance (0.2) in cross-play on Card Alignment; on LBF, IPPO reaches 0.356 self-play / 0.229 cross-play."
+rows = [
+  ["Card Alignment", "0.872 ± 0.008", "0.823 ± 0.010"],
+  ["LBF", "0.460", "0.446"],
+  ["OvercookedV2", "143.3 ± 1.4", "132.2 ± 3.0"],
+]
