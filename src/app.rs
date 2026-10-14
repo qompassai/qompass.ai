@@ -1,6 +1,8 @@
 use crate::pages::{
     about::About,
     contact::Contact,
+    fiber_trainer::FiberTrainer,
+    field_service::{FieldNoteDispatch, FieldService},
     home::Home,
     legal::Legal,
     light_show::{LightShow, LightShowTesters},
@@ -66,6 +68,7 @@ fn Header() -> impl IntoView {
                     <A href="/solutions">"Solutions"</A>
                     <A href="/on-ai">"On AI"</A>
                     <A href="/standards">"Standards"</A>
+                    <A href="/field-service">"Field Service"</A>
                     <A href="/about">"About"</A>
                     <A href="/contact">"Contact"</A>
                 </nav>
@@ -192,6 +195,9 @@ pub fn App() -> impl IntoView {
                     <Route path=path!("/solutions") view=Projects />
                     <Route path=path!("/light-show") view=LightShow />
                     <Route path=path!("/light-show/testers") view=LightShowTesters />
+                    <Route path=path!("/field-service") view=FieldService />
+                    <Route path=path!("/field-service/trainer") view=FiberTrainer />
+                    <Route path=path!("/field-service/notes/:slug") view=FieldNoteDispatch />
                     <Route path=path!("/on-ai") view=OnAi />
                     <Route path=path!("/standards") view=TigerStyle />
                     <Route path=path!("/standards/:slug") view=TigerStyleDispatch />

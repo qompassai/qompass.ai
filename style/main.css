@@ -1108,6 +1108,268 @@ a.download-box .download-state {
   text-align: center;
 }
 
+/* — Field Service ————————————————————————
+   The notes index, the notes' worked arithmetic, and the TIA-598
+   trainer. Fiber colors are classes that set --fiber (no inline
+   styles); every swatch carries its color name in text beside it, so
+   nothing depends on telling colors apart. Trainer buttons are sized
+   for a thumb and need no hover: hover only adds emphasis. */
+.fs-notes {
+  display: grid;
+  gap: 0.55rem;
+  margin-top: 1rem;
+}
+.fs-note {
+  background: var(--chart-raise);
+  border: 1px solid var(--chart-line);
+  border-radius: 4px;
+  color: inherit;
+  display: block;
+  padding: 0.9rem 1.1rem;
+  text-decoration: none;
+}
+.fs-note:hover,
+.fs-note:focus-visible {
+  border-color: var(--brass-dim);
+}
+.fs-note-title {
+  color: var(--starlight);
+  display: block;
+  font-family: var(--font-display);
+  font-size: 1.15rem;
+  margin-top: 0.2rem;
+}
+.fs-note-blurb {
+  color: var(--fog);
+  display: block;
+  font-size: 0.94rem;
+  margin-top: 0.2rem;
+}
+.fs-calc {
+  background: var(--abyss);
+  border: 1px solid var(--chart-line);
+  border-radius: 4px;
+  color: var(--starlight);
+  font-family: var(--font-mono);
+  font-size: 0.86rem;
+  margin: 1rem 0;
+  overflow-x: auto;
+  padding: 0.9rem 1rem;
+}
+.fs-back {
+  margin-top: 2rem;
+}
+.fiber-blue { --fiber: #2f6fe4; }
+.fiber-orange { --fiber: #f08a1c; }
+.fiber-green { --fiber: #2e9e47; }
+.fiber-brown { --fiber: #7a4a24; }
+.fiber-slate { --fiber: #6f7f8f; }
+.fiber-white { --fiber: #f4f4f4; }
+.fiber-red { --fiber: #d62828; }
+.fiber-black { --fiber: #111111; }
+.fiber-yellow { --fiber: #f4d03f; }
+.fiber-violet { --fiber: #8a4fd8; }
+.fiber-rose { --fiber: #f4a6c0; }
+.fiber-aqua { --fiber: #3fd0d4; }
+.ft-swatch {
+  background: var(--fiber, transparent);
+  border: 1px solid rgba(232, 238, 247, 0.45);
+  border-radius: 50%;
+  display: inline-block;
+  flex: none;
+  height: 1.15rem;
+  vertical-align: -0.2rem;
+  width: 1.15rem;
+}
+.ft-modes {
+  display: grid;
+  gap: 0.55rem;
+  margin-top: 1rem;
+}
+@media (min-width: 641px) {
+  .ft-modes {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+.ft-mode {
+  background: var(--chart);
+  border: 1px solid var(--chart-line);
+  border-radius: 4px;
+  color: var(--starlight);
+  cursor: pointer;
+  min-height: 3.25rem;
+  padding: 0.75rem 1rem;
+  text-align: left;
+  touch-action: manipulation;
+}
+.ft-mode.is-active {
+  background: var(--chart-raise);
+  border-color: var(--brass);
+}
+.ft-mode-name {
+  display: block;
+  font-family: var(--font-display);
+  font-size: 1.05rem;
+}
+.ft-mode.is-active .ft-mode-name {
+  color: var(--brass);
+}
+.ft-mode-hint {
+  color: var(--fog);
+  display: block;
+  font-size: 0.86rem;
+  margin-top: 0.15rem;
+}
+.ft-stage {
+  background: var(--chart-raise);
+  border: 1px solid var(--chart-line);
+  border-top: 2px solid var(--brass);
+  border-radius: 4px;
+  margin-top: 1.2rem;
+  padding: 1.2rem 1.1rem 1.4rem;
+}
+.ft-stage .ft-idle {
+  margin: 0;
+}
+.ft-stage .ft-prompt {
+  align-items: center;
+  color: var(--starlight);
+  display: flex;
+  flex-wrap: wrap;
+  font-family: var(--font-display);
+  font-size: 1.45rem;
+  gap: 0.45rem;
+  margin: 0.6rem 0 0.2rem;
+}
+.ft-prompt .ft-swatch {
+  height: 1.6rem;
+  width: 1.6rem;
+}
+.ft-sub {
+  margin: 0.2rem 0 0;
+}
+.ft-answers {
+  display: grid;
+  gap: 0.55rem;
+  grid-template-columns: repeat(3, 1fr);
+  margin-top: 1.1rem;
+}
+.ft-answers-numbers {
+  grid-template-columns: repeat(4, 1fr);
+}
+@media (min-width: 641px) {
+  .ft-answers {
+    grid-template-columns: repeat(4, 1fr);
+  }
+  .ft-answers-numbers {
+    grid-template-columns: repeat(6, 1fr);
+  }
+}
+.ft-answer {
+  align-items: center;
+  background: var(--chart);
+  border: 1px solid var(--chart-line);
+  border-radius: 4px;
+  color: var(--starlight);
+  cursor: pointer;
+  display: flex;
+  font-family: var(--font-body);
+  font-size: 1rem;
+  gap: 0.5rem;
+  justify-content: center;
+  min-height: 3.25rem;
+  padding: 0.5rem;
+  touch-action: manipulation;
+}
+.ft-answer:hover:not(:disabled) {
+  border-color: var(--brass-dim);
+}
+.ft-answer:disabled {
+  cursor: default;
+}
+.ft-number {
+  font-family: var(--font-mono);
+  font-size: 1.2rem;
+}
+.ft-answer.is-right {
+  border-color: var(--cherenkov);
+  box-shadow: 0 0 12px rgba(91, 140, 255, 0.45);
+}
+.ft-answer.is-right::after {
+  color: var(--cherenkov-soft);
+  content: "✓";
+}
+.ft-answer.is-wrong {
+  border-color: #e0607a;
+}
+.ft-answer.is-wrong::after {
+  color: #e0607a;
+  content: "✗";
+}
+.ft-answer.is-placed {
+  opacity: 0.35;
+}
+.ft-feedback {
+  font-weight: 600;
+  margin: 1rem 0 0;
+}
+.ft-stage .ft-feedback.is-right {
+  color: var(--cherenkov-soft);
+}
+.ft-stage .ft-feedback.is-wrong {
+  color: #f0a0b0;
+}
+.ft-next {
+  background: transparent;
+  border: 1px solid var(--brass-dim);
+  border-radius: 3px;
+  color: var(--brass);
+  cursor: pointer;
+  font-family: var(--font-display);
+  font-size: 1.05rem;
+  margin-top: 1rem;
+  min-height: 3rem;
+  padding: 0.6rem 1.3rem;
+  touch-action: manipulation;
+}
+.ft-next:hover {
+  border-color: var(--brass);
+  color: var(--starlight);
+}
+.ft-stage .ft-score {
+  color: var(--starlight);
+  font-family: var(--font-display);
+  font-size: 1.2rem;
+  margin: 1.2rem 0 0;
+}
+.ft-built {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem 1rem;
+  list-style: none;
+  margin: 0.8rem 0 0;
+  padding: 0;
+}
+.ft-built-item {
+  align-items: center;
+  color: var(--fog);
+  display: flex;
+  font-family: var(--font-mono);
+  font-size: 0.86rem;
+  gap: 0.4rem;
+}
+.ft-reference summary {
+  color: var(--cherenkov-soft);
+  cursor: pointer;
+  font-family: var(--font-mono);
+  font-size: 0.88rem;
+  min-height: 2.75rem;
+  padding: 0.6rem 0;
+}
+.fs-sequence {
+  margin-bottom: 1rem;
+}
+
 /* — On AI page ——————————————————————————— */
 .on-ai-note {
   color: var(--fog);

@@ -7,7 +7,7 @@ cd "$(dirname "$0")/.."
 BIN="target/release/qompass-ai"
 SITE="target/site"
 DIST="dist"
-ROUTES=("/" "/research" "/solutions" "/on-ai" "/standards" "/about" "/contact" "/privacy" "/legal" "/ontrack/privacy" "/light-show" "/light-show/testers")
+ROUTES=("/" "/research" "/solutions" "/on-ai" "/standards" "/about" "/contact" "/privacy" "/legal" "/ontrack/privacy" "/light-show" "/light-show/testers" "/field-service" "/field-service/trainer")
 
 # Tiger Style full references: one quiet page per imported reference,
 # linked only from its chapter on /standards.
@@ -51,6 +51,20 @@ for route in "${ROUTES[@]}"; do
     fi
     curl -sf "http://127.0.0.1:3000$route" -o "$out"
     echo "prerendered $route -> $out"
+done
+
+# Field notes: one page per note the /field-service index links, so the
+# NOTES list in src/pages/field_service.rs is the one place to add a note.
+mapfile -t NOTE_ROUTES < <(grep -o 'href="/field-service/notes/[a-z0-9-]*"' "$DIST/field-service/index.html" \
+    | sed -e 's/^href="//' -e 's/"$//' | sort -u)
+if [ "${#NOTE_ROUTES[@]}" -eq 0 ]; then
+    echo "prerender: /field-service links no field notes" >&2
+    exit 1
+fi
+for route in "${NOTE_ROUTES[@]}"; do
+    mkdir -p "$DIST$route"
+    curl -sf "http://127.0.0.1:3000$route" -o "$DIST$route/index.html"
+    echo "prerendered $route -> $DIST$route/index.html"
 done
 
 kill "$SERVER_PID"
