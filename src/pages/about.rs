@@ -1,4 +1,4 @@
-use crate::pages::identity::IdentitySection;
+use crate::pages::identity::{skill_icon, IdentitySection};
 use leptos::prelude::*;
 use leptos_meta::Title;
 
@@ -44,6 +44,8 @@ pub fn About() -> impl IntoView {
             </div>
 
             <IdentitySection />
+
+            <Soundings />
 
             <p class="page-bearing">"CHART — SERVICE RECORD"</p>
             <h2 class="cv-head">{CV_PROFILE.name}</h2>
@@ -156,19 +158,6 @@ pub fn About() -> impl IntoView {
                 })
                 .collect_view()}
 
-            <h2 class="cv-head">"Soundings — Skills"</h2>
-            {CV_SKILLS
-                .iter()
-                .map(|g| {
-                    view! {
-                        <p class="cv-skills">
-                            <span class="cv-skill-label">{g.label} " — "</span>
-                            {g.items.join(", ")}
-                        </p>
-                    }
-                })
-                .collect_view()}
-
             <h2 class="cv-head">"Off Watch"</h2>
             <p>{CV_PERSONAL_LINE}</p>
             {CV_CODA.as_ref().map(|c| {
@@ -199,5 +188,87 @@ pub fn About() -> impl IntoView {
                 }
             })}
         </section>
+    }
+}
+
+/// Where a skill's evidence lives, if cv.toml names any.
+fn evidence(label: &str) -> Option<&'static str> {
+    CV_SKILL_EVIDENCE.iter().find(|(skill, _)| *skill == label).map(|(_, url)| *url)
+}
+
+/// "Soundings — Skills": every skill as a labeled chip, A–Z within
+/// A–Z groups (build.rs holds the order). A chip links only to Matt's
+/// own evidence and carries a mark only where the skill has one;
+/// nothing here moves.
+#[component]
+fn Soundings() -> impl IntoView {
+    view! {
+        <section class="skills" aria-labelledby="skills-head">
+            <h2 class="cv-head" id="skills-head">"Soundings — Skills"</h2>
+            {CV_SKILLS
+                .iter()
+                .map(|g| {
+                    view! {
+                        <div class="skill-group">
+                            <h3 class="cv-skill-label">{g.label}</h3>
+                            <ul class="skill-chips">
+                                {g
+                                    .items
+                                    .iter()
+                                    .map(|s| {
+                                        let label = evidence(s).map_or_else(
+                                            || view! { <span>{*s}</span> }.into_any(),
+                                            |url| view! { <a href=url>{*s}</a> }.into_any(),
+                                        );
+                                        view! { <li class="skill-chip">{skill_icon(s)} {label}</li> }
+                                    })
+                                    .collect_view()}
+                            </ul>
+                        </div>
+                    }
+                })
+                .collect_view()}
+        </section>
+    }
+    // Type-erased like the identity section, for the same query depth.
+    .into_any()
+}
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    #[test]
+    fn seven_groups_carry_forty_eight_skills() {
+        assert_eq!(CV_SKILLS.len(), 7);
+        assert_eq!(CV_SKILLS.iter().map(|g| g.items.len()).sum::<usize>(), 48);
+    }
+
+    #[test]
+    fn groups_and_skills_render_a_to_z() {
+        let az = |labels: Vec<&str>| {
+            labels.iter().zip(labels.iter().skip(1)).all(|(a, b)| a.to_lowercase() <= b.to_lowercase())
+        };
+        assert!(az(CV_SKILLS.iter().map(|g| g.label).collect()));
+        for g in CV_SKILLS {
+            assert!(az(g.items.to_vec()), "{}", g.label);
+        }
+    }
+
+    #[test]
+    fn evidence_names_listed_skills_once_each() {
+        for (i, (skill, url)) in CV_SKILL_EVIDENCE.iter().enumerate() {
+            assert!(CV_SKILLS.iter().any(|g| g.items.contains(skill)), "{skill}");
+            assert!(url.starts_with("https://") || url.starts_with("/research"), "{skill}: {url}");
+            assert!(CV_SKILL_EVIDENCE.iter().skip(i + 1).all(|(other, _)| other != skill), "{skill}");
+        }
+    }
+
+    #[test]
+    fn skills_without_evidence_stay_unlinked() {
+        for skill in ["GPG/PGP", "Kubernetes", "CPR", "Leadership", "Windows 10/11", "", "rust"] {
+            assert_eq!(evidence(skill), None, "{skill:?}");
+        }
+        assert_eq!(evidence("Rust"), Some("https://github.com/qompassai/light-show"));
     }
 }

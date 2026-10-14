@@ -1899,6 +1899,34 @@ a.download-box .download-state {
   height: 19px;
   width: 19px;
 }
+.skill-group h3 {
+  font-size: 1rem;
+  margin: 1.3rem 0 0.55rem;
+}
+.skill-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+.skill-chip {
+  align-items: center;
+  background: var(--chart);
+  border: 1px solid var(--chart-line);
+  border-radius: 999px;
+  color: var(--fog);
+  display: inline-flex;
+  font-family: var(--font-mono);
+  font-size: 0.82rem;
+  gap: 0.45rem;
+  padding: 0.35rem 0.9rem;
+}
+.skill-chip .cv-id-icon {
+  height: 15px;
+  width: 15px;
+}
 .press-grid {
   display: grid;
   gap: 1rem;

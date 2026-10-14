@@ -201,16 +201,47 @@ detail = "Manuscripts on LLMs in medical education and clinical AI — JGME, JMI
 item = "Youth Instructor"
 detail = "Village Seven Presbyterian Church, Colorado Springs, CO (07/2013–12/2013) — classroom teaching and mentoring of 15 elementary students."
 
+# Groups and their items stay A–Z (case-insensitive); build.rs refuses
+# any other order.
 [skills]
 groups = [
-  { label = "Code", items = ["Python", "Rust", "Lua", "JavaScript", "C++ (Unreal)", "Go", "Zig", "CUDA", "Mojo"] },
-  { label = "Network", items = ["IPv6/IPv4", "DNS", "SSL/TLS", "SSH", "GPG/PGP", "Tor"] },
-  { label = "DevOps", items = ["Bash", "Kernel", "Docker/Podman", "Kubernetes", "Terraform", "Ansible", "Postgres", "MySQL/MariaDB", "SQLite", "Redis/Valkey", "Vulkan", "Git"] },
-  { label = "Systems", items = ["Windows 10/11", "macOS", "Debian", "Ubuntu", "Arch", "Nix", "Fedora"] },
-  { label = "Medical & Healthcare", items = ["CPR", "BLS", "HIPAA Compliance", "Research Design", "Publication", "Peer Review"] },
-  { label = "Military", items = ["Project Management", "Leadership", "Civil/Military Relations"] },
-  { label = "Education", items = ["AI Education Integration", "Teaching", "Tutoring", "Para-Education", "Curriculum Development"] },
+  { label = "Code", items = ["C++ (Unreal)", "CUDA", "Go", "JavaScript", "Lua", "Mojo", "Python", "Rust", "Zig"] },
+  { label = "DevOps", items = ["Ansible", "Bash", "Docker/Podman", "Git", "Kernel", "Kubernetes", "MySQL/MariaDB", "Postgres", "Redis/Valkey", "SQLite", "Terraform", "Vulkan"] },
+  { label = "Education", items = ["AI Education Integration", "Curriculum Development", "Para-Education", "Teaching", "Tutoring"] },
+  { label = "Medical & Healthcare", items = ["BLS", "CPR", "HIPAA Compliance", "Peer Review", "Publication", "Research Design"] },
+  { label = "Military", items = ["Civil/Military Relations", "Leadership", "Project Management"] },
+  { label = "Network", items = ["DNS", "GPG/PGP", "IPv6/IPv4", "SSH", "SSL/TLS", "Tor"] },
+  { label = "Systems", items = ["Arch", "Debian", "Fedora", "macOS", "Nix", "Ubuntu", "Windows 10/11"] },
 ]
+
+# Evidence for a skill: Matt's own work in it, keyed by the skill's
+# label above. A skill with no entry renders as plain text — no stand-in
+# links. Every key must name a skill (build.rs checks).
+[skills.evidence]
+"AI Education Integration" = "https://github.com/qompassai/Equator"
+"Ansible" = "https://github.com/qompassai/ansible"
+"Arch" = "https://github.com/qompassai/arch"
+"Bash" = "https://github.com/qompassai/Shell"
+"C++ (Unreal)" = "https://github.com/qompassai/unreal"
+"CUDA" = "https://github.com/qompassai/cuda"
+"Git" = "https://github.com/qompassai/Git"
+"IPv6/IPv4" = "https://github.com/qompassai/network"
+"Lua" = "https://github.com/qompassai/Diver"
+"Mojo" = "https://github.com/qompassai/Mojo"
+"Nix" = "https://github.com/qompassai/nix"
+"Peer Review" = "https://orcid.org/0000-0002-0302-4812"
+"Postgres" = "https://github.com/qompassai/psql"
+"Publication" = "/research"
+"Python" = "https://github.com/qompassai/Python"
+"Redis/Valkey" = "https://github.com/qompassai/valkey"
+"Research Design" = "/research"
+"Rust" = "https://github.com/qompassai/light-show"
+"SSH" = "https://github.com/qompassai/qssh"
+"SSL/TLS" = "https://github.com/qompassai/qssl"
+"Terraform" = "https://github.com/qompassai/terraform"
+"Tor" = "https://github.com/qompassai/tor"
+"Vulkan" = "https://github.com/qompassai/vulkan"
+"Zig" = "https://github.com/qompassai/Zig"
 
 [[identifiers]]
 kind = "Researcher ID"
