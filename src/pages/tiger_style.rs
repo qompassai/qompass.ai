@@ -14,13 +14,13 @@ use leptos_router::hooks::use_params_map;
 
 /// The badge every chapter icon shares.
 ///
-/// A rounded tile, a gradient ring (the `ts-ring-grad` gradient
-/// defined once beside the chapters), a soft halo, and a dashed
-/// orbit ring. Inside sits the project's own mark — see
-/// `icon_glyph` — recolored into the Qompass palette. The ring
-/// and halo stay still at rest; the stylesheet turns them only
-/// while the chapter's summary is hovered, focused, or open.
-const ICON_BADGE: &str = r#"<rect x="3" y="3" width="42" height="42" rx="11" fill="var(--chart-raise)" stroke="url(#ts-ring-grad)" stroke-width="1.6"/><circle class="ts-icon-halo" cx="24" cy="24" r="11" fill="var(--cherenkov)"/><circle class="ts-icon-ring" cx="24" cy="24" r="17.5" fill="none" stroke="var(--cherenkov)" stroke-opacity=".5" stroke-width="1.3" stroke-dasharray="3.5 5.5"/>"#;
+/// No tile and no frame: the project's own mark — see
+/// `icon_glyph` — recolored into the Qompass palette, backed
+/// only by a soft halo and a dashed orbit ring on the bare
+/// page. The ring and halo stay still at rest; the stylesheet
+/// turns them only while the chapter's summary is hovered,
+/// focused, or open.
+const ICON_BADGE: &str = r#"<circle class="ts-icon-halo" cx="24" cy="24" r="11" fill="var(--cherenkov)"/><circle class="ts-icon-ring" cx="24" cy="24" r="17.5" fill="none" stroke="var(--cherenkov)" stroke-opacity=".5" stroke-width="1.3" stroke-dasharray="3.5 5.5"/>"#;
 
 /// The mark at the centre of one chapter's icon badge, by slug.
 ///
@@ -93,19 +93,33 @@ fn icon_glyph(slug: &str) -> &'static str {
     }
 }
 
-/// The one-sentence header summary for a chapter, where one is used.
+/// The one-sentence header summary for a chapter.
 ///
-/// Three chapters' imported scope lines are long, multi-sentence
-/// skill descriptions whose substance the guide body already
-/// carries; their headers keep one sentence summarizing the
-/// approach instead, and nothing is repeated inside. Every other
-/// chapter folds its scope line into the chapter as the lead and
-/// its header is name-only.
+/// Every chapter carries one sentence under its name, written
+/// from its own guide. The imported scope lines are long,
+/// multi-sentence skill descriptions whose substance the guide
+/// body already carries, so nothing is repeated inside. A
+/// chapter without an entry here folds its scope line into the
+/// chapter as the lead instead and its header is name-only.
 fn chapter_headline(slug: &str) -> Option<&'static str> {
     match slug {
+        "aseprite" => Some("Safety-first Aseprite — headless CLI and Lua pipelines with explicit contracts, version guards, and every flag verified against official docs."),
+        "bash" => Some("Safety-first Bash — strict mode, every expansion quoted, bounds on every loop and retry, and exit statuses checked, never assumed."),
         "c" => Some("Safety-first C — explicit contracts, checked bounds, and disciplined manual ownership, hardened against overflow and use-after-free."),
+        "cpp" => Some("Safety-first C++ — C++23 with contracts first, std::expected for validation, Rule-of-Zero RAII ownership, and one explicit exception policy."),
+        "go" => Some("Safety-first Go — errors as values, panic reserved for broken contracts, and goroutines, queues, and retries bounded by named limits."),
+        "kotlin" => Some("Safety-first Kotlin — contracts that name threading and lifecycle, sealed result types for expected failures, and budgeted resources."),
+        "lua" => Some("Safety-first Lua — the runtime named up front, validation by nil-plus-error returns, no bare pcall, and every loop bounded."),
+        "mojo" => Some("Safety-first Mojo — pinned compiler and libraries, never a moving nightly, typed errors, and recorded evidence for every accelerator target."),
         "nix" => Some("Safety-first Nix — pure evaluation, explicit inputs, and pinned sources, validated by a pinned toolchain."),
+        "odin" => Some("Safety-first Odin — explicit allocators on every procedure, typed error returns, and contracts that state ownership and failure behavior."),
+        "php" => Some("Safety-first PHP — strict_types everywhere, domain exceptions for input, identity comparisons on untrusted values, and validation surviving production settings."),
+        "python" => Some("Safety-first Python — typed signatures, precise domain exceptions, bounded I/O and retries, and validation that survives python -O."),
+        "rust" => Some("Safety-first Rust — pinned toolchain, typed errors over panics, an owner for every allocation and task, and bounds with units."),
+        "scala" => Some("Safety-first Scala — total functions over ADTs, input parsed into validated domain values, effect discipline, and bounded executors and queues."),
         "typescript" => Some("Safety-first TypeScript under the strict profile — explicit contracts, strict null handling, and bounded async work."),
+        "wgsl" => Some("Safety-first WGSL — explicit shader contracts, 16-byte uniform alignment, naga validation, and portability proven on every target backend."),
+        "zig" => Some("Safety-first Zig — explicit allocators, documented error unions, comptime proofs, and tests run in Debug and ReleaseSafe alike."),
         _ => None,
     }
 }
@@ -323,18 +337,6 @@ pub fn TigerStyle() -> impl IntoView {
             </p>
             <svg class="ts-defs" aria-hidden="true">
                 <defs>
-                    <linearGradient
-                        id="ts-ring-grad"
-                        x1="0"
-                        y1="0"
-                        x2="48"
-                        y2="48"
-                        gradientUnits="userSpaceOnUse"
-                    >
-                        <stop offset="0" stop-color="#5B8CFF"></stop>
-                        <stop offset=".55" stop-color="#7C5CFF"></stop>
-                        <stop offset="1" stop-color="#C9A227"></stop>
-                    </linearGradient>
                     <linearGradient
                         id="ts-icon-grad"
                         x1="13"

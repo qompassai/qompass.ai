@@ -334,7 +334,7 @@ pub fn Home() -> impl IntoView {
                 "Security reviews, research tooling, and deployment work — measured, not marketed."
             </p>
             <p class="hero-ctas">
-                <a class="cta cta-brass" href="/contact">
+                <a class="cta cta-brass" href="/about#identity">
                     "Start a conversation"
                 </a>
             </p>

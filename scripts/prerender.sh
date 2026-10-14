@@ -7,7 +7,7 @@ cd "$(dirname "$0")/.."
 BIN="target/release/qompass-ai"
 SITE="target/site"
 DIST="dist"
-ROUTES=("/" "/research" "/solutions" "/on-ai" "/standards" "/about" "/contact" "/privacy" "/legal" "/ontrack/privacy")
+ROUTES=("/" "/research" "/solutions" "/on-ai" "/standards" "/about" "/privacy" "/legal" "/ontrack/privacy" "/light-show" "/light-show/testers" "/field-service" "/field-service/trainer")
 
 # Tiger Style full references: one quiet page per imported reference,
 # linked only from its chapter on /standards.
@@ -53,6 +53,20 @@ for route in "${ROUTES[@]}"; do
     echo "prerendered $route -> $out"
 done
 
+# Field notes: one page per note the /field-service index links, so the
+# NOTES list in src/pages/field_service.rs is the one place to add a note.
+mapfile -t NOTE_ROUTES < <(grep -o 'href="/field-service/notes/[a-z0-9-]*"' "$DIST/field-service/index.html" \
+    | sed -e 's/^href="//' -e 's/"$//' | sort -u)
+if [ "${#NOTE_ROUTES[@]}" -eq 0 ]; then
+    echo "prerender: /field-service links no field notes" >&2
+    exit 1
+fi
+for route in "${NOTE_ROUTES[@]}"; do
+    mkdir -p "$DIST$route"
+    curl -sf "http://127.0.0.1:3000$route" -o "$DIST$route/index.html"
+    echo "prerendered $route -> $DIST$route/index.html"
+done
+
 kill "$SERVER_PID"
 trap - EXIT
 
@@ -91,10 +105,15 @@ for ref in content/tiger-style/*-reference.md; do
     write_redirect "/tiger-style/$slug" "/standards/$slug"
 done
 
-# Same treatment for the CV, folded into /about (record) and /contact
-# (identifiers) on 2026-10-13: the standalone page is retired, the old
+# Same treatment for the CV, folded into /about (record and, since
+# the /contact fold, identifiers) on 2026-10-13: the standalone page is retired, the old
 # address lands on the page that now carries the record.
 write_redirect "/cv" "/about" "About - Qompass AI" "About"
+
+# And for /contact, folded the same day into the identity section of
+# /about: the mailbox, the key, and every identifier now live at
+# /about#identity, and the old address lands there.
+write_redirect "/contact" "/about#identity" "Contact - Qompass AI" "Contact on the About page"
 
 # Same treatment for the fleet index, renamed from Projects to
 # Solutions on 2026-10-13: the grid and every ready study page moved
