@@ -233,6 +233,11 @@ value = "PhaedrusFlow"
 url = "https://gitlab.com/PhaedrusFlow"
 
 [[identifiers]]
+label = "Google Play"
+value = "7351560589446098345"
+url = "https://play.google.com/store/apps/dev?id=7351560589446098345"
+
+[[identifiers]]
 label = "HackerOne"
 value = "phaedrusflow"
 url = "https://hackerone.com/phaedrusflow"

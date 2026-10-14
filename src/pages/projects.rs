@@ -122,6 +122,9 @@ pub fn Projects() -> impl IntoView {
                     </p>
                     <DownloadBoxes slug="light-show" />
                     <StudyLink slug="light-show" />
+                    <p class="study-link">
+                        <a href="/light-show">"Visit the game →"</a>
+                    </p>
                 </article>
                 <article class="entry">
                     <img class="project-mark" src="/img/projects/fathom.webp" alt="fathom" />

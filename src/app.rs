@@ -3,6 +3,7 @@ use crate::pages::{
     contact::Contact,
     home::Home,
     legal::Legal,
+    light_show::{LightShow, LightShowTesters},
     on_ai::OnAi,
     ontrack_privacy::OnTrackPrivacy,
     privacy::Privacy,
@@ -189,6 +190,8 @@ pub fn App() -> impl IntoView {
                     <Route path=path!("/ontrack/privacy") view=OnTrackPrivacy />
                     <Route path=path!("/legal") view=Legal />
                     <Route path=path!("/solutions") view=Projects />
+                    <Route path=path!("/light-show") view=LightShow />
+                    <Route path=path!("/light-show/testers") view=LightShowTesters />
                     <Route path=path!("/on-ai") view=OnAi />
                     <Route path=path!("/standards") view=TigerStyle />
                     <Route path=path!("/standards/:slug") view=TigerStyleDispatch />

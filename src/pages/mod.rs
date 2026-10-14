@@ -2,6 +2,7 @@ pub mod about;
 pub mod contact;
 pub mod home;
 pub mod legal;
+pub mod light_show;
 pub mod on_ai;
 pub mod ontrack_privacy;
 pub mod privacy;

@@ -952,6 +952,162 @@ a.download-box .download-state {
   margin: 0.8rem 0 0;
 }
 
+/* — Light Show pages ————————————————————————
+   The game's home (/light-show) and its testers page
+   (/light-show/testers). Channel rows follow the download-box
+   anatomy — a platform, a state — at row width: a row is a live
+   link only when its channel is open to everyone; a channel that
+   is not open yet is visible and legible, never a dead link, and
+   the Google Play badge sits muted and inert in the same spirit
+   until the production listing opens. Motion, as everywhere on
+   the site, lives in the reduced-motion block at the foot. */
+.feature-list {
+  color: var(--fog);
+  margin: 0.6rem 0 1.2rem;
+  padding-left: 1.3rem;
+}
+.feature-list li {
+  margin-top: 0.45rem;
+}
+.shot-gallery {
+  display: grid;
+  gap: 1rem;
+  grid-template-columns: repeat(2, 1fr);
+  margin-top: 1.2rem;
+}
+@media (min-width: 641px) {
+  .shot-gallery {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+.shot {
+  margin: 0;
+}
+.shot img {
+  border: 1px solid var(--chart-line);
+  border-radius: 4px;
+  display: block;
+  height: auto;
+  width: 100%;
+}
+.shot figcaption {
+  color: var(--fog);
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+  margin-top: 0.4rem;
+  text-align: center;
+}
+.channel-rows {
+  display: grid;
+  gap: 0.55rem;
+  margin-top: 1rem;
+}
+.channel-row {
+  align-items: center;
+  background: var(--chart-raise);
+  border: 1px solid var(--chart-line);
+  border-radius: 4px;
+  color: inherit;
+  display: flex;
+  gap: 1.1rem;
+  padding: 0.85rem 1rem;
+  text-decoration: none;
+}
+.channel-text {
+  flex: 1;
+}
+.channel-line {
+  align-items: baseline;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem 1.2rem;
+  margin: 0;
+}
+.channel-name {
+  color: var(--starlight);
+  font-family: var(--font-display);
+  font-size: 1.05rem;
+}
+.channel-state {
+  color: var(--fog);
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+.channel-state.is-live {
+  color: var(--brass);
+}
+.channel-note {
+  font-size: 0.92rem;
+  margin: 0.35rem 0 0;
+}
+.play-badge-slot {
+  flex: none;
+  opacity: 0.55;
+}
+.play-badge {
+  display: block;
+  height: 3rem;
+  width: auto;
+}
+@media (prefers-reduced-motion: no-preference) {
+  a.channel-row {
+    transition:
+      transform 0.18s ease,
+      border-color 0.18s ease,
+      box-shadow 0.18s ease;
+  }
+  a.channel-row:hover,
+  a.channel-row:focus-visible,
+  a.channel-row:active {
+    border-color: var(--cherenkov);
+    box-shadow: 0 0 14px rgba(91, 140, 255, 0.35);
+    transform: translateY(-2px);
+  }
+}
+.tester-steps {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+.tester-step {
+  margin-top: 2.4rem;
+}
+.step-shot {
+  margin: 1.1rem auto 0;
+  max-width: 280px;
+}
+.step-shot img {
+  border: 1px solid var(--chart-line);
+  border-radius: 8px;
+  display: block;
+  height: auto;
+  width: 100%;
+}
+.step-shot-slot {
+  align-items: center;
+  aspect-ratio: 9 / 16;
+  background: var(--chart);
+  border: 1.5px dashed var(--chart-line);
+  border-radius: 20px;
+  color: var(--fog);
+  display: flex;
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+  justify-content: center;
+  letter-spacing: 0.08em;
+  padding: 1rem;
+  text-align: center;
+  text-transform: uppercase;
+}
+.step-shot figcaption {
+  color: var(--fog);
+  font-size: 0.88rem;
+  margin-top: 0.5rem;
+  text-align: center;
+}
+
 /* — On AI page ——————————————————————————— */
 .on-ai-note {
   color: var(--fog);
