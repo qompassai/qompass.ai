@@ -1,6 +1,5 @@
 use crate::pages::{
     about::About,
-    contact::Contact,
     fiber_trainer::FiberTrainer,
     field_service::{FieldNoteDispatch, FieldService},
     home::Home,
@@ -70,7 +69,6 @@ fn Header() -> impl IntoView {
                     <A href="/standards">"Standards"</A>
                     <A href="/field-service">"Field Service"</A>
                     <A href="/about">"About"</A>
-                    <A href="/contact">"Contact"</A>
                 </nav>
             </div>
         </header>
@@ -161,6 +159,8 @@ fn Footer() -> impl IntoView {
                     </a>
                 </p>
                 <p class="footer-note">
+                    <A href="/about#identity">"Contact"</A>
+                    " · "
                     <A href="/privacy">"Privacy"</A>
                     " · "
                     <A href="/legal">"Legal"</A>
@@ -188,7 +188,6 @@ pub fn App() -> impl IntoView {
                 }>
                     <Route path=path!("/") view=Home />
                     <Route path=path!("/about") view=About />
-                    <Route path=path!("/contact") view=Contact />
                     <Route path=path!("/privacy") view=Privacy />
                     <Route path=path!("/ontrack/privacy") view=OnTrackPrivacy />
                     <Route path=path!("/legal") view=Legal />

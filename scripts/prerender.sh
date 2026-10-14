@@ -7,7 +7,7 @@ cd "$(dirname "$0")/.."
 BIN="target/release/qompass-ai"
 SITE="target/site"
 DIST="dist"
-ROUTES=("/" "/research" "/solutions" "/on-ai" "/standards" "/about" "/contact" "/privacy" "/legal" "/ontrack/privacy" "/light-show" "/light-show/testers" "/field-service" "/field-service/trainer")
+ROUTES=("/" "/research" "/solutions" "/on-ai" "/standards" "/about" "/privacy" "/legal" "/ontrack/privacy" "/light-show" "/light-show/testers" "/field-service" "/field-service/trainer")
 
 # Tiger Style full references: one quiet page per imported reference,
 # linked only from its chapter on /standards.
@@ -105,10 +105,15 @@ for ref in content/tiger-style/*-reference.md; do
     write_redirect "/tiger-style/$slug" "/standards/$slug"
 done
 
-# Same treatment for the CV, folded into /about (record) and /contact
-# (identifiers) on 2026-10-13: the standalone page is retired, the old
+# Same treatment for the CV, folded into /about (record and, since
+# the /contact fold, identifiers) on 2026-10-13: the standalone page is retired, the old
 # address lands on the page that now carries the record.
 write_redirect "/cv" "/about" "About - Qompass AI" "About"
+
+# And for /contact, folded the same day into the identity section of
+# /about: the mailbox, the key, and every identifier now live at
+# /about#identity, and the old address lands there.
+write_redirect "/contact" "/about#identity" "Contact - Qompass AI" "Contact on the About page"
 
 # Same treatment for the fleet index, renamed from Projects to
 # Solutions on 2026-10-13: the grid and every ready study page moved

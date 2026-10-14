@@ -1,3 +1,4 @@
+use crate::pages::identity::IdentitySection;
 use leptos::prelude::*;
 use leptos_meta::Title;
 
@@ -5,8 +6,9 @@ include!(concat!(env!("OUT_DIR"), "/cv_data.rs"));
 
 // Matt's record folded in from the retired /cv page: the data
 // still comes from content/cv.toml (compiled in by build.rs) — this
-// page renders every section except Identifiers, which live on
-// /contact with the other identity links.
+// page renders every section, the Identifiers through the identity
+// section (src/pages/identity.rs, anchor #identity) that absorbed the
+// retired /contact page on 2026-10-13.
 #[component]
 pub fn About() -> impl IntoView {
     view! {
@@ -40,6 +42,8 @@ pub fn About() -> impl IntoView {
                     "volta for keys, bunker for packages."
                 </p>
             </div>
+
+            <IdentitySection />
 
             <p class="page-bearing">"CHART — SERVICE RECORD"</p>
             <h2 class="cv-head">{CV_PROFILE.name}</h2>

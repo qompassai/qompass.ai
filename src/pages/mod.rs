@@ -1,8 +1,8 @@
 pub mod about;
-pub mod contact;
 pub mod fiber_trainer;
 pub mod field_service;
 pub mod home;
+pub mod identity;
 pub mod legal;
 pub mod light_show;
 pub mod on_ai;

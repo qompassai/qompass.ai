@@ -2529,3 +2529,234 @@ a.download-box .download-state {
   font-size: 0.88rem;
   max-width: 46rem;
 }
+
+/* — Identity: /about#identity ————————————————————— */
+/* The compass card over its plain list. The card is static by default,
+   its home heading (--ring-home) under the fixed lubber line; turning
+   and the glide between headings live only in the
+   prefers-reduced-motion: no-preference block below. Hydration owns
+   the state and writes --ring-turn; nothing reads the angle back. */
+.identity {
+  scroll-margin-top: 5rem;
+}
+.identity .entry h3 {
+  margin: 0.4rem 0 0.5rem;
+  font-size: 1.35rem;
+}
+.ring-wrap {
+  margin: 2.4rem auto 0;
+  max-width: 36rem;
+}
+.ring-controls {
+  align-items: end;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.7rem;
+  justify-content: center;
+}
+.ring-search {
+  color: var(--fog);
+  display: flex;
+  flex: 1 1 16rem;
+  flex-direction: column;
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+  gap: 0.3rem;
+  letter-spacing: 0.08em;
+  max-width: 22rem;
+  text-transform: uppercase;
+}
+.ring-search input {
+  background: var(--abyss);
+  border: 1px solid var(--chart-line);
+  border-radius: 3px;
+  color: var(--starlight);
+  font: inherit;
+  font-size: 0.95rem;
+  letter-spacing: 0;
+  padding: 0.55rem 0.75rem;
+  text-transform: none;
+}
+.ring-search input:focus-visible {
+  outline: 2px solid var(--cherenkov);
+  outline-offset: 1px;
+}
+.ring-search input:disabled {
+  opacity: 0.55;
+}
+.ring-toggle,
+.ring-copy {
+  background: transparent;
+  border: 1px solid var(--brass-dim);
+  border-radius: 3px;
+  color: var(--brass);
+  cursor: pointer;
+  font-family: var(--font-display);
+  font-size: 0.9rem;
+  font-weight: 500;
+  padding: 0.5rem 0.9rem;
+}
+.ring-toggle:hover,
+.ring-copy:hover:not(:disabled) {
+  border-color: var(--brass);
+  color: var(--starlight);
+}
+.ring-copy {
+  font-size: 0.78rem;
+  padding: 0.25rem 0.65rem;
+}
+.ring-copy:disabled {
+  cursor: default;
+  opacity: 0.5;
+}
+.ring-status {
+  color: var(--cherenkov-soft);
+  font-family: var(--font-mono);
+  font-size: 0.85rem;
+  margin: 0.5rem 0 0.9rem;
+  min-height: 1.4em;
+  text-align: center;
+}
+.ring {
+  aspect-ratio: 1;
+  margin: 0 auto;
+  position: relative;
+  width: min(100%, 34rem);
+}
+.ring-dial {
+  display: block;
+  height: 100%;
+  overflow: visible;
+  width: 100%;
+}
+.ring-card {
+  transform: rotate(var(--ring-home, 0deg));
+  transform-box: view-box;
+  transform-origin: 50% 50%;
+}
+.ring-rim {
+  fill: var(--chart);
+  stroke: var(--chart-line);
+  stroke-width: 1.5;
+}
+.ring-inner {
+  fill: var(--abyss);
+  stroke: var(--brass-dim);
+  stroke-width: 1;
+}
+.ring-minor {
+  stroke: var(--chart-line);
+  stroke-width: 1.5;
+}
+.ring-tick {
+  cursor: pointer;
+}
+.ring-tick:focus-visible {
+  outline: none;
+}
+.ring-hit {
+  fill: transparent;
+}
+.ring-tick:focus-visible .ring-hit {
+  stroke: var(--cherenkov);
+  stroke-width: 1.5;
+}
+.ring-mark {
+  stroke: var(--fog);
+  stroke-width: 2;
+}
+.ring-label {
+  dominant-baseline: central;
+  fill: var(--fog);
+  font-family: var(--font-mono);
+  font-size: 12px;
+}
+.ring-tick:hover .ring-label,
+.ring-tick:focus-visible .ring-label {
+  fill: var(--starlight);
+}
+.ring-tick.is-match .ring-label {
+  fill: var(--cherenkov-soft);
+}
+.ring-tick.is-heading .ring-mark {
+  stroke: var(--brass);
+  stroke-width: 3;
+}
+.ring-tick.is-heading .ring-label {
+  fill: var(--brass);
+  font-weight: 600;
+}
+.ring-lubber {
+  fill: var(--brass);
+  stroke: var(--brass);
+  stroke-width: 2;
+}
+.ring-readout {
+  left: 50%;
+  position: absolute;
+  text-align: center;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  width: 37%;
+}
+.ring-kind {
+  color: var(--brass);
+  font-family: var(--font-mono);
+  font-size: 0.66rem;
+  letter-spacing: 0.12em;
+  margin: 0;
+  text-transform: uppercase;
+}
+.ring-name {
+  align-items: center;
+  color: var(--starlight);
+  display: flex;
+  font-family: var(--font-display);
+  font-size: 1rem;
+  font-weight: 600;
+  gap: 0.4rem;
+  justify-content: center;
+  line-height: 1.2;
+  margin: 0.3rem 0 0;
+}
+.ring-value {
+  color: var(--cherenkov-soft);
+  font-family: var(--font-mono);
+  font-size: 0.82rem;
+  margin: 0.35rem 0 0;
+  overflow-wrap: anywhere;
+}
+.ring-actions {
+  align-items: center;
+  display: flex;
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  gap: 0.6rem;
+  justify-content: center;
+  margin: 0.55rem 0 0;
+}
+@media (max-width: 30rem) {
+  .ring-name { font-size: 0.82rem; }
+  .ring-value { font-size: 0.7rem; }
+  .ring-kind { font-size: 0.56rem; }
+  .ring-actions { gap: 0.4rem; margin-top: 0.35rem; }
+}
+.cv-id-kind {
+  font-size: 0.78rem;
+  opacity: 0.8;
+}
+.cv-id.is-heading .cv-id-label {
+  color: var(--brass);
+}
+.cv-id.is-match a {
+  color: var(--cherenkov-soft);
+}
+.cv-id.is-dim {
+  opacity: 0.38;
+}
+@media (prefers-reduced-motion: no-preference) {
+  .ring-card {
+    transform: rotate(var(--ring-turn, 0deg));
+    transition: transform 1.6s cubic-bezier(0.45, 0.05, 0.25, 1);
+  }
+}

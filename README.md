@@ -8,7 +8,7 @@ Cherenkov blue, brass instruments.
 ## Layout
 
 - `src/` — Leptos app (pages in `src/pages/`)
-- `content/cv.toml` — the founder's record as data; edit it and rebuild to update /about (the record) and /contact (the identifiers)
+- `content/cv.toml` — the founder's record as data; edit it and rebuild to update /about (the record, and the identifiers in its #identity section)
 - `scripts/fetch-orcid.py` — regenerates `src/orcid_data.rs` from the live ORCID record
 - `style/main.css` — the design system
 - `public/` — vendored assets (fonts, Three.js, island scripts); no CDNs at runtime

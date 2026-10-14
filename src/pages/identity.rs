@@ -1,5 +1,12 @@
+//! The identity section of /about (anchor `#identity`).
+//!
+//! The mailbox, the `OpenPGP` key, and every identifier in content/cv.toml
+//! twice over — once as ticks on a slowly drifting compass card, once as
+//! a plain prerendered list. The list is the guarantee: complete in the
+//! HTML, readable with JavaScript off. The card is presentation over the
+//! same data and owns no identity of its own.
+
 use leptos::prelude::*;
-use leptos_meta::Title;
 
 include!(concat!(env!("OUT_DIR"), "/cv_data.rs"));
 
@@ -47,6 +54,10 @@ const ICON_ZENODO: &str = "M23.82698 11.163a2.2419 2.2419 0 00-.46698-.68697 2.1
 /// serves, tinted Cherenkov the same way — the served
 /// original sits on an opaque white square and its navy
 /// ring is too dark for the abyss ground.
+/// crates.io and `LuaRocks` have no simple-icons mark
+/// either (15.16.1 carries neither `cratesio` nor
+/// `luarocks`): each carries the favicon.ico its own site
+/// serves, kept byte for byte as fetched on 2026-10-13.
 /// Every icon is decorative — the label beside it
 /// carries the name.
 fn identity_icon(label: &str) -> AnyView {
@@ -55,6 +66,15 @@ fn identity_icon(label: &str) -> AnyView {
             <img
                 class="cv-id-icon"
                 src="/img/icons/authenticus.png"
+                alt=""
+                aria-hidden="true"
+            />
+        }
+        .into_any(),
+        "crates.io" => view! {
+            <img
+                class="cv-id-icon"
+                src="/img/icons/crates-io.ico"
                 alt=""
                 aria-hidden="true"
             />
@@ -82,6 +102,15 @@ fn identity_icon(label: &str) -> AnyView {
             <img
                 class="cv-id-icon"
                 src="/img/icons/loop.png"
+                alt=""
+                aria-hidden="true"
+            />
+        }
+        .into_any(),
+        "LuaRocks" => view! {
+            <img
+                class="cv-id-icon"
+                src="/img/icons/luarocks.ico"
                 alt=""
                 aria-hidden="true"
             />
@@ -164,58 +193,491 @@ fn identity_icon(label: &str) -> AnyView {
     }
 }
 
-// The Identities entry is the page's single consolidated list of
-// profiles and researcher IDs: it renders every identifier from
-// content/cv.toml (compiled in by build.rs), folded in from the
-// retired /cv page, each value as a link, centered on the page
-// with its service's recognized mark beside it.
+/// The identity the card heads to before anyone touches it — the
+/// persistent researcher identifier. Falls back to the first entry if
+/// cv.toml ever drops it.
+const HOME_LABEL: &str = "ORCID";
+
+/// One drift step: every period the card heads to the next identity.
+/// The glide between headings is the CSS transition, not this timer.
+#[cfg(feature = "hydrate")]
+const DRIFT_PERIOD: std::time::Duration = std::time::Duration::from_secs(6);
+
+/// Longest query the search matches against. Longer input is cut, so
+/// one keystroke costs at most every identity times three fields of
+/// this many characters.
+const QUERY_MAX: usize = 64;
+
+/// How well `id` matches a normalized `query`; lower is better.
+///
+/// `None` is no match. Exact name, exact value, name prefix, name
+/// substring, value substring, then the kind line — so "orcid" lands
+/// on ORCID and "license" on the state license.
+fn match_rank(id: &CvIdentifier, query: &str) -> Option<u8> {
+    if query.is_empty() {
+        return None;
+    }
+    let label = id.label.to_lowercase();
+    let value = id.value.to_lowercase();
+    if label == query {
+        Some(0)
+    } else if value == query {
+        Some(1)
+    } else if label.starts_with(query) {
+        Some(2)
+    } else if label.contains(query) {
+        Some(3)
+    } else if value.contains(query) {
+        Some(4)
+    } else if id.kind.to_lowercase().contains(query) {
+        Some(5)
+    } else {
+        None
+    }
+}
+
+/// Search input as matched: trimmed, capped at `QUERY_MAX` characters,
+/// lowercased.
+fn normalize_query(raw: &str) -> String {
+    raw.trim().chars().take(QUERY_MAX).collect::<String>().to_lowercase()
+}
+
+/// Index of the best match for a normalized `query` — lowest rank,
+/// ties to the earlier entry — or `None` when nothing matches.
+fn best_match(ids: &[CvIdentifier], query: &str) -> Option<usize> {
+    ids.iter().enumerate().filter_map(|(i, id)| match_rank(id, query).map(|rank| (rank, i))).min().map(|(_, i)| i)
+}
+
+/// Signed tick count from position `from` to position `to` on a card
+/// of `n` ticks, the short way round (a half-turn tie goes forward).
+/// Both positions must lie in `0..n`; anything else turns nothing.
+fn shortest_steps(from: i32, to: i32, n: i32) -> i32 {
+    if n <= 0 || !(0..n).contains(&from) || !(0..n).contains(&to) {
+        return 0;
+    }
+    let ahead = (to - from).rem_euclid(n);
+    if ahead > n / 2 {
+        ahead - n
+    } else {
+        ahead
+    }
+}
+
+/// The text drawn on a tick: the label up to any parenthetical, so
+/// `ResearcherID (Web of Science)` reads `ResearcherID` on the card.
+/// The readout and the list keep the full label.
+fn tick_text(label: &str) -> &str {
+    label.split_once(" (").map_or(label, |(head, _)| head)
+}
+
+fn tick_class(heading: bool, matched: bool) -> &'static str {
+    if heading {
+        "ring-tick is-heading"
+    } else if matched {
+        "ring-tick is-match"
+    } else {
+        "ring-tick"
+    }
+}
+
+/// List entries dim — never leave the DOM — while a search is active,
+/// so the prerendered list stays complete for find-in-page.
+fn list_class(heading: bool, searching: bool, matched: bool) -> &'static str {
+    if heading {
+        "cv-id is-heading"
+    } else if !searching {
+        "cv-id"
+    } else if matched {
+        "cv-id is-match"
+    } else {
+        "cv-id is-dim"
+    }
+}
+
+/// The mailbox, the key, and the identity card over its plain list.
+/// Personal presentation: the section speaks for Matt, not a company.
 #[component]
-pub fn Contact() -> impl IntoView {
+pub fn IdentitySection() -> impl IntoView {
     view! {
-        <Title text="Contact - Qompass AI" />
-        <section class="page">
+        <section class="identity" id="identity" aria-labelledby="identity-head">
             <p class="page-bearing">"CHART — OPEN A CHANNEL"</p>
-            <h1>"Contact"</h1>
+            <h2 class="cv-head" id="identity-head">"Contact"</h2>
             <p class="page-lede">
-                "One mailbox, answered by the founder. Encrypt it if the matter warrants — "
-                "the key is published on our own key server."
+                "One mailbox, answered by me. Encrypt it if the matter warrants — "
+                "the key is published on my own key server."
             </p>
             <div class="entry-list">
                 <article class="entry">
                     <p class="entry-kind">"EMAIL"</p>
-                    <h2>
+                    <h3>
                         <a href="mailto:map@qompass.ai">"map@qompass.ai"</a>
-                    </h2>
+                    </h3>
                     <p>"Research, consulting, and collaboration inquiries."</p>
                 </article>
                 <article class="entry">
                     <p class="entry-kind">"OPENPGP — WEB KEY DIRECTORY"</p>
-                    <h2 class="mono-block">"3410 59A8 D566 DE30 B4B6 7FC5 FC89 A70A C651 68FD"</h2>
+                    <h3 class="mono-block">"3410 59A8 D566 DE30 B4B6 7FC5 FC89 A70A C651 68FD"</h3>
                     <p>
                         "Fetch it the modern way: " <span class="mono-inline">"gpg --locate-keys map@qompass.ai"</span>
                         " — served by volta at keys.qompass.ai — or verify the fingerprint "
                         "above against any copy you already hold."
                     </p>
                 </article>
-                <article class="entry entry-identities">
-                    <p class="entry-kind">"IDENTITIES"</p>
-                    <h2>"Everywhere else"</h2>
-                    <ul class="cv-ids">
-                        {CV_IDENTIFIERS
-                            .iter()
-                            .map(|i| {
-                                view! {
-                                    <li class="cv-id" aria-label={i.label}>
-                                        {identity_icon(i.label)}
-                                        <span class="cv-id-label">{i.label} ": "</span>
-                                        <a href={i.url}>{i.value}</a>
-                                    </li>
-                                }
-                            })
-                            .collect_view()}
-                    </ul>
-                </article>
             </div>
+            <IdentityCard />
         </section>
+    }
+    // Type-erased at the boundary: nested inside the About view, the
+    // full static type of this tree overflows the binary crate's
+    // default query depth (the lib raises its own limit for the home
+    // page; the bin does not).
+    .into_any()
+}
+
+/// The compass card and the guarantee list, sharing one selection.
+///
+/// Every piece of state is a signal named here:
+/// - `selected` — the identity in the readout; always a valid index,
+///   because every change goes through `select`.
+/// - `turn` — the card's angle in whole ticks. `select` moves it the
+///   short way to `selected` and the CSS transition glides it there;
+///   nothing reads the angle back, so the readout can never show a
+///   half-turned or stale heading.
+/// - `held` — the visitor stopped the drift (a tap, a tick, a search,
+///   or the pause button); `hovering` pauses it only while the pointer
+///   or keyboard focus is on the card.
+/// - `hydrated`, `drifting` — false in the prerender. The search box,
+///   copy button, and tick focus stops switch on after hydration; the
+///   drift starts only when the visitor has not asked for reduced
+///   motion.
+#[component]
+fn IdentityCard() -> impl IntoView {
+    let ids = CV_IDENTIFIERS;
+    let len = ids.len();
+    // build.rs refuses a cv.toml without identifiers, so `ticks` >= 1
+    // from the data; the max(1) keeps rem_euclid total regardless.
+    let ticks = i32::try_from(len).unwrap_or(i32::MAX).max(1);
+    let home = ids.iter().position(|id| id.label == HOME_LABEL).unwrap_or(0);
+    let home_turn = i32::try_from(home).unwrap_or(0);
+    let tick_deg = 360.0 / f64::from(ticks);
+
+    let selected = RwSignal::new(home);
+    let turn = RwSignal::new(home_turn);
+    let query = RwSignal::new(String::new());
+    let status = RwSignal::new(String::new());
+    let held = RwSignal::new(false);
+    let hovering = RwSignal::new(false);
+    let hydrated = RwSignal::new(false);
+    let drifting = RwSignal::new(false);
+    let copied = RwSignal::new(false);
+
+    let select = move |i: usize| {
+        let Ok(target) = i32::try_from(i) else {
+            return;
+        };
+        if i >= len {
+            return;
+        }
+        // Saturating: at one tick per drift period the counter needs
+        // centuries to get near i32::MAX.
+        turn.update(|t| *t = t.saturating_add(shortest_steps(t.rem_euclid(ticks), target, ticks)));
+        selected.set(i);
+        copied.set(false);
+    };
+
+    Effect::new(move |_| {
+        hydrated.set(true);
+        #[cfg(feature = "hydrate")]
+        start_drift(drifting, held, hovering, selected, select, len);
+    });
+
+    let copy = move |_| {
+        #[cfg(feature = "hydrate")]
+        copy_value(selected.get_untracked(), copied);
+    };
+
+    let on_search = move |ev| {
+        let q = normalize_query(&leptos::leptos_dom::helpers::event_target_value(&ev));
+        if q.is_empty() {
+            status.set(String::new());
+        } else {
+            held.set(true);
+            let message = best_match(ids, &q).map_or_else(
+                || format!("No identity matches \u{201c}{q}\u{201d}."),
+                |i| {
+                    select(i);
+                    ids.get(i).map_or_else(String::new, |id| format!("Heading: {} — {}", id.label, id.value))
+                },
+            );
+            status.set(message);
+        }
+        query.set(q);
+    };
+
+    let card_style = move || {
+        let home_deg = -f64::from(home_turn) * tick_deg;
+        let turn_deg = -f64::from(turn.get()) * tick_deg;
+        format!("--ring-home: {home_deg:.3}deg; --ring-turn: {turn_deg:.3}deg")
+    };
+
+    let ticks_view = ids
+        .iter()
+        .enumerate()
+        .map(|(i, id)| {
+            let at = f64::from(i32::try_from(i).unwrap_or(0)) * tick_deg;
+            let between = at + tick_deg / 2.0;
+            view! {
+                <line
+                    class="ring-minor"
+                    x1="300"
+                    y1="14"
+                    x2="300"
+                    y2="26"
+                    transform=format!("rotate({between:.3} 300 300)")
+                />
+                <g
+                    class=move || tick_class(selected.get() == i, query.with(|q| match_rank(id, q).is_some()))
+                    transform=format!("rotate({at:.3} 300 300)")
+                    role=move || hydrated.get().then_some("button")
+                    tabindex=move || hydrated.get().then_some("0")
+                    aria-label=id.label
+                    aria-pressed=move || hydrated.get().then(|| (selected.get() == i).to_string())
+                    on:click=move |_| {
+                        held.set(true);
+                        select(i);
+                    }
+                    on:keydown=move |ev| {
+                        let key = ev.key();
+                        if key == "Enter" || key == " " {
+                            ev.prevent_default();
+                            held.set(true);
+                            select(i);
+                        }
+                    }
+                >
+                    <rect class="ring-hit" x="284" y="6" width="32" height="182" rx="4" />
+                    <line class="ring-mark" x1="300" y1="10" x2="300" y2="36" />
+                    <text class="ring-label" x="300" y="46" transform="rotate(90 300 46)">
+                        {tick_text(id.label)}
+                    </text>
+                </g>
+            }
+        })
+        .collect_view();
+
+    let readout = move || {
+        ids.get(selected.get()).map(|id| {
+            view! {
+                <p class="ring-kind">{id.kind}</p>
+                <p class="ring-name">{identity_icon(id.label)} <span>{id.label}</span></p>
+                <p class="ring-value">{id.value}</p>
+                <p class="ring-actions">
+                    <button type="button" class="ring-copy" disabled=move || !hydrated.get() on:click=copy>
+                        {move || if copied.get() { "Copied" } else { "Copy" }}
+                    </button>
+                    <a class="ring-open" href=id.url aria-label=format!("Open {}", id.label)>
+                        "Open"
+                    </a>
+                </p>
+            }
+        })
+    };
+
+    view! {
+        <div class="ring-wrap">
+            <div class="ring-controls">
+                <label class="ring-search">
+                    <span>"Search identities"</span>
+                    <input
+                        type="search"
+                        maxlength="64"
+                        autocomplete="off"
+                        spellcheck="false"
+                        placeholder="try “license” or “orcid”"
+                        aria-controls="identity-list"
+                        disabled=move || !hydrated.get()
+                        on:input=on_search
+                    />
+                </label>
+                <Show when=move || drifting.get()>
+                    <button type="button" class="ring-toggle" on:click=move |_| held.update(|h| *h = !*h)>
+                        {move || if held.get() { "Resume drift" } else { "Pause drift" }}
+                    </button>
+                </Show>
+            </div>
+            <p class="ring-status" role="status">
+                {move || status.get()}
+            </p>
+            <div
+                class="ring"
+                on:mouseenter=move |_| hovering.set(true)
+                on:mouseleave=move |_| hovering.set(false)
+                on:focusin=move |_| hovering.set(true)
+                on:focusout=move |_| hovering.set(false)
+                on:pointerdown=move |_| held.set(true)
+            >
+                <svg class="ring-dial" viewBox="0 0 600 600" role="group" aria-label="Identity compass card">
+                    <g class="ring-card" style=card_style>
+                        <circle class="ring-rim" cx="300" cy="300" r="292" />
+                        <circle class="ring-inner" cx="300" cy="300" r="112" />
+                        {ticks_view}
+                    </g>
+                    <polygon class="ring-lubber" points="290,0 310,0 300,16" />
+                    <line class="ring-lubber" x1="300" y1="16" x2="300" y2="40" />
+                </svg>
+                <div class="ring-readout">{readout}</div>
+            </div>
+        </div>
+        <article class="entry entry-identities">
+            <p class="entry-kind">"EVERY IDENTITY, LISTED"</p>
+            <h3>{format!("{len} identities")}</h3>
+            <ul class="cv-ids" id="identity-list">
+                {ids
+                    .iter()
+                    .enumerate()
+                    .map(|(i, id)| {
+                        view! {
+                            <li
+                                class=move || {
+                                    query.with(|q| list_class(selected.get() == i, !q.is_empty(), match_rank(id, q).is_some()))
+                                }
+                                aria-label=id.label
+                            >
+                                {identity_icon(id.label)}
+                                <span class="cv-id-label">{id.label} ": "</span>
+                                <a href=id.url>{id.value}</a>
+                                <span class="cv-id-kind">{id.kind}</span>
+                            </li>
+                        }
+                    })
+                    .collect_view()}
+            </ul>
+        </article>
+    }
+}
+
+/// Start the drift: one heading step per `DRIFT_PERIOD`.
+///
+/// A step is skipped while the visitor has held the card or has the
+/// pointer or focus on it. Without `matchMedia`, or for a visitor who
+/// asked for reduced motion, the drift never starts and the card stays
+/// exactly where the prerender drew it.
+#[cfg(feature = "hydrate")]
+fn start_drift(
+    drifting: RwSignal<bool>,
+    held: RwSignal<bool>,
+    hovering: RwSignal<bool>,
+    selected: RwSignal<usize>,
+    select: impl Fn(usize) + 'static,
+    len: usize,
+) {
+    let reduced = web_sys::window()
+        .and_then(|w| w.match_media("(prefers-reduced-motion: reduce)").ok().flatten())
+        .is_none_or(|m| m.matches());
+    if reduced || len < 2 {
+        return;
+    }
+    drifting.set(true);
+    let step = move || {
+        if held.get_untracked() || hovering.get_untracked() {
+            return;
+        }
+        select(selected.get_untracked().saturating_add(1).checked_rem(len).unwrap_or(0));
+    };
+    if let Ok(handle) = leptos::leptos_dom::helpers::set_interval_with_handle(step, DRIFT_PERIOD) {
+        on_cleanup(move || handle.clear());
+    }
+}
+
+/// Copy the selected identity's value to the clipboard.
+///
+/// Same settle-or-swallow handling as the home page's Quickstart copy:
+/// the label flips only on a settled write, a denied write is consumed
+/// on the derived promise, and `forget()` hands each closure to the JS
+/// side, which frees it when called.
+#[cfg(feature = "hydrate")]
+fn copy_value(index: usize, copied: RwSignal<bool>) {
+    let (Some(window), Some(id)) = (web_sys::window(), CV_IDENTIFIERS.get(index)) else {
+        return;
+    };
+    let promise = window.navigator().clipboard().write_text(id.value);
+    let mark_copied = wasm_bindgen::closure::Closure::once(move |_| copied.set(true));
+    let swallow = wasm_bindgen::closure::Closure::once(|_| ());
+    let _ = promise.then(&mark_copied).catch(&swallow);
+    mark_copied.forget();
+    swallow.forget();
+}
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    fn heading_for(raw: &str) -> Option<&'static str> {
+        best_match(CV_IDENTIFIERS, &normalize_query(raw)).and_then(|i| CV_IDENTIFIERS.get(i)).map(|id| id.label)
+    }
+
+    #[test]
+    fn the_card_carries_all_twenty_four_identities() {
+        assert_eq!(CV_IDENTIFIERS.len(), 24);
+        assert!(CV_IDENTIFIERS.iter().any(|id| id.label == HOME_LABEL));
+    }
+
+    #[test]
+    fn search_steers_to_the_named_identity() {
+        assert_eq!(heading_for("orcid"), Some("ORCID"));
+        assert_eq!(heading_for("  LICENSE "), Some("Washington L&I"));
+        assert_eq!(heading_for("7351560589446098345"), Some("Google Play"));
+        assert_eq!(heading_for("crates"), Some("crates.io"));
+        assert_eq!(heading_for("LuaRocks"), Some("LuaRocks"));
+    }
+
+    #[test]
+    fn the_card_turns_the_short_way_round() {
+        assert_eq!(shortest_steps(23, 0, 24), 1);
+        assert_eq!(shortest_steps(0, 23, 24), -1);
+        assert_eq!(shortest_steps(5, 5, 24), 0);
+        assert_eq!(shortest_steps(0, 12, 24), 12);
+    }
+
+    #[test]
+    fn every_identity_is_complete_and_unique() {
+        for (i, id) in CV_IDENTIFIERS.iter().enumerate() {
+            assert!(!id.kind.is_empty() && !id.value.is_empty(), "{}", id.label);
+            assert!(id.url.starts_with("https://"), "{}", id.label);
+            assert!(CV_IDENTIFIERS.iter().skip(i + 1).all(|other| other.label != id.label), "{}", id.label);
+        }
+    }
+
+    #[test]
+    fn blank_queries_match_nothing() {
+        for raw in ["", "   ", "\t\n"] {
+            assert_eq!(heading_for(raw), None, "{raw:?}");
+        }
+    }
+
+    #[test]
+    fn hostile_queries_match_nothing_and_stay_bounded() {
+        for raw in ["<script>alert(1)</script>", "zzzz-no-such-identity", "\u{0}", "' OR 1=1 --"] {
+            assert_eq!(heading_for(raw), None, "{raw:?}");
+        }
+        let flood = "x".repeat(100_000);
+        assert!(normalize_query(&flood).chars().count() <= QUERY_MAX);
+        assert_eq!(heading_for(&flood), None);
+    }
+
+    #[test]
+    fn out_of_range_positions_never_turn_the_card() {
+        assert_eq!(shortest_steps(-1, 0, 24), 0);
+        assert_eq!(shortest_steps(0, 24, 24), 0);
+        assert_eq!(shortest_steps(0, 1, 0), 0);
+        assert_eq!(shortest_steps(i32::MIN, i32::MAX, 24), 0);
+    }
+
+    #[test]
+    fn tick_text_drops_only_the_parenthetical() {
+        assert_eq!(tick_text("ResearcherID (Web of Science)"), "ResearcherID");
+        assert_eq!(tick_text("ORCID"), "ORCID");
+        assert_eq!(tick_text(""), "");
+        assert_eq!(tick_text(" ("), "");
     }
 }

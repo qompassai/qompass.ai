@@ -213,111 +213,145 @@ groups = [
 ]
 
 [[identifiers]]
+kind = "Researcher ID"
 label = "AuthenticusID"
 value = "R-00K-KM3"
 url = "https://www.authenticus.pt/R-00K-KM3"
 
 [[identifiers]]
+kind = "Rust packages"
+label = "crates.io"
+value = "PhaedrusFlow"
+url = "https://crates.io/users/PhaedrusFlow"
+
+[[identifiers]]
+kind = "Medical network"
 label = "Doximity"
 value = "Matt A. Porter"
 url = "https://www.doximity.com/profiles/e57f71e8-dddb-4782-b87b-86cc273aab30/view"
 
 [[identifiers]]
+kind = "Code"
 label = "GitHub"
 value = "qompassai · PhaedrusFlow"
 url = "https://github.com/qompassai"
 
 [[identifiers]]
+kind = "Code"
 label = "GitLab"
 value = "PhaedrusFlow"
 url = "https://gitlab.com/PhaedrusFlow"
 
 [[identifiers]]
+kind = "App developer account"
 label = "Google Play"
 value = "7351560589446098345"
 url = "https://play.google.com/store/apps/dev?id=7351560589446098345"
 
 [[identifiers]]
+kind = "Bug bounty"
 label = "HackerOne"
 value = "phaedrusflow"
 url = "https://hackerone.com/phaedrusflow"
 
 [[identifiers]]
+kind = "Models and datasets"
 label = "Hugging Face"
 value = "qompass"
 url = "https://huggingface.co/qompass"
 
 [[identifiers]]
+kind = "Scholarly profile"
 label = "Humanities Commons"
 value = "mpcoug"
 url = "https://hcommons.org/members/mpcoug/"
 
 [[identifiers]]
+kind = "Data science"
 label = "Kaggle"
 value = "docphaedrus"
 url = "https://www.kaggle.com/docphaedrus"
 
 [[identifiers]]
+kind = "Researcher profile"
 label = "Loop profile"
 value = "2230223"
 url = "https://loop.frontiersin.org/people/2230223/overview?referrer=orcid_profile"
 
 [[identifiers]]
+kind = "Lua packages"
+label = "LuaRocks"
+value = "phaedrusflow"
+url = "https://luarocks.org/modules/phaedrusflow"
+
+[[identifiers]]
+kind = "Training"
 label = "Microsoft Learn"
 value = "phaedrusflow"
 url = "https://learn.microsoft.com/en-us/users/phaedrusflow/"
 
 [[identifiers]]
+kind = "Research graph"
 label = "OpenAIRE"
 value = "Matt Porter"
 url = "https://explore.openaire.eu/search/publication?orcid=0000-0002-0302-4812"
 
 [[identifiers]]
+kind = "Author ID"
 label = "OpenAlex"
 value = "A5013877486"
 url = "https://openalex.org/A5013877486"
 
 [[identifiers]]
+kind = "Researcher ID"
 label = "ORCID"
 value = "0000-0002-0302-4812"
 url = "https://orcid.org/0000-0002-0302-4812"
 
 [[identifiers]]
+kind = "Researcher profile"
 label = "ResearchGate"
 value = "Matt-Porter-7"
 url = "https://www.researchgate.net/profile/Matt-Porter-7/research"
 
 [[identifiers]]
+kind = "Researcher ID"
 label = "ResearcherID (Web of Science)"
 value = "HNQ-0292-2023"
 url = "https://www.webofscience.com/wos/author/record/HNQ-0292-2023"
 
 [[identifiers]]
+kind = "Training"
 label = "Salesforce Trailhead"
 value = "qompassai"
 url = "https://www.salesforce.com/trailblazer/qompassai"
 
 [[identifiers]]
+kind = "Researcher profile"
 label = "SciProfiles"
 value = "2835041"
 url = "https://sciprofiles.com/profile/2835041"
 
 [[identifiers]]
+kind = "Author ID"
 label = "Scopus Author ID"
 value = "57385910700"
 url = "https://www.scopus.com/inward/authorDetails.url?authorID=57385910700&partnerID=MN8TOARS"
 
 [[identifiers]]
+kind = "State license"
 label = "Washington L&I"
 value = "PORTEM*744M3"
 url = "https://secure.lni.wa.gov/verify/Detail.aspx?UBI=&LIC=PORTEM*744M3&SAW="
 
 [[identifiers]]
+kind = "Video"
 label = "YouTube"
 value = "@QompassAI"
 url = "https://www.youtube.com/@QompassAI"
 
 [[identifiers]]
+kind = "Research archive"
 label = "Zenodo"
 value = "qompassai"
 url = "https://zenodo.org/communities/qompassai"

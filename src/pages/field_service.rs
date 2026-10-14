@@ -42,7 +42,7 @@ const NOTES: &[NoteEntry] = &[
     },
 ];
 
-/// The public L&I record for the license, the same link /contact uses.
+/// The public L&I record for the license, the same link the /about identity list uses.
 const LICENSE_URL: &str = "https://secure.lni.wa.gov/verify/Detail.aspx?UBI=&LIC=PORTEM*744M3&SAW=";
 
 #[component]
@@ -123,7 +123,7 @@ pub fn FieldService() -> impl IntoView {
                         "and working through continuing education toward my next license renewal. "
                         "When I learn something worth passing on, it lands here. When a note is "
                         "wrong, it gets corrected here, in the open; if you spot an error, "
-                        <a href="/contact">"tell me"</a>
+                        <a href="/about#identity">"tell me"</a>
                         "."
                     </p>
                 </section>
