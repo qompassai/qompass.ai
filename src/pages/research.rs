@@ -8,29 +8,25 @@ use leptos_meta::Title;
 // in one place. Only the Software list is refreshed in the browser from
 // the ORCID public API by /js/orcid.js.
 
-/// Publications in the ORCID snapshot that must not become cards of their
-/// own: the CORR letter and the Kyber Odyssey poster are carried by the
+/// ORCID-snapshot works that must not become cards of their own.
+///
+/// The CORR letter and the Kyber Odyssey poster are carried by the
 /// curated cards in the Publications block (matched here by DOI), and
 /// "First, Do No Harm" is research in progress, not a publication (Matt's
 /// ruling, 2026-10-13) — it appears on this page only as a tracker entry.
 const CARD_EXCLUDED_DOIS: &[&str] = &["10.1097/corr.0000000000003001", "10.48448/kwd5-1j32"];
-const CARD_EXCLUDED_TITLES: &[&str] =
-    &["First, Do No Harm: On Making AI Safe, Secure and Trustworthy"];
+const CARD_EXCLUDED_TITLES: &[&str] = &["First, Do No Harm: On Making AI Safe, Secure and Trustworthy"];
 
 /// Whether an ORCID-snapshot work becomes a publication card.
 fn card_included(work: &crate::orcid_data::Work) -> bool {
-    work.kind != "software"
-        && !CARD_EXCLUDED_DOIS.contains(&work.doi)
-        && !CARD_EXCLUDED_TITLES.contains(&work.title)
+    work.kind != "software" && !CARD_EXCLUDED_DOIS.contains(&work.doi) && !CARD_EXCLUDED_TITLES.contains(&work.title)
 }
 
 /// The format a work's record states, if any: its ORCID work type, refined
 /// to "Case report" where the title itself says so. A work the record
 /// carries as "other" states no format and yields None.
 fn format_label(work: &crate::orcid_data::Work) -> Option<String> {
-    if work.title.to_lowercase().contains("case report")
-        && (work.kind == "journal-article" || work.kind == "other")
-    {
+    if work.title.to_lowercase().contains("case report") && (work.kind == "journal-article" || work.kind == "other") {
         return Some("Case report".to_string());
     }
     match work.kind {
@@ -42,10 +38,12 @@ fn format_label(work: &crate::orcid_data::Work) -> Option<String> {
     }
 }
 
-/// One-line provenance for a publication card: format and venue where the
-/// record states them, and the year. The snapshot's venue falls back to
-/// the work type when a work has no journal or venue, so a venue that
-/// merely repeats the type (or "other") states nothing and is dropped.
+/// One-line provenance for a publication card.
+///
+/// Format and venue where the record states them, and the year. The
+/// snapshot's venue falls back to the work type when a work has no
+/// journal or venue, so a venue that merely repeats the type (or
+/// "other") states nothing and is dropped.
 fn provenance_line(work: &crate::orcid_data::Work) -> String {
     let mut parts: Vec<String> = Vec::new();
     if let Some(label) = format_label(work) {
