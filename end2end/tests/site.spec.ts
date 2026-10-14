@@ -42,15 +42,16 @@ test('home page loads with zero page errors and zero console errors', async ({ p
 test('solutions index links exactly the ready study pages', async ({ page }) => {
   await page.goto('/solutions');
   const links = page.locator('.study-link a');
-  await expect(links).toHaveCount(1);
+  await expect(links).toHaveCount(2);
   await expect(links.first()).toHaveAttribute('href', '/solutions/phlow');
-  // Download boxes: four platforms per project, and until a real
-  // binary URL is recorded in content/downloads.toml every box is a
-  // disabled "Coming soon" span — never a link.
+  await expect(links.nth(1)).toHaveAttribute('href', '/light-show');
+  // Download boxes: four platforms per project. Projects with a real
+  // binary URL recorded in content/downloads.toml render as links;
+  // the rest stay disabled "Coming soon" spans.
   await expect(page.locator('.download-box')).toHaveCount(32);
-  await expect(page.locator('a.download-box')).toHaveCount(0);
-  await expect(page.locator('.download-box.is-soon')).toHaveCount(32);
-  await expect(page.locator('.download-state', { hasText: 'Coming soon' })).toHaveCount(32);
+  await expect(page.locator('a.download-box')).toHaveCount(12);
+  await expect(page.locator('.download-box.is-soon')).toHaveCount(20);
+  await expect(page.locator('.download-state', { hasText: 'Coming soon' })).toHaveCount(20);
 });
 
 test('phlow study page renders all five sections with KaTeX math', async ({ page }) => {
@@ -276,9 +277,9 @@ test('no CSP violations on any route, including interactions', async ({ page }) 
     await expect(page.locator('#qompass-hero')).toBeAttached();
   });
   await sweep('/research', async () => {
-    // The ORCID island refreshes from pub.orcid.org (connect-src).
+    // The ORCID software list refreshes from pub.orcid.org (connect-src).
     await page.waitForTimeout(2000);
-    await expect(page.locator('#orcid-works')).toBeAttached();
+    await expect(page.locator('#orcid-software')).toBeAttached();
   });
   await sweep('/solutions');
   await sweep('/solutions/phlow', async () => {
