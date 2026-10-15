@@ -1,3 +1,4 @@
+use crate::pages::flow::FlowArc;
 use leptos::prelude::*;
 use leptos_meta::Title;
 
@@ -272,6 +273,23 @@ pub fn Research() -> impl IntoView {
                     })
                     .collect_view()}
             </ul>
+            <h2 class="record-head">"The Long Arc"</h2>
+            <p class="record-blurb">
+                "Research is promoted learning. Questions and results rise from "
+                <a href="/field-notes">"Field Notes"</a>
+                " — work done under "
+                <a href="/standards">"Standards"</a>
+                " and weighed in "
+                <a href="/analysis">"Analysis"</a>
+                " — and mature here into publications and programs. What Research "
+                "establishes does not stay here: it returns to Standards and revises them, "
+                "and sends new questions back to the field."
+            </p>
+            <FlowArc compact=true />
+            <nav class="fn-flow-nav" aria-label="Site flow">
+                <a href="/field-notes">"← Field Notes — the learning"</a>
+                <a href="/standards">"Standards — revised by what lands here →"</a>
+            </nav>
         </section>
         <script type="module" src="/js/orcid.js"></script>
     }

@@ -86,7 +86,7 @@ test('phlow study page renders all five sections with KaTeX math', async ({ page
   expect(errors).toEqual([]);
 });
 
-test('on-ai page renders all three tracks and the filters work', async ({ page }) => {
+test('analysis page renders all three tracks and the filters work', async ({ page }) => {
   const errors: string[] = [];
   page.on('pageerror', (error) => errors.push(`pageerror: ${error.message}`));
   page.on('console', (message) => {
@@ -94,8 +94,8 @@ test('on-ai page renders all three tracks and the filters work', async ({ page }
       errors.push(`console: ${message.text()}`);
     }
   });
-  await page.goto('/on-ai');
-  await expect(page.getByRole('heading', { name: 'On AI' })).toBeVisible();
+  await page.goto('/analysis');
+  await expect(page.getByRole('heading', { name: 'Analysis' })).toBeVisible();
   // All three tracks present in the server-rendered timeline.
   await expect(page.locator('.tl-entry[data-track="protocols"]').first()).toBeVisible();
   await expect(page.locator('.tl-entry[data-track="models"]').first()).toBeVisible();
@@ -128,7 +128,7 @@ test('on-ai page renders all three tracks and the filters work', async ({ page }
   expect(errors).toEqual([]);
 });
 
-test('on-ai diagrams stay legible at phone width', async ({ page }) => {
+test('analysis diagrams stay legible at phone width', async ({ page }) => {
   const errors: string[] = [];
   page.on('pageerror', (error) => errors.push(`pageerror: ${error.message}`));
   page.on('console', (message) => {
@@ -137,7 +137,7 @@ test('on-ai diagrams stay legible at phone width', async ({ page }) => {
     }
   });
   await page.setViewportSize({ width: 390, height: 844 });
-  await page.goto('/on-ai');
+  await page.goto('/analysis');
   // Narrow variants swap in: still exactly four visible diagram SVGs.
   await expect(page.locator('figure.fig svg:visible')).toHaveCount(4);
   const overflow = await page.evaluate(
@@ -148,7 +148,7 @@ test('on-ai diagrams stay legible at phone width', async ({ page }) => {
   // width over viewBox width must stay at reading size on the phone.
   const minEffective = await page.evaluate(() => {
     let min = Number.POSITIVE_INFINITY;
-    document.querySelectorAll<SVGSVGElement>('figure.fig svg').forEach((svg) => {
+    document.querySelectorAll<SVGSVGElement>('figure.fig svg, figure.flow-fig svg').forEach((svg) => {
       const rendered = svg.getBoundingClientRect().width;
       if (rendered === 0) return;
       const scale = rendered / svg.viewBox.baseVal.width;
@@ -196,7 +196,7 @@ const ALL_ROUTES = [
   '/research',
   '/solutions',
   '/solutions/phlow',
-  '/on-ai',
+  '/analysis',
   '/standards',
   '/standards/rust',
   '/standards/lua',
@@ -289,7 +289,7 @@ test('no CSP violations on any route, including interactions', async ({ page }) 
     await slider.fill('0');
     await page.locator('[data-ix="noise"]').check();
   });
-  await sweep('/on-ai', async () => {
+  await sweep('/analysis', async () => {
     await page.locator('.tl-filter[data-filter="law"]').click();
     await page.locator('.tl-filter[data-filter="all"]').click();
   });
@@ -389,4 +389,107 @@ test('privacy page is linked from the footer and states the policy', async ({ pa
   await expect(page.locator('.prose')).toContainText('ai.qompass.lightshow');
   await expect(page.locator('.prose a[href="mailto:map@qompass.ai"]')).toHaveCount(1);
   expect(errors).toEqual([]);
+});
+
+// The flow: Standards (set) -> Analysis (weigh) -> Field Notes (learn),
+// promoted into Research, which returns to revise the Standards.
+const FLOW = [
+  { route: '/standards', step: 'Step One — Set', prev: '/research', next: '/analysis' },
+  { route: '/analysis', step: 'Step Two — Weigh', prev: '/standards', next: '/field-notes' },
+  { route: '/field-notes', step: 'Step Three — Learn', prev: '/analysis', next: '/research' },
+  { route: '/research', step: null, prev: '/field-notes', next: '/standards' },
+];
+
+test('the nav carries the flow consecutively: Standards, Analysis, Field Notes', async ({ page }) => {
+  await page.goto('/');
+  const hrefs = await page
+    .locator('.site-nav a')
+    .evaluateAll((links) => links.map((a) => a.getAttribute('href')));
+  const at = hrefs.indexOf('/standards');
+  expect(at, hrefs.join(' ')).toBeGreaterThanOrEqual(0);
+  expect(hrefs.slice(at, at + 3)).toEqual(['/standards', '/analysis', '/field-notes']);
+  await expect(page.locator('.site-nav a[href="/analysis"]')).toHaveText('Analysis');
+  await expect(page.locator('.site-nav a[href="/on-ai"]')).toHaveCount(0);
+});
+
+test('every flow page carries its step line and its prev/next links', async ({ page }) => {
+  for (const { route, step, prev, next } of FLOW) {
+    await page.goto(route);
+    if (step) await expect(page.locator('.page-bearing').first(), route).toHaveText(step);
+    const links = page.locator('.fn-flow-nav a');
+    await expect(links, route).toHaveCount(2);
+    await expect(links.first(), route).toHaveAttribute('href', prev);
+    await expect(links.nth(1), route).toHaveAttribute('href', next);
+  }
+  // The diagram is framing: one on Analysis, one compact on Research,
+  // and Analysis keeps exactly its four content figures.
+  await page.goto('/analysis');
+  await expect(page.locator('figure.flow-fig')).toHaveCount(1);
+  await expect(page.locator('figure.fig')).toHaveCount(4);
+  await page.goto('/research');
+  await expect(page.locator('figure.flow-fig.flow-fig-compact')).toHaveCount(1);
+});
+
+test('every flow link resolves to a live page', async ({ page, request }) => {
+  const flowLinks = ['/standards', '/analysis', '/field-notes', '/research']
+    .map((href) => `.page a[href="${href}"]`)
+    .join(', ');
+  const seen = new Set<string>();
+  for (const { route } of FLOW) {
+    await page.goto(route);
+    const hrefs = await page
+      .locator(flowLinks)
+      .evaluateAll((links) => links.map((a) => a.getAttribute('href') ?? ''));
+    hrefs.forEach((h) => seen.add(h));
+  }
+  expect([...seen].sort()).toEqual(['/analysis', '/field-notes', '/research', '/standards']);
+  for (const href of seen) {
+    const res = await request.get(href);
+    expect(res.status(), href).toBe(200);
+  }
+});
+
+test('/on-ai is a noindex meta-refresh onto /analysis, and nothing says On AI', async ({ page, request }) => {
+  const res = await request.get('/on-ai');
+  expect(res.status()).toBe(200);
+  const body = await res.text();
+  expect(body).toContain('<meta http-equiv="refresh" content="0; url=/analysis" />');
+  expect(body).toContain('<link rel="canonical" href="https://qompass.ai/analysis" />');
+  expect(body).toContain('<meta name="robots" content="noindex" />');
+  expect(body).not.toContain('On AI');
+  await page.goto('/on-ai');
+  await expect(page).toHaveURL(/\/analysis\/?$/);
+  await expect(page.getByRole('heading', { name: 'Analysis', exact: true })).toBeVisible();
+  for (const route of ['/', '/analysis', '/standards', '/field-notes', '/research']) {
+    await page.goto(route);
+    expect(await page.title(), route).not.toContain('On AI');
+    expect(await page.locator('body').innerText(), route).not.toContain('On AI');
+  }
+});
+
+test('the flow pulse honors reduced motion; the static diagram stands alone', async ({ browser }) => {
+  for (const reducedMotion of ['reduce', 'no-preference'] as const) {
+    const context = await browser.newContext({ reducedMotion });
+    const page = await context.newPage();
+    await page.goto('/analysis');
+    const fig = page.locator('figure.flow-fig');
+    // The static parts carry the whole meaning: three nodes, the
+    // Research peak, two arc legs, two base arrows.
+    await expect(fig.locator('.fl-node')).toHaveCount(3);
+    await expect(fig.locator('.fl-peak')).toHaveCount(1);
+    await expect(fig.locator('.fl-arc')).toHaveCount(2);
+    await expect(fig.locator('.fl-base')).toHaveCount(2);
+    const pulses = await fig
+      .locator('.fl-pulse')
+      .evaluateAll((els) => els.map((el) => [getComputedStyle(el).animationName, getComputedStyle(el).opacity]));
+    if (reducedMotion === 'reduce') {
+      expect(pulses).toEqual([
+        ['none', '0'],
+        ['none', '0'],
+      ]);
+    } else {
+      expect(pulses.map(([name]) => name)).toEqual(['fl-base', 'fl-arc']);
+    }
+    await context.close();
+  }
 });

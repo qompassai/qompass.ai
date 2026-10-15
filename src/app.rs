@@ -65,8 +65,8 @@ fn Header() -> impl IntoView {
                 <nav class="site-nav" aria-label="Primary">
                     <A href="/research">"Research"</A>
                     <A href="/solutions">"Solutions"</A>
-                    <A href="/on-ai">"On AI"</A>
                     <A href="/standards">"Standards"</A>
+                    <A href="/analysis">"Analysis"</A>
                     <A href="/field-notes">"Field Notes"</A>
                     <A href="/about">"About"</A>
                 </nav>
@@ -197,7 +197,7 @@ pub fn App() -> impl IntoView {
                     <Route path=path!("/field-notes") view=FieldNotes />
                     <Route path=path!("/field-notes/trainer") view=FiberTrainer />
                     <Route path=path!("/field-notes/notes/:slug") view=FieldNoteDispatch />
-                    <Route path=path!("/on-ai") view=OnAi />
+                    <Route path=path!("/analysis") view=OnAi />
                     <Route path=path!("/standards") view=TigerStyle />
                     <Route path=path!("/standards/:slug") view=TigerStyleDispatch />
                     <Route path=path!("/solutions/:slug") view=ProjectDispatch />

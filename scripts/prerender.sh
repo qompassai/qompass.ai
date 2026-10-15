@@ -7,7 +7,7 @@ cd "$(dirname "$0")/.."
 BIN="target/release/qompass-ai"
 SITE="target/site"
 DIST="dist"
-ROUTES=("/" "/research" "/solutions" "/on-ai" "/standards" "/about" "/privacy" "/legal" "/ontrack/privacy" "/light-show" "/light-show/testers" "/field-notes" "/field-notes/trainer")
+ROUTES=("/" "/research" "/solutions" "/analysis" "/standards" "/about" "/privacy" "/legal" "/ontrack/privacy" "/light-show" "/light-show/testers" "/field-notes" "/field-notes/trainer")
 
 # Tiger Style full references: one quiet page per imported reference,
 # linked only from its chapter on /standards.
@@ -134,6 +134,10 @@ write_redirect "/field-service/trainer" "/field-notes/trainer" "Field Notes - Qo
 for route in "${NOTE_ROUTES[@]}"; do
     write_redirect "/field-service${route#/field-notes}" "$route" "Field Notes - Qompass AI" "Field Notes"
 done
+
+# And for On AI, renamed Analysis on 2026-10-13 as the middle step of
+# the flow (Standards -> Analysis -> Field Notes).
+write_redirect "/on-ai" "/analysis" "Analysis - Qompass AI" "Analysis"
 
 # The web server reads dist/ as an unprivileged user, so every deployed
 # file must be world-readable and every directory world-traversable.

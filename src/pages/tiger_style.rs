@@ -200,12 +200,22 @@ pub fn TigerStyle() -> impl IntoView {
     view! {
         <Title text="Standards - Qompass AI" />
         <section class="page tiger-page">
-            <p class="page-bearing">"STANDING ORDERS"</p>
+            <p class="page-bearing">"Step One — Set"</p>
             <h1>"Standards"</h1>
             <p class="ts-subhead">"The orders the work is done under."</p>
             <p class="page-lede">
                 "Tiger Style is Qompass AI's standing orders for code. Safety first, "
                 "everything bounded, nothing hidden — in every language we ship."
+            </p>
+            <p>
+                "These standards come first. They are the terms under which work is "
+                "judged: how claims are weighed in "
+                <a href="/analysis">"Analysis"</a>
+                ", what counts as a result worth recording in "
+                <a href="/field-notes">"Field Notes"</a>
+                ", and what may stand. When promoted "
+                <a href="/research">"Research"</a>
+                " lands, it returns here — and these standards are revised."
             </p>
 
             <h2 class="band-label">"RESPECT WHERE DUE"</h2>
@@ -418,6 +428,10 @@ pub fn TigerStyle() -> impl IntoView {
                 " was built under them — that is what the phrase means when it "
                 "appears in a repository: the work was done under these orders."
             </p>
+            <nav class="fn-flow-nav" aria-label="Site flow">
+                <a href="/research">"← Research — the long arc"</a>
+                <a href="/analysis">"Analysis — the standards put to work →"</a>
+            </nav>
         </section>
     }
 }

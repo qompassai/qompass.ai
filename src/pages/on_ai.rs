@@ -7,6 +7,7 @@
 //! sources: official journals, the Federal Register, EUR-Lex, company
 //! announcements). The timeline is fully server-rendered; the filter
 //! buttons in `/js/on-ai.js` are an enhancement only.
+use crate::pages::flow::FlowArc;
 use leptos::prelude::*;
 use leptos_meta::Title;
 
@@ -1057,15 +1058,25 @@ pub fn OnAi() -> impl IntoView {
         ys
     };
     view! {
-        <Title text="On AI - Qompass AI" />
+        <Title text="Analysis - Qompass AI" />
         <section class="page on-ai-page">
-            <p class="page-bearing">"ON AI"</p>
-            <h1>"On AI"</h1>
+            <p class="page-bearing">"Step Two — Weigh"</p>
+            <h1>"Analysis"</h1>
             <p class="page-lede">
                 "A compressed timeline from ChatGPT to Agent2Agent — the models that "
                 "changed what software can do, the protocols that let agents work "
                 "together, and the laws racing to catch up. Three tracks, one page, "
                 "no hype: what happened, when, and where it is going."
+            </p>
+            <p class="on-ai-note">
+                "Analysis does not begin from nothing. It begins under "
+                <a href="/standards">"Standards"</a>
+                ": those terms decide how evidence is weighed and what a claim must "
+                "survive. What survives becomes concrete results and recorded learning in "
+                <a href="/field-notes">"Field Notes"</a>
+                "; the strongest of that learning is promoted into "
+                <a href="/research">"Research"</a>
+                "."
             </p>
 
             <EraDiagram />
@@ -1153,6 +1164,13 @@ pub fn OnAi() -> impl IntoView {
                 "Entries marked [secondary] rest on corroborating coverage rather "
                 "than a primary page; [disputed] marks a date sources disagreed on."
             </p>
+
+            <h2 class="band-label">"THE FLOW"</h2>
+            <FlowArc />
+            <nav class="fn-flow-nav" aria-label="Site flow">
+                <a href="/standards">"← Standards — the terms"</a>
+                <a href="/field-notes">"Field Notes — the results and learning →"</a>
+            </nav>
             <script src="/js/on-ai.js"></script>
         </section>
     }

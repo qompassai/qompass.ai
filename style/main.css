@@ -1691,6 +1691,62 @@ a.download-box .download-state {
 .fig .seg-g { fill: color-mix(in srgb, var(--cherenkov) 35%, transparent); }
 .fig .mk-arr { fill: var(--cherenkov); }
 .fig .mk-fog { fill: var(--fog); }
+/* — The flow: the long arc over the loop (src/pages/flow.rs). Its own
+   class, not .fig, so it never counts as a page's content figure. The
+   static drawing is complete; the pulse only runs when motion is
+   welcome. One viewBox for every width: 12px labels stay above 11px
+   rendered at a 390px phone. */
+.flow-fig { margin: 1.4rem auto 0.5rem; max-width: 30rem; }
+.flow-fig-compact { max-width: 22rem; }
+.flow-fig svg { display: block; height: auto; width: 100%; }
+.flow-fig figcaption {
+  color: var(--fog);
+  font-size: 0.92rem;
+  line-height: 1.55;
+  margin-top: 0.75rem;
+}
+.flow-fig text { fill: var(--starlight); font-family: var(--font-body); }
+.flow-fig .fl-name { font-family: var(--font-display); font-weight: 600; text-anchor: middle; }
+.flow-fig .fl-step { fill: var(--fog); font-family: var(--font-mono); letter-spacing: 0.08em; text-anchor: middle; }
+.flow-fig .fl-arc-step { fill: var(--brass); }
+.flow-fig .fl-note { fill: var(--fog); font-style: italic; }
+.flow-fig .fl-end { text-anchor: end; }
+.flow-fig .fl-node { fill: var(--chart); stroke: var(--cherenkov); stroke-width: 2; }
+.flow-fig .fl-peak { fill: var(--chart); stroke: var(--brass); stroke-width: 2; }
+.flow-fig .fl-base { fill: none; stroke: var(--cherenkov); stroke-width: 2; }
+.flow-fig .fl-arc {
+  fill: none;
+  stroke: var(--brass);
+  stroke-dasharray: 1 5;
+  stroke-linecap: round;
+  stroke-width: 2.2;
+}
+.flow-fig .fl-mk-base { fill: var(--cherenkov); }
+.flow-fig .fl-mk-arc { fill: var(--brass); }
+.flow-fig .fl-pulse {
+  fill: none;
+  opacity: 0;
+  stroke-dasharray: 6 100;
+  stroke-dashoffset: 6;
+  stroke-linecap: round;
+  stroke-width: 4;
+}
+.flow-fig .fl-pulse-base { stroke: var(--cherenkov-soft); }
+.flow-fig .fl-pulse-arc { stroke: var(--brass); }
+@media (prefers-reduced-motion: no-preference) {
+  .flow-fig .fl-pulse-base { animation: fl-base 9s linear infinite; }
+  .flow-fig .fl-pulse-arc { animation: fl-arc 9s linear infinite; }
+  @keyframes fl-base {
+    0% { opacity: 0; stroke-dashoffset: 6; }
+    4%, 38% { opacity: 0.9; }
+    42%, 100% { opacity: 0; stroke-dashoffset: -100; }
+  }
+  @keyframes fl-arc {
+    0%, 46% { opacity: 0; stroke-dashoffset: 6; }
+    50%, 88% { opacity: 0.9; }
+    92%, 100% { opacity: 0; stroke-dashoffset: -100; }
+  }
+}
 .tl-filters {
   display: flex;
   flex-wrap: wrap;
