@@ -9,6 +9,7 @@ pub mod home;
 pub mod identity;
 pub mod legal;
 pub mod light_show;
+pub mod light_show_howto;
 pub mod on_ai;
 pub mod ontrack_privacy;
 pub mod privacy;

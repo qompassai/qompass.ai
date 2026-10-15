@@ -20,6 +20,8 @@
 use leptos::prelude::*;
 use leptos_meta::Title;
 
+use crate::pages::light_show_howto::LightShowHowTo;
+
 /// The app's Google Play listing address.
 ///
 /// Prepared for the day the production listing opens. While the game
@@ -308,6 +310,7 @@ pub fn LightShow() -> impl IntoView {
                         <a href="/light-show/testers">"Become a tester →"</a>
                     </p>
                 </section>
+                <LightShowHowTo />
             </article>
         </section>
     }

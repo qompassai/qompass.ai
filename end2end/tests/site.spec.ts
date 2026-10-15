@@ -493,3 +493,159 @@ test('the flow pulse honors reduced motion; the static diagram stands alone', as
     await context.close();
   }
 });
+
+const HOWTO_TITLES = [
+  'Design the learning before the game',
+  'Build it on your desk first',
+  'Shape it for Android',
+  'Sign it, and guard the key',
+  'Open the Play Console and claim the package name',
+  'Write the store listing',
+  'Clear the policy gauntlet',
+  'Run the testing tracks',
+  'Ship beyond Play',
+  'Ship, listen, and iterate',
+];
+
+test('light-show how-to: all ten steps read in order with JavaScript off', async ({ browser }) => {
+  const context = await browser.newContext({ javaScriptEnabled: false });
+  const page = await context.newPage();
+  await page.goto('/light-show');
+  const howto = page.locator('#how-to');
+  await expect(howto.getByRole('heading', { name: 'How to build an educational game for Android' })).toBeVisible();
+  await expect(howto.locator('.howto-title')).toHaveText(HOWTO_TITLES);
+  // Every panel open: practice, worked example, and checklist visible.
+  const panels = howto.locator('.howto-panel');
+  await expect(panels).toHaveCount(10);
+  for (let i = 0; i < 10; i++) {
+    await expect(panels.nth(i)).toBeVisible();
+    await expect(panels.nth(i).locator('.howto-example')).toBeVisible();
+    await expect(panels.nth(i).locator('.howto-checks')).toBeVisible();
+  }
+  // The enhancement-only controls stay out of the way.
+  await expect(howto.locator('.howto-tally')).toBeHidden();
+  await expect(howto.locator('.howto-nav').first()).toBeHidden();
+  // The how-to sits below the tester call to action, which is untouched.
+  const order = await page.evaluate(() => {
+    const cta = document.querySelector('a[href="/light-show/testers"]');
+    const section = document.getElementById('how-to');
+    return cta && section ? cta.compareDocumentPosition(section) & Node.DOCUMENT_POSITION_FOLLOWING : 0;
+  });
+  expect(order).toBeTruthy();
+  await context.close();
+});
+
+test('light-show how-to: accordion, prev/next, and the tally work once hydrated', async ({ page }) => {
+  const errors: string[] = [];
+  page.on('pageerror', (error) => errors.push(`pageerror: ${error.message}`));
+  page.on('console', (message) => {
+    if (message.type() === 'error') errors.push(`console: ${message.text()}`);
+  });
+  await page.goto('/light-show');
+  const howto = page.locator('#how-to.is-enhanced');
+  await expect(howto).toBeAttached();
+  const panels = howto.locator('.howto-panel');
+  const toggles = howto.locator('.howto-toggle');
+  const tally = howto.locator('.howto-tally');
+  await expect(panels.nth(0)).toBeVisible();
+  for (let i = 1; i < 10; i++) await expect(panels.nth(i)).toBeHidden();
+  await expect(toggles.nth(0)).toHaveAttribute('aria-expanded', 'true');
+  await expect(tally).toHaveText('0 of 10 steps complete');
+
+  // Tick every box of step 1: the step completes and the tally moves.
+  const boxes = panels.nth(0).locator('input[type="checkbox"]');
+  const count = await boxes.count();
+  for (let i = 0; i < count; i++) await boxes.nth(i).check();
+  await expect(tally).toHaveText('1 of 10 steps complete');
+  await expect(howto.locator('.howto-step').nth(0)).toHaveClass(/is-done/);
+
+  // Next moves to step 2 and puts focus on its header.
+  await panels.nth(0).getByRole('button', { name: 'Next step →' }).click();
+  await expect(panels.nth(1)).toBeVisible();
+  await expect(panels.nth(0)).toBeHidden();
+  await expect(toggles.nth(1)).toBeFocused();
+  await expect(toggles.nth(1)).toHaveAttribute('aria-expanded', 'true');
+  await expect(toggles.nth(0)).toHaveAttribute('aria-expanded', 'false');
+
+  // Keyboard: Enter on the step-10 header opens it alone.
+  await toggles.nth(9).focus();
+  await page.keyboard.press('Enter');
+  await expect(panels.nth(9)).toBeVisible();
+  await expect(panels.nth(1)).toBeHidden();
+  await expect(panels.nth(9).getByRole('button', { name: 'Next step →' })).toHaveCount(0);
+  await panels.nth(9).getByRole('button', { name: '← Previous step' }).click();
+  await expect(panels.nth(8)).toBeVisible();
+  expect(errors).toEqual([]);
+});
+
+// — adversarial —
+
+test('light-show how-to: unticking undoes a step; partial ticks never count', async ({ page }) => {
+  await page.goto('/light-show');
+  const howto = page.locator('#how-to.is-enhanced');
+  await expect(howto).toBeAttached();
+  const tally = howto.locator('.howto-tally');
+  const first = howto.locator('.howto-panel').nth(0).locator('input[type="checkbox"]');
+  const count = await first.count();
+  for (let i = 0; i < count; i++) await first.nth(i).check();
+  await expect(tally).toHaveText('1 of 10 steps complete');
+  await first.nth(0).uncheck();
+  await expect(tally).toHaveText('0 of 10 steps complete');
+  // One box in each of steps 2 and 3: still nothing complete.
+  for (const step of [1, 2]) {
+    await howto.locator('.howto-toggle').nth(step).click();
+    await howto.locator('.howto-panel').nth(step).locator('input[type="checkbox"]').first().check();
+  }
+  await expect(tally).toHaveText('0 of 10 steps complete');
+  // Closing the open step leaves every panel closed, and ticks survive.
+  await howto.locator('.howto-toggle').nth(2).click();
+  await expect(howto.locator('.howto-panel:visible')).toHaveCount(0);
+  await howto.locator('.howto-toggle').nth(1).click();
+  await expect(howto.locator('.howto-panel').nth(1).locator('input[type="checkbox"]').first()).toBeChecked();
+});
+
+test('light-show how-to: ticking transmits and stores nothing', async ({ page }) => {
+  await page.goto('/light-show');
+  const howto = page.locator('#how-to.is-enhanced');
+  await expect(howto).toBeAttached();
+  await page.waitForLoadState('networkidle');
+  const requests: string[] = [];
+  page.on('request', (request) => requests.push(request.url()));
+  const boxes = howto.locator('.howto-panel').nth(0).locator('input[type="checkbox"]');
+  const count = await boxes.count();
+  for (let i = 0; i < count; i++) await boxes.nth(i).check();
+  await howto.getByRole('button', { name: 'Next step →' }).first().click();
+  await expect(howto.locator('.howto-tally')).toHaveText('1 of 10 steps complete');
+  await page.waitForTimeout(500);
+  expect(requests).toEqual([]);
+  const stored = await page.evaluate(() => [localStorage.length, sessionStorage.length, document.cookie]);
+  expect(stored).toEqual([0, 0, '']);
+  // A reload starts the walk over: nothing persisted.
+  await page.reload();
+  await expect(page.locator('#how-to.is-enhanced .howto-tally')).toHaveText('0 of 10 steps complete');
+});
+
+test('light-show how-to: fits a 390px phone with nothing past the edge', async ({ page }) => {
+  await page.setViewportSize({ width: 390, height: 844 });
+  await page.goto('/light-show');
+  const howto = page.locator('#how-to.is-enhanced');
+  await expect(howto).toBeAttached();
+  // Open every step in turn; no element or text run in the how-to may
+  // reach past the viewport (scrollWidth catches unbroken text too).
+  for (let i = 0; i < 10; i++) {
+    await howto.locator('.howto-toggle').nth(i).click();
+    const offenders = await page.evaluate(() => {
+      const width = document.documentElement.clientWidth;
+      return Array.from(document.querySelectorAll('#how-to *'))
+        .filter((el) => {
+          const rect = el.getBoundingClientRect();
+          return rect.width > 0 && (rect.right > width + 0.5 || rect.left < -0.5 || (el.clientWidth > 0 && el.scrollWidth > el.clientWidth + 1));
+        })
+        .map((el) => `${el.tagName.toLowerCase()}.${el.className}`);
+    });
+    expect(offenders, `step ${i + 1}`).toEqual([]);
+  }
+  // Move buttons stay thumb-sized.
+  const prev = await howto.locator('.howto-panel').nth(9).getByRole('button', { name: '← Previous step' }).boundingBox();
+  expect(prev?.height ?? 0).toBeGreaterThanOrEqual(44);
+});
