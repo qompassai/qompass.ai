@@ -1,20 +1,32 @@
-//! Telco-admin practice quizzes on `/field-notes`: Matt's twelve study
-//! sets for the Washington Telecommunications (09) administrator exam
-//! — NEC, RCW 19.28, WAC 296-46B, and general theory — ported whole.
+//! Telco-admin practice quizzes at `/solutions/telco-admin-quizzes`.
+//!
+//! An Education solution with its own page (until 2026-10-15 they sat
+//! on `/field-notes`): Matt's twelve study sets for the Washington
+//! Telecommunications (09) administrator exam — NEC, RCW 19.28,
+//! WAC 296-46B, and general theory — ported whole.
 //!
 //! Questions, choices, answers, and explanations are the source text,
 //! byte for byte (see `content/field-notes/quizzes.toml`); nothing here
 //! rewords them. Where a set carries code sections, index lookup paths,
 //! or a note per answer choice, the feedback shows them too.
 //!
-//! Two renderings, both honest. The server renders every set as a
-//! static answer key — each question readable, its answer behind a
-//! disclosure — so the whole bank works without JavaScript. Once the
-//! page hydrates, the picker and the one-question-at-a-time runner
-//! appear: instant feedback, a running score, and a restart. The run
-//! logic is [`Run`], plain Rust, so its rules are unit-tested.
+//! Once the page hydrates, the picker and the one-question-at-a-time
+//! runner appear: instant feedback, a running score, and a restart. The
+//! run logic is [`Run`], plain Rust, so its rules are unit-tested.
+//!
+//! The answer keys are not in the page. Each set's key is an encrypted
+//! envelope at `/answer-keys/<slug>.json` (written by
+//! `scripts/generate-answer-keys.mjs`, one password per set) that
+//! `/js/answer-keys.js` opens in the browser. The server renders a
+//! panel per set; the panel's lock is `inner_html` because that script
+//! owns it, and hydration must not walk nodes a page script owns.
 use crate::field_notes_data::{question_count, Quiz, QuizQuestion, QUIZZES};
+use crate::pages::compass_services::{solution_page, CARDINALS};
 use leptos::prelude::*;
+use leptos_meta::Title;
+
+/// The page's slug under `/solutions/`.
+pub const SLUG: &str = "telco-admin-quizzes";
 
 const LETTERS: [&str; 4] = ["A", "B", "C", "D"];
 
@@ -210,44 +222,36 @@ fn stage_view(run: RunSignal, state: Option<&Run>) -> AnyView {
     )
 }
 
-/// The static answer key for one set: every question, its choices, and
-/// the answer behind a disclosure.
+/// The lock of one answer-key panel, owned by `/js/answer-keys.js`.
+///
+/// Without JavaScript only the note shows; the script unhides the form.
+/// `slug` is a build-checked set id (`[a-z0-9-]`, see the tests), so it
+/// needs no escaping in the attribute.
+fn lock_html(slug: &str) -> String {
+    format!(
+        concat!(
+            "<p class=\"ak-note\">This answer key is encrypted; it opens with this set's password.</p>",
+            "<form class=\"ak-form\" data-key-slug=\"{}\" hidden>",
+            "<input class=\"ak-input\" type=\"password\" aria-label=\"Password for this answer key\" ",
+            "autocomplete=\"off\" required>",
+            "<button type=\"submit\" class=\"ft-next\">Unlock</button>",
+            "</form>",
+            "<p class=\"ak-error\" role=\"alert\" hidden></p>",
+            "<div class=\"ak-body\"></div>",
+            "<button type=\"button\" class=\"ft-next ak-hide\" hidden>Hide</button>",
+        ),
+        slug
+    )
+}
+
+/// One set's answer-key panel: title, question count, and the lock.
 fn answer_key(quiz: &'static Quiz) -> impl IntoView {
     view! {
-        <details class="fn-quiz-key" id=format!("key-{}", quiz.slug)>
-            <summary>{format!("{} — {} questions, answer key", quiz.title, quiz.questions.len())}</summary>
-            {(!quiz.description.is_empty()).then(|| view! { <p class="fn-key-desc">{quiz.description}</p> })}
-            <ol class="fn-key-list">
-                {quiz
-                    .questions
-                    .iter()
-                    .map(|q| {
-                        view! {
-                            <li class="fn-key-q" value=q.number>
-                                <p class="fn-key-prompt">{q.prompt}</p>
-                                <ol class="fn-key-choices" type="A">
-                                    {q.choices.iter().map(|&c| view! { <li>{c}</li> }).collect_view()}
-                                </ol>
-                                <details class="fn-key-answer">
-                                    <summary>"Answer"</summary>
-                                    <p>
-                                        <strong>
-                                            {format!(
-                                                "{}. {}",
-                                                letter(q.answer),
-                                                q.choices.get(q.answer).copied().unwrap_or_default(),
-                                            )}
-                                        </strong>
-                                    </p>
-                                    {(!q.explanation.is_empty()).then(|| view! { <p>{q.explanation}</p> })}
-                                    {references(q)}
-                                </details>
-                            </li>
-                        }
-                    })
-                    .collect_view()}
-            </ol>
-        </details>
+        <div class="ak-panel" id=format!("key-{}", quiz.slug)>
+            <h3 class="ak-title">{quiz.title}</h3>
+            <p class="ak-count">{format!("{} questions", quiz.questions.len())}</p>
+            <div class="ak-lock" inner_html=lock_html(quiz.slug)></div>
+        </div>
     }
 }
 
@@ -256,9 +260,36 @@ pub fn TelcoQuizzes() -> impl IntoView {
     let run: RunSignal = RwSignal::new(None);
     let enhanced = RwSignal::new(false);
     Effect::new(move |_| enhanced.set(true));
+    let solution = solution_page(SLUG);
+    let name = solution.map_or("Telco-Admin Practice Quizzes", |s| s.name);
+    view! {
+        <Title text=format!("{name} - Qompass AI") />
+        <section class="page project-page">
+            <article class="project-article">
+                <header class="study-head">
+                    <p class="page-bearing">{solution.and_then(|s| CARDINALS.get(s.cardinal)).map(|c| c.mark)}</p>
+                    <h1>{name}</h1>
+                </header>
+                {quiz_section(run, enhanced)}
+                <section class="study-section fn-quizzes" id="answer-keys">
+                    <h2 class="band-label">"ANSWER KEYS"</h2>
+                    <p>
+                        "Each set's answer key is encrypted, with its own password. Unlocking happens "
+                        "in your browser; the password and the key are never stored or sent anywhere."
+                    </p>
+                    {QUIZZES.iter().map(answer_key).collect_view()}
+                </section>
+            </article>
+            <script src="/js/answer-keys.js" defer></script>
+        </section>
+    }
+}
+
+/// The intro, the picker, and the runner.
+fn quiz_section(run: RunSignal, enhanced: RwSignal<bool>) -> impl IntoView {
     view! {
         <section class="study-section fn-quizzes" id="quizzes">
-            <h2 class="band-label">"TELCO-ADMIN PRACTICE QUIZZES"</h2>
+            <h2 class="band-label">"PRACTICE SETS"</h2>
             <p>
                 {format!(
                     concat!(
@@ -272,8 +303,7 @@ pub fn TelcoQuizzes() -> impl IntoView {
                 )}
             </p>
             <p class="fn-noscript-note" hidden=move || enhanced.get()>
-                "The interactive quiz runs with JavaScript. Every question and its answer are in "
-                "the answer keys below either way."
+                "The interactive quiz and the answer keys run with JavaScript."
             </p>
             <div class="fn-quiz-live" hidden=move || !enhanced.get()>
                 <div class="fn-quiz-picker" role="group" aria-label="Choose a practice set">
@@ -302,15 +332,14 @@ pub fn TelcoQuizzes() -> impl IntoView {
                     {move || run.with(|r| stage_view(run, r.as_ref()))}
                 </div>
             </div>
-            <h3 class="study-subhead">"Answer keys"</h3>
-            {QUIZZES.iter().map(answer_key).collect_view()}
         </section>
     }
 }
 
 #[cfg(test)]
 mod tests {
-    use super::{Run, QUIZZES};
+    use super::{solution_page, Run, CARDINALS, QUIZZES, SLUG};
+    use crate::pages::compass_services::Solution;
 
     #[test]
     fn right_answer_scores_and_wrong_answer_is_remembered() {
@@ -355,6 +384,35 @@ mod tests {
             run.next();
             assert_eq!(run.index + 1, quiz.questions.len(), "next past the end must not move");
         }
+    }
+
+    #[test]
+    fn every_set_has_exactly_one_sealed_envelope_and_a_plain_slug() {
+        let dir = format!("{}/public/answer-keys", env!("CARGO_MANIFEST_DIR"));
+        let mut on_disk: Vec<String> = std::fs::read_dir(&dir)
+            .map(|d| d.flatten().filter_map(|e| e.file_name().into_string().ok()).collect())
+            .unwrap_or_default();
+        on_disk.sort();
+        let mut want: Vec<String> = QUIZZES.iter().map(|q| format!("{}.json", q.slug)).collect();
+        want.sort();
+        assert_eq!(on_disk, want);
+        for quiz in QUIZZES {
+            assert!(quiz.slug.bytes().all(|b| b.is_ascii_lowercase() || b.is_ascii_digit() || b == b'-'));
+            let body = std::fs::read_to_string(format!("{dir}/{}.json", quiz.slug)).unwrap_or_default();
+            assert!(body.starts_with(r#"{"v":1,"kdf":"PBKDF2-SHA256","iter":310000,"salt":""#), "{}", quiz.slug);
+            // Sealed, not plaintext: no explanation survives into the envelope.
+            for q in quiz.questions.iter().filter(|q| q.explanation.len() > 20) {
+                assert!(!body.contains(q.explanation), "{} {}", quiz.slug, q.number);
+            }
+        }
+    }
+
+    #[test]
+    fn the_page_is_an_education_solution_without_a_version() {
+        let page = solution_page(SLUG);
+        assert_eq!(page.map(|s| (s.name, s.cardinal, s.version)), Some(("Telco-Admin Practice Quizzes", 1, None)));
+        assert_eq!(page.and_then(|s| CARDINALS.get(s.cardinal)).map(|c| c.name), Some("Education"));
+        assert_eq!(page.and_then(Solution::version_href), None);
     }
 
     #[test]

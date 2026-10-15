@@ -2,7 +2,8 @@
 //!
 //! Renamed from `/field-service` on 2026-10-13; the notes live under
 //! `/field-notes/notes/<slug>`. The landing also carries the US fiber
-//! timeline, the glossary, and the telco-admin practice quizzes.
+//! timeline and the glossary; the telco-admin practice quizzes moved to
+//! `/solutions/telco-admin-quizzes` on 2026-10-15.
 //!
 //! Every figure in a note is a typical or standard-reference value and
 //! says so on the page; standards are named, never quoted. Nothing here
@@ -16,7 +17,6 @@
 use crate::pages::fiber_timeline::FiberTimeline;
 use crate::pages::fiber_trainer::{fiber_name, swatch_class, FIBERS};
 use crate::pages::field_glossary::FieldGlossary;
-use crate::pages::telco_quizzes::TelcoQuizzes;
 use leptos::prelude::*;
 use leptos_meta::Title;
 use leptos_router::hooks::use_params_map;
@@ -170,7 +170,6 @@ pub fn FieldNotes() -> impl IntoView {
                 </section>
                 <FiberTimeline />
                 <FieldGlossary />
-                <TelcoQuizzes />
                 <section class="study-section">
                     <p class="band-label">"LEARNING IN PUBLIC"</p>
                     <p>

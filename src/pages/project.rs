@@ -16,6 +16,7 @@
 //! JavaScript the raw LaTeX remains visible in a styled mono span —
 //! degraded, never broken.
 use crate::pages::compass_services::{solution_page, version_link, Solution, CARDINALS};
+use crate::pages::telco_quizzes::{self, TelcoQuizzes};
 use crate::project_data::{project_page, Benchmark};
 use leptos::prelude::*;
 use leptos_meta::Title;
@@ -255,7 +256,8 @@ fn ProjectGraphic(id: &'static str) -> impl IntoView {
     }
 }
 
-/// Route entry for `/solutions/:slug`. The slug is dispatched against
+/// Route entry for `/solutions/:slug`. The telco-admin practice quizzes
+/// have their own page; every other slug is dispatched against
 /// the compiled-in (ready-only) page list first: a match renders the
 /// study. Otherwise a solution on the compass renders its generated
 /// page, and anything else renders the same "Off chart" fallback as any
@@ -264,6 +266,9 @@ fn ProjectGraphic(id: &'static str) -> impl IntoView {
 pub fn ProjectDispatch() -> impl IntoView {
     let params = use_params_map();
     let slug = params.with(|map| map.get("slug")).unwrap_or_default();
+    if slug == telco_quizzes::SLUG {
+        return view! { <TelcoQuizzes /> }.into_any();
+    }
     if let Some(page) = project_page(&slug) {
         return view! { <ProjectStudy slug=page.slug /> }.into_any();
     }

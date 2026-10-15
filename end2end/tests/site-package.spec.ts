@@ -3,8 +3,9 @@ import { expect, test } from '@playwright/test';
 // The 2026-10-15 site package: one blended compass readout, solution
 // pages on this site, versions in place of status, the cardinal cards
 // on /solutions, and the qubit hero. The table below is an independent
-// oracle for the 43 solutions — written from the package order, not
-// read from src/pages/compass_services.rs.
+// oracle for the 44 solutions — written from the package order, not
+// read from src/pages/compass_services.rs. Two carry no version: the
+// archived rose.nvim, and the telco-admin quizzes, which live here.
 const GH = 'https://github.com/qompassai/';
 const LR = 'https://luarocks.org/modules/phaedrusflow/';
 const gh = (slug: string, name: string, repo: string) =>
@@ -32,6 +33,7 @@ const SOLUTIONS: { slug: string; name: string; version: string | null; versionHr
   gh('eigenstyle', 'eigenstyle', 'eigenstyle'),
   lr('blaze-nvim-luarocks', 'blaze.nvim (LuaRocks)', 'blaze.nvim', '1.0-1'),
   lr('diver-research', 'diver-research', 'diver-research'),
+  { slug: 'telco-admin-quizzes', name: 'Telco-Admin Practice Quizzes', version: null, versionHref: null },
   gh('azimuth', 'Azimuth', 'Azimuth'),
   gh('current', 'Current', 'current'),
   gh('dotfiles', 'Dotfiles', 'dotfiles'),
@@ -89,8 +91,8 @@ test('(a) the blend still moves: at NE the readout joins two cardinals, still on
   await ne.focus();
   await ne.press('Enter');
   await expect(readout.locator('.cs-r-bearing')).toHaveText(/^045°/);
-  // Security (8) then Education (11), one list, no percent anywhere.
-  await expect(readout.locator('a.cs-solution')).toHaveCount(19);
+  // Security (8) then Education (12), one list, no percent anywhere.
+  await expect(readout.locator('a.cs-solution')).toHaveCount(20);
   await expect(readout.locator('ul')).toHaveCount(1);
   expect(await readout.innerText()).not.toMatch(/\d\s*%/);
   const hrefs = await readout.locator('a.cs-solution').evaluateAll((as) => as.map((a) => a.getAttribute('href')));
@@ -99,10 +101,10 @@ test('(a) the blend still moves: at NE the readout joins two cardinals, still on
   for (const href of hrefs) expect(href).toMatch(/^\/solutions\/[a-z0-9-]+$/);
 });
 
-test('(b) all 43 solution links point to /solutions/<slug>', async ({ page }) => {
+test('(b) all 44 solution links point to /solutions/<slug>', async ({ page }) => {
   await page.goto('/solutions');
   const links = page.locator('.cs-directory a.cs-solution');
-  await expect(links).toHaveCount(43);
+  await expect(links).toHaveCount(44);
   const got = await links.evaluateAll((as) => as.map((a) => [a.getAttribute('href'), a.textContent?.trim()]));
   expect(got).toEqual(SOLUTIONS.map((s) => [`/solutions/${s.slug}`, s.name]));
   // No solution link escapes to GitHub or LuaRocks.
@@ -110,7 +112,7 @@ test('(b) all 43 solution links point to /solutions/<slug>', async ({ page }) =>
   expect(outward).toBe(0);
 });
 
-test('(b) versions on /solutions link to the release; rose.nvim carries none', async ({ page }) => {
+test('(b) versions on /solutions link to the release; rose.nvim and the quizzes carry none', async ({ page }) => {
   await page.goto('/solutions');
   for (const s of SOLUTIONS) {
     const item = page.locator('.cs-directory li', { has: page.locator(`a.cs-solution[href="/solutions/${s.slug}"]`) });
@@ -137,8 +139,11 @@ test('(b) every /solutions/<slug> returns 200 with its name and version', async 
     const version = page.locator('.study-meta a.cs-version');
     if (s.version === null) {
       await expect(version, s.slug).toHaveCount(0);
-      await expect(page.locator('.study-meta'), s.slug).not.toContainText('Version');
-      await expect(page.locator('.project-article'), s.slug).toContainText('now lives inside Diver');
+      // The whole article, not just .study-meta: the quizzes page has none.
+      await expect(page.locator('.project-article'), s.slug).not.toContainText('Version');
+      if (s.slug === 'rose-nvim') {
+        await expect(page.locator('.project-article'), s.slug).toContainText('now lives inside Diver');
+      }
     } else {
       await expect(version, s.slug).toHaveText(s.version);
       await expect(version, s.slug).toHaveAttribute('href', s.versionHref!);

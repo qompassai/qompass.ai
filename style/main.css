@@ -1856,14 +1856,57 @@ a.download-box .download-state {
   font-size: 0.82rem;
   margin: 0.4rem 0 0;
 }
-.fn-quiz-key summary,
-.fn-key-answer summary {
-  color: var(--cherenkov-soft);
-  cursor: pointer;
+/* Answer keys: encrypted per set, opened by /js/answer-keys.js. */
+.ak-panel {
+  border-top: 1px solid var(--chart-line);
+  margin-top: 1.2rem;
+  padding-top: 0.9rem;
+}
+.study-section .ak-title {
+  color: var(--starlight);
+  font-family: var(--font-display);
+  font-size: 1.1rem;
+  margin: 0;
+}
+.study-section .ak-count,
+.study-section .ak-note {
+  color: var(--fog);
+  font-family: var(--font-mono);
+  font-size: 0.82rem;
+  margin: 0.3rem 0 0;
+}
+.ak-form {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.55rem;
+  margin-top: 0.7rem;
+}
+.ak-input {
+  background: var(--chart);
+  border: 1px solid var(--chart-line);
+  border-radius: 4px;
+  color: var(--starlight);
+  flex: 1 1 14rem;
+  font-family: var(--font-mono);
+  font-size: 1rem;
+  min-height: 2.75rem;
+  padding: 0.5rem 0.75rem;
+}
+.ak-input:focus {
+  border-color: var(--brass-dim);
+}
+.study-section .ak-error {
+  color: #e0607a;
   font-family: var(--font-mono);
   font-size: 0.88rem;
-  min-height: 2.75rem;
-  padding: 0.6rem 0;
+  margin: 0.5rem 0 0;
+}
+.ak-correct {
+  color: var(--cherenkov-soft);
+}
+.study-section .ak-answer,
+.study-section .ak-expl {
+  margin: 0.4rem 0 0;
 }
 .fn-key-list {
   padding-left: 1.6rem;

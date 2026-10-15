@@ -66,7 +66,8 @@ const W: usize = 3;
 const GITHUB: &str = "https://github.com/qompassai/";
 
 /// One published solution under one cardinal. `slug` is its page,
-/// `/solutions/<slug>`; `href` is where it lives (GitHub or `LuaRocks`).
+/// `/solutions/<slug>`; `href` is where it lives (GitHub, `LuaRocks`, or
+/// that page itself for a solution that lives on this site).
 pub struct Solution {
     pub name: &'static str,
     pub slug: &'static str,
@@ -123,8 +124,9 @@ const ROCK: Option<&str> = Some("0.1.0-1");
 /// published additions — MCP servers and the phaedrusflow `LuaRocks`
 /// modules (crates.io: none published). rose.nvim has no version: the
 /// repository is archived (GitHub refuses it a release) and rose now
-/// lives inside Diver.
-pub const SOLUTIONS: [Solution; 43] = [
+/// lives inside Diver. The telco-admin practice quizzes live on this
+/// site — their `href` is their own page — and carry no version.
+pub const SOLUTIONS: [Solution; 44] = [
     sol("Qompass-Hold", "qompass-hold", "https://github.com/qompassai/qompass-hold", N, V1),
     sol("Qssl", "qssl", "https://github.com/qompassai/qssl", N, V1),
     sol("Radar", "radar", "https://github.com/qompassai/radar", N, V1),
@@ -150,6 +152,7 @@ pub const SOLUTIONS: [Solution; 43] = [
         Some("1.0-1"),
     ),
     sol("diver-research", "diver-research", "https://luarocks.org/modules/phaedrusflow/diver-research", E, ROCK),
+    sol("Telco-Admin Practice Quizzes", "telco-admin-quizzes", "/solutions/telco-admin-quizzes", E, None),
     sol("Azimuth", "azimuth", "https://github.com/qompassai/Azimuth", S, V1),
     sol("Current", "current", "https://github.com/qompassai/current", S, V1),
     sol("Dotfiles", "dotfiles", "https://github.com/qompassai/dotfiles", S, V1),
@@ -796,12 +799,13 @@ mod tests {
     #[test]
     fn the_completed_membership_counts_and_links_are_sound() {
         let counts: Vec<usize> = (0..4).map(|c| solutions_of(c).count()).collect();
-        assert_eq!(counts, vec![8, 11, 18, 6]);
+        assert_eq!(counts, vec![8, 12, 18, 6]);
         for (i, s) in SOLUTIONS.iter().enumerate() {
             assert!(s.cardinal < CARDINALS.len(), "{}", s.name);
             assert!(
                 s.href.starts_with("https://github.com/qompassai/")
-                    || s.href.starts_with("https://luarocks.org/modules/phaedrusflow/"),
+                    || s.href.starts_with("https://luarocks.org/modules/phaedrusflow/")
+                    || s.href == format!("/solutions/{}", s.slug),
                 "{}",
                 s.name
             );
@@ -859,7 +863,7 @@ mod tests {
     fn luarocks_solutions_carry_their_published_versions_never_1_00() {
         let rocks: Vec<(&str, Option<&str>, Option<String>)> = SOLUTIONS
             .iter()
-            .filter(|s| !s.href.starts_with(GITHUB))
+            .filter(|s| s.href.starts_with("https://luarocks.org/"))
             .map(|s| (s.slug, s.version, s.version_href()))
             .collect();
         assert_eq!(rocks.len(), 12);
