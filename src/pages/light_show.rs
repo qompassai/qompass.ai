@@ -54,6 +54,83 @@ const SCREENSHOTS: &[(&str, &str)] = &[
     ("/img/light-show/ls_phone_08_warehouse.webp", "Warehouse"),
 ];
 
+/// Companion portraits: `(image, name, role)`.
+///
+/// Web-sized copies of the light-show repo's
+/// `assets/art/<name>/companions/<name>_portrait.jpg` at 9c21ca1; each
+/// role is the Role column of `docs/characters/README.md`. Clara, Aino,
+/// and Hikari are left out until the repo settles which of their
+/// generations is canonical (their character pages flag it).
+const PORTRAITS: &[(&str, &str, &str)] = &[
+    ("/img/light-show/portraits/seraphine.webp", "Séraphine", "Fiber-optic OSP splicing"),
+    ("/img/light-show/portraits/ondine.webp", "Ondine", "Coax / broadband RF"),
+    ("/img/light-show/portraits/linka.webp", "Linka", "Mobile / cellular RF"),
+    ("/img/light-show/portraits/lattice.webp", "Lattice", "Ethernet / copper LAN"),
+    ("/img/light-show/portraits/lea.webp", "Léa", "WA 09 Telecom Admin prep"),
+    ("/img/light-show/portraits/bianca.webp", "Bianca", "Warehouse host — test bench"),
+    ("/img/light-show/portraits/tessa.webp", "Tessa", "Warehouse host — field"),
+];
+
+/// One soundtrack entry: `(title, artist, length)`.
+type Track = (&'static str, &'static str, &'static str);
+
+/// The game's music, grouped by the game state that plays it.
+///
+/// Groups run in the order a run meets them. Source of truth is the
+/// light-show repo's `game/src/audio.rs` at 9c21ca1 (track per state,
+/// tier rotation order, the companion-theme order); titles and artists
+/// come from `docs/CREDITS.md`, lengths from ffprobe. The per-companion
+/// ambience hums are excluded: the game layers them under the music on
+/// their own channel, not as music tracks.
+const SOUNDTRACK: &[(&str, &[Track])] = &[
+    ("TITLE MENU AND CREDITS", &[("We're all under the stars", "Eric Skiff", "4:33")]),
+    (
+        "COMPANION SELECT — EACH COMPANION'S THEME",
+        &[
+            ("Séraphine", "companion theme", "0:17"),
+            ("Ondine", "companion theme", "0:16"),
+            ("Linka", "companion theme", "0:14"),
+            ("Lattice", "companion theme", "0:17"),
+            ("Clara", "companion theme", "0:15"),
+            ("Aino", "companion theme", "0:18"),
+            ("Hikari", "companion theme", "0:15"),
+            ("Léa", "companion theme", "0:20"),
+        ],
+    ),
+    ("WORLD 1 — SPLICE SCHOOL", &[("Intensive puzzle resolution", "Komiku", "1:34")]),
+    ("WORLD 2", &[("Searching", "Eric Skiff", "2:20"), ("Ascending", "Eric Skiff", "3:13")]),
+    (
+        "WORLD 3",
+        &[("Chibi Ninja", "Eric Skiff", "2:03"), ("Underclocked (underunderclocked mix)", "Eric Skiff", "3:09")],
+    ),
+    (
+        "WORLD 4 AND BEYOND",
+        &[
+            ("Exhilarate", "Kevin MacLeod", "2:25"),
+            ("Action2 - Army Approaching", "Juhani Junkala / SubspaceAudio", "2:04"),
+        ],
+    ),
+    (
+        "OUTAGE",
+        &[
+            ("Basic Metal 5", "TeknoAXE", "3:27"),
+            ("Action3 - Preparing For Battle", "Juhani Junkala / SubspaceAudio", "0:55"),
+        ],
+    ),
+    ("RESULTS", &[("We're the Resistors", "Eric Skiff", "2:22"), ("In a Heartbeat", "Kevin MacLeod", "3:38")]),
+];
+
+/// The music attribution, as `docs/CREDITS.md` in the light-show repo
+/// states it: artist, source, license, and the required credit text
+/// where the artist asks for one.
+const MUSIC_CREDITS: &[&str] = &[
+    "Eric Skiff — Resistor Anthems (http://ericskiff.com/music): \u{201c}We're all under the stars\u{201d}, \u{201c}Searching\u{201d}, \u{201c}Ascending\u{201d}, \u{201c}Chibi Ninja\u{201d}, \u{201c}Underclocked (underunderclocked mix)\u{201d}, \u{201c}We're the Resistors\u{201d} — CC-BY 4.0. Eric Skiff - [Song] - Resistor Anthems - Available at http://EricSkiff.com/music",
+    "Kevin MacLeod (https://incompetech.com/music/royalty-free/): \u{201c}Exhilarate\u{201d} — CC-BY 4.0; \u{201c}In a Heartbeat\u{201d} — CC-BY 3.0.",
+    "TeknoAXE: \u{201c}Basic Metal 5\u{201d} — CC-BY 4.0. Basic Metal 5 by TeknoAXE | http://teknoaxe.com — Royalty Free Music by https://www.free-stock-music.com — CC BY 4.0 — https://creativecommons.org/licenses/by/4.0/",
+    "Juhani Junkala / SubspaceAudio — JRPG Pack 5: Action (https://opengameart.org/content/jrpg-pack-5-action): \u{201c}Action2 - Army Approaching\u{201d}, \u{201c}Action3 - Preparing For Battle\u{201d} — CC0 (courtesy credit).",
+    "Komiku (https://freemusicarchive.org/): \u{201c}Intensive puzzle resolution\u{201d} — CC0 1.0 Universal (courtesy credit).",
+];
+
 #[component]
 pub fn LightShow() -> impl IntoView {
     view! {
@@ -119,6 +196,53 @@ pub fn LightShow() -> impl IntoView {
                             })
                             .collect_view()}
                     </div>
+                </section>
+                <section class="study-section">
+                    <p class="band-label">"PORTRAITS"</p>
+                    <div class="shot-gallery">
+                        {PORTRAITS
+                            .iter()
+                            .map(|(src, name, role)| {
+                                view! {
+                                    <figure class="shot">
+                                        <img src={*src} alt={*name} loading="lazy" />
+                                        <figcaption>{*name}<br />{*role}</figcaption>
+                                    </figure>
+                                }
+                            })
+                            .collect_view()}
+                    </div>
+                    <p class="channel-note">"Portraits: AI-generated anime art."</p>
+                </section>
+                <section class="study-section">
+                    <p class="band-label">"SOUNDTRACK"</p>
+                    <p>
+                        "Every music track the game ships, in the order a run meets them."
+                    </p>
+                    {SOUNDTRACK
+                        .iter()
+                        .map(|(state, tracks)| {
+                            view! {
+                                <h3 class="study-subhead">{*state}</h3>
+                                <ul class="feature-list">
+                                    {tracks
+                                        .iter()
+                                        .map(|(title, artist, length)| {
+                                            view! { <li>{format!("{title} — {artist} · {length}")}</li> }
+                                        })
+                                        .collect_view()}
+                                </ul>
+                            }
+                        })
+                        .collect_view()}
+                    <h3 class="study-subhead">"MUSIC CREDITS"</h3>
+                    <ul class="feature-list">
+                        {MUSIC_CREDITS.iter().map(|c| view! { <li>{*c}</li> }).collect_view()}
+                    </ul>
+                    <p class="channel-note">
+                        "The companion themes are synthesized from scratch by the game's own "
+                        "audio tools — no samples, no licensed material."
+                    </p>
                 </section>
                 <section class="study-section">
                     <p class="band-label">"GET THE GAME"</p>
