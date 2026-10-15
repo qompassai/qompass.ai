@@ -1,3 +1,8 @@
+// Same remedy as src/lib.rs: the /field-notes view tree (timeline,
+// glossary, quizzes) overflows rustc's default query depth when the
+// server binary is built with fat LTO.
+#![recursion_limit = "256"]
+
 /// Content-Security-Policy for every response.
 ///
 /// KEEP IN SYNC with `deploy/Caddyfile` — the edge serves the same value,

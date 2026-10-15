@@ -1108,7 +1108,7 @@ a.download-box .download-state {
   text-align: center;
 }
 
-/* — Field Service ————————————————————————
+/* — Field Notes ——————————————————————————
    The notes index, the notes' worked arithmetic, and the TIA-598
    trainer. Fiber colors are classes that set --fiber (no inline
    styles); every swatch carries its color name in text beside it, so
@@ -1368,6 +1368,271 @@ a.download-box .download-state {
 }
 .fs-sequence {
   margin-bottom: 1rem;
+}
+
+/* — Field Notes: timeline, glossary, quizzes, flow ————————
+   Everything renders in full on the server; after hydration the
+   enhancements toggle `hidden`, which must beat any display rule. */
+.fn-timeline [hidden],
+.fn-glossary [hidden],
+.fn-quizzes [hidden] {
+  display: none !important;
+}
+.fn-flow-nav {
+  display: flex;
+  flex-wrap: wrap;
+  font-family: var(--font-mono);
+  font-size: 0.9rem;
+  gap: 0.8rem 1.5rem;
+  justify-content: space-between;
+  margin-top: 1rem;
+}
+.fn-flow-nav a {
+  display: inline-block;
+  min-height: 2.75rem;
+  padding: 0.6rem 0;
+}
+.fig .fn-dash { stroke-dasharray: 3 3; }
+.fig .fn-faint { opacity: 0.45; }
+.fn-era-tabs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin: 1rem 0 0.4rem;
+}
+.fn-era-tabs .tl-filter {
+  min-height: 2.75rem;
+  touch-action: manipulation;
+}
+.fn-era-step {
+  align-items: center;
+  display: flex;
+  gap: 0.6rem;
+  justify-content: space-between;
+}
+.fn-era-step .ft-next {
+  margin-top: 0.4rem;
+}
+.fn-era-step .ft-next:disabled {
+  cursor: default;
+  opacity: 0.4;
+}
+.fn-era-status {
+  color: var(--fog);
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  margin: 0.4rem 0 0;
+  text-align: center;
+}
+.fn-era-title {
+  font-size: 1.35rem;
+  margin: 1.8rem 0 0.3rem;
+}
+.fn-era-span {
+  color: var(--fog);
+  font-family: var(--font-mono);
+  font-size: 0.9rem;
+  font-weight: 400;
+}
+.study-section .fn-era-intro {
+  color: var(--fog);
+}
+.fn-milestones {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+.fn-input {
+  background: var(--chart);
+  border: 1px solid var(--chart-line);
+  border-radius: 4px;
+  box-sizing: border-box;
+  color: var(--starlight);
+  font-family: var(--font-body);
+  font-size: 1rem;
+  margin-top: 0.4rem;
+  min-height: 2.9rem;
+  padding: 0.55rem 0.8rem;
+  width: 100%;
+}
+.fn-input:focus-visible {
+  border-color: var(--brass);
+  outline: none;
+}
+.study-section .fn-gloss-count {
+  color: var(--fog);
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  margin: 0.4rem 0 0;
+}
+.fn-eq-defs {
+  height: 0;
+  overflow: hidden;
+  position: absolute;
+  width: 0;
+}
+.fn-gloss {
+  margin: 1rem 0 0;
+}
+.fn-term {
+  border-top: 1px solid var(--chart-line);
+  padding: 0.9rem 0;
+}
+.fn-term > dt .fn-term-name {
+  color: var(--starlight);
+  font-family: var(--font-display);
+  font-size: 1.12rem;
+  text-decoration: none;
+}
+.fn-term > dd {
+  margin: 0;
+}
+.study-section .fn-term-def {
+  margin: 0.3rem 0 0;
+}
+.fn-eq {
+  background: var(--abyss);
+  border: 1px solid var(--chart-line);
+  border-radius: 4px;
+  margin: 0.8rem 0 0;
+  padding: 0.8rem 1rem;
+}
+.fn-eq-math {
+  color: var(--starlight);
+  font-size: 1.05rem;
+  overflow-x: auto;
+  padding: 0.2rem 0;
+}
+.fn-eq-math svg {
+  display: block;
+  margin: 0 auto;
+  max-width: none;
+}
+.study-section .fn-eq-plain {
+  color: var(--starlight);
+  margin: 0.5rem 0 0;
+}
+.fn-eq-legend {
+  display: grid;
+  font-size: 0.92rem;
+  gap: 0.25rem 0.9rem;
+  grid-template-columns: max-content 1fr;
+  margin: 0.55rem 0 0;
+}
+.fn-eq-legend > div {
+  display: contents;
+}
+.fn-eq-legend dt {
+  color: var(--brass);
+  font-family: Georgia, "Times New Roman", serif;
+}
+.fn-eq-legend dd {
+  color: var(--fog);
+  margin: 0;
+}
+.fn-quiz-picker {
+  display: grid;
+  gap: 0.55rem;
+  margin-top: 1rem;
+}
+@media (min-width: 641px) {
+  .fn-quiz-picker {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+.study-section .fn-q-set {
+  color: var(--fog);
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  margin: 0.3rem 0 0;
+}
+.study-section .fn-q-prompt {
+  color: var(--starlight);
+  font-family: var(--font-display);
+  font-size: 1.2rem;
+  margin: 0.6rem 0 0;
+}
+.fn-choices {
+  display: grid;
+  gap: 0.55rem;
+  margin-top: 1rem;
+}
+.fn-choice {
+  align-items: baseline;
+  background: var(--chart);
+  border: 1px solid var(--chart-line);
+  border-radius: 4px;
+  color: var(--starlight);
+  cursor: pointer;
+  display: flex;
+  font-family: var(--font-body);
+  font-size: 1rem;
+  gap: 0.7rem;
+  min-height: 3.25rem;
+  padding: 0.7rem 0.9rem;
+  text-align: left;
+  touch-action: manipulation;
+}
+.fn-choice:hover:not(:disabled) {
+  border-color: var(--brass-dim);
+}
+.fn-choice:disabled {
+  cursor: default;
+}
+.fn-choice-letter {
+  color: var(--brass);
+  flex: none;
+  font-family: var(--font-mono);
+}
+.fn-choice.is-right {
+  border-color: var(--cherenkov);
+  box-shadow: 0 0 12px rgba(91, 140, 255, 0.45);
+}
+.fn-choice.is-right::after {
+  color: var(--cherenkov-soft);
+  content: "✓";
+  margin-left: auto;
+}
+.fn-choice.is-wrong {
+  border-color: #e0607a;
+}
+.fn-choice.is-wrong::after {
+  color: #e0607a;
+  content: "✗";
+  margin-left: auto;
+}
+.ft-stage .fn-q-expl,
+.ft-stage .fn-q-note {
+  margin: 0.6rem 0 0;
+}
+.fn-quizzes .fn-q-ref {
+  color: var(--fog);
+  font-family: var(--font-mono);
+  font-size: 0.82rem;
+  margin: 0.4rem 0 0;
+}
+.fn-quiz-key summary,
+.fn-key-answer summary {
+  color: var(--cherenkov-soft);
+  cursor: pointer;
+  font-family: var(--font-mono);
+  font-size: 0.88rem;
+  min-height: 2.75rem;
+  padding: 0.6rem 0;
+}
+.fn-key-list {
+  padding-left: 1.6rem;
+}
+.fn-key-q {
+  margin: 0.9rem 0 0;
+}
+.study-section .fn-key-prompt {
+  color: var(--starlight);
+  margin: 0;
+}
+.fn-key-choices {
+  color: var(--fog);
+  margin: 0.3rem 0 0;
 }
 
 /* — On AI page ——————————————————————————— */

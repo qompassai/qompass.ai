@@ -1,4 +1,4 @@
-//! The TIA-598 color code trainer, `/field-service/trainer`.
+//! The TIA-598 color code trainer, `/field-notes/trainer`.
 //!
 //! A hydrated Leptos island in the same model as the home page's
 //! quick-start picker: the server renders the idle trainer (no round
@@ -10,6 +10,7 @@
 //! reads a `Drill` and forwards taps to it. Randomness is drawn only
 //! when a round starts (a click, so always after hydration), which
 //! keeps the server render and the hydrated render identical.
+use crate::pages::field_service::flow_block;
 use leptos::prelude::*;
 use leptos_meta::Title;
 
@@ -490,7 +491,7 @@ pub fn FiberTrainer() -> impl IntoView {
     view! {
         <Title text="TIA-598 Color Code Trainer - Qompass AI" />
         <section class="page">
-            <p class="page-bearing">"FIELD SERVICE — TRAINER"</p>
+            <p class="page-bearing">"FIELD NOTES — TRAINER"</p>
             <article class="project-article">
                 <header class="study-head">
                     <h1>"TIA-598 color code trainer"</h1>
@@ -549,12 +550,13 @@ pub fn FiberTrainer() -> impl IntoView {
                     <p>
                         "The why behind the colors — units, tracers, high-count cables, and the "
                         "splice tray — is in the "
-                        <a href="/field-service/notes/tia-598-color-code">"TIA-598 field note"</a> "."
+                        <a href="/field-notes/notes/tia-598-color-code">"TIA-598 field note"</a> "."
                     </p>
                     <p class="study-link">
-                        <a href="/field-service">"← Field Service"</a>
+                        <a href="/field-notes">"← Field Notes"</a>
                     </p>
                 </section>
+                {flow_block()}
             </article>
         </section>
     }

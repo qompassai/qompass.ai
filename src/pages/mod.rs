@@ -1,5 +1,7 @@
 pub mod about;
+pub mod fiber_timeline;
 pub mod fiber_trainer;
+pub mod field_glossary;
 pub mod field_service;
 pub mod home;
 pub mod identity;
@@ -11,4 +13,5 @@ pub mod privacy;
 pub mod project;
 pub mod projects;
 pub mod research;
+pub mod telco_quizzes;
 pub mod tiger_style;

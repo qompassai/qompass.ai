@@ -1,0 +1,2838 @@
+{
+ "provenance": "Adapted from Matt Porter's own study repository (Apache-2.0); equation TeX transcribed verbatim from it.",
+ "terms": [
+  {
+   "term": "Ampere-turns (magnetomotive force)",
+   "source": "ta/README.md",
+   "definition": "Magnetomotive force: the number of turns in a coil times the current in amperes. Rearrange to solve for current or turns.",
+   "symbols": [
+    {
+     "tex": "\\mathcal{F}",
+     "label": "ℱ",
+     "meaning": "magnetomotive force (ampere-turns)"
+    },
+    {
+     "tex": "N",
+     "label": "<i>N</i>",
+     "meaning": "number of turns"
+    },
+    {
+     "tex": "I",
+     "label": "<i>I</i>",
+     "meaning": "current (amperes, A)"
+    },
+    {
+     "tex": "\\text{Ampere-turns}",
+     "label": "Ampere-turns",
+     "meaning": "magnetomotive force, written out (ampere-turns)"
+    },
+    {
+     "tex": "\\text{ ampere-turns}",
+     "label": "ampere-turns",
+     "meaning": "unit: ampere-turns"
+    },
+    {
+     "tex": "\\text{ A}",
+     "label": "A",
+     "meaning": "unit: amperes"
+    },
+    {
+     "tex": "\\text{ turns}",
+     "label": "turns",
+     "meaning": "unit: turns of the coil"
+    }
+   ],
+   "equations": [
+    {
+     "plain": "Magnetomotive force is turns times current.",
+     "legend": [
+      "\\mathcal{F}",
+      "N",
+      "I"
+     ],
+     "tex": "\\mathcal{F}=NI",
+     "where": [
+      "ta/README.md:558",
+      "ta/README.md:620",
+      "ta/README.md:821"
+     ],
+     "kind": "inline",
+     "id": "eq001"
+    },
+    {
+     "plain": "Rearranged: current is force over turns, and turns is force over current.",
+     "legend": [
+      "\\mathcal{F}",
+      "N",
+      "I"
+     ],
+     "tex": "I=\\frac{\\mathcal{F}}{N} \\qquad N=\\frac{\\mathcal{F}}{I}",
+     "where": [
+      "ta/README.md:628"
+     ],
+     "kind": "display",
+     "id": "eq002"
+    },
+    {
+     "plain": "Worked from the source: 3 turns at 12 A make 36 ampere-turns.",
+     "legend": [
+      "\\mathcal{F}",
+      "N",
+      "I",
+      "\\text{ ampere-turns}"
+     ],
+     "tex": "\\mathcal{F}=NI=3(12)=36\\text{ ampere-turns}",
+     "where": [
+      "ta/README.md:842"
+     ],
+     "kind": "display",
+     "id": "eq003"
+    },
+    {
+     "plain": "Worked from the source: 5 turns at 4 A make 20 ampere-turns.",
+     "legend": [
+      "\\mathcal{F}",
+      "N",
+      "I",
+      "\\text{ ampere-turns}"
+     ],
+     "tex": "\\mathcal{F}=NI=5(4)=20\\text{ ampere-turns}",
+     "where": [
+      "ta/README.md:865"
+     ],
+     "kind": "display",
+     "id": "eq004"
+    },
+    {
+     "plain": "Worked from the source: 18 ampere-turns on 6 turns takes 3 A.",
+     "legend": [
+      "\\mathcal{F}",
+      "N",
+      "I",
+      "\\text{ A}"
+     ],
+     "tex": "I=\\frac{\\mathcal{F}}{N}=\\frac{18}{6}=3\\text{ A}",
+     "where": [
+      "ta/README.md:888"
+     ],
+     "kind": "display",
+     "id": "eq005"
+    },
+    {
+     "plain": "Worked from the source: 32 ampere-turns at 8 A takes 4 turns.",
+     "legend": [
+      "\\mathcal{F}",
+      "N",
+      "I",
+      "\\text{ turns}"
+     ],
+     "tex": "N=\\frac{\\mathcal{F}}{I}=\\frac{32}{8}=4\\text{ turns}",
+     "where": [
+      "ta/README.md:911"
+     ],
+     "kind": "display",
+     "id": "eq006"
+    },
+    {
+     "plain": "Worked from the source: 7 turns at 9 A make 63 ampere-turns.",
+     "legend": [
+      "\\mathcal{F}",
+      "N",
+      "I",
+      "\\text{ ampere-turns}"
+     ],
+     "tex": "\\mathcal{F}=NI=7(9)=63\\text{ ampere-turns}",
+     "where": [
+      "ta/README.md:934"
+     ],
+     "kind": "display",
+     "id": "eq007"
+    },
+    {
+     "plain": "Worked from the source: 45 ampere-turns on 9 turns takes 5 A.",
+     "legend": [
+      "\\mathcal{F}",
+      "N",
+      "I",
+      "\\text{ A}"
+     ],
+     "tex": "I=\\frac{\\mathcal{F}}{N}=\\frac{45}{9}=5\\text{ A}",
+     "where": [
+      "ta/README.md:957"
+     ],
+     "kind": "display",
+     "id": "eq008"
+    },
+    {
+     "plain": "Ampere-turns, written out: turns times current.",
+     "legend": [
+      "\\text{Ampere-turns}",
+      "N",
+      "I"
+     ],
+     "tex": "\\text{Ampere-turns} = N \\times I",
+     "where": [
+      "ta/notes/README.md:755",
+      "ta/notes/README.md:782",
+      "ta/notes/README.md:808",
+      "ta/notes/README.md:836",
+      "ta/notes/README.md:872",
+      "ta/notes/README.md:906",
+      "ta/notes/README.md:934"
+     ],
+     "kind": "display",
+     "id": "eq009"
+    },
+    {
+     "plain": "Problem 1, substituted: 3 turns times 12 A.",
+     "legend": [
+      "\\text{Ampere-turns}"
+     ],
+     "tex": "\\text{Ampere-turns} = 3 \\times 12",
+     "where": [
+      "ta/notes/README.md:786"
+     ],
+     "kind": "display",
+     "id": "eq010"
+    },
+    {
+     "plain": "Problem 1, answered: 36 ampere-turns.",
+     "legend": [
+      "\\text{Ampere-turns}"
+     ],
+     "tex": "\\text{Ampere-turns} = 36",
+     "where": [
+      "ta/notes/README.md:790"
+     ],
+     "kind": "display",
+     "id": "eq011"
+    },
+    {
+     "plain": "Problem 2, substituted: 5 turns times 4 A.",
+     "legend": [
+      "\\text{Ampere-turns}"
+     ],
+     "tex": "\\text{Ampere-turns} = 5 \\times 4",
+     "where": [
+      "ta/notes/README.md:812"
+     ],
+     "kind": "display",
+     "id": "eq012"
+    },
+    {
+     "plain": "Problem 2, answered: 20 ampere-turns.",
+     "legend": [
+      "\\text{Ampere-turns}"
+     ],
+     "tex": "\\text{Ampere-turns} = 20",
+     "where": [
+      "ta/notes/README.md:816"
+     ],
+     "kind": "display",
+     "id": "eq013"
+    },
+    {
+     "plain": "Problem 3, substituted: 18 ampere-turns equals 6 turns times the unknown current.",
+     "legend": [
+      "I"
+     ],
+     "tex": "18 = 6 \\times I",
+     "where": [
+      "ta/notes/README.md:842"
+     ],
+     "kind": "display",
+     "id": "eq014"
+    },
+    {
+     "plain": "Problem 3, solved for current: 18 divided by 6.",
+     "legend": [
+      "I"
+     ],
+     "tex": "I = \\frac{18}{6}",
+     "where": [
+      "ta/notes/README.md:848"
+     ],
+     "kind": "display",
+     "id": "eq015"
+    },
+    {
+     "plain": "Problem 3, answered: 3 A.",
+     "legend": [
+      "I",
+      "\\text{ A}"
+     ],
+     "tex": "I = 3\\ \\text{A}",
+     "where": [
+      "ta/notes/README.md:852"
+     ],
+     "kind": "display",
+     "id": "eq016"
+    },
+    {
+     "plain": "Problem 4, substituted: 32 ampere-turns equals the unknown turns times 8 A.",
+     "legend": [
+      "N"
+     ],
+     "tex": "32 = N \\times 8",
+     "where": [
+      "ta/notes/README.md:878"
+     ],
+     "kind": "display",
+     "id": "eq017"
+    },
+    {
+     "plain": "Problem 4, solved for turns: 32 divided by 8.",
+     "legend": [
+      "N"
+     ],
+     "tex": "N = \\frac{32}{8}",
+     "where": [
+      "ta/notes/README.md:884"
+     ],
+     "kind": "display",
+     "id": "eq018"
+    },
+    {
+     "plain": "Problem 4, answered: 4 turns.",
+     "legend": [
+      "N"
+     ],
+     "tex": "N = 4",
+     "where": [
+      "ta/notes/README.md:888"
+     ],
+     "kind": "display",
+     "id": "eq019"
+    },
+    {
+     "plain": "Problem 5, substituted: 7 turns times 9 A.",
+     "legend": [
+      "\\text{Ampere-turns}"
+     ],
+     "tex": "\\text{Ampere-turns} = 7 \\times 9",
+     "where": [
+      "ta/notes/README.md:910"
+     ],
+     "kind": "display",
+     "id": "eq020"
+    },
+    {
+     "plain": "Problem 5, answered: 63 ampere-turns.",
+     "legend": [
+      "\\text{Ampere-turns}"
+     ],
+     "tex": "\\text{Ampere-turns} = 63",
+     "where": [
+      "ta/notes/README.md:914"
+     ],
+     "kind": "display",
+     "id": "eq021"
+    },
+    {
+     "plain": "Problem 6, substituted: 45 ampere-turns equals 9 turns times the unknown current.",
+     "legend": [
+      "I"
+     ],
+     "tex": "45 = 9 \\times I",
+     "where": [
+      "ta/notes/README.md:940"
+     ],
+     "kind": "display",
+     "id": "eq022"
+    },
+    {
+     "plain": "Problem 6, solved for current: 45 divided by 9.",
+     "legend": [
+      "I"
+     ],
+     "tex": "I = \\frac{45}{9}",
+     "where": [
+      "ta/notes/README.md:946"
+     ],
+     "kind": "display",
+     "id": "eq023"
+    },
+    {
+     "plain": "Problem 6, answered: 5 A.",
+     "legend": [
+      "I",
+      "\\text{ A}"
+     ],
+     "tex": "I = 5\\ \\text{A}",
+     "where": [
+      "ta/notes/README.md:950"
+     ],
+     "kind": "display",
+     "id": "eq024"
+    }
+   ]
+  },
+  {
+   "term": "Antenna systems (NEC 810)",
+   "source": "ta/README.md",
+   "definition": "The NEC article for radio and television receiving equipment, antenna masts, lead-in conductors, grounding, bonding, and satellite receiving systems.",
+   "symbols": [],
+   "equations": []
+  },
+  {
+   "term": "Attenuation (optical)",
+   "source": "README.md",
+   "definition": "The loss of optical signal power along a fiber span, written as an attenuation coefficient in dB/km — about 0.35 dB/km at 1310 nm and 0.20 dB/km at 1550 nm. A 20 km run at 1310 nm loses 7 dB in the fiber alone, before any connector or splice losses.",
+   "symbols": [
+    {
+     "tex": "P(L)",
+     "label": "<i>P</i>(<i>L</i>)",
+     "meaning": "optical power at distance L from the source (linear units, e.g. mW)"
+    },
+    {
+     "tex": "P_0",
+     "label": "<i>P</i><sub>0</sub>",
+     "meaning": "launch power at the source (linear units, e.g. mW)"
+    },
+    {
+     "tex": "P_{\\text{dBm}}(L)",
+     "label": "<i>P</i><sub>dBm</sub>(<i>L</i>)",
+     "meaning": "received power at distance L (dBm)"
+    },
+    {
+     "tex": "P_{0,\\text{dBm}}",
+     "label": "<i>P</i><sub>0,dBm</sub>",
+     "meaning": "launch power (dBm)"
+    },
+    {
+     "tex": "\\alpha",
+     "label": "α",
+     "meaning": "attenuation coefficient (dB/km)"
+    },
+    {
+     "tex": "L",
+     "label": "<i>L</i>",
+     "meaning": "fiber span length (km)"
+    },
+    {
+     "tex": "\\text{dB}",
+     "label": "dB",
+     "meaning": "decibels — here, the loss in the fiber alone"
+    }
+   ],
+   "equations": [
+    {
+     "plain": "Power falls off exponentially with distance: every kilometer multiplies it by the same fraction, set by α.",
+     "legend": [
+      "P(L)",
+      "P_0",
+      "\\alpha",
+      "L"
+     ],
+     "tex": "P(L) = P_0 \\cdot 10^{\\displaystyle\\left(\\frac{-\\alpha L}{10}\\right)}",
+     "where": [
+      "README.md:141"
+     ],
+     "kind": "display",
+     "id": "eq025"
+    },
+    {
+     "plain": "In decibels the same loss is a subtraction: received power is launch power minus α times the length.",
+     "legend": [
+      "P_{\\text{dBm}}(L)",
+      "P_{0,\\text{dBm}}",
+      "\\alpha",
+      "L"
+     ],
+     "tex": "P_{\\text{dBm}}(L) = P_{0,\\text{dBm}} - \\alpha L",
+     "where": [
+      "README.md:145"
+     ],
+     "kind": "display",
+     "id": "eq026"
+    },
+    {
+     "plain": "Worked from the source: 20 km at 0.35 dB/km costs 7 dB of fiber loss.",
+     "legend": [
+      "\\text{dB}"
+     ],
+     "tex": "0.35 \\times 20 = 7\\text{ dB}",
+     "where": [
+      "README.md:153"
+     ],
+     "kind": "inline",
+     "id": "eq027"
+    }
+   ]
+  },
+  {
+   "term": "Bell states",
+   "source": "README.md",
+   "definition": "The four maximally entangled two-qubit states, which form an orthonormal basis for two-qubit systems. Applying H then CNOT to |00⟩ produces the first of them.",
+   "symbols": [
+    {
+     "tex": "|\\Phi^+\\rangle",
+     "label": "|Φ<sup>+</sup>⟩",
+     "meaning": "the first Bell state"
+    },
+    {
+     "tex": "|\\Phi^\\pm\\rangle",
+     "label": "|Φ<sup>±</sup>⟩",
+     "meaning": "the two Bell states built from |00⟩ and |11⟩"
+    },
+    {
+     "tex": "|\\Psi^\\pm\\rangle",
+     "label": "|Ψ<sup>±</sup>⟩",
+     "meaning": "the two Bell states built from |01⟩ and |10⟩"
+    },
+    {
+     "tex": "|00\\rangle, |11\\rangle",
+     "label": "|00⟩, |11⟩",
+     "meaning": "two-qubit basis states: both qubits 0; both qubits 1"
+    },
+    {
+     "tex": "|01\\rangle, |10\\rangle",
+     "label": "|01⟩, |10⟩",
+     "meaning": "two-qubit basis states with the qubits different"
+    },
+    {
+     "tex": "\\pm",
+     "label": "±",
+     "meaning": "plus or minus: one sign gives each state of the pair"
+    }
+   ],
+   "equations": [
+    {
+     "plain": "The first Bell state is an equal blend of both-zero and both-one — measure one qubit and you know the other.",
+     "legend": [
+      "|\\Phi^+\\rangle",
+      "|00\\rangle, |11\\rangle"
+     ],
+     "tex": "|\\Phi^+\\rangle = \\frac{|00\\rangle + |11\\rangle}{\\sqrt{2}}",
+     "where": [
+      "README.md:321"
+     ],
+     "kind": "display",
+     "id": "eq028"
+    },
+    {
+     "plain": "All four Bell states: equal blends of matching (Φ) or opposite (Ψ) qubit values, with a plus or minus sign.",
+     "legend": [
+      "|\\Phi^\\pm\\rangle",
+      "|\\Psi^\\pm\\rangle",
+      "|00\\rangle, |11\\rangle",
+      "|01\\rangle, |10\\rangle",
+      "\\pm"
+     ],
+     "tex": "|\\Phi^\\pm\\rangle = \\frac{|00\\rangle \\pm |11\\rangle}{\\sqrt{2}} \\qquad |\\Psi^\\pm\\rangle = \\frac{|01\\rangle \\pm |10\\rangle}{\\sqrt{2}}",
+     "where": [
+      "README.md:325"
+     ],
+     "kind": "display",
+     "id": "eq029"
+    }
+   ]
+  },
+  {
+   "term": "Bit-flip code (3-qubit)",
+   "source": "README.md",
+   "definition": "Protects one logical qubit against a single bit-flip error by encoding it across three physical qubits. Measuring the stabilizers Z₁Z₂ and Z₂Z₃ (parity checks) detects and corrects an error on any one of the three without collapsing the logical state.",
+   "symbols": [
+    {
+     "tex": "|0\\rangle_L, |1\\rangle_L",
+     "label": "|0⟩<sub>L</sub>, |1⟩<sub>L</sub>",
+     "meaning": "the logical 0 and logical 1 states"
+    },
+    {
+     "tex": "|000\\rangle, |111\\rangle",
+     "label": "|000⟩, |111⟩",
+     "meaning": "three physical qubits, all 0; all 1"
+    }
+   ],
+   "equations": [
+    {
+     "plain": "Logical 0 is stored as three physical zeros, logical 1 as three ones.",
+     "tex": "|0\\rangle_L = |000\\rangle \\qquad |1\\rangle_L = |111\\rangle",
+     "where": [
+      "README.md:381"
+     ],
+     "kind": "display",
+     "id": "eq030"
+    }
+   ]
+  },
+  {
+   "term": "Bloch sphere",
+   "source": "README.md",
+   "definition": "Any pure qubit state written in spherical coordinates: the polar angle sets the mix of |0⟩ and |1⟩, the azimuthal angle the relative phase. The north pole is |0⟩, the south pole is |1⟩, and the equator is maximum superposition.",
+   "symbols": [
+    {
+     "tex": "|\\psi\\rangle",
+     "label": "|ψ⟩",
+     "meaning": "the qubit's state (a ket)"
+    },
+    {
+     "tex": "|0\\rangle",
+     "label": "|0⟩",
+     "meaning": "the basis state 0 (a ket: a state vector)"
+    },
+    {
+     "tex": "|1\\rangle",
+     "label": "|1⟩",
+     "meaning": "the basis state 1"
+    },
+    {
+     "tex": "\\theta",
+     "label": "θ",
+     "meaning": "polar angle, from 0 to π: the mix of |0⟩ and |1⟩"
+    },
+    {
+     "tex": "\\phi",
+     "label": "φ",
+     "meaning": "azimuthal angle, from 0 to 2π: the relative phase"
+    },
+    {
+     "tex": "\\cos, \\sin",
+     "label": "cos, sin",
+     "meaning": "cosine and sine"
+    },
+    {
+     "tex": "e",
+     "label": "<i>e</i>",
+     "meaning": "Euler's number, the base of the natural logarithm (≈ 2.718)"
+    },
+    {
+     "tex": "i",
+     "label": "<i>i</i>",
+     "meaning": "the imaginary unit, √−1"
+    },
+    {
+     "tex": "\\pi",
+     "label": "π",
+     "meaning": "pi, the circle constant (≈ 3.14159)"
+    }
+   ],
+   "equations": [
+    {
+     "plain": "Any pure qubit state is a point on a sphere, fixed by two angles.",
+     "legend": [
+      "|\\psi\\rangle",
+      "|0\\rangle",
+      "|1\\rangle",
+      "\\theta",
+      "\\phi",
+      "\\cos, \\sin",
+      "e",
+      "i"
+     ],
+     "tex": "|\\psi\\rangle = \\cos\\!\\frac{\\theta}{2}|0\\rangle + e^{i\\phi}\\sin\\!\\frac{\\theta}{2}|1\\rangle",
+     "where": [
+      "README.md:280"
+     ],
+     "kind": "display",
+     "id": "eq031"
+    },
+    {
+     "plain": "At θ = 0 the state sits at the north pole: |0⟩.",
+     "legend": [
+      "\\theta"
+     ],
+     "tex": "\\theta=0",
+     "where": [
+      "README.md:287"
+     ],
+     "kind": "inline",
+     "id": "eq032"
+    },
+    {
+     "plain": "At θ = π the state sits at the south pole: |1⟩.",
+     "legend": [
+      "\\theta",
+      "\\pi"
+     ],
+     "tex": "\\theta=\\pi",
+     "where": [
+      "README.md:287"
+     ],
+     "kind": "inline",
+     "id": "eq033"
+    }
+   ]
+  },
+  {
+   "term": "Capacitive reactance",
+   "source": "ta/README.md",
+   "definition": "A capacitor's opposition to AC current flow, in ohms. It decreases as frequency increases; with a capacitive load, current leads voltage.",
+   "symbols": [
+    {
+     "tex": "X_C",
+     "label": "<i>X</i><sub><i>C</i></sub>",
+     "meaning": "capacitive reactance (ohms, Ω)"
+    },
+    {
+     "tex": "X_c",
+     "label": "<i>X</i><sub><i>c</i></sub>",
+     "meaning": "capacitive reactance (ohms, Ω) — lowercase c, as written in the source notes"
+    },
+    {
+     "tex": "f",
+     "label": "<i>f</i>",
+     "meaning": "frequency of the AC signal (hertz, Hz)"
+    },
+    {
+     "tex": "C",
+     "label": "<i>C</i>",
+     "meaning": "capacitance (farads, F)"
+    },
+    {
+     "tex": "\\pi",
+     "label": "π",
+     "meaning": "pi, the circle constant (≈ 3.14159)"
+    }
+   ],
+   "equations": [
+    {
+     "plain": "Reactance is one over 2π times frequency times capacitance — so it falls as frequency rises.",
+     "legend": [
+      "X_C",
+      "f",
+      "C",
+      "\\pi"
+     ],
+     "tex": "X_C=\\dfrac{1}{2\\pi fC}",
+     "where": [
+      "ta/README.md:560"
+     ],
+     "kind": "inline",
+     "id": "eq034"
+    },
+    {
+     "plain": "The same relationship, as written in the theory section.",
+     "legend": [
+      "X_C",
+      "f",
+      "C",
+      "\\pi"
+     ],
+     "tex": "X_C=\\frac{1}{2\\pi fC}",
+     "where": [
+      "ta/README.md:653"
+     ],
+     "kind": "display",
+     "id": "eq035"
+    },
+    {
+     "plain": "The same relationship, as written in the study notes.",
+     "legend": [
+      "X_c",
+      "f",
+      "C",
+      "\\pi"
+     ],
+     "tex": "X_c = \\frac{1}{2\\pi f C}",
+     "where": [
+      "ta/notes/README.md:459",
+      "ta/notes/README.md:597"
+     ],
+     "kind": "display",
+     "id": "eq036"
+    }
+   ]
+  },
+  {
+   "term": "Cascaded splitters",
+   "source": "README.md",
+   "definition": "Splitters in series — for example a 1:4 feeding four 1:8s, which gives an effective 1:32 split. Their losses add cumulatively.",
+   "symbols": [
+    {
+     "tex": "IL_{\\text{cascade}}",
+     "label": "<i>IL</i><sub>cascade</sub>",
+     "meaning": "total insertion loss of the cascade (dB)"
+    },
+    {
+     "tex": "IL_1, IL_2",
+     "label": "<i>IL</i><sub>1</sub>, <i>IL</i><sub>2</sub>",
+     "meaning": "insertion loss of the first and second splitter stage (dB)"
+    },
+    {
+     "tex": "N_1, N_2",
+     "label": "<i>N</i><sub>1</sub>, <i>N</i><sub>2</sub>",
+     "meaning": "split ratio of the first and second stage"
+    },
+    {
+     "tex": "IL",
+     "label": "<i>IL</i>",
+     "meaning": "insertion loss of the 1:4 → 1:8 cascade (dB)"
+    },
+    {
+     "tex": "\\log_{10}",
+     "label": "log<sub>10</sub>",
+     "meaning": "base-10 logarithm"
+    },
+    {
+     "tex": "\\text{dB (ideal)}",
+     "label": "dB (ideal)",
+     "meaning": "decibels, ideal — excess loss not included"
+    }
+   ],
+   "equations": [
+    {
+     "plain": "Two splitters in a row lose the sum of their losses, each set by its own split ratio.",
+     "legend": [
+      "IL_{\\text{cascade}}",
+      "IL_1, IL_2",
+      "N_1, N_2",
+      "\\log_{10}"
+     ],
+     "tex": "IL_{\\text{cascade}} = IL_1 + IL_2 = 10\\log_{10}(N_1) + 10\\log_{10}(N_2)",
+     "where": [
+      "README.md:182"
+     ],
+     "kind": "display",
+     "id": "eq037"
+    },
+    {
+     "plain": "Worked from the source: a 1:4 (6.0 dB) feeding a 1:8 (9.0 dB) loses 15.0 dB ideal — the same as one 1:32.",
+     "legend": [
+      "IL",
+      "\\text{dB (ideal)}"
+     ],
+     "tex": "IL = 6.0 + 9.0 = 15.0 \\text{ dB (ideal)}",
+     "where": [
+      "README.md:185"
+     ],
+     "kind": "display",
+     "id": "eq038"
+    }
+   ]
+  },
+  {
+   "term": "CATV and radio distribution (NEC 820)",
+   "source": "ta/README.md",
+   "definition": "The NEC article for community antenna television and radio distribution systems — coaxial CATV or radio distribution.",
+   "symbols": [],
+   "equations": []
+  },
+  {
+   "term": "Class 1 power-limited circuits (NEC 724)",
+   "source": "ta/README.md",
+   "definition": "The NEC article for Class 1 power-limited, remote-control, and signaling circuits.",
+   "symbols": [],
+   "equations": []
+  },
+  {
+   "term": "Class 2 and Class 3 power-limited circuits (NEC 725)",
+   "source": "ta/README.md",
+   "definition": "The NEC article for Class 2 and Class 3 power-limited circuits — control, signaling, and low-voltage control wiring.",
+   "symbols": [],
+   "equations": []
+  },
+  {
+   "term": "Class 4 fault-managed power (NEC 726)",
+   "source": "ta/README.md",
+   "definition": "The NEC article for Class 4 fault-managed power systems.",
+   "symbols": [],
+   "equations": []
+  },
+  {
+   "term": "CNOT (controlled-NOT) gate",
+   "source": "README.md",
+   "definition": "The fundamental two-qubit entangling gate: it flips the target qubit when the control qubit is 1. Applying H then CNOT to |00⟩ produces a Bell state.",
+   "symbols": [
+    {
+     "tex": "\\text{CNOT}",
+     "label": "CNOT",
+     "meaning": "the controlled-NOT gate, a 4×4 matrix acting on two qubits"
+    }
+   ],
+   "equations": [
+    {
+     "plain": "CNOT leaves |00⟩ and |01⟩ alone and swaps |10⟩ with |11⟩.",
+     "tex": "\\text{CNOT} = \\begin{pmatrix} 1 & 0 & 0 & 0 \\\\ 0 & 1 & 0 & 0 \\\\ 0 & 0 & 0 & 1 \\\\ 0 & 0 & 1 & 0 \\end{pmatrix}",
+     "where": [
+      "README.md:311"
+     ],
+     "kind": "display",
+     "id": "eq039"
+    }
+   ]
+  },
+  {
+   "term": "Coaxial cable",
+   "source": "README.md",
+   "definition": "Cable with a copper core and shielding, carrying electrical signals.",
+   "symbols": [],
+   "equations": []
+  },
+  {
+   "term": "Communications circuits (NEC 805)",
+   "source": "ta/README.md",
+   "definition": "The NEC article for communications wiring from the service point to terminal equipment: cable types, building pathways, listing, separation, and installation methods for voice and data circuits.",
+   "symbols": [],
+   "equations": []
+  },
+  {
+   "term": "Communications systems, general requirements (NEC 800)",
+   "source": "ta/README.md",
+   "definition": "The NEC article for scope and definitions shared across communications systems; grounding and bonding; equipment and cable listing; protection at the building entrance; cable installation and separation; and references that apply across the later Chapter 8 articles. When a rule is common to several communications technologies, start here.",
+   "symbols": [],
+   "equations": []
+  },
+  {
+   "term": "Copper cable attenuation",
+   "source": "ta/README.md",
+   "definition": "Signal loss per unit length in copper cable, which generally increases with frequency. In the simplified model, the √f term models conductor (skin-effect) loss and the f term models dielectric loss; the constants depend on the cable's construction and materials.",
+   "symbols": [
+    {
+     "tex": "\\alpha",
+     "label": "α",
+     "meaning": "attenuation: signal loss per unit length (dB/m or dB/ft)"
+    },
+    {
+     "tex": "f",
+     "label": "<i>f</i>",
+     "meaning": "frequency of the transmitted signal (hertz, Hz)"
+    },
+    {
+     "tex": "k_1, k_2",
+     "label": "<i>k</i><sub>1</sub>, <i>k</i><sub>2</sub>",
+     "meaning": "constants set by the cable's construction and materials"
+    }
+   ],
+   "equations": [
+    {
+     "plain": "Copper loss climbs with frequency: a square-root part from the skin effect plus a straight-line part from the dielectric.",
+     "tex": "\\alpha\\approx k_1\\sqrt{f}+k_2f",
+     "where": [
+      "ta/README.md:781"
+     ],
+     "kind": "display",
+     "id": "eq040"
+    },
+    {
+     "plain": "The same model, as written in the study notes.",
+     "tex": "\\alpha \\approx k_1 \\sqrt{f} + k_2 f",
+     "where": [
+      "ta/notes/README.md:722"
+     ],
+     "kind": "display",
+     "id": "eq041"
+    }
+   ]
+  },
+  {
+   "term": "Critical angle (θc)",
+   "source": "README.md",
+   "definition": "The angle at the core–cladding boundary beyond which light is totally internally reflected back into the core. It is set by the refractive indices of the core and the cladding.",
+   "symbols": [
+    {
+     "tex": "\\theta_c",
+     "label": "θ<sub>c</sub>",
+     "meaning": "critical angle at the core–cladding boundary (degrees)"
+    },
+    {
+     "tex": "n_1",
+     "label": "<i>n</i><sub>1</sub>",
+     "meaning": "refractive index of the core (dimensionless)"
+    },
+    {
+     "tex": "n_2",
+     "label": "<i>n</i><sub>2</sub>",
+     "meaning": "refractive index of the cladding (dimensionless)"
+    },
+    {
+     "tex": "\\arcsin",
+     "label": "arcsin",
+     "meaning": "inverse sine: the angle whose sine is the value given"
+    }
+   ],
+   "equations": [
+    {
+     "plain": "The critical angle is the angle whose sine is the cladding's index divided by the core's index.",
+     "tex": "\\theta_c = \\arcsin\\!\\left(\\frac{n_2}{n_1}\\right)",
+     "where": [
+      "README.md:116"
+     ],
+     "kind": "display",
+     "id": "eq042"
+    }
+   ]
+  },
+  {
+   "term": "Decibel (dB)",
+   "source": "ta/README.md",
+   "definition": "A power ratio on a logarithmic scale. Doubling power is approximately +3 dB, halving it approximately −3 dB, and multiplying it by ten is +10 dB.",
+   "symbols": [
+    {
+     "tex": "\\Delta P_{\\mathrm{dB}}",
+     "label": "Δ<i>P</i><sub>dB</sub>",
+     "meaning": "change in power, in decibels (dB)"
+    },
+    {
+     "tex": "\\Delta P_{\\text{dB}}",
+     "label": "Δ<i>P</i><sub>dB</sub>",
+     "meaning": "change in power, in decibels (dB) — as written in the study notes"
+    },
+    {
+     "tex": "P_1",
+     "label": "<i>P</i><sub>1</sub>",
+     "meaning": "initial power level (watts, W)"
+    },
+    {
+     "tex": "P_2",
+     "label": "<i>P</i><sub>2</sub>",
+     "meaning": "final power level (watts, W)"
+    },
+    {
+     "tex": "\\log_{10}",
+     "label": "log<sub>10</sub>",
+     "meaning": "base-10 logarithm"
+    },
+    {
+     "tex": "\\text{ dB}",
+     "label": "dB",
+     "meaning": "unit: decibels"
+    }
+   ],
+   "equations": [
+    {
+     "plain": "A change in dB is ten times the base-10 log of the power ratio.",
+     "legend": [
+      "\\Delta P_{\\mathrm{dB}}",
+      "P_1",
+      "P_2",
+      "\\log_{10}"
+     ],
+     "tex": "\\Delta P_{\\mathrm{dB}}=10\\log_{10}\\left(\\dfrac{P_2}{P_1}\\right)",
+     "where": [
+      "ta/README.md:564"
+     ],
+     "kind": "inline",
+     "id": "eq043"
+    },
+    {
+     "plain": "The same definition, as written in the theory section.",
+     "legend": [
+      "\\Delta P_{\\mathrm{dB}}",
+      "P_1",
+      "P_2",
+      "\\log_{10}"
+     ],
+     "tex": "\\Delta P_{\\mathrm{dB}}=10\\log_{10}\\left(\\frac{P_2}{P_1}\\right)",
+     "where": [
+      "ta/README.md:763"
+     ],
+     "kind": "display",
+     "id": "eq044"
+    },
+    {
+     "plain": "Twice the power is about 3.01 dB more.",
+     "legend": [
+      "\\log_{10}",
+      "\\text{ dB}"
+     ],
+     "tex": "10\\log_{10}(2)\\approx3.01\\text{ dB}",
+     "where": [
+      "ta/README.md:769"
+     ],
+     "kind": "display",
+     "id": "eq045"
+    },
+    {
+     "plain": "Worked from the study notes: doubling the power gives 10 × log₁₀(2) ≈ 3.01 dB.",
+     "legend": [
+      "\\Delta P_{\\text{dB}}",
+      "P_1",
+      "P_2",
+      "\\log_{10}",
+      "\\text{ dB}"
+     ],
+     "tex": "\\Delta P_{\\text{dB}} = 10 \\times \\log_{10}\\left(\\frac{P_2}{P_1}\\right) = 10 \\times \\log_{10}(2) \\approx 10 \\times 0.3010 = 3.01\\text{ dB}",
+     "where": [
+      "ta/notes/README.md:706"
+     ],
+     "kind": "display",
+     "id": "eq046"
+    }
+   ]
+  },
+  {
+   "term": "Decoherence",
+   "source": "README.md",
+   "definition": "The loss of a qubit's quantum state through interaction with its environment.",
+   "symbols": [],
+   "equations": []
+  },
+  {
+   "term": "Dense wavelength-division multiplexing (DWDM)",
+   "source": "README.md",
+   "definition": "Carrying many wavelengths of light on one fiber at once. A single single-mode strand with DWDM can carry more than 100 Tbps in laboratory conditions.",
+   "symbols": [],
+   "equations": []
+  },
+  {
+   "term": "Deutsch algorithm",
+   "source": "README.md",
+   "definition": "Determines in a single query whether a function f:{0,1}→{0,1} is constant or balanced — something that requires two queries classically. The function is encoded as an oracle gate.",
+   "symbols": [
+    {
+     "tex": "U_f",
+     "label": "<i>U</i><sub><i>f</i></sub>",
+     "meaning": "the oracle: a gate that encodes f"
+    },
+    {
+     "tex": "f",
+     "label": "<i>f</i>",
+     "meaning": "a function from {0, 1} to {0, 1}"
+    },
+    {
+     "tex": "|x\\rangle, |y\\rangle",
+     "label": "|<i>x</i>⟩, |<i>y</i>⟩",
+     "meaning": "the input qubit and the output qubit"
+    },
+    {
+     "tex": "\\oplus",
+     "label": "⊕",
+     "meaning": "XOR: addition modulo 2"
+    }
+   ],
+   "equations": [
+    {
+     "plain": "The oracle leaves the input alone and XORs f of the input into the output qubit.",
+     "tex": "U_f|x\\rangle|y\\rangle = |x\\rangle|y \\oplus f(x)\\rangle",
+     "where": [
+      "README.md:337"
+     ],
+     "kind": "display",
+     "id": "eq047"
+    },
+    {
+     "plain": "Constant: f gives the same output for both inputs.",
+     "legend": [
+      "f"
+     ],
+     "tex": "f(0)=f(1)",
+     "where": [
+      "README.md:339"
+     ],
+     "kind": "inline",
+     "id": "eq048"
+    },
+    {
+     "plain": "Balanced: f gives different outputs for the two inputs.",
+     "legend": [
+      "f"
+     ],
+     "tex": "f(0)\\neq f(1)",
+     "where": [
+      "README.md:339"
+     ],
+     "kind": "inline",
+     "id": "eq049"
+    }
+   ]
+  },
+  {
+   "term": "Electrical power",
+   "source": "ta/README.md",
+   "definition": "The rate at which a circuit delivers energy, in watts. With any two of voltage, current, and resistance known, the identities give the power.",
+   "symbols": [
+    {
+     "tex": "P",
+     "label": "<i>P</i>",
+     "meaning": "power (watts, W)"
+    },
+    {
+     "tex": "V",
+     "label": "<i>V</i>",
+     "meaning": "voltage (volts, V)"
+    },
+    {
+     "tex": "I",
+     "label": "<i>I</i>",
+     "meaning": "current (amperes, A)"
+    },
+    {
+     "tex": "R",
+     "label": "<i>R</i>",
+     "meaning": "resistance (ohms, Ω)"
+    },
+    {
+     "tex": "\\text{ W}",
+     "label": "W",
+     "meaning": "unit: watts"
+    }
+   ],
+   "equations": [
+    {
+     "plain": "Power is voltage times current — or current squared times resistance, or voltage squared over resistance.",
+     "legend": [
+      "P",
+      "V",
+      "I",
+      "R"
+     ],
+     "tex": "P = VI = I^2R = \\dfrac{V^2}{R}",
+     "where": [
+      "ta/README.md:555"
+     ],
+     "kind": "inline",
+     "id": "eq050"
+    },
+    {
+     "plain": "The same identities, as written in the theory section.",
+     "legend": [
+      "P",
+      "V",
+      "I",
+      "R"
+     ],
+     "tex": "P=VI=I^2R=\\frac{V^2}{R}",
+     "where": [
+      "ta/README.md:675"
+     ],
+     "kind": "display",
+     "id": "eq051"
+    },
+    {
+     "plain": "Worked from the source: 4 A through 12 Ω dissipates 192 W.",
+     "legend": [
+      "P",
+      "\\text{ W}"
+     ],
+     "tex": "P=(4)^2(12)=192\\text{ W}",
+     "where": [
+      "ta/README.md:681"
+     ],
+     "kind": "display",
+     "id": "eq052"
+    },
+    {
+     "plain": "Worked from the source: 240 V across 60 Ω dissipates 960 W.",
+     "legend": [
+      "P",
+      "\\text{ W}"
+     ],
+     "tex": "P=\\frac{(240)^2}{60}=960\\text{ W}",
+     "where": [
+      "ta/README.md:685"
+     ],
+     "kind": "display",
+     "id": "eq053"
+    },
+    {
+     "plain": "Worked from the source: a 48 V circuit supplying 2.5 A delivers 120 W.",
+     "legend": [
+      "P",
+      "V",
+      "I",
+      "\\text{ W}"
+     ],
+     "tex": "P=VI=48(2.5)=120\\text{ W}",
+     "where": [
+      "ta/README.md:980"
+     ],
+     "kind": "display",
+     "id": "eq054"
+    },
+    {
+     "plain": "Worked from the study notes: 4 A through 12 Ω, via current squared, is 192 W.",
+     "legend": [
+      "P",
+      "I",
+      "R",
+      "\\text{ W}"
+     ],
+     "tex": "P = I^2 \\times R = (4)^2 \\times 12 = 16 \\times 12 = 192\\text{ W}",
+     "where": [
+      "ta/notes/README.md:502",
+      "ta/notes/README.md:640"
+     ],
+     "kind": "display",
+     "id": "eq055"
+    },
+    {
+     "plain": "Worked from the study notes: 240 V across 60 Ω, via voltage squared, is 960 W.",
+     "legend": [
+      "P",
+      "V",
+      "R",
+      "\\text{ W}"
+     ],
+     "tex": "P = \\frac{V^2}{R} = \\frac{(240)^2}{60} = \\frac{57,600}{60} = 960\\text{ W}",
+     "where": [
+      "ta/notes/README.md:513",
+      "ta/notes/README.md:651"
+     ],
+     "kind": "display",
+     "id": "eq056"
+    },
+    {
+     "plain": "Power is voltage times current.",
+     "legend": [
+      "P",
+      "V",
+      "I"
+     ],
+     "tex": "P = V \\times I",
+     "where": [
+      "ta/notes/README.md:955"
+     ],
+     "kind": "display",
+     "id": "eq057"
+    },
+    {
+     "plain": "Worked from the study notes: 48 V times 2.5 A is 120 W.",
+     "legend": [
+      "P",
+      "\\text{ W}"
+     ],
+     "tex": "P = 48 \\times 2.5 = 120\\ \\text{W}",
+     "where": [
+      "ta/notes/README.md:959"
+     ],
+     "kind": "display",
+     "id": "eq058"
+    }
+   ]
+  },
+  {
+   "term": "Entanglement",
+   "source": "README.md",
+   "definition": "Once two qubits are entangled, measuring one instantly determines the state of the other, regardless of physical separation. This is not faster-than-light signalling: no classical information is transmitted.",
+   "symbols": [],
+   "equations": []
+  },
+  {
+   "term": "Fiber-optic cable",
+   "source": "README.md",
+   "definition": "Cable that transmits data as pulses of light through ultra-pure glass or plastic strands — light through glass, where copper carries electricity through metal.",
+   "symbols": [],
+   "equations": []
+  },
+  {
+   "term": "Fidelity (quantum)",
+   "source": "README.md",
+   "definition": "How close an actual, possibly mixed, state is to the ideal state. F = 1 is a perfect qubit; F = 0.5 is completely mixed (classical). Error correction requires fidelity above the fault-tolerance threshold (~99.0–99.9% depending on the code).",
+   "symbols": [
+    {
+     "tex": "F",
+     "label": "<i>F</i>",
+     "meaning": "fidelity, from 0 to 1"
+    },
+    {
+     "tex": "|\\psi\\rangle",
+     "label": "|ψ⟩",
+     "meaning": "the ideal state (a ket)"
+    },
+    {
+     "tex": "\\langle\\psi|",
+     "label": "⟨ψ|",
+     "meaning": "the bra: the conjugate transpose of |ψ⟩"
+    },
+    {
+     "tex": "\\rho",
+     "label": "ρ",
+     "meaning": "the actual, possibly mixed, state (a density matrix)"
+    }
+   ],
+   "equations": [
+    {
+     "plain": "Fidelity measures how much of the ideal state survives in the actual one.",
+     "tex": "F = \\langle\\psi|\\rho|\\psi\\rangle",
+     "where": [
+      "README.md:371"
+     ],
+     "kind": "display",
+     "id": "eq059"
+    },
+    {
+     "plain": "F = 1: a perfect qubit.",
+     "legend": [
+      "F"
+     ],
+     "tex": "F = 1",
+     "where": [
+      "README.md:373"
+     ],
+     "kind": "inline",
+     "id": "eq060"
+    },
+    {
+     "plain": "F = 0.5: completely mixed — no better than classical.",
+     "legend": [
+      "F"
+     ],
+     "tex": "F = 0.5",
+     "where": [
+      "README.md:373"
+     ],
+     "kind": "inline",
+     "id": "eq061"
+    }
+   ]
+  },
+  {
+   "term": "Fire-resistive cable systems (NEC 728)",
+   "source": "ta/README.md",
+   "definition": "The NEC article for circuit-integrity, fire-resistive cable — cable that must survive fire exposure.",
+   "symbols": [],
+   "equations": []
+  },
+  {
+   "term": "GPON",
+   "source": "README.md",
+   "definition": "A gigabit passive optical network. Upstream and downstream travel on separate wavelengths — 1310 nm upstream, 1490 nm downstream.",
+   "symbols": [],
+   "equations": []
+  },
+  {
+   "term": "Grover's algorithm",
+   "source": "README.md",
+   "definition": "Searches an unsorted database of N items in O(√N) queries where classical search needs O(N) — a quadratic speedup: about 2³² steps instead of 2⁶⁴ for 2⁶⁴ entries.",
+   "symbols": [
+    {
+     "tex": "k",
+     "label": "<i>k</i>",
+     "meaning": "the optimal number of Grover iterations before measuring"
+    },
+    {
+     "tex": "N",
+     "label": "<i>N</i>",
+     "meaning": "the number of items searched"
+    },
+    {
+     "tex": "n",
+     "label": "<i>n</i>",
+     "meaning": "the number of qubits in the register"
+    },
+    {
+     "tex": "\\lfloor\\,\\rfloor",
+     "label": "⌊ ⌋",
+     "meaning": "floor: round down to a whole number"
+    },
+    {
+     "tex": "\\pi",
+     "label": "π",
+     "meaning": "pi, the circle constant (≈ 3.14159)"
+    }
+   ],
+   "equations": [
+    {
+     "plain": "Run about π/4 times the square root of N iterations, rounded down, then measure.",
+     "legend": [
+      "k",
+      "N",
+      "\\lfloor\\,\\rfloor",
+      "\\pi"
+     ],
+     "tex": "k = \\left\\lfloor \\frac{\\pi}{4}\\sqrt{N} \\right\\rfloor",
+     "where": [
+      "README.md:351"
+     ],
+     "kind": "display",
+     "id": "eq062"
+    },
+    {
+     "plain": "An n-qubit register holds 2 to the n items.",
+     "legend": [
+      "N",
+      "n"
+     ],
+     "tex": "N = 2^n",
+     "where": [
+      "README.md:353"
+     ],
+     "kind": "inline",
+     "id": "eq063"
+    }
+   ]
+  },
+  {
+   "term": "Hadamard gate",
+   "source": "README.md",
+   "definition": "A single-qubit gate that creates an equal superposition from a basis state.",
+   "symbols": [
+    {
+     "tex": "H",
+     "label": "<i>H</i>",
+     "meaning": "the Hadamard gate matrix"
+    },
+    {
+     "tex": "|0\\rangle",
+     "label": "|0⟩",
+     "meaning": "the basis state 0 (a ket: a state vector)"
+    },
+    {
+     "tex": "|1\\rangle",
+     "label": "|1⟩",
+     "meaning": "the basis state 1"
+    },
+    {
+     "tex": "|{+}\\rangle, |{-}\\rangle",
+     "label": "|+⟩, |−⟩",
+     "meaning": "the plus and minus states: equal superpositions with a + or − sign"
+    }
+   ],
+   "equations": [
+    {
+     "plain": "The Hadamard matrix: all entries ±1, scaled by one over root two.",
+     "legend": [
+      "H"
+     ],
+     "tex": "H = \\frac{1}{\\sqrt{2}}\\begin{pmatrix} 1 & 1 \\\\ 1 & -1 \\end{pmatrix}",
+     "where": [
+      "README.md:301"
+     ],
+     "kind": "display",
+     "id": "eq064"
+    },
+    {
+     "plain": "Hadamard turns |0⟩ into the plus state and |1⟩ into the minus state.",
+     "tex": "H|0\\rangle = \\frac{|0\\rangle + |1\\rangle}{\\sqrt{2}} = |{+}\\rangle \\qquad H|1\\rangle = \\frac{|0\\rangle - |1\\rangle}{\\sqrt{2}} = |{-}\\rangle",
+     "where": [
+      "README.md:303"
+     ],
+     "kind": "display",
+     "id": "eq065"
+    }
+   ]
+  },
+  {
+   "term": "Ideal transformer",
+   "source": "ta/README.md",
+   "definition": "For an ideal transformer, voltage follows the turns ratio, current varies inversely with turns, and apparent input power equals apparent output power.",
+   "symbols": [
+    {
+     "tex": "V_p, V_s",
+     "label": "<i>V</i><sub><i>p</i></sub>, <i>V</i><sub><i>s</i></sub>",
+     "meaning": "primary (input) and secondary (output) voltage (volts, V)"
+    },
+    {
+     "tex": "I_p, I_s",
+     "label": "<i>I</i><sub><i>p</i></sub>, <i>I</i><sub><i>s</i></sub>",
+     "meaning": "primary and secondary current (amperes, A)"
+    },
+    {
+     "tex": "N_p, N_s",
+     "label": "<i>N</i><sub><i>p</i></sub>, <i>N</i><sub><i>s</i></sub>",
+     "meaning": "number of turns in the primary and secondary winding"
+    },
+    {
+     "tex": "\\implies",
+     "label": "⟹",
+     "meaning": "implies: therefore"
+    },
+    {
+     "tex": "\\text{ V}",
+     "label": "V",
+     "meaning": "unit: volts"
+    },
+    {
+     "tex": "\\text{ A}",
+     "label": "A",
+     "meaning": "unit: amperes"
+    }
+   ],
+   "equations": [
+    {
+     "plain": "Voltage ratio equals turns ratio.",
+     "legend": [
+      "V_p, V_s",
+      "N_p, N_s"
+     ],
+     "tex": "\\dfrac{V_s}{V_p}=\\dfrac{N_s}{N_p}",
+     "where": [
+      "ta/README.md:556"
+     ],
+     "kind": "inline",
+     "id": "eq066"
+    },
+    {
+     "plain": "Current ratio is the turns ratio flipped.",
+     "legend": [
+      "I_p, I_s",
+      "N_p, N_s"
+     ],
+     "tex": "\\dfrac{I_s}{I_p}=\\dfrac{N_p}{N_s}",
+     "where": [
+      "ta/README.md:557"
+     ],
+     "kind": "inline",
+     "id": "eq067"
+    },
+    {
+     "plain": "Secondary voltage is the primary voltage scaled by the turns ratio.",
+     "legend": [
+      "V_p, V_s",
+      "N_p, N_s"
+     ],
+     "tex": "V_s=V_p\\left(\\frac{N_s}{N_p}\\right)",
+     "where": [
+      "ta/README.md:573"
+     ],
+     "kind": "display",
+     "id": "eq068"
+    },
+    {
+     "plain": "Worked from the source: 240 V on a 200:50 transformer gives 60 V.",
+     "legend": [
+      "V_p, V_s",
+      "\\text{ V}"
+     ],
+     "tex": "V_s=240\\left(\\frac{50}{200}\\right)=60\\text{ V}",
+     "where": [
+      "ta/README.md:579"
+     ],
+     "kind": "display",
+     "id": "eq069"
+    },
+    {
+     "plain": "Secondary current is the primary current scaled by the inverted turns ratio.",
+     "legend": [
+      "I_p, I_s",
+      "N_p, N_s"
+     ],
+     "tex": "I_s=I_p\\left(\\frac{N_p}{N_s}\\right)",
+     "where": [
+      "ta/README.md:585"
+     ],
+     "kind": "display",
+     "id": "eq070"
+    },
+    {
+     "plain": "Worked from the source: 5 A on a 600:150 transformer gives 20 A.",
+     "legend": [
+      "I_p, I_s",
+      "\\text{ A}"
+     ],
+     "tex": "I_s=5\\left(\\frac{600}{150}\\right)=20\\text{ A}",
+     "where": [
+      "ta/README.md:591"
+     ],
+     "kind": "display",
+     "id": "eq071"
+    },
+    {
+     "plain": "Power in equals power out: primary volts times amps equal secondary volts times amps.",
+     "legend": [
+      "V_p, V_s",
+      "I_p, I_s"
+     ],
+     "tex": "V_pI_p=V_sI_s",
+     "where": [
+      "ta/README.md:597"
+     ],
+     "kind": "display",
+     "id": "eq072"
+    },
+    {
+     "plain": "Worked from the source: 120 V at 8 A in, 480 V out, means 2 A out.",
+     "legend": [
+      "I_p, I_s",
+      "\\text{ A}"
+     ],
+     "tex": "I_s=\\frac{120\\times8}{480}=2\\text{ A}",
+     "where": [
+      "ta/README.md:603"
+     ],
+     "kind": "display",
+     "id": "eq073"
+    },
+    {
+     "plain": "Worked from the study notes: 240 V times 50/200 is 60 V.",
+     "legend": [
+      "V_p, V_s",
+      "N_p, N_s",
+      "\\text{ V}"
+     ],
+     "tex": "V_s = V_p \\times \\left(\\frac{N_s}{N_p}\\right) = 240 \\times \\left(\\frac{50}{200}\\right) = 60\\text{ V}",
+     "where": [
+      "ta/notes/README.md:428",
+      "ta/notes/README.md:566"
+     ],
+     "kind": "display",
+     "id": "eq074"
+    },
+    {
+     "plain": "Worked from the study notes: power balance solved for secondary current — 120 × 8 ÷ 480 = 2 A.",
+     "legend": [
+      "V_p, V_s",
+      "I_p, I_s",
+      "\\implies",
+      "\\text{ A}"
+     ],
+     "tex": "V_p \\times I_p = V_s \\times I_s \\implies I_s = \\frac{V_p \\times I_p}{V_s} = \\frac{120 \\times 8}{480} = \\frac{960}{480} = 2\\text{ A}",
+     "where": [
+      "ta/notes/README.md:542",
+      "ta/notes/README.md:680"
+     ],
+     "kind": "display",
+     "id": "eq075"
+    },
+    {
+     "plain": "Worked from the study notes: 5 A times 600/150 is 20 A.",
+     "legend": [
+      "I_p, I_s",
+      "N_p, N_s",
+      "\\text{ A}"
+     ],
+     "tex": "I_s = I_p \\times \\frac{N_p}{N_s} = 5 \\times \\frac{600}{150} = 20\\,\\text{A}",
+     "where": [
+      "ta/notes/README.md:736"
+     ],
+     "kind": "display",
+     "id": "eq076"
+    }
+   ]
+  },
+  {
+   "term": "Inductive reactance",
+   "source": "ta/README.md",
+   "definition": "An inductor's opposition to AC current flow, in ohms. It increases as frequency increases; with an inductive load, current lags voltage.",
+   "symbols": [
+    {
+     "tex": "X_L",
+     "label": "<i>X</i><sub><i>L</i></sub>",
+     "meaning": "inductive reactance (ohms, Ω)"
+    },
+    {
+     "tex": "f",
+     "label": "<i>f</i>",
+     "meaning": "frequency of the AC signal (hertz, Hz)"
+    },
+    {
+     "tex": "L",
+     "label": "<i>L</i>",
+     "meaning": "inductance (henrys, H)"
+    },
+    {
+     "tex": "\\pi",
+     "label": "π",
+     "meaning": "pi, the circle constant (≈ 3.14159)"
+    }
+   ],
+   "equations": [
+    {
+     "plain": "Reactance is 2π times frequency times inductance — so it climbs as frequency rises.",
+     "tex": "X_L=2\\pi fL",
+     "where": [
+      "ta/README.md:561",
+      "ta/README.md:659"
+     ],
+     "kind": "inline",
+     "id": "eq077"
+    },
+    {
+     "plain": "The same relationship, as written in the study notes.",
+     "tex": "X_L = 2\\pi f L",
+     "where": [
+      "ta/notes/README.md:470",
+      "ta/notes/README.md:608"
+     ],
+     "kind": "display",
+     "id": "eq078"
+    }
+   ]
+  },
+  {
+   "term": "Interleaving delay",
+   "source": "README.md",
+   "definition": "Delay DSL adds on top of propagation delay — up to 20 ms on ADSL2+.",
+   "symbols": [],
+   "equations": []
+  },
+  {
+   "term": "Kirchhoff's current law (KCL)",
+   "source": "ta/README.md",
+   "definition": "The sum of currents entering a node equals the sum leaving it.",
+   "symbols": [
+    {
+     "tex": "I_1, I_2",
+     "label": "<i>I</i><sub>1</sub>, <i>I</i><sub>2</sub>",
+     "meaning": "current in each parallel branch (amperes, A)"
+    },
+    {
+     "tex": "I_{\\mathrm{total}}",
+     "label": "<i>I</i><sub>total</sub>",
+     "meaning": "total current entering or leaving the parallel circuit (A)"
+    },
+    {
+     "tex": "I_{\\text{total}}",
+     "label": "<i>I</i><sub>total</sub>",
+     "meaning": "total current entering or leaving the parallel circuit (A) — as written in the study notes"
+    },
+    {
+     "tex": "\\text{ A}",
+     "label": "A",
+     "meaning": "unit: amperes"
+    }
+   ],
+   "equations": [
+    {
+     "plain": "Worked from the source: at 120 V, a 40 Ω branch draws 3 A and a 60 Ω branch 2 A.",
+     "legend": [
+      "I_1, I_2",
+      "\\text{ A}"
+     ],
+     "tex": "I_1=\\frac{120}{40}=3\\text{ A} \\qquad I_2=\\frac{120}{60}=2\\text{ A}",
+     "where": [
+      "ta/README.md:739"
+     ],
+     "kind": "display",
+     "id": "eq079"
+    },
+    {
+     "plain": "By KCL the source supplies the branches' sum: 5 A.",
+     "legend": [
+      "I_1, I_2",
+      "I_{\\mathrm{total}}",
+      "\\text{ A}"
+     ],
+     "tex": "I_{\\mathrm{total}}=I_1+I_2=5\\text{ A}",
+     "where": [
+      "ta/README.md:747"
+     ],
+     "kind": "display",
+     "id": "eq080"
+    },
+    {
+     "plain": "The same branch currents, as written in the study notes.",
+     "legend": [
+      "I_1, I_2",
+      "\\text{ A}"
+     ],
+     "tex": "I_1 = \\frac{120}{40} = 3\\text{ A}, \\quad I_2 = \\frac{120}{60} = 2\\text{ A}",
+     "where": [
+      "ta/notes/README.md:524",
+      "ta/notes/README.md:662"
+     ],
+     "kind": "display",
+     "id": "eq081"
+    },
+    {
+     "plain": "The same total, as written in the study notes: 3 + 2 = 5 A.",
+     "legend": [
+      "I_1, I_2",
+      "I_{\\text{total}}",
+      "\\text{ A}"
+     ],
+     "tex": "I_{\\text{total}} = I_1 + I_2 = 3 + 2 = 5\\text{ A}",
+     "where": [
+      "ta/notes/README.md:526",
+      "ta/notes/README.md:664"
+     ],
+     "kind": "display",
+     "id": "eq082"
+    }
+   ]
+  },
+  {
+   "term": "Kirchhoff's voltage law (KVL)",
+   "source": "ta/README.md",
+   "definition": "The algebraic sum of voltage rises and drops around a closed loop is zero — the voltage drops around any loop add up to the source voltage.",
+   "symbols": [],
+   "equations": []
+  },
+  {
+   "term": "Multimode fiber (MMF)",
+   "source": "README.md",
+   "definition": "Fiber with a numerical aperture of about 0.20–0.50: a wider acceptance cone, used over shorter distances.",
+   "symbols": [],
+   "equations": []
+  },
+  {
+   "term": "Network-powered broadband (NEC 830)",
+   "source": "ta/README.md",
+   "definition": "The NEC article for network-powered broadband communications systems — broadband powered from the network side.",
+   "symbols": [],
+   "equations": []
+  },
+  {
+   "term": "Nonlinear load",
+   "source": "ta/README.md",
+   "definition": "A load that does not draw current in proportion to the applied sinusoidal voltage. Its distorted current is a fundamental plus harmonic components; electronic power supplies and rectifier-input loads commonly produce them. Harmonics add current distortion and heating in conductors and transformers, and triplen harmonics in four-wire wye systems can add in the neutral rather than cancel.",
+   "symbols": [
+    {
+     "tex": "i(t)",
+     "label": "<i>i</i>(<i>t</i>)",
+     "meaning": "the instantaneous current at time t (amperes, A)"
+    },
+    {
+     "tex": "t",
+     "label": "<i>t</i>",
+     "meaning": "time (seconds, s)"
+    },
+    {
+     "tex": "I_1",
+     "label": "<i>I</i><sub>1</sub>",
+     "meaning": "amplitude of the fundamental (A)"
+    },
+    {
+     "tex": "I_n",
+     "label": "<i>I</i><sub><i>n</i></sub>",
+     "meaning": "amplitude of the nth harmonic (A)"
+    },
+    {
+     "tex": "n",
+     "label": "<i>n</i>",
+     "meaning": "harmonic number"
+    },
+    {
+     "tex": "\\omega",
+     "label": "ω",
+     "meaning": "angular frequency of the fundamental (radians per second)"
+    },
+    {
+     "tex": "\\phi_1, \\phi_n",
+     "label": "φ<sub>1</sub>, φ<sub><i>n</i></sub>",
+     "meaning": "phase angle of the fundamental and of the nth harmonic (radians)"
+    },
+    {
+     "tex": "\\sin",
+     "label": "sin",
+     "meaning": "sine"
+    },
+    {
+     "tex": "\\sum_{n=2}^{\\infty}",
+     "label": "Σ<sub><i>n</i>=2</sub><sup>∞</sup>",
+     "meaning": "sum over the harmonics n = 2, 3, 4, … without end"
+    }
+   ],
+   "equations": [
+    {
+     "plain": "Distorted current is the fundamental sine wave plus a stack of harmonics at whole-number multiples of its frequency.",
+     "tex": "i(t)=I_1\\sin(\\omega t+\\phi_1)+\\sum_{n=2}^{\\infty}I_n\\sin(n\\omega t+\\phi_n)",
+     "where": [
+      "ta/README.md:794"
+     ],
+     "kind": "display",
+     "id": "eq083"
+    }
+   ]
+  },
+  {
+   "term": "Numerical aperture (NA)",
+   "source": "README.md",
+   "definition": "A measure of the cone of light a fiber accepts, set by the core and cladding refractive indices. Single-mode fiber: NA ≈ 0.12 — a tight beam, one propagation mode, minimal dispersion. Multimode fiber: NA ≈ 0.20–0.50.",
+   "symbols": [
+    {
+     "tex": "\\text{NA}",
+     "label": "NA",
+     "meaning": "numerical aperture (dimensionless)"
+    },
+    {
+     "tex": "n_1",
+     "label": "<i>n</i><sub>1</sub>",
+     "meaning": "refractive index of the core"
+    },
+    {
+     "tex": "n_2",
+     "label": "<i>n</i><sub>2</sub>",
+     "meaning": "refractive index of the cladding"
+    }
+   ],
+   "equations": [
+    {
+     "plain": "The acceptance of a fiber is the square root of the difference between the squared core and cladding indices.",
+     "tex": "\\text{NA} = \\sqrt{n_1^2 - n_2^2}",
+     "where": [
+      "README.md:130"
+     ],
+     "kind": "display",
+     "id": "eq084"
+    }
+   ]
+  },
+  {
+   "term": "Ohm's law",
+   "source": "ta/README.md",
+   "definition": "The relationship between voltage, current, and resistance in a circuit.",
+   "symbols": [
+    {
+     "tex": "V",
+     "label": "<i>V</i>",
+     "meaning": "voltage (volts, V)"
+    },
+    {
+     "tex": "I",
+     "label": "<i>I</i>",
+     "meaning": "current (amperes, A)"
+    },
+    {
+     "tex": "R",
+     "label": "<i>R</i>",
+     "meaning": "resistance (ohms, Ω)"
+    }
+   ],
+   "equations": [
+    {
+     "plain": "Voltage equals current times resistance.",
+     "tex": "V = IR",
+     "where": [
+      "ta/README.md:554"
+     ],
+     "kind": "inline",
+     "id": "eq085"
+    }
+   ]
+  },
+  {
+   "term": "Optical fiber cables (NEC 770)",
+   "source": "ta/README.md",
+   "definition": "The NEC article for optical fiber cables and raceways: fiber backbone, transmission by light.",
+   "symbols": [],
+   "equations": []
+  },
+  {
+   "term": "Optical network terminal (ONT)",
+   "source": "README.md",
+   "definition": "A small device installed at the customer's premises that converts the optical signal to Ethernet; the customer's router connects to the ONT's Ethernet port.",
+   "symbols": [],
+   "equations": []
+  },
+  {
+   "term": "Optical power budget (OPB)",
+   "source": "README.md",
+   "definition": "What the link can afford to lose: transmitter power minus the receiver's minimum. The full end-to-end loss from OLT to ONT must stay within it.",
+   "symbols": [
+    {
+     "tex": "\\text{OPB}",
+     "label": "OPB",
+     "meaning": "optical power budget (dB)"
+    },
+    {
+     "tex": "P_{\\text{tx}}",
+     "label": "<i>P</i><sub>tx</sub>",
+     "meaning": "transmitter power (dBm)"
+    },
+    {
+     "tex": "P_{\\text{rx,min}}",
+     "label": "<i>P</i><sub>rx,min</sub>",
+     "meaning": "the receiver's minimum power (dBm)"
+    },
+    {
+     "tex": "L_{\\text{total}}",
+     "label": "<i>L</i><sub>total</sub>",
+     "meaning": "total end-to-end loss, OLT to ONT (dB)"
+    },
+    {
+     "tex": "\\alpha_f",
+     "label": "α<sub>f</sub>",
+     "meaning": "fiber attenuation (dB/km)"
+    },
+    {
+     "tex": "d",
+     "label": "<i>d</i>",
+     "meaning": "fiber distance (km)"
+    },
+    {
+     "tex": "\\sum IL_{\\text{split}}",
+     "label": "Σ <i>IL</i><sub>split</sub>",
+     "meaning": "the sum of every splitter's insertion loss (dB)"
+    },
+    {
+     "tex": "N_c",
+     "label": "<i>N</i><sub>c</sub>",
+     "meaning": "number of connector pairs"
+    },
+    {
+     "tex": "\\alpha_c",
+     "label": "α<sub>c</sub>",
+     "meaning": "connector loss per pair (dB)"
+    },
+    {
+     "tex": "N_s",
+     "label": "<i>N</i><sub>s</sub>",
+     "meaning": "number of splices"
+    },
+    {
+     "tex": "\\alpha_s",
+     "label": "α<sub>s</sub>",
+     "meaning": "splice loss per joint (dB)"
+    },
+    {
+     "tex": "M",
+     "label": "<i>M</i>",
+     "meaning": "system margin for ageing and temperature (dB)"
+    },
+    {
+     "tex": "\\text{fiber}\\,\\text{splitters}\\,\\text{connectors}\\,\\text{splices}\\,\\text{margin}",
+     "label": "fiber · splitters · connectors · splices · margin",
+     "meaning": "the labels under the braces, naming each term"
+    }
+   ],
+   "equations": [
+    {
+     "plain": "The budget is what the transmitter puts out minus the least the receiver can still read.",
+     "tex": "\\text{OPB} = P_{\\text{tx}} - P_{\\text{rx,min}}",
+     "where": [
+      "README.md:193"
+     ],
+     "kind": "display",
+     "id": "eq086"
+    },
+    {
+     "plain": "Total loss is fiber, splitters, connectors, and splices added up — with the system margin carried as one more line item.",
+     "tex": "L_{\\text{total}} = \\underbrace{\\alpha_f \\cdot d}_{\\text{fiber}} + \\underbrace{\\sum IL_{\\text{split}}}_{\\text{splitters}} + \\underbrace{N_c \\cdot \\alpha_c}_{\\text{connectors}} + \\underbrace{N_s \\cdot \\alpha_s}_{\\text{splices}} + \\underbrace{M}_{\\text{margin}}",
+     "where": [
+      "README.md:195"
+     ],
+     "kind": "display",
+     "id": "eq087"
+    }
+   ]
+  },
+  {
+   "term": "Passive optical network (PON)",
+   "source": "README.md",
+   "definition": "A network that uses passive 1:N optical splitters. Each split divides the optical power equally — but the loss in dB does not divide equally: it adds logarithmically.",
+   "symbols": [],
+   "equations": []
+  },
+  {
+   "term": "Pauli-X gate",
+   "source": "README.md",
+   "definition": "The bit flip, or quantum NOT.",
+   "symbols": [
+    {
+     "tex": "X",
+     "label": "<i>X</i>",
+     "meaning": "the Pauli-X gate matrix"
+    }
+   ],
+   "equations": [
+    {
+     "plain": "Pauli-X swaps the two basis states: |0⟩ becomes |1⟩ and back.",
+     "tex": "X = \\begin{pmatrix} 0 & 1 \\\\ 1 & 0 \\end{pmatrix}",
+     "where": [
+      "README.md:297"
+     ],
+     "kind": "display",
+     "id": "eq088"
+    }
+   ]
+  },
+  {
+   "term": "Phase (S) and T gates",
+   "source": "README.md",
+   "definition": "Single-qubit gates that leave |0⟩ alone and shift the phase of |1⟩.",
+   "symbols": [
+    {
+     "tex": "S",
+     "label": "<i>S</i>",
+     "meaning": "the phase gate matrix"
+    },
+    {
+     "tex": "T",
+     "label": "<i>T</i>",
+     "meaning": "the T gate matrix"
+    },
+    {
+     "tex": "i",
+     "label": "<i>i</i>",
+     "meaning": "the imaginary unit, √−1"
+    },
+    {
+     "tex": "e",
+     "label": "<i>e</i>",
+     "meaning": "Euler's number, the base of the natural logarithm (≈ 2.718)"
+    },
+    {
+     "tex": "\\pi",
+     "label": "π",
+     "meaning": "pi, the circle constant (≈ 3.14159)"
+    }
+   ],
+   "equations": [
+    {
+     "plain": "S multiplies the |1⟩ part by i (a quarter turn); T by e to the iπ/4 (an eighth turn).",
+     "tex": "S = \\begin{pmatrix} 1 & 0 \\\\ 0 & i \\end{pmatrix} \\qquad T = \\begin{pmatrix} 1 & 0 \\\\ 0 & e^{i\\pi/4} \\end{pmatrix}",
+     "where": [
+      "README.md:307"
+     ],
+     "kind": "display",
+     "id": "eq089"
+    }
+   ]
+  },
+  {
+   "term": "Post-quantum cryptography",
+   "source": "README.md",
+   "definition": "Lattice-based and hash-based algorithms resistant to Shor's algorithm; standardized by NIST in 2024.",
+   "symbols": [],
+   "equations": []
+  },
+  {
+   "term": "Power factor",
+   "source": "ta/README.md",
+   "definition": "A ratio between 0.0 and 1.0 relating real power to apparent power. A purely resistive AC load has a power factor of 1.0. Where waveform distortion is present, distinguish displacement power factor from true power factor.",
+   "symbols": [],
+   "equations": []
+  },
+  {
+   "term": "Power triangle",
+   "source": "ta/README.md",
+   "definition": "Apparent power (VA), real power (W), and reactive power (VAR) relate like the sides of a right triangle, so reactive power follows from the other two.",
+   "symbols": [
+    {
+     "tex": "Q",
+     "label": "<i>Q</i>",
+     "meaning": "reactive power (volt-amperes reactive, VAR)"
+    },
+    {
+     "tex": "S",
+     "label": "<i>S</i>",
+     "meaning": "apparent power: the total delivered to the circuit (volt-amperes, VA)"
+    },
+    {
+     "tex": "P",
+     "label": "<i>P</i>",
+     "meaning": "real (active) power: the power doing work (watts, W)"
+    },
+    {
+     "tex": "\\text{ VAR}",
+     "label": "VAR",
+     "meaning": "unit: volt-amperes reactive"
+    }
+   ],
+   "equations": [
+    {
+     "plain": "Reactive power is the square root of apparent power squared minus real power squared.",
+     "legend": [
+      "Q",
+      "S",
+      "P"
+     ],
+     "tex": "Q=\\sqrt{S^2-P^2}",
+     "where": [
+      "ta/README.md:563"
+     ],
+     "kind": "inline",
+     "id": "eq090"
+    },
+    {
+     "plain": "Apparent power squared equals real power squared plus reactive power squared.",
+     "legend": [
+      "S",
+      "P",
+      "Q"
+     ],
+     "tex": "S^2=P^2+Q^2",
+     "where": [
+      "ta/README.md:703"
+     ],
+     "kind": "display",
+     "id": "eq091"
+    },
+    {
+     "plain": "Worked from the source: 10,000 VA and 8,000 W leave 6,000 VAR.",
+     "legend": [
+      "Q",
+      "\\text{ VAR}"
+     ],
+     "tex": "Q=\\sqrt{10{,}000^2-8{,}000^2}=6{,}000\\text{ VAR}",
+     "where": [
+      "ta/README.md:709"
+     ],
+     "kind": "display",
+     "id": "eq092"
+    },
+    {
+     "plain": "Worked from the study notes, every step shown: 6,000 VAR.",
+     "legend": [
+      "Q",
+      "S",
+      "P",
+      "\\text{ VAR}"
+     ],
+     "tex": "Q = \\sqrt{S^2 - P^2} = \\sqrt{10,000^2 - 8,000^2} = \\sqrt{100,000,000 - 64,000,000} = \\sqrt{36,000,000} = 6,000\\text{ VAR}",
+     "where": [
+      "ta/notes/README.md:554",
+      "ta/notes/README.md:692"
+     ],
+     "kind": "display",
+     "id": "eq093"
+    }
+   ]
+  },
+  {
+   "term": "Power-limited and fault-managed power cables (NEC 722)",
+   "source": "ta/README.md",
+   "definition": "The NEC article for cables for power-limited circuits and fault-managed power circuits — a generic power-limited or fault-managed power cable without a class number.",
+   "symbols": [],
+   "equations": []
+  },
+  {
+   "term": "Premises-powered broadband (NEC 840)",
+   "source": "ta/README.md",
+   "definition": "The NEC article for premises-powered broadband communications systems — customer-side powered optical network equipment.",
+   "symbols": [],
+   "equations": []
+  },
+  {
+   "term": "Propagation delay",
+   "source": "README.md",
+   "definition": "The time a signal takes to cross a span. Light travels through silica fiber at about 2 × 10⁸ m/s — roughly two-thirds of its speed in vacuum — so a 100 km span adds about 0.5 ms one way.",
+   "symbols": [],
+   "equations": []
+  },
+  {
+   "term": "Quantum Fourier transform (QFT)",
+   "source": "README.md",
+   "definition": "The quantum analogue of the discrete Fourier transform and the core subroutine of Shor's algorithm and quantum phase estimation. It runs in O(n²) gates on an n-qubit register, where the classical FFT runs in O(N log N).",
+   "symbols": [
+    {
+     "tex": "|\\tilde{x}\\rangle",
+     "label": "|<i>x̃</i>⟩",
+     "meaning": "the transformed state"
+    },
+    {
+     "tex": "|x\\rangle",
+     "label": "|<i>x</i>⟩",
+     "meaning": "the input basis state"
+    },
+    {
+     "tex": "|k\\rangle",
+     "label": "|<i>k</i>⟩",
+     "meaning": "an output basis state"
+    },
+    {
+     "tex": "\\text{QFT}",
+     "label": "QFT",
+     "meaning": "the quantum Fourier transform"
+    },
+    {
+     "tex": "N",
+     "label": "<i>N</i>",
+     "meaning": "the number of basis states (N = 2ⁿ for n qubits)"
+    },
+    {
+     "tex": "\\sum_{k=0}^{N-1}",
+     "label": "Σ<sub><i>k</i>=0</sub><sup><i>N</i>−1</sup>",
+     "meaning": "sum over k from 0 to N − 1"
+    },
+    {
+     "tex": "x, k",
+     "label": "<i>x</i>, <i>k</i>",
+     "meaning": "integer labels of the input and output basis states"
+    },
+    {
+     "tex": "e",
+     "label": "<i>e</i>",
+     "meaning": "Euler's number, the base of the natural logarithm (≈ 2.718)"
+    },
+    {
+     "tex": "i",
+     "label": "<i>i</i>",
+     "meaning": "the imaginary unit, √−1"
+    },
+    {
+     "tex": "\\pi",
+     "label": "π",
+     "meaning": "pi, the circle constant (≈ 3.14159)"
+    }
+   ],
+   "equations": [
+    {
+     "plain": "The QFT spreads one input state over every output state, each with a phase that turns with x times k.",
+     "tex": "|\\tilde{x}\\rangle = \\text{QFT}|x\\rangle = \\frac{1}{\\sqrt{N}}\\sum_{k=0}^{N-1} e^{2\\pi i xk/N}|k\\rangle",
+     "where": [
+      "README.md:361"
+     ],
+     "kind": "display",
+     "id": "eq094"
+    }
+   ]
+  },
+  {
+   "term": "Quantum gate",
+   "source": "README.md",
+   "definition": "A unitary transformation of qubit states. All quantum gates are unitary matrices.",
+   "symbols": [
+    {
+     "tex": "U^\\dagger",
+     "label": "<i>U</i><sup>†</sup>",
+     "meaning": "the conjugate transpose of U (\"U-dagger\")"
+    },
+    {
+     "tex": "U",
+     "label": "<i>U</i>",
+     "meaning": "a gate's matrix"
+    },
+    {
+     "tex": "I",
+     "label": "<i>I</i>",
+     "meaning": "the identity matrix"
+    }
+   ],
+   "equations": [
+    {
+     "plain": "Undoing a gate is always possible: U-dagger times U gives back the identity.",
+     "tex": "U^\\dagger U = I",
+     "where": [
+      "README.md:293"
+     ],
+     "kind": "inline",
+     "id": "eq095"
+    }
+   ]
+  },
+  {
+   "term": "Quantum interference",
+   "source": "README.md",
+   "definition": "Quantum algorithms exploit constructive interference to amplify correct answers and destructive interference to cancel wrong ones.",
+   "symbols": [],
+   "equations": []
+  },
+  {
+   "term": "Quantum key distribution (QKD)",
+   "source": "README.md",
+   "definition": "Key exchange such as the BB84 protocol, in which eavesdropping disturbs the quantum state and so becomes detectable. Commercial deployments exist.",
+   "symbols": [],
+   "equations": []
+  },
+  {
+   "term": "Qubit",
+   "source": "README.md",
+   "definition": "A quantum bit. A classical bit is always 0 or 1; a qubit exists in a superposition of both, weighted by complex probability amplitudes. Measurement collapses the superposition irreversibly.",
+   "symbols": [
+    {
+     "tex": "|\\psi\\rangle",
+     "label": "|ψ⟩",
+     "meaning": "the qubit's state (a ket)"
+    },
+    {
+     "tex": "|0\\rangle",
+     "label": "|0⟩",
+     "meaning": "the basis state 0 (a ket: a state vector)"
+    },
+    {
+     "tex": "|1\\rangle",
+     "label": "|1⟩",
+     "meaning": "the basis state 1"
+    },
+    {
+     "tex": "\\alpha, \\beta",
+     "label": "α, β",
+     "meaning": "complex probability amplitudes of |0⟩ and |1⟩"
+    },
+    {
+     "tex": "|\\alpha|^2",
+     "label": "|α|<sup>2</sup>",
+     "meaning": "the probability of measuring |0⟩"
+    },
+    {
+     "tex": "|\\beta|^2",
+     "label": "|β|<sup>2</sup>",
+     "meaning": "the probability of measuring |1⟩"
+    }
+   ],
+   "equations": [
+    {
+     "plain": "A qubit's state is a weighted blend of 0 and 1.",
+     "legend": [
+      "|\\psi\\rangle",
+      "|0\\rangle",
+      "|1\\rangle",
+      "\\alpha, \\beta"
+     ],
+     "tex": "|\\psi\\rangle = \\alpha|0\\rangle + \\beta|1\\rangle",
+     "where": [
+      "README.md:264"
+     ],
+     "kind": "display",
+     "id": "eq096"
+    },
+    {
+     "plain": "The two probabilities must add up to one.",
+     "legend": [
+      "|\\alpha|^2",
+      "|\\beta|^2"
+     ],
+     "tex": "|\\alpha|^2 + |\\beta|^2 = 1",
+     "where": [
+      "README.md:268"
+     ],
+     "kind": "display",
+     "id": "eq097"
+    }
+   ]
+  },
+  {
+   "term": "RMS voltage",
+   "source": "ta/README.md",
+   "definition": "For a sinusoidal waveform, the effective AC voltage: the peak voltage divided by √2, about 0.707 of the peak.",
+   "symbols": [
+    {
+     "tex": "V_{\\mathrm{rms}}",
+     "label": "<i>V</i><sub>rms</sub>",
+     "meaning": "root-mean-square voltage: the effective AC voltage (volts, V)"
+    },
+    {
+     "tex": "V_{\\mathrm{peak}}",
+     "label": "<i>V</i><sub>peak</sub>",
+     "meaning": "peak voltage: the maximum amplitude of the waveform (V)"
+    },
+    {
+     "tex": "V_{\\text{rms}}",
+     "label": "<i>V</i><sub>rms</sub>",
+     "meaning": "root-mean-square voltage (V) — as written in the study notes"
+    },
+    {
+     "tex": "V_{\\text{peak}}",
+     "label": "<i>V</i><sub>peak</sub>",
+     "meaning": "peak voltage (V) — as written in the study notes"
+    },
+    {
+     "tex": "\\text{ V}",
+     "label": "V",
+     "meaning": "unit: volts"
+    }
+   ],
+   "equations": [
+    {
+     "plain": "RMS is peak over root two — about 0.707 of the peak.",
+     "legend": [
+      "V_{\\mathrm{rms}}",
+      "V_{\\mathrm{peak}}"
+     ],
+     "tex": "V_{\\mathrm{rms}}=\\dfrac{V_{\\mathrm{peak}}}{\\sqrt{2}}\\approx0.707V_{\\mathrm{peak}}",
+     "where": [
+      "ta/README.md:559"
+     ],
+     "kind": "inline",
+     "id": "eq098"
+    },
+    {
+     "plain": "RMS is 0.707 of the peak.",
+     "legend": [
+      "V_{\\mathrm{rms}}",
+      "V_{\\mathrm{peak}}"
+     ],
+     "tex": "V_{\\mathrm{rms}}=0.707V_{\\mathrm{peak}}",
+     "where": [
+      "ta/README.md:641"
+     ],
+     "kind": "display",
+     "id": "eq099"
+    },
+    {
+     "plain": "Worked from the source: a 170 V peak is about 120 V RMS.",
+     "legend": [
+      "V_{\\mathrm{rms}}",
+      "\\text{ V}"
+     ],
+     "tex": "V_{\\mathrm{rms}}=170\\times0.707\\approx120\\text{ V}",
+     "where": [
+      "ta/README.md:647"
+     ],
+     "kind": "display",
+     "id": "eq100"
+    },
+    {
+     "plain": "Worked from the study notes: 170 V peak times 0.707 is about 120 V.",
+     "legend": [
+      "V_{\\text{rms}}",
+      "V_{\\text{peak}}",
+      "\\text{ V}"
+     ],
+     "tex": "V_{\\text{rms}} = V_{\\text{peak}} \\times 0.707 = 170 \\times 0.707 \\approx 120\\text{ V}",
+     "where": [
+      "ta/notes/README.md:439",
+      "ta/notes/README.md:449",
+      "ta/notes/README.md:577",
+      "ta/notes/README.md:587"
+     ],
+     "kind": "display",
+     "id": "eq101"
+    }
+   ]
+  },
+  {
+   "term": "Series resistance",
+   "source": "ta/README.md",
+   "definition": "Resistances in series add directly.",
+   "symbols": [
+    {
+     "tex": "R_{\\mathrm{total}}",
+     "label": "<i>R</i><sub>total</sub>",
+     "meaning": "total resistance of the series circuit (ohms, Ω)"
+    },
+    {
+     "tex": "R_{\\text{total}}",
+     "label": "<i>R</i><sub>total</sub>",
+     "meaning": "total resistance of the series circuit (Ω) — as written in the study notes"
+    },
+    {
+     "tex": "R_1, R_2, R_3",
+     "label": "<i>R</i><sub>1</sub>, <i>R</i><sub>2</sub>, <i>R</i><sub>3</sub>",
+     "meaning": "the individual resistors in series (Ω)"
+    },
+    {
+     "tex": "\\Omega",
+     "label": "Ω",
+     "meaning": "unit: ohms"
+    }
+   ],
+   "equations": [
+    {
+     "plain": "Total series resistance is the sum of the parts.",
+     "legend": [
+      "R_{\\mathrm{total}}",
+      "R_1, R_2, R_3"
+     ],
+     "tex": "R_{\\mathrm{total}}=R_1+R_2+R_3",
+     "where": [
+      "ta/README.md:727"
+     ],
+     "kind": "display",
+     "id": "eq102"
+    },
+    {
+     "plain": "Worked from the source: 10 + 15 + 25 = 50 Ω.",
+     "legend": [
+      "R_{\\mathrm{total}}",
+      "\\Omega"
+     ],
+     "tex": "R_{\\mathrm{total}}=10+15+25=50\\ \\Omega",
+     "where": [
+      "ta/README.md:733"
+     ],
+     "kind": "display",
+     "id": "eq103"
+    },
+    {
+     "plain": "Worked from the study notes: 10 + 15 + 25 = 50 Ω.",
+     "legend": [
+      "R_{\\text{total}}",
+      "R_1, R_2, R_3",
+      "\\Omega"
+     ],
+     "tex": "R_{\\text{total}} = R_1 + R_2 + R_3 = 10 + 15 + 25 = 50\\ \\Omega",
+     "where": [
+      "ta/notes/README.md:493",
+      "ta/notes/README.md:631"
+     ],
+     "kind": "display",
+     "id": "eq104"
+    }
+   ]
+  },
+  {
+   "term": "Shannon–Hartley theorem",
+   "source": "README.md",
+   "definition": "The maximum theoretical throughput of a channel, set by its bandwidth and its signal-to-noise ratio. Fiber's near-zero noise floor and multi-THz optical bandwidth give it a theoretical capacity orders of magnitude above copper.",
+   "symbols": [
+    {
+     "tex": "C",
+     "label": "<i>C</i>",
+     "meaning": "channel capacity (bits per second)"
+    },
+    {
+     "tex": "B",
+     "label": "<i>B</i>",
+     "meaning": "bandwidth (Hz)"
+    },
+    {
+     "tex": "S/N",
+     "label": "<i>S</i>/<i>N</i>",
+     "meaning": "signal-to-noise ratio (linear, not dB)"
+    },
+    {
+     "tex": "\\log_2",
+     "label": "log<sub>2</sub>",
+     "meaning": "base-2 logarithm"
+    }
+   ],
+   "equations": [
+    {
+     "plain": "Capacity grows in step with bandwidth, but only with the logarithm of the signal-to-noise ratio.",
+     "tex": "C = B \\log_2\\!\\left(1 + \\frac{S}{N}\\right)",
+     "where": [
+      "README.md:217"
+     ],
+     "kind": "display",
+     "id": "eq105"
+    }
+   ]
+  },
+  {
+   "term": "Shor code",
+   "source": "README.md",
+   "definition": "A quantum error-correcting code that uses 9 physical qubits per logical qubit and corrects arbitrary single-qubit errors (X, Z, and Y).",
+   "symbols": [],
+   "equations": []
+  },
+  {
+   "term": "Single-mode fiber (SMF)",
+   "source": "README.md",
+   "definition": "Fiber with a 9 µm core that carries a single light mode with virtually no modal dispersion, enabling multi-gigabit speeds over distances exceeding 40 km without amplification.",
+   "symbols": [],
+   "equations": []
+  },
+  {
+   "term": "Splitter insertion loss",
+   "source": "README.md",
+   "definition": "The loss a passive 1:N optical splitter puts on each output. The ideal (theoretical) loss is set by the split ratio alone; real splitters add excess loss from manufacturing imperfections — typically 0.1–0.5 dB for a PLC splitter.",
+   "symbols": [
+    {
+     "tex": "IL_{\\text{split}}",
+     "label": "<i>IL</i><sub>split</sub>",
+     "meaning": "ideal splitting loss of a 1:N splitter (dB)"
+    },
+    {
+     "tex": "IL_{\\text{actual}}",
+     "label": "<i>IL</i><sub>actual</sub>",
+     "meaning": "actual insertion loss, excess loss included (dB)"
+    },
+    {
+     "tex": "IL_{\\text{excess}}",
+     "label": "<i>IL</i><sub>excess</sub>",
+     "meaning": "excess loss from manufacturing imperfections (dB)"
+    },
+    {
+     "tex": "N",
+     "label": "<i>N</i>",
+     "meaning": "split ratio: the number of outputs"
+    },
+    {
+     "tex": "\\log_{10}",
+     "label": "log<sub>10</sub>",
+     "meaning": "base-10 logarithm"
+    },
+    {
+     "tex": "\\text{dB}",
+     "label": "dB",
+     "meaning": "decibels"
+    }
+   ],
+   "equations": [
+    {
+     "plain": "Splitting light N ways costs ten times the base-10 logarithm of N, in dB — 3 dB for every halving.",
+     "legend": [
+      "IL_{\\text{split}}",
+      "N",
+      "\\log_{10}",
+      "\\text{dB}"
+     ],
+     "tex": "IL_{\\text{split}} = 10 \\log_{10}(N) \\text{ dB}",
+     "where": [
+      "README.md:163"
+     ],
+     "kind": "display",
+     "id": "eq106"
+    },
+    {
+     "plain": "A real splitter loses the ideal amount plus its excess loss.",
+     "legend": [
+      "IL_{\\text{actual}}",
+      "IL_{\\text{excess}}",
+      "N",
+      "\\log_{10}"
+     ],
+     "tex": "IL_{\\text{actual}} = 10 \\log_{10}(N) + IL_{\\text{excess}}",
+     "where": [
+      "README.md:167"
+     ],
+     "kind": "display",
+     "id": "eq107"
+    }
+   ]
+  },
+  {
+   "term": "Three-phase power",
+   "source": "ta/README.md",
+   "definition": "The real power of a balanced three-phase load, from line-to-line voltage, line current, and power factor. √3 (≈ 1.732) is the line-to-line multiplier for three-phase systems.",
+   "symbols": [
+    {
+     "tex": "P",
+     "label": "<i>P</i>",
+     "meaning": "total three-phase real power (watts, W)"
+    },
+    {
+     "tex": "V",
+     "label": "<i>V</i>",
+     "meaning": "line-to-line voltage (volts, V)"
+    },
+    {
+     "tex": "I",
+     "label": "<i>I</i>",
+     "meaning": "line current (amperes, A)"
+    },
+    {
+     "tex": "\\operatorname{PF}",
+     "label": "PF",
+     "meaning": "power factor, between 0.0 and 1.0"
+    },
+    {
+     "tex": "\\text{PF}",
+     "label": "PF",
+     "meaning": "power factor, between 0.0 and 1.0 — as written in the study notes"
+    },
+    {
+     "tex": "\\text{ W}",
+     "label": "W",
+     "meaning": "unit: watts"
+    }
+   ],
+   "equations": [
+    {
+     "plain": "Three-phase power is root three times voltage times current times power factor.",
+     "legend": [
+      "P",
+      "V",
+      "I",
+      "\\operatorname{PF}"
+     ],
+     "tex": "P=\\sqrt{3}VI\\operatorname{PF}",
+     "where": [
+      "ta/README.md:562",
+      "ta/README.md:691"
+     ],
+     "kind": "inline",
+     "id": "eq108"
+    },
+    {
+     "plain": "Worked from the source: 480 V, 10 A, PF 1.0 gives about 8,314 W.",
+     "legend": [
+      "P",
+      "\\text{ W}"
+     ],
+     "tex": "P=1.732(480)(10)(1.0)\\approx8{,}314\\text{ W}",
+     "where": [
+      "ta/README.md:697"
+     ],
+     "kind": "display",
+     "id": "eq109"
+    },
+    {
+     "plain": "Worked from the study notes: 1.732 × 480 × 10 × 1.0 ≈ 8,314 W.",
+     "legend": [
+      "P",
+      "V",
+      "I",
+      "\\text{PF}",
+      "\\text{ W}"
+     ],
+     "tex": "P = \\sqrt{3} \\times V \\times I \\times \\text{PF} = 1.732 \\times 480 \\times 10 \\times 1.0 \\approx 8,314\\text{ W}",
+     "where": [
+      "ta/notes/README.md:481",
+      "ta/notes/README.md:619"
+     ],
+     "kind": "display",
+     "id": "eq110"
+    }
+   ]
+  },
+  {
+   "term": "Total internal reflection",
+   "source": "README.md",
+   "definition": "When light strikes the core–cladding boundary at an angle greater than the critical angle, it reflects entirely back into the core with zero energy lost to the cladding — the fundamental mechanism that makes fiber work.",
+   "symbols": [],
+   "equations": []
+  },
+  {
+   "term": "Twisted pair",
+   "source": "README.md",
+   "definition": "Copper wire pairs over which traditional telco infrastructure (DSL, POTS) transmits electrical signals.",
+   "symbols": [],
+   "equations": []
+  }
+ ]
+}

@@ -7,7 +7,7 @@ cd "$(dirname "$0")/.."
 BIN="target/release/qompass-ai"
 SITE="target/site"
 DIST="dist"
-ROUTES=("/" "/research" "/solutions" "/on-ai" "/standards" "/about" "/privacy" "/legal" "/ontrack/privacy" "/light-show" "/light-show/testers" "/field-service" "/field-service/trainer")
+ROUTES=("/" "/research" "/solutions" "/on-ai" "/standards" "/about" "/privacy" "/legal" "/ontrack/privacy" "/light-show" "/light-show/testers" "/field-notes" "/field-notes/trainer")
 
 # Tiger Style full references: one quiet page per imported reference,
 # linked only from its chapter on /standards.
@@ -53,12 +53,12 @@ for route in "${ROUTES[@]}"; do
     echo "prerendered $route -> $out"
 done
 
-# Field notes: one page per note the /field-service index links, so the
+# Field notes: one page per note the /field-notes index links, so the
 # NOTES list in src/pages/field_service.rs is the one place to add a note.
-mapfile -t NOTE_ROUTES < <(grep -o 'href="/field-service/notes/[a-z0-9-]*"' "$DIST/field-service/index.html" \
+mapfile -t NOTE_ROUTES < <(grep -o 'href="/field-notes/notes/[a-z0-9-]*"' "$DIST/field-notes/index.html" \
     | sed -e 's/^href="//' -e 's/"$//' | sort -u)
 if [ "${#NOTE_ROUTES[@]}" -eq 0 ]; then
-    echo "prerender: /field-service links no field notes" >&2
+    echo "prerender: /field-notes links no field notes" >&2
     exit 1
 fi
 for route in "${NOTE_ROUTES[@]}"; do
@@ -125,6 +125,14 @@ for toml in content/projects/*.toml; do
         slug="$(basename "$toml" .toml)"
         write_redirect "/projects/$slug" "/solutions/$slug" "Solutions - Qompass AI" "Solutions"
     fi
+done
+
+# And for the Field Service strand, renamed Field Notes on 2026-10-13:
+# the landing, the trainer, and every note moved under /field-notes.
+write_redirect "/field-service" "/field-notes" "Field Notes - Qompass AI" "Field Notes"
+write_redirect "/field-service/trainer" "/field-notes/trainer" "Field Notes - Qompass AI" "the TIA-598 trainer"
+for route in "${NOTE_ROUTES[@]}"; do
+    write_redirect "/field-service${route#/field-notes}" "$route" "Field Notes - Qompass AI" "Field Notes"
 done
 
 # The web server reads dist/ as an unprivileged user, so every deployed

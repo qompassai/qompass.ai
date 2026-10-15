@@ -1,0 +1,367 @@
+{
+  "id": "nec-800-830-communications",
+  "title": "NEC 2023 Chapter 8 — Communications Systems Practice Test",
+  "description": "A 30-question telecommunications administrator practice test drawn from the text and tables of NEC 70, 2023 edition, covering general communications requirements, communications circuits, antenna systems, CATV systems, and network-powered broadband systems.",
+  "questions": [
+    {
+      "id": 1,
+      "question": "For a communications-system installation governed by Chapter 8, which requirements from Chapters 1 through 7 apply?",
+      "choices": [
+        "All requirements in Chapters 1 through 7 apply unless specifically waived",
+        "Only requirements specifically referenced in Chapter 8 apply",
+        "Only the requirements in Chapters 1 and 3 apply",
+        "No requirements in Chapters 1 through 7 can apply"
+      ],
+      "answer": "Only requirements specifically referenced in Chapter 8 apply",
+      "explanation": "Correct: Only requirements specifically referenced in Chapter 8 apply. Section 800.3 states that Chapter 8 is not subject to the requirements of Chapters 1 through 7 except where those requirements are specifically referenced in Chapter 8. It also states that definitions in Article 100 apply."
+    },
+    {
+      "id": 2,
+      "question": "Communications cables have accumulated above a removable suspended-ceiling panel that provides access to electrical equipment. Which condition complies with the NEC?",
+      "choices": [
+        "The cables may rest on the panel if they are less than 50 volts",
+        "The cables may block removal of the panel if warning labels are installed",
+        "The cables must be arranged so their accumulation does not prevent removal of the access panel",
+        "The cables must be enclosed in rigid metal conduit above every access panel"
+      ],
+      "answer": "The cables must be arranged so their accumulation does not prevent removal of the access panel",
+      "explanation": "Correct: The cables must be arranged so their accumulation does not prevent removal of the access panel. Section 800.21 prohibits an accumulation of wires and cables from denying access to electrical equipment by preventing removal of panels, including suspended-ceiling panels, that are designed to provide access."
+    },
+    {
+      "id": 3,
+      "question": "Nonmetallic cable ties are used to secure communications cables in a space used for environmental air. What listing characteristic is required for the ties?",
+      "choices": [
+        "Oil resistance and sunlight resistance",
+        "Low smoke and heat release properties",
+        "A 600-volt insulation rating",
+        "Suitability for direct burial"
+      ],
+      "answer": "Low smoke and heat release properties",
+      "explanation": "Correct: Low smoke and heat release properties. Section 800.24(A) requires nonmetallic cable ties and other nonmetallic cable accessories used to secure and support cables in a space used for environmental air to be listed as having low smoke and heat release properties."
+    },
+    {
+      "id": 4,
+      "question": "Fill in the blank: An accessible communications cable that is not terminated at equipment and is not identified for future use must be ______.",
+      "choices": [
+        "painted orange",
+        "removed",
+        "bonded at both ends",
+        "placed in metal raceway"
+      ],
+      "answer": "removed",
+      "explanation": "Correct: removed. Section 800.25 requires the accessible portion of abandoned communications cables to be removed. A cable identified for future use may remain, but its tag must be sufficiently durable to withstand the environment involved."
+    },
+    {
+      "id": 5,
+      "question": "A communications cable penetrates a fire-resistance-rated floor. What must the installation accomplish at the penetration?",
+      "choices": [
+        "Reduce the floor rating by no more than one hour",
+        "Use an approved firestop method that maintains the fire-resistance rating",
+        "Provide a metal sleeve without any additional sealing",
+        "Terminate the cable within 50 feet of the penetration"
+      ],
+      "answer": "Use an approved firestop method that maintains the fire-resistance rating",
+      "explanation": "Correct: Use an approved firestop method that maintains the fire-resistance rating. Section 800.26 requires penetrations through fire-resistant-rated walls, partitions, floors, or ceilings to be firestopped using approved methods that maintain the fire-resistance rating."
+    },
+    {
+      "id": 6,
+      "question": "Fill in the blank: Unless an applicable exception permits a reduction, an aerial communications cable passing above a roof must have at least ______ of vertical clearance from the roof surface.",
+      "choices": [
+        "4 feet",
+        "6 feet",
+        "8 feet",
+        "10 feet"
+      ],
+      "answer": "8 feet",
+      "explanation": "Correct: 8 feet. Section 800.44(B) requires a vertical clearance of not less than 2.5 m (8 ft) from all points of roofs above which aerial communications cables pass, subject to the stated exceptions."
+    },
+    {
+      "id": 7,
+      "question": "An unlisted outside-plant communications cable enters an ordinary building space and terminates in a permitted enclosure or protector. What is the maximum length generally permitted inside the building before termination?",
+      "choices": [
+        "15 feet",
+        "25 feet",
+        "50 feet",
+        "100 feet"
+      ],
+      "answer": "50 feet",
+      "explanation": "Correct: 50 feet. Section 800.48 permits up to 15 m (50 ft) of unlisted outside-plant communications cable inside a building, measured from its point of entrance, where the cable enters from outside and terminates in an enclosure or listed primary protector. This permission does not apply to risers, ducts fabricated for environmental air, or plenums."
+    },
+    {
+      "id": 8,
+      "question": "Fill in the blanks: A communications bonding conductor must not be smaller than ______ copper, and it is not required to be larger than ______ copper.",
+      "choices": [
+        "18 AWG; 10 AWG",
+        "14 AWG; 6 AWG",
+        "12 AWG; 4 AWG",
+        "10 AWG; 2 AWG"
+      ],
+      "answer": "14 AWG; 6 AWG",
+      "explanation": "Correct: 14 AWG; 6 AWG. Section 800.100(A)(3) requires the bonding conductor to be not smaller than 14 AWG and states that it is not required to be larger than 6 AWG. Its current-carrying capacity must also be approximately equal to that of the grounded metallic members."
+    },
+    {
+      "id": 9,
+      "question": "In new construction, what minimum communications-outlet provision is required for a dwelling?",
+      "choices": [
+        "Two outlets in every habitable room, each cabled to the service equipment",
+        "At least one outlet in a readily accessible area, cabled to the service-provider demarcation point",
+        "One wireless access point with no cabling requirement",
+        "One outlet only where the dwelling exceeds 2,000 square feet"
+      ],
+      "answer": "At least one outlet in a readily accessible area, cabled to the service-provider demarcation point",
+      "explanation": "Correct: At least one outlet in a readily accessible area, cabled to the service-provider demarcation point. Section 805.156 requires this minimum provision for new dwelling construction."
+    },
+    {
+      "id": 10,
+      "question": "An unshielded communications drop cable runs on a building from its last outdoor support to the primary protector. What minimum separation is required from power conductors that are not in raceway or cable?",
+      "choices": [
+        "2 inches",
+        "4 inches",
+        "12 inches",
+        "24 inches"
+      ],
+      "answer": "4 inches",
+      "explanation": "Correct: 4 inches. Section 805.50(B) requires the communications wires and cables on buildings to be separated at least 100 mm (4 in.) from power conductors that are not in a raceway or cable, unless a permanent and firmly fixed nonconductor separates them."
+    },
+    {
+      "id": 11,
+      "question": "Communications conductors requiring a primary protector enter a building through a bushing or raceway. What arrangement is required to help prevent water from entering?",
+      "choices": [
+        "The raceway or bushing must slope downward from the outside",
+        "The raceway or bushing must slope upward from the outside or the conductors must have drip loops immediately before entry",
+        "The conductors must make a complete loop inside the building",
+        "Only a threaded metal service head may be used"
+      ],
+      "answer": "The raceway or bushing must slope upward from the outside or the conductors must have drip loops immediately before entry",
+      "explanation": "Correct: The raceway or bushing must slope upward from the outside or the conductors must have drip loops immediately before entry. Section 805.50(C) gives these water-control requirements and also requires an approved service head."
+    },
+    {
+      "id": 12,
+      "question": "A communications circuit is partly aerial and is not confined within a city block. What primary-protection provision is required?",
+      "choices": [
+        "A listed primary protector must be provided for the circuit",
+        "Only a grounding block is required if the circuit is below 150 volts",
+        "A protector is required only after the first equipment outlet",
+        "No primary protection is required for an aerial circuit"
+      ],
+      "answer": "A listed primary protector must be provided for the circuit",
+      "explanation": "Correct: A listed primary protector must be provided for the circuit. Section 805.90(A) requires a listed primary protector for each communications circuit that is partly or entirely aerial and is not confined within a block."
+    },
+    {
+      "id": 13,
+      "question": "An interbuilding communications circuit on a premises is exposed to lightning. Where must listed primary protectors be installed?",
+      "choices": [
+        "Only at the building with the service-provider demarcation point",
+        "Only at the building with the longest cable run",
+        "At each end of the interbuilding circuit",
+        "At the midpoint of the interbuilding circuit"
+      ],
+      "answer": "At each end of the interbuilding circuit",
+      "explanation": "Correct: At each end of the interbuilding circuit. Section 805.90(A) requires a listed primary protector at each end of an interbuilding communications circuit on a premises where the circuit is exposed to lightning."
+    },
+    {
+      "id": 14,
+      "question": "Where must a communications primary protector generally be located?",
+      "choices": [
+        "Anywhere within 50 feet of the service equipment",
+        "In, on, or immediately adjacent to the structure or building served and as close as practicable to the point of entrance",
+        "Only on the exterior wall at least 6 feet above grade",
+        "At the first communications outlet after the cable enters"
+      ],
+      "answer": "In, on, or immediately adjacent to the structure or building served and as close as practicable to the point of entrance",
+      "explanation": "Correct: In, on, or immediately adjacent to the structure or building served and as close as practicable to the point of entrance. Section 805.90(B) states this location requirement. Section 805.90(C) also generally prohibits locating the protector in a hazardous location or near easily ignitible material."
+    },
+    {
+      "id": 15,
+      "question": "A communications cable with a metallic sheath enters a building. What must be done to the sheath?",
+      "choices": [
+        "Leave it electrically continuous and ungrounded",
+        "Ground or bond it as close as practicable to the point of entrance, or interrupt it with an insulating joint or equivalent device",
+        "Connect it only to the grounded circuit conductor",
+        "Remove the sheath for the first 50 feet inside the building"
+      ],
+      "answer": "Ground or bond it as close as practicable to the point of entrance, or interrupt it with an insulating joint or equivalent device",
+      "explanation": "Correct: Ground or bond it as close as practicable to the point of entrance, or interrupt it with an insulating joint or equivalent device. Section 805.93(A) applies this requirement to the metallic sheath and other metallic members of an entering communications cable."
+    },
+    {
+      "id": 16,
+      "question": "Which support method is prohibited for an outdoor radio or television receiving antenna?",
+      "choices": [
+        "A structurally adequate independent mast",
+        "A listed tower designed for the antenna load",
+        "Attachment to an electric service mast",
+        "A building-mounted bracket designed for the antenna"
+      ],
+      "answer": "Attachment to an electric service mast",
+      "explanation": "Correct: Attachment to an electric service mast. Section 810.12 requires outdoor antennas and lead-in conductors to be securely supported and prohibits attaching them to the electric service mast. It also prohibits attachment to poles or similar structures carrying open electric light or power wires of more than 250 volts between conductors."
+    },
+    {
+      "id": 17,
+      "question": "Fill in the blank: For a receiving-antenna span longer than 45 m (150 ft), a copper-clad steel, bronze, or other high-strength antenna conductor must be at least ______.",
+      "choices": [
+        "20 AWG",
+        "17 AWG",
+        "14 AWG",
+        "10 AWG"
+      ],
+      "answer": "14 AWG",
+      "explanation": "Correct: 14 AWG. Table 810.16(A) specifies 14 AWG as the minimum size for copper-clad steel, bronze, or other high-strength receiving-antenna conductors where the span is over 45 m (150 ft)."
+    },
+    {
+      "id": 18,
+      "question": "An outdoor antenna lead-in conductor could swing toward an electric light or power circuit operating above 250 volts between conductors. What minimum clearance is required?",
+      "choices": [
+        "2 feet",
+        "4 feet",
+        "6 feet",
+        "10 feet"
+      ],
+      "answer": "10 feet",
+      "explanation": "Correct: 10 feet. Section 810.18(A) requires an outdoor antenna lead-in conductor to be installed so that it cannot swing closer than 3.0 m (10 ft) to an electric light or power circuit operating at more than 250 volts between conductors."
+    },
+    {
+      "id": 19,
+      "question": "Where must an antenna discharge unit for a receiving station be located?",
+      "choices": [
+        "At the highest point of the antenna mast",
+        "Outside or inside the building between the lead-in entrance and the receiver, as near as practicable to the entrance",
+        "At the service disconnect only",
+        "Within the receiver cabinet after the power supply"
+      ],
+      "answer": "Outside or inside the building between the lead-in entrance and the receiver, as near as practicable to the entrance",
+      "explanation": "Correct: Outside or inside the building between the lead-in entrance and the receiver, as near as practicable to the entrance. Section 810.20(B) gives this location requirement and prohibits installation near combustible material or in a hazardous location."
+    },
+    {
+      "id": 20,
+      "question": "Which set gives the minimum sizes for an antenna grounding conductor made of copper, aluminum, or copper-clad steel or bronze, respectively?",
+      "choices": [
+        "14 AWG copper; 12 AWG aluminum; 10 AWG copper-clad steel",
+        "12 AWG copper; 10 AWG aluminum; 8 AWG copper-clad steel",
+        "10 AWG copper; 8 AWG aluminum; 17 AWG copper-clad steel or bronze",
+        "8 AWG copper; 6 AWG aluminum; 14 AWG copper-clad steel"
+      ],
+      "answer": "10 AWG copper; 8 AWG aluminum; 17 AWG copper-clad steel or bronze",
+      "explanation": "Correct: 10 AWG copper; 8 AWG aluminum; 17 AWG copper-clad steel or bronze. These minimum sizes are specified in 810.21(H)."
+    },
+    {
+      "id": 21,
+      "question": "A coaxial cable supplies power to equipment directly associated with radio-frequency signal distribution. Which condition is permitted?",
+      "choices": [
+        "The voltage may be unlimited if the coaxial shield is grounded",
+        "The voltage must not exceed 60 volts, and the source must have power-limiting characteristics",
+        "The voltage must not exceed 120 volts, and a 20-ampere breaker is required",
+        "Power may be supplied to any connected equipment whether or not it is intended to be powered"
+      ],
+      "answer": "The voltage must not exceed 60 volts, and the source must have power-limiting characteristics",
+      "explanation": "Correct: The voltage must not exceed 60 volts, and the source must have power-limiting characteristics. Section 820.15 permits coaxial cable to deliver power to equipment directly associated with radio-frequency distribution where these limits are met, and requires power to be blocked from equipment not intended to be powered."
+    },
+    {
+      "id": 22,
+      "question": "A coaxial cable with an outer conductive shield enters a building. Where must the shield be grounded?",
+      "choices": [
+        "At the first active splitter, regardless of its distance from entry",
+        "As close as practicable to the point of entrance",
+        "Only at the farthest outlet from the entrance",
+        "At both ends of every indoor cable segment"
+      ],
+      "answer": "As close as practicable to the point of entrance",
+      "explanation": "Correct: As close as practicable to the point of entrance. Section 820.93(A) requires the outer conductive shield of a coaxial cable entering a building to be grounded as close as practicable to the point of entrance or interrupted by an insulating joint or equivalent device."
+    },
+    {
+      "id": 23,
+      "question": "A listed primary protector is installed on an outside coaxial cable. Which location complies with the NEC?",
+      "choices": [
+        "As close as practicable to the point of entrance, on either side of the building wall or integral to a grounding block",
+        "Only at the final television outlet",
+        "Only within the service disconnect enclosure",
+        "Anywhere on the premises if it is at least 6 feet above grade"
+      ],
+      "answer": "As close as practicable to the point of entrance, on either side of the building wall or integral to a grounding block",
+      "explanation": "Correct: As close as practicable to the point of entrance, on either side of the building wall or integral to a grounding block. Section 820.93(C) states this location rule for a listed primary protector used on an external coaxial cable."
+    },
+    {
+      "id": 24,
+      "question": "A designer needs a permitted substitute for Type CATVR coaxial cable. Which listed pair contains cable types permitted as substitutes?",
+      "choices": [
+        "CATVP and CMP",
+        "CATV and CATVX",
+        "CMG and CMX",
+        "BL and BLX"
+      ],
+      "answer": "CATVP and CMP",
+      "explanation": "Correct: CATVP and CMP. Table 820.154(b) lists CATVP, CMP, CMR, BMR, BLP, and BLR as permitted substitutions for Type CATVR cable."
+    },
+    {
+      "id": 25,
+      "question": "For a medium-power network-powered broadband circuit, which pair correctly states the maximum voltage rating and maximum power rating?",
+      "choices": [
+        "100 volts and 60 volt-amperes",
+        "100 volts and 100 volt-amperes",
+        "150 volts and 100 volt-amperes",
+        "150 volts and 250 volt-amperes"
+      ],
+      "answer": "150 volts and 100 volt-amperes",
+      "explanation": "Correct: 150 volts and 100 volt-amperes. Table 830.15 gives a maximum voltage rating of 150 volts and a maximum power rating of 100 VA for a medium-power network-powered broadband circuit. The table separately lists a 250 VA power limitation."
+    },
+    {
+      "id": 26,
+      "question": "An overhead network-powered broadband cable crosses a residential driveway used only by vehicles under 2.4 m (8 ft) in height. What minimum clearance is required at the lowest point of the cable?",
+      "choices": [
+        "9.5 feet",
+        "11.5 feet",
+        "13.5 feet",
+        "15.5 feet"
+      ],
+      "answer": "11.5 feet",
+      "explanation": "Correct: 11.5 feet. Section 830.44(B)(2) requires 3.5 m (11.5 ft) over residential property and driveways, and commercial areas not subject to truck traffic, where the cable does not exceed 300 volts to ground."
+    },
+    {
+      "id": 27,
+      "question": "A network-powered broadband cable is direct buried at a location not otherwise specified in the minimum-cover table. What minimum cover is required?",
+      "choices": [
+        "6 inches",
+        "12 inches",
+        "18 inches",
+        "24 inches"
+      ],
+      "answer": "18 inches",
+      "explanation": "Correct: 18 inches. Table 830.47(A) requires 450 mm (18 in.) of cover for a direct-buried cable or conductor at all locations not specified elsewhere in the table."
+    },
+    {
+      "id": 28,
+      "question": "May a medium-power network-powered broadband cable occupy the same raceway, cable tray, box, enclosure, or cable routing assembly with ordinary communications cable or CATV coaxial cable?",
+      "choices": [
+        "Yes, without restriction",
+        "Yes, if every cable has a plenum rating",
+        "No, that combination is not permitted",
+        "Only if the medium-power cable is smaller than 18 AWG"
+      ],
+      "answer": "No, that combination is not permitted",
+      "explanation": "Correct: No, that combination is not permitted. Section 830.133(A)(1)(c) prohibits medium-power network-powered broadband cables from occupying the same raceway, cable tray, box, enclosure, or cable routing assembly with communications cables, conductive optical fiber cables, or CATV coaxial cables."
+    },
+    {
+      "id": 29,
+      "question": "A medium-power network-powered broadband cable must be spliced or extended. Which method is permitted?",
+      "choices": [
+        "An open-air twist splice above a suspended ceiling",
+        "A splice or extension using a listed junction box or listed patch panel",
+        "A taped splice secured to the exterior of a conduit",
+        "Any connector marked for 60 volts"
+      ],
+      "answer": "A splice or extension using a listed junction box or listed patch panel",
+      "explanation": "Correct: A splice or extension using a listed junction box or listed patch panel. Section 830.133(C) requires listed junction boxes or listed patch panels for splices and extensions of medium-power network-powered broadband cable."
+    },
+    {
+      "id": 30,
+      "question": "Fill in the blank: The inner edge of a bend in a network-powered broadband cable must have a radius not less than ______ the cable diameter.",
+      "choices": [
+        "4 times",
+        "6 times",
+        "8 times",
+        "10 times"
+      ],
+      "answer": "10 times",
+      "explanation": "Correct: 10 times. Section 830.160 requires bends in network-powered broadband cable to be made so that the cable is not damaged and the radius of the inner edge of a bend is not less than 10 times the cable diameter."
+    }
+  ]
+}

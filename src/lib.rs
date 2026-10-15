@@ -5,6 +5,7 @@
 
 pub mod app;
 pub mod download_data;
+pub mod field_notes_data;
 pub mod orcid_data;
 pub mod pages;
 pub mod project_data;

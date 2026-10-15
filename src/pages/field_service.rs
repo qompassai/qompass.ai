@@ -1,6 +1,8 @@
-//! Field Service — fiber notes from a working technician
-//! (`/field-service`) and the field notes under it
-//! (`/field-service/notes/<slug>`).
+//! Field Notes — fiber notes from a working technician (`/field-notes`).
+//!
+//! Renamed from `/field-service` on 2026-10-13; the notes live under
+//! `/field-notes/notes/<slug>`. The landing also carries the US fiber
+//! timeline, the glossary, and the telco-admin practice quizzes.
 //!
 //! Every figure in a note is a typical or standard-reference value and
 //! says so on the page; standards are named, never quoted. Nothing here
@@ -11,7 +13,10 @@
 //! alphabetical order by title), and add the match arm in
 //! [`FieldNoteDispatch`]. `scripts/prerender.sh` prerenders every note
 //! the index links, so the index is the one list to extend.
+use crate::pages::fiber_timeline::FiberTimeline;
 use crate::pages::fiber_trainer::{fiber_name, swatch_class, FIBERS};
+use crate::pages::field_glossary::FieldGlossary;
+use crate::pages::telco_quizzes::TelcoQuizzes;
 use leptos::prelude::*;
 use leptos_meta::Title;
 use leptos_router::hooks::use_params_map;
@@ -45,15 +50,39 @@ const NOTES: &[NoteEntry] = &[
 /// The public L&I record for the license, the same link the /about identity list uses.
 const LICENSE_URL: &str = "https://secure.lni.wa.gov/verify/Detail.aspx?UBI=&LIC=PORTEM*744M3&SAW=";
 
-#[component]
-pub fn FieldService() -> impl IntoView {
+/// Where Field Notes sits in the site's flow — Standards, then
+/// Analysis, then Field Notes, promoted into Research — with working
+/// links both ways. Shared by the landing and the trainer.
+pub fn flow_block() -> impl IntoView {
     view! {
-        <Title text="Field Service - Qompass AI" />
+        <section class="study-section fn-flow">
+            <p class="band-label">"THE FLOW"</p>
+            <p>
+                "These are not raw sightings. They are the concrete results of work done under "
+                <a href="/standards">"Standards"</a>
+                " and weighed in "
+                <a href="/analysis">"Analysis"</a>
+                " — and the lessons those results taught. What holds is promoted into "
+                <a href="/research">"Research"</a>
+                "; what fails changes the practice, and in time the Standards themselves."
+            </p>
+            <nav class="fn-flow-nav" aria-label="Site flow">
+                <a href="/analysis">"← Analysis: the weighing"</a>
+                <a href="/research">"Research: the long arc →"</a>
+            </nav>
+        </section>
+    }
+}
+
+#[component]
+pub fn FieldNotes() -> impl IntoView {
+    view! {
+        <Title text="Field Notes - Qompass AI" />
         <section class="page">
-            <p class="page-bearing">"CHART — FIELD SERVICE"</p>
+            <p class="page-bearing">"Step Three — Learn"</p>
             <article class="project-article">
                 <header class="study-head">
-                    <h1>"Field Service"</h1>
+                    <h1>"Field Notes"</h1>
                     <p class="page-lede">"Learning fiber inside out, and teaching it forward."</p>
                 </header>
                 <section class="study-section">
@@ -74,6 +103,29 @@ pub fn FieldService() -> impl IntoView {
                         "trade practice; every number is labeled for what it is."
                     </p>
                 </section>
+                <section class="study-section" id="two-working-lives">
+                    <p class="band-label">"TWO WORKING LIVES"</p>
+                    <p>
+                        "Part of my working life happens at a desk. Quantum physics, AI, "
+                        "programming — I value that work, and I think it matters. But it lives in "
+                        "the abstract and in software. You can do it for a long time without "
+                        "touching anything you could hold in your hand."
+                    </p>
+                    <p>
+                        "The other part happens in the field, and fiber is the opposite. A "
+                        "fiber-optic network is tangible: glass in a buffer tube, a drop on a pole, "
+                        "a splice in a closure, light at an ONT. It is practical, and it actually "
+                        "connects people."
+                    </p>
+                    <p>
+                        "Neither half is the point on its own. The point is the combination: the "
+                        "big ideation that comes from inside work — from being an indoor cat — "
+                        "joined with the practical, hands-on knowledge that comes from every "
+                        "aspect of even the most basic residential install: the route the drop "
+                        "takes, the light that reaches the ONT, the wall it goes through, the "
+                        "person waiting on it."
+                    </p>
+                </section>
                 <section class="study-section">
                     <p class="band-label">"FIELD NOTES"</p>
                     <div class="fs-notes">
@@ -81,7 +133,7 @@ pub fn FieldService() -> impl IntoView {
                             .iter()
                             .map(|note| {
                                 view! {
-                                    <a class="fs-note" href=format!("/field-service/notes/{}", note.slug)>
+                                    <a class="fs-note" href=format!("/field-notes/notes/{}", note.slug)>
                                         <span class="entry-kind">"FIELD NOTE"</span>
                                         <span class="fs-note-title">{note.title}</span>
                                         <span class="fs-note-blurb">{note.blurb}</span>
@@ -101,7 +153,7 @@ pub fn FieldService() -> impl IntoView {
                         "phone in a truck cab."
                     </p>
                     <p class="study-link">
-                        <a href="/field-service/trainer">"Open the trainer →"</a>
+                        <a href="/field-notes/trainer">"Open the trainer →"</a>
                     </p>
                 </section>
                 <section class="study-section">
@@ -116,6 +168,9 @@ pub fn FieldService() -> impl IntoView {
                         <a href="/light-show">"See Light Show →"</a>
                     </p>
                 </section>
+                <FiberTimeline />
+                <FieldGlossary />
+                <TelcoQuizzes />
                 <section class="study-section">
                     <p class="band-label">"LEARNING IN PUBLIC"</p>
                     <p>
@@ -127,6 +182,7 @@ pub fn FieldService() -> impl IntoView {
                         "."
                     </p>
                 </section>
+                {flow_block()}
             </article>
         </section>
     }
@@ -136,7 +192,7 @@ pub fn FieldService() -> impl IntoView {
 fn note_head(title: &'static str, lede: &'static str) -> impl IntoView {
     view! {
         <Title text=format!("{title} - Field Notes - Qompass AI") />
-        <p class="page-bearing">"FIELD SERVICE — FIELD NOTE"</p>
+        <p class="page-bearing">"FIELD NOTES — NOTE"</p>
         <header class="study-head">
             <h1>{title}</h1>
             <p class="page-lede">{lede}</p>
@@ -148,7 +204,7 @@ fn note_head(title: &'static str, lede: &'static str) -> impl IntoView {
 fn note_foot() -> impl IntoView {
     view! {
         <p class="study-link fs-back">
-            <a href="/field-service">"← All field notes"</a>
+            <a href="/field-notes">"← All field notes"</a>
         </p>
     }
 }
@@ -729,7 +785,7 @@ fn ColorCode() -> impl IntoView {
             <p>
                 "Knowing the sequence and recalling it instantly at the tray are two different "
                 "skills. The "
-                <a href="/field-service/trainer">"TIA-598 trainer"</a>
+                <a href="/field-notes/trainer">"TIA-598 trainer"</a>
                 " drills color to position, position to color, and the whole order, with a "
                 "score per round."
             </p>

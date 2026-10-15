@@ -1,0 +1,367 @@
+{
+  "id": "nec-500-516-hazardous-locations",
+  "title": "NEC 2023 Articles 500–516 — Hazardous Locations Practice Test",
+  "description": "A 30-question practice test drawn from the text and tables of NEC 70, 2023 edition, covering hazardous-location documentation and classification, material groups, equipment marking, wiring methods, seals, bonding, intrinsically safe systems, gas and dust zones, commercial garages, motor-fuel dispensing facilities, and spray applications.",
+  "questions": [
+    {
+      "id": 1,
+      "question": "An area is designated as hazardous (classified) or determined to be unclassified. What documentation is required?",
+      "choices": [
+        "Only a verbal determination by the facility owner",
+        "An area-classification drawing and associated documentation available to the authority having jurisdiction and authorized personnel",
+        "A manufacturer’s equipment catalog kept at the service equipment",
+        "A one-line diagram filed only with the electric utility"
+      ],
+      "answer": "An area-classification drawing and associated documentation available to the authority having jurisdiction and authorized personnel",
+      "explanation": "Correct: An area-classification drawing and associated documentation available to the authority having jurisdiction and authorized personnel. Section 500.4 requires the classification to be documented on an area-classification drawing and other associated documentation and made available to the AHJ and persons authorized to design, install, inspect, maintain, or operate the electrical equipment."
+    },
+    {
+      "id": 2,
+      "question": "Ignitible concentrations of flammable gas can exist under normal operating conditions in a process area. How is the location classified under the Division system?",
+      "choices": [
+        "Class I, Division 1",
+        "Class I, Division 2",
+        "Class II, Division 1",
+        "Class III, Division 1"
+      ],
+      "answer": "Class I, Division 1",
+      "explanation": "Correct: Class I, Division 1. Section 500.5(B)(1)(1) includes a location in which ignitible concentrations of flammable gases, flammable liquid-produced vapors, or combustible liquid-produced vapors can exist under normal operating conditions."
+    },
+    {
+      "id": 3,
+      "question": "Flammable gas is normally confined within a closed system and can escape only through accidental rupture, system breakdown, or abnormal equipment operation. How is the location classified under the Division system?",
+      "choices": [
+        "Class I, Division 1",
+        "Class I, Division 2",
+        "Class II, Division 2",
+        "Class III, Division 2"
+      ],
+      "answer": "Class I, Division 2",
+      "explanation": "Correct: Class I, Division 2. Section 500.5(B)(2)(1) describes a location where flammable liquids, vapors, or gases are normally confined within closed containers or systems and can escape only because of accidental rupture, breakdown, or abnormal operation."
+    },
+    {
+      "id": 4,
+      "question": "Combustible dust is present in the air under normal operating conditions in quantities sufficient to produce an ignitible mixture. How is the location classified?",
+      "choices": [
+        "Class I, Division 2",
+        "Class II, Division 1",
+        "Class II, Division 2",
+        "Class III, Division 1"
+      ],
+      "answer": "Class II, Division 1",
+      "explanation": "Correct: Class II, Division 1. Section 500.5(C)(1)(1) applies where combustible dust is in the air under normal operating conditions in quantities sufficient to produce explosive or ignitible mixtures."
+    },
+    {
+      "id": 5,
+      "question": "Ignitible fibers or flyings are stored or handled in an area, but the activity is not part of the manufacturing process. How is the area classified?",
+      "choices": [
+        "Class II, Division 1",
+        "Class II, Division 2",
+        "Class III, Division 1",
+        "Class III, Division 2"
+      ],
+      "answer": "Class III, Division 2",
+      "explanation": "Correct: Class III, Division 2. Section 500.5(D)(2)(b) classifies locations where ignitible fibers or flyings are stored or handled, other than in the process of manufacture, as Class III, Division 2."
+    },
+    {
+      "id": 6,
+      "question": "Which Class I material group applies to an acetylene atmosphere?",
+      "choices": [
+        "Group A",
+        "Group B",
+        "Group C",
+        "Group D"
+      ],
+      "answer": "Group A",
+      "explanation": "Correct: Group A. Section 500.6(A)(1) identifies acetylene as Class I, Group A."
+    },
+    {
+      "id": 7,
+      "question": "An atmosphere contains combustible aluminum or magnesium dust. Which Class II material group applies?",
+      "choices": [
+        "Group E",
+        "Group F",
+        "Group G",
+        "Group D"
+      ],
+      "answer": "Group E",
+      "explanation": "Correct: Group E. Section 500.6(B)(1) assigns atmospheres containing combustible metal dusts, including aluminum, magnesium, and their commercial alloys, to Group E."
+    },
+    {
+      "id": 8,
+      "question": "Fill in the blank: Equipment marked with temperature code T4 has a maximum surface temperature of ______.",
+      "choices": [
+        "100°C",
+        "120°C",
+        "135°C",
+        "165°C"
+      ],
+      "answer": "135°C",
+      "explanation": "Correct: 135°C. Table 500.8(C)(4) assigns temperature code T4 to a maximum surface temperature of 135°C (275°F)."
+    },
+    {
+      "id": 9,
+      "question": "Equipment evaluated under the Division system is designed for an ambient-temperature range that requires no ambient-temperature marking. Which range is it?",
+      "choices": [
+        "−40°C to +40°C",
+        "−25°C to +40°C",
+        "−20°C to +50°C",
+        "0°C to +40°C"
+      ],
+      "answer": "−25°C to +40°C",
+      "explanation": "Correct: −25°C to +40°C. Section 500.8(C)(5) states that electrical equipment designed for use from −25°C to +40°C requires no ambient-temperature marking. Equipment intended for another range must be marked with the special range and the symbol Ta or Tamb."
+    },
+    {
+      "id": 10,
+      "question": "Fill in the blank: An NPT-threaded entry into explosionproof equipment must generally have at least ______ threads fully engaged.",
+      "choices": [
+        "three",
+        "four",
+        "five",
+        "seven"
+      ],
+      "answer": "five",
+      "explanation": "Correct: five. Section 500.8(E)(1) requires NPT-threaded entries into explosionproof equipment to have at least five threads fully engaged. The listed factory-threaded exception permits at least four and one-half fully engaged threads."
+    },
+    {
+      "id": 11,
+      "question": "Which wiring method is expressly permitted as a general method in a Class I, Division 1 location?",
+      "choices": [
+        "Threaded rigid metal conduit or threaded intermediate metal conduit",
+        "Electrical metallic tubing with setscrew fittings",
+        "Type NM cable with listed connectors",
+        "Flexible metal conduit without a bonding jumper"
+      ],
+      "answer": "Threaded rigid metal conduit or threaded intermediate metal conduit",
+      "explanation": "Correct: Threaded rigid metal conduit or threaded intermediate metal conduit. Section 501.10(A)(1)(1) permits threaded RMC or threaded IMC, including systems with supplemental corrosion-protection coatings, in Class I, Division 1 locations."
+    },
+    {
+      "id": 12,
+      "question": "A Class 2 control circuit is installed in a Class I, Division 2 area. Which cable method is specifically permitted when it is terminated with listed fittings?",
+      "choices": [
+        "Type PLTC or Type PLTC-ER cable",
+        "Type NM-B cable",
+        "Type SE cable",
+        "Type UF cable with ordinary connectors"
+      ],
+      "answer": "Type PLTC or Type PLTC-ER cable",
+      "explanation": "Correct: Type PLTC or Type PLTC-ER cable. Section 501.10(B)(1)(3) permits these cable types for Class 2 and Class 3 circuits, including installation in cable-tray systems, when terminated with listed fittings. Type PLTC-ER must include an equipment grounding conductor in addition to any drain wire."
+    },
+    {
+      "id": 13,
+      "question": "Fill in the blank: Where a required conduit seal serves an explosionproof enclosure containing terminals, splices, or taps and the entry is trade size 2 or larger, the seal must generally be installed within ______ of the enclosure.",
+      "choices": [
+        "12 inches",
+        "18 inches",
+        "24 inches",
+        "36 inches"
+      ],
+      "answer": "18 inches",
+      "explanation": "Correct: 18 inches. Section 501.15(A)(1) requires the conduit seal when the entry is metric designator 53 (trade size 2) or larger and the enclosure contains terminals, splices, or taps. The seal must be within 450 mm (18 in.) of the enclosure or as required by the enclosure marking."
+    },
+    {
+      "id": 14,
+      "question": "Which pair correctly states the minimum melting point for conduit-sealing compound and the minimum compound thickness in a completed seal, unless a listed cable-sealing fitting or other stated condition applies?",
+      "choices": [
+        "65°C and 6 mm",
+        "80°C and 12 mm",
+        "93°C and 16 mm",
+        "100°C and 25 mm"
+      ],
+      "answer": "93°C and 16 mm",
+      "explanation": "Correct: 93°C and 16 mm. Sections 501.15(C)(2) and (C)(3) require the compound melting point to be at least 93°C (200°F), and the completed seal thickness must never be less than 16 mm (5/8 in.), while also meeting the trade-size-based thickness rule."
+    },
+    {
+      "id": 15,
+      "question": "May locknut-bushing or double-locknut contact be relied on as the bonding means for metal raceways and enclosures serving a Class I location?",
+      "choices": [
+        "Yes, for circuits of 150 volts or less",
+        "Yes, if two locknuts are installed on each side",
+        "No; bonding jumpers with identified fittings or another approved bonding means must be used",
+        "No; every raceway must instead contain two equipment grounding conductors"
+      ],
+      "answer": "No; bonding jumpers with identified fittings or another approved bonding means must be used",
+      "explanation": "Correct: No; bonding jumpers with identified fittings or another approved bonding means must be used. Section 501.30(B)(1)(a) states that locknut-bushing and double-locknut contact must not be depended on for bonding purposes."
+    },
+    {
+      "id": 16,
+      "question": "Which additional raceway method is expressly permitted in a Class II, Division 2 location?",
+      "choices": [
+        "Dusttight wireways or electrical metallic tubing with listed compression-type connectors or couplings",
+        "Open wiring on insulators in every process area",
+        "Electrical nonmetallic tubing with ordinary snap-in fittings",
+        "Type NM cable supported by an open cable tray"
+      ],
+      "answer": "Dusttight wireways or electrical metallic tubing with listed compression-type connectors or couplings",
+      "explanation": "Correct: Dusttight wireways or electrical metallic tubing with listed compression-type connectors or couplings. Section 502.10(B)(1)(3) expressly permits this method in Class II, Division 2 locations."
+    },
+    {
+      "id": 17,
+      "question": "A raceway communicates between a dust-ignitionproof enclosure and an enclosure that is not dust-ignitionproof. Which arrangement is one permitted means of preventing dust entry?",
+      "choices": [
+        "A horizontal raceway at least 10 feet long",
+        "An upward vertical raceway at least 2 feet long",
+        "A flexible metallic raceway at least 3 feet long",
+        "Any raceway if both enclosures are grounded"
+      ],
+      "answer": "A horizontal raceway at least 10 feet long",
+      "explanation": "Correct: A horizontal raceway at least 10 feet long. Section 502.15 permits a permanent effective seal, a horizontal raceway at least 3.05 m (10 ft) long, a downward vertical raceway at least 1.5 m (5 ft) long, an equivalent horizontal-and-downward arrangement, or electrical sealing putty."
+    },
+    {
+      "id": 18,
+      "question": "In a Class II, Division 1 location, what construction is required for boxes and fittings in which taps, joints, or terminal connections are made?",
+      "choices": [
+        "Threaded bosses, dusttight construction, and identification for Class II locations",
+        "General-purpose construction with ventilation openings",
+        "NEMA 1 construction with bonding locknuts",
+        "Nonmetallic construction without listed termination fittings"
+      ],
+      "answer": "Threaded bosses, dusttight construction, and identification for Class II locations",
+      "explanation": "Correct: Threaded bosses, dusttight construction, and identification for Class II locations. Section 502.10(A)(3) requires threaded bosses for conduit or cable terminations and dusttight construction; boxes and fittings containing taps, joints, or terminal connections, and those used in Group E locations, must be identified for Class II locations."
+    },
+    {
+      "id": 19,
+      "question": "Which types of motors, generators, and other rotating machinery are generally permitted in Class III, Division 1 and Division 2 locations?",
+      "choices": [
+        "Open dripproof or weather-protected machines",
+        "Totally enclosed nonventilated, totally enclosed pipe-ventilated, or totally enclosed fan-cooled machines",
+        "Any standard open motor with thermal overload protection",
+        "Explosionproof motors only"
+      ],
+      "answer": "Totally enclosed nonventilated, totally enclosed pipe-ventilated, or totally enclosed fan-cooled machines",
+      "explanation": "Correct: Totally enclosed nonventilated, totally enclosed pipe-ventilated, or totally enclosed fan-cooled machines. Section 503.125 gives these general motor and generator requirements, subject to its limited exception."
+    },
+    {
+      "id": 20,
+      "question": "A Class III, Division 2 compartment contains no machinery and is used solely for storage. Which wiring method may be permitted?",
+      "choices": [
+        "Open wiring on insulators installed under the applicable open-wiring requirements and protected from physical damage",
+        "Bare conductors fastened directly to wood framing",
+        "Flexible cord laid on the floor without protection",
+        "Any wiring method used in an unclassified office"
+      ],
+      "answer": "Open wiring on insulators installed under the applicable open-wiring requirements and protected from physical damage",
+      "explanation": "Correct: Open wiring on insulators installed under the applicable open-wiring requirements and protected from physical damage. Section 503.10(B)(2) permits this method in storage-only sections, compartments, or areas that contain no machinery when installed in accordance with Part II of Article 398, including required physical protection."
+    },
+    {
+      "id": 21,
+      "question": "What listing rule applies to intrinsically safe apparatus and associated apparatus?",
+      "choices": [
+        "Both must be listed, except simple apparatus described on the control drawing need not be listed",
+        "Only associated apparatus must be listed",
+        "Listing is optional when the circuit is below 30 volts",
+        "Only apparatus installed outside the classified area must be listed"
+      ],
+      "answer": "Both must be listed, except simple apparatus described on the control drawing need not be listed",
+      "explanation": "Correct: Both must be listed, except simple apparatus described on the control drawing need not be listed. Section 504.4 requires all intrinsically safe apparatus and associated apparatus to be listed and provides the stated exception for simple apparatus."
+    },
+    {
+      "id": 22,
+      "question": "Intrinsically safe circuit conductors and nonintrinsically safe circuit conductors share a cable tray. Which separation method is permitted?",
+      "choices": [
+        "At least 2 inches of separation with the conductors secured",
+        "At least 1/4 inch of separation without securement",
+        "Color coding alone",
+        "No separation when both circuits are below 50 volts"
+      ],
+      "answer": "At least 2 inches of separation with the conductors secured",
+      "explanation": "Correct: At least 2 inches of separation with the conductors secured. Section 504.30(A)(1)(1)(a) permits separation of at least 50 mm (2 in.) with securement. The same subsection also permits specified grounded metal or approved insulating partitions and certain grounded metal-sheathed or metal-clad cable arrangements."
+    },
+    {
+      "id": 23,
+      "question": "Under the gas-zone classification system, ignitible concentrations of flammable gas or vapor are present continuously or for long periods. Which zone applies?",
+      "choices": [
+        "Zone 0",
+        "Zone 1",
+        "Zone 2",
+        "Zone 20"
+      ],
+      "answer": "Zone 0",
+      "explanation": "Correct: Zone 0. Section 505.5(B)(1) defines Zone 0 by the continuous or long-period presence of ignitible concentrations of flammable gases or vapors."
+    },
+    {
+      "id": 24,
+      "question": "Which gas-zone material group includes acetylene and hydrogen?",
+      "choices": [
+        "Group IIA",
+        "Group IIB",
+        "Group IIC",
+        "Group IIIC"
+      ],
+      "answer": "Group IIC",
+      "explanation": "Correct: Group IIC. Section 505.6(A) includes acetylene and hydrogen in Group IIC. The informational text explains that IIC corresponds to the combination of Division-system Groups A and B."
+    },
+    {
+      "id": 25,
+      "question": "Equipment is listed for a Zone 0 location. Where else may it be installed when the gas or vapor is the same and the marked protection requirements are followed?",
+      "choices": [
+        "Zone 1 or Zone 2",
+        "Zone 20 only",
+        "Class II, Division 1 only",
+        "Only in the Zone 0 location shown on the label"
+      ],
+      "answer": "Zone 1 or Zone 2",
+      "explanation": "Correct: Zone 1 or Zone 2. Section 505.9(B)(1) permits Zone 0-listed equipment in Zone 1 or Zone 2 for the same gas or vapor when installed according to the requirements for its marked type of protection."
+    },
+    {
+      "id": 26,
+      "question": "Under the dust-zone classification system, ignitible concentrations of combustible dust or fibers are present continuously or for long periods. Which zone applies?",
+      "choices": [
+        "Zone 2",
+        "Zone 20",
+        "Zone 21",
+        "Zone 22"
+      ],
+      "answer": "Zone 20",
+      "explanation": "Correct: Zone 20. Section 506.5(B)(1) defines Zone 20 as a location where ignitible concentrations of combustible dust, combustible fibers or flyings, or ignitible fibers or flyings are present continuously or for long periods. It also includes continuous or long-period hazardous quantities of Group IIIC combustible dust."
+    },
+    {
+      "id": 27,
+      "question": "In a major repair garage where heavier-than-air Class I fuel is transferred, how is an unventilated pit or belowgrade work area classified?",
+      "choices": [
+        "Class I, Division 1 or Zone 1 for the entire pit or belowgrade area",
+        "Class I, Division 2 or Zone 2 only within 18 inches of the floor",
+        "Class II, Division 1 or Zone 21",
+        "Unclassified if the building has general ventilation"
+      ],
+      "answer": "Class I, Division 1 or Zone 1 for the entire pit or belowgrade area",
+      "explanation": "Correct: Class I, Division 1 or Zone 1 for the entire pit or belowgrade area. Table 511.3(C) classifies the entire unventilated pit, belowgrade work area, or subfloor work area in a major repair garage where Class I liquids or gaseous fuels are transferred or dispensed as Division 1 or Zone 1."
+    },
+    {
+      "id": 28,
+      "question": "Fill in the blanks: A clearly identified emergency electrical disconnect serving motor-fuel dispensing equipment must generally be located not less than ______ and not more than ______ from the dispensing devices served.",
+      "choices": [
+        "10 feet; 50 feet",
+        "20 feet; 100 feet",
+        "25 feet; 75 feet",
+        "50 feet; 150 feet"
+      ],
+      "answer": "20 feet; 100 feet",
+      "explanation": "Correct: 20 feet; 100 feet. Section 514.11(A) requires the emergency shutoff device or electrical disconnect to be in an approved location at least 6 m (20 ft) and not more than 30 m (100 ft) from the dispensing devices it serves."
+    },
+    {
+      "id": 29,
+      "question": "Before maintenance or service of a fuel-dispensing device, what sources must the provided disconnecting means be capable of removing?",
+      "choices": [
+        "Power circuits only",
+        "Power and control circuits only",
+        "All external voltage sources, including power, communications, data, video, and feedback",
+        "Only circuits operating above 50 volts"
+      ],
+      "answer": "All external voltage sources, including power, communications, data, video, and feedback",
+      "explanation": "Correct: All external voltage sources, including power, communications, data, video, and feedback. Section 514.13 requires each dispensing device to have a means to remove all of these external voltage sources during maintenance and service, and the means must be capable of being locked in the open position in accordance with 110.25."
+    },
+    {
+      "id": 30,
+      "question": "Spray application is performed in a closed-top, open-face spray booth. How must wiring or utilization equipment located outside the booth but within 3 feet of an opening be suitable for the location?",
+      "choices": [
+        "Class I, Division 2; Zone 2; Class II, Division 2; or Zone 22, as applicable",
+        "Class I, Division 1 or Zone 0 only",
+        "Class III, Division 1 only",
+        "Unclassified whenever the booth has mechanical exhaust"
+      ],
+      "answer": "Class I, Division 2; Zone 2; Class II, Division 2; or Zone 22, as applicable",
+      "explanation": "Correct: Class I, Division 2; Zone 2; Class II, Division 2; or Zone 22, as applicable. Section 516.5(D)(2) applies this classification to wiring and utilization equipment outside a closed-top, open-face, or open-front spray booth or room but within 915 mm (3 ft) of an opening."
+    }
+  ]
+}

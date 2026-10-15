@@ -1,0 +1,657 @@
+{
+  "id": "nec-705-770-special-conditions",
+  "title": "NEC 2023 Articles 705–770 — Special Conditions",
+  "description": "Thirty book-reference questions drawn only from NEC 2023 Articles 705, 706, 708, 710, 722, 724, 725, 726, 728, 750, 760, and 770. Question stems omit section-number clues; answers are stated in the cited NEC text or tables.",
+  "questions": [
+    {
+      "id": 1,
+      "question": "Equipment is used to interconnect an electric power production source with another power source. What approval does the NEC require for this equipment?",
+      "choices": [
+        "It must be listed for the intended use",
+        "It only needs a field-applied voltage label",
+        "It may be unlisted when installed indoors",
+        "It must be approved only by the serving utility"
+      ],
+      "answer": "It must be listed for the intended use",
+      "explanation": {
+        "correct": {
+          "text": "Equipment used to interconnect electric power production sources must be listed for the intended use.",
+          "indexKeywords": ["Interconnection equipment -> listed for intended use", "Power production sources -> equipment approval"],
+          "sections": ["705.6"]
+        },
+        "choices": {
+          "It must be listed for the intended use": {"text": "This is the approval required for interconnection equipment.", "sections": ["705.6"]},
+          "It only needs a field-applied voltage label": {"text": "A field-applied voltage label alone does not satisfy the listing requirement.", "sections": ["705.6"]},
+          "It may be unlisted when installed indoors": {"text": "The requirement is not waived merely because the equipment is indoors.", "sections": ["705.6"]},
+          "It must be approved only by the serving utility": {"text": "Utility approval does not replace the NEC equipment approval requirement.", "sections": ["705.6"]}
+        }
+      }
+    },
+    {
+      "id": 2,
+      "question": "An interconnected power production source is provided with a disconnecting means. What must the disconnecting means do when operated?",
+      "choices": [
+        "Simultaneously disconnect all ungrounded conductors of the source",
+        "Disconnect only the grounded conductor",
+        "Disconnect one ungrounded conductor at a time",
+        "Open only the equipment grounding conductor"
+      ],
+      "answer": "Simultaneously disconnect all ungrounded conductors of the source",
+      "explanation": {
+        "correct": {
+          "text": "The source disconnecting means must simultaneously disconnect all ungrounded conductors from all other conductors.",
+          "indexKeywords": ["Source disconnect -> simultaneous operation", "Ungrounded conductors -> all disconnected"],
+          "sections": ["705.20"]
+        },
+        "choices": {
+          "Simultaneously disconnect all ungrounded conductors of the source": {"text": "This states the required switching action.", "sections": ["705.20"]},
+          "Disconnect only the grounded conductor": {"text": "The rule addresses all ungrounded conductors, not only a grounded conductor.", "sections": ["705.20"]},
+          "Disconnect one ungrounded conductor at a time": {"text": "The ungrounded conductors must be disconnected simultaneously.", "sections": ["705.20"]},
+          "Open only the equipment grounding conductor": {"text": "The equipment grounding conductor is not the required source-disconnection path.", "sections": ["705.20"]}
+        }
+      }
+    },
+    {
+      "id": 3,
+      "question": "Where must the disconnecting means for an interconnected electric power production source be located?",
+      "choices": [
+        "In a readily accessible location",
+        "Only on the roof beside the source",
+        "Inside a locked utility transformer enclosure",
+        "Anywhere on the premises if shown on drawings"
+      ],
+      "answer": "In a readily accessible location",
+      "explanation": {
+        "correct": {
+          "text": "The source disconnecting means is required to be in a readily accessible location.",
+          "indexKeywords": ["Source disconnect -> readily accessible", "Interconnected source -> disconnect location"],
+          "sections": ["705.20"]
+        },
+        "choices": {
+          "In a readily accessible location": {"text": "This is the location requirement stated for the disconnect.", "sections": ["705.20"]},
+          "Only on the roof beside the source": {"text": "The text does not impose a roof-only location.", "sections": ["705.20"]},
+          "Inside a locked utility transformer enclosure": {"text": "That location would not satisfy the stated readily accessible requirement for the source disconnect.", "sections": ["705.20"]},
+          "Anywhere on the premises if shown on drawings": {"text": "Drawings do not replace the readily accessible location requirement.", "sections": ["705.20"]}
+        }
+      }
+    },
+    {
+      "id": 4,
+      "question": "A commercial building installs a stationary energy storage system. What equipment-listing requirement applies to the system?",
+      "choices": [
+        "The energy storage system must be listed",
+        "Only the battery cells must be listed",
+        "Listing is required only when installed outdoors",
+        "No listing is required if the system is field assembled"
+      ],
+      "answer": "The energy storage system must be listed",
+      "explanation": {
+        "correct": {
+          "text": "The NEC requires an energy storage system to be listed.",
+          "indexKeywords": ["Energy storage system -> listing required", "ESS equipment -> listed system"],
+          "sections": ["706.5"]
+        },
+        "choices": {
+          "The energy storage system must be listed": {"text": "This directly states the listing requirement.", "sections": ["706.5"]},
+          "Only the battery cells must be listed": {"text": "The requirement applies to the energy storage system, not merely its cells.", "sections": ["706.5"]},
+          "Listing is required only when installed outdoors": {"text": "The listing requirement is not limited to outdoor systems.", "sections": ["706.5"]},
+          "No listing is required if the system is field assembled": {"text": "Field assembly does not create the stated exception.", "sections": ["706.5"]}
+        }
+      }
+    },
+    {
+      "id": 5,
+      "question": "A new energy storage system is installed at a commercial telecommunications facility. What must occur when the system is installed?",
+      "choices": [
+        "The system must be commissioned upon installation",
+        "The system must remain de-energized for 30 days",
+        "Only the serving utility may test the system",
+        "Commissioning may be omitted when the system is listed"
+      ],
+      "answer": "The system must be commissioned upon installation",
+      "explanation": {
+        "correct": {
+          "text": "Energy storage systems within the rule are required to be commissioned upon installation.",
+          "indexKeywords": ["ESS installation -> commissioning", "Commercial ESS -> commissioned upon installation"],
+          "sections": ["706.7(A)"]
+        },
+        "choices": {
+          "The system must be commissioned upon installation": {"text": "This is the timing stated for commissioning.", "sections": ["706.7(A)"]},
+          "The system must remain de-energized for 30 days": {"text": "No 30-day waiting period is stated.", "sections": ["706.7(A)"]},
+          "Only the serving utility may test the system": {"text": "The text requires commissioning but does not reserve it solely to the utility.", "sections": ["706.7(A)"]},
+          "Commissioning may be omitted when the system is listed": {"text": "Listing does not replace the commissioning requirement.", "sections": ["706.5", "706.7(A)"]}
+        }
+      }
+    },
+    {
+      "id": 6,
+      "question": "An energy storage system disconnect is installed within sight of the system. What is the greatest permitted distance between the disconnect and the system?",
+      "choices": ["3 m (10 ft)", "1.8 m (6 ft)", "7.5 m (25 ft)", "15 m (50 ft)"],
+      "answer": "3 m (10 ft)",
+      "explanation": {
+        "correct": {
+          "text": "A disconnect located within sight of the energy storage system must be no more than 3 m (10 ft) from the system.",
+          "indexKeywords": ["ESS disconnect -> within sight", "Maximum distance -> 3 m (10 ft)"],
+          "sections": ["706.15(B)"]
+        },
+        "choices": {
+          "3 m (10 ft)": {"text": "This is the maximum stated distance for this within-sight arrangement.", "sections": ["706.15(B)"]},
+          "1.8 m (6 ft)": {"text": "This is not the stated maximum distance.", "sections": ["706.15(B)"]},
+          "7.5 m (25 ft)": {"text": "This exceeds the stated maximum distance.", "sections": ["706.15(B)"]},
+          "15 m (50 ft)": {"text": "This greatly exceeds the stated maximum distance.", "sections": ["706.15(B)"]}
+        }
+      }
+    },
+    {
+      "id": 7,
+      "question": "Critical operations power system wiring must be protected against physical damage. Which wiring method is specifically permitted for this protection?",
+      "choices": ["Rigid metal conduit", "Open knob-and-tube wiring", "Flexible cord run openly", "Unsupported nonmetallic cable"],
+      "answer": "Rigid metal conduit",
+      "explanation": {
+        "correct": {
+          "text": "Rigid metal conduit is one of the wiring methods specifically permitted for COPS wiring protected against physical damage.",
+          "indexKeywords": ["COPS wiring -> physical protection", "Permitted wiring method -> rigid metal conduit"],
+          "sections": ["708.10(C)(1)"]
+        },
+        "choices": {
+          "Rigid metal conduit": {"text": "Rigid metal conduit appears in the permitted wiring-method list.", "sections": ["708.10(C)(1)"]},
+          "Open knob-and-tube wiring": {"text": "This is not in the specified list for COPS physical protection.", "sections": ["708.10(C)(1)"]},
+          "Flexible cord run openly": {"text": "This is not one of the specified protective wiring methods.", "sections": ["708.10(C)(1)"]},
+          "Unsupported nonmetallic cable": {"text": "This does not meet the stated protected-wiring method requirement.", "sections": ["708.10(C)(1)"]}
+        }
+      }
+    },
+    {
+      "id": 8,
+      "question": "How must the capacity and rating of a critical operations power system be sized for the loads it serves?",
+      "choices": [
+        "For all loads expected to operate simultaneously",
+        "For only the single largest load",
+        "For 50 percent of the connected load",
+        "For lighting loads only"
+      ],
+      "answer": "For all loads expected to operate simultaneously",
+      "explanation": {
+        "correct": {
+          "text": "The COPS must have adequate capacity and rating for all loads expected to operate simultaneously.",
+          "indexKeywords": ["COPS capacity -> simultaneous loads", "System rating -> all operating loads"],
+          "sections": ["708.22(A)"]
+        },
+        "choices": {
+          "For all loads expected to operate simultaneously": {"text": "This is the required capacity basis.", "sections": ["708.22(A)"]},
+          "For only the single largest load": {"text": "The rule is based on all loads expected to operate simultaneously.", "sections": ["708.22(A)"]},
+          "For 50 percent of the connected load": {"text": "No general 50-percent sizing allowance is stated.", "sections": ["708.22(A)"]},
+          "For lighting loads only": {"text": "The capacity requirement applies to all served COPS loads, not lighting alone.", "sections": ["708.22(A)"]}
+        }
+      }
+    },
+    {
+      "id": 9,
+      "question": "A building is supplied by a stand-alone system. What information must the required plaque or directory provide?",
+      "choices": [
+        "The location of each power-source disconnecting means",
+        "The monthly energy use of every load",
+        "The utility account number",
+        "The conductor color code for every branch circuit"
+      ],
+      "answer": "The location of each power-source disconnecting means",
+      "explanation": {
+        "correct": {
+          "text": "The plaque or directory must denote the location of each power-source disconnecting means for the building or structure.",
+          "indexKeywords": ["Stand-alone system -> plaque or directory", "Power-source disconnects -> locations identified"],
+          "sections": ["710.10"]
+        },
+        "choices": {
+          "The location of each power-source disconnecting means": {"text": "This is the information the plaque or directory must provide.", "sections": ["710.10"]},
+          "The monthly energy use of every load": {"text": "Energy-use history is not the required directory information.", "sections": ["710.10"]},
+          "The utility account number": {"text": "A stand-alone-system plaque is not required to show a utility account number.", "sections": ["710.10"]},
+          "The conductor color code for every branch circuit": {"text": "The rule identifies power-source disconnect locations, not all conductor colors.", "sections": ["710.10"]}
+        }
+      }
+    },
+    {
+      "id": 10,
+      "question": "How must a stand-alone system be sized for equipment that the user intends to operate at the same time?",
+      "choices": [
+        "Its capacity and rating must be sufficient for all equipment intended to operate simultaneously",
+        "It need only supply the largest individual appliance",
+        "It must be sized at exactly twice the connected load",
+        "Its rating is unrestricted when loads are manually selected"
+      ],
+      "answer": "Its capacity and rating must be sufficient for all equipment intended to operate simultaneously",
+      "explanation": {
+        "correct": {
+          "text": "A stand-alone system must have capacity and rating sufficient for all equipment intended to operate simultaneously.",
+          "indexKeywords": ["Stand-alone system -> capacity and rating", "Simultaneous equipment -> sufficient supply"],
+          "sections": ["710.15(A)"]
+        },
+        "choices": {
+          "Its capacity and rating must be sufficient for all equipment intended to operate simultaneously": {"text": "This is the stated sizing basis.", "sections": ["710.15(A)"]},
+          "It need only supply the largest individual appliance": {"text": "More than one item may be intended to operate simultaneously.", "sections": ["710.15(A)"]},
+          "It must be sized at exactly twice the connected load": {"text": "No general two-times multiplier is stated.", "sections": ["710.15(A)"]},
+          "Its rating is unrestricted when loads are manually selected": {"text": "User load selection does not remove the adequate-capacity requirement.", "sections": ["710.15(A)"]}
+        }
+      }
+    },
+    {
+      "id": 11,
+      "question": "A cable is marked CL4P. What cable type does this marking identify?",
+      "choices": ["Class 4 plenum cable", "Class 4 riser cable", "Class 3 plenum cable", "Class 2 general-purpose cable"],
+      "answer": "Class 4 plenum cable",
+      "explanation": {
+        "correct": {
+          "text": "The cable-type marking table identifies CL4P as Class 4 plenum cable.",
+          "indexKeywords": ["CL4P -> Class 4 plenum cable", "Cable marking -> plenum"],
+          "sections": ["Table 722.179(B)"]
+        },
+        "choices": {
+          "Class 4 plenum cable": {"text": "This is the table entry for CL4P.", "sections": ["Table 722.179(B)"]},
+          "Class 4 riser cable": {"text": "Class 4 riser cable is marked CL4R.", "sections": ["Table 722.179(B)"]},
+          "Class 3 plenum cable": {"text": "Class 3 plenum cable is marked CL3P.", "sections": ["Table 722.179(B)"]},
+          "Class 2 general-purpose cable": {"text": "CL4P does not identify a Class 2 general-purpose cable.", "sections": ["Table 722.179(B)"]}
+        }
+      }
+    },
+    {
+      "id": 12,
+      "question": "A design calls for Type CL2P cable, but a permitted substitute will be installed. Which pair consists entirely of permitted substitutions?",
+      "choices": ["CMP and CL3P", "CL2R and CL3R", "PLTC and CL2X", "CMX and CL4R"],
+      "answer": "CMP and CL3P",
+      "explanation": {
+        "correct": {
+          "text": "The cable-substitution table lists CMP and CL3P as permitted substitutions for CL2P.",
+          "indexKeywords": ["CL2P -> permitted substitutions", "CMP and CL3P -> permitted"],
+          "sections": ["Table 722.135(E)"]
+        },
+        "choices": {
+          "CMP and CL3P": {"text": "Both types appear in the permitted-substitution entry for CL2P.", "sections": ["Table 722.135(E)"]},
+          "CL2R and CL3R": {"text": "This pair is not the table entry for substituting CL2P.", "sections": ["Table 722.135(E)"]},
+          "PLTC and CL2X": {"text": "This pair is not listed as the permitted substitution set for CL2P.", "sections": ["Table 722.135(E)"]},
+          "CMX and CL4R": {"text": "This pair is not permitted as a substitute for CL2P by the table.", "sections": ["Table 722.135(E)"]}
+        }
+      }
+    },
+    {
+      "id": 13,
+      "question": "A cable is identified as a power-limited fire alarm plenum cable. Which marking corresponds to that cable type?",
+      "choices": ["FPLP", "NPLFP", "CL3P", "OFNP"],
+      "answer": "FPLP",
+      "explanation": {
+        "correct": {
+          "text": "The cable-type marking table assigns FPLP to power-limited fire alarm plenum cable.",
+          "indexKeywords": ["Power-limited fire alarm plenum cable -> FPLP", "Cable type marking -> FPLP"],
+          "sections": ["Table 722.179(B)"]
+        },
+        "choices": {
+          "FPLP": {"text": "This is the table marking for a power-limited fire alarm plenum cable.", "sections": ["Table 722.179(B)"]},
+          "NPLFP": {"text": "NPLFP identifies a non-power-limited fire alarm plenum cable.", "sections": ["760.176(G)"]},
+          "CL3P": {"text": "CL3P identifies a Class 3 plenum cable.", "sections": ["Table 722.179(B)"]},
+          "OFNP": {"text": "OFNP identifies a nonconductive optical fiber plenum cable.", "sections": ["Table 722.179(B)"]}
+        }
+      }
+    },
+    {
+      "id": 14,
+      "question": "What are the maximum output limits for a Class 1 power-limited circuit power source?",
+      "choices": ["30 volts and 1000 volt-amperes", "60 volts and 100 volt-amperes", "120 volts and 2000 volt-amperes", "600 volts with no power limit"],
+      "answer": "30 volts and 1000 volt-amperes",
+      "explanation": {
+        "correct": {
+          "text": "A Class 1 power-limited circuit is limited to 30 volts and 1000 volt-amperes.",
+          "indexKeywords": ["Class 1 power-limited source -> 30 volts", "Class 1 power limit -> 1000 volt-amperes"],
+          "sections": ["724.40", "724.41(A)"]
+        },
+        "choices": {
+          "30 volts and 1000 volt-amperes": {"text": "These are the stated Class 1 power-limited values.", "sections": ["724.40", "724.41(A)"]},
+          "60 volts and 100 volt-amperes": {"text": "These are not the stated limits for this circuit class.", "sections": ["724.40"]},
+          "120 volts and 2000 volt-amperes": {"text": "Both values exceed the stated Class 1 power-limited limits.", "sections": ["724.40"]},
+          "600 volts with no power limit": {"text": "Class 1 power-limited circuits have both voltage and power limits.", "sections": ["724.40"]}
+        }
+      }
+    },
+    {
+      "id": 15,
+      "question": "What are the maximum overcurrent-protection ratings for 18 AWG and 16 AWG conductors in a Class 1 power-limited circuit?",
+      "choices": ["7 amperes for 18 AWG and 10 amperes for 16 AWG", "10 amperes for 18 AWG and 15 amperes for 16 AWG", "15 amperes for both sizes", "20 amperes for both sizes"],
+      "answer": "7 amperes for 18 AWG and 10 amperes for 16 AWG",
+      "explanation": {
+        "correct": {
+          "text": "Class 1 circuit overcurrent protection must not exceed 7 amperes for 18 AWG conductors and 10 amperes for 16 AWG conductors.",
+          "indexKeywords": ["18 AWG Class 1 -> 7 A maximum", "16 AWG Class 1 -> 10 A maximum"],
+          "sections": ["724.43"]
+        },
+        "choices": {
+          "7 amperes for 18 AWG and 10 amperes for 16 AWG": {"text": "This pair matches the stated conductor limits.", "sections": ["724.43"]},
+          "10 amperes for 18 AWG and 15 amperes for 16 AWG": {"text": "Both values exceed the stated limits.", "sections": ["724.43"]},
+          "15 amperes for both sizes": {"text": "The rule provides lower, size-specific limits.", "sections": ["724.43"]},
+          "20 amperes for both sizes": {"text": "Twenty amperes exceeds both stated limits.", "sections": ["724.43"]}
+        }
+      }
+    },
+    {
+      "id": 16,
+      "question": "A branch circuit supplies a listed Class 2 or Class 3 power source. What is the maximum rating permitted for the branch-circuit overcurrent protective device?",
+      "choices": ["20 amperes", "30 amperes", "60 amperes", "100 amperes"],
+      "answer": "20 amperes",
+      "explanation": {
+        "correct": {
+          "text": "The branch circuit supplying the Class 2 or Class 3 power source must be protected at not over 20 amperes.",
+          "indexKeywords": ["Class 2 or Class 3 source supply -> branch circuit", "Maximum source-supply OCPD -> 20 A"],
+          "sections": ["725.127"]
+        },
+        "choices": {
+          "20 amperes": {"text": "This is the stated maximum branch-circuit overcurrent rating.", "sections": ["725.127"]},
+          "30 amperes": {"text": "This exceeds the stated maximum.", "sections": ["725.127"]},
+          "60 amperes": {"text": "This exceeds the stated maximum.", "sections": ["725.127"]},
+          "100 amperes": {"text": "This greatly exceeds the stated maximum.", "sections": ["725.127"]}
+        }
+      }
+    },
+    {
+      "id": 17,
+      "question": "Class 2 circuit conductors are installed in the same cable with Class 3 circuit conductors. What insulation level is required for the Class 2 conductors?",
+      "choices": [
+        "Insulation at least sufficient for the Class 3 circuit",
+        "No insulation when the cable is listed",
+        "Insulation rated only for the Class 2 source",
+        "Exactly 600-volt insulation in every installation"
+      ],
+      "answer": "Insulation at least sufficient for the Class 3 circuit",
+      "explanation": {
+        "correct": {
+          "text": "Class 2 conductors installed with Class 3 conductors must have insulation at least that required for the Class 3 circuit.",
+          "indexKeywords": ["Class 2 with Class 3 -> insulation", "Required insulation -> Class 3 level"],
+          "sections": ["725.139(C)"]
+        },
+        "choices": {
+          "Insulation at least sufficient for the Class 3 circuit": {"text": "This directly states the mixed-circuit insulation requirement.", "sections": ["725.139(C)"]},
+          "No insulation when the cable is listed": {"text": "Listing does not remove the insulation requirement.", "sections": ["725.139(C)"]},
+          "Insulation rated only for the Class 2 source": {"text": "The Class 2 conductors must meet at least the Class 3 insulation requirement.", "sections": ["725.139(C)"]},
+          "Exactly 600-volt insulation in every installation": {"text": "The text states the Class 3 requirement rather than a universal exact 600-volt value.", "sections": ["725.139(C)"]}
+        }
+      }
+    },
+    {
+      "id": 18,
+      "question": "Which power source is permitted to supply a Class 2 circuit?",
+      "choices": [
+        "A listed Class 2 transformer or listed Class 2 power supply",
+        "Any unlisted transformer below 600 volts",
+        "A branch circuit with no output limitation",
+        "A Class 1 source relabeled in the field"
+      ],
+      "answer": "A listed Class 2 transformer or listed Class 2 power supply",
+      "explanation": {
+        "correct": {
+          "text": "A Class 2 circuit may be supplied by a listed Class 2 transformer or a listed Class 2 power supply, among the permitted source types.",
+          "indexKeywords": ["Class 2 circuit -> permitted source", "Listed Class 2 transformer or power supply"],
+          "sections": ["725.60(A)"]
+        },
+        "choices": {
+          "A listed Class 2 transformer or listed Class 2 power supply": {"text": "Both are expressly permitted Class 2 source types.", "sections": ["725.60(A)"]},
+          "Any unlisted transformer below 600 volts": {"text": "Voltage alone does not make an unlisted transformer a permitted Class 2 source.", "sections": ["725.60(A)"]},
+          "A branch circuit with no output limitation": {"text": "Class 2 circuits depend on a qualifying limited output source.", "sections": ["725.60(A)"]},
+          "A Class 1 source relabeled in the field": {"text": "Field relabeling does not establish a permitted listed Class 2 source.", "sections": ["725.60(A)"]}
+        }
+      }
+    },
+    {
+      "id": 19,
+      "question": "What is the maximum output voltage permitted for a Class 4 transmitter?",
+      "choices": ["450 volts peak or dc", "30 volts peak or dc", "600 volts rms", "1000 volts with no peak limit"],
+      "answer": "450 volts peak or dc",
+      "explanation": {
+        "correct": {
+          "text": "The output voltage of a Class 4 transmitter must not exceed 450 volts peak or dc.",
+          "indexKeywords": ["Class 4 transmitter -> output voltage", "Maximum -> 450 V peak or dc"],
+          "sections": ["726.121"]
+        },
+        "choices": {
+          "450 volts peak or dc": {"text": "This is the stated Class 4 transmitter output limit.", "sections": ["726.121"]},
+          "30 volts peak or dc": {"text": "This is not the maximum stated for a Class 4 transmitter.", "sections": ["726.121"]},
+          "600 volts rms": {"text": "The Class 4 limit is expressed as 450 volts peak or dc.", "sections": ["726.121"]},
+          "1000 volts with no peak limit": {"text": "This exceeds and misstates the specified output limit.", "sections": ["726.121"]}
+        }
+      }
+    },
+    {
+      "id": 20,
+      "question": "A line-to-line fault occurs between a Class 4 transmitter and receiver and presents an unacceptable risk of fire or electric shock. What must the transmitter do?",
+      "choices": [
+        "Interrupt the energized circuit",
+        "Increase current to clear the fault",
+        "Continue operating until a branch breaker opens",
+        "Transfer the fault current to the equipment grounding conductor indefinitely"
+      ],
+      "answer": "Interrupt the energized circuit",
+      "explanation": {
+        "correct": {
+          "text": "For the specified line-to-line fault, the Class 4 transmitter is required to interrupt the energized circuit.",
+          "indexKeywords": ["Class 4 line-to-line fault -> unacceptable risk", "Transmitter response -> interrupt circuit"],
+          "sections": ["726.121(A)(2)"]
+        },
+        "choices": {
+          "Interrupt the energized circuit": {"text": "This is the required response to the stated fault condition.", "sections": ["726.121(A)(2)"]},
+          "Increase current to clear the fault": {"text": "The required action is interruption, not increased output.", "sections": ["726.121(A)(2)"]},
+          "Continue operating until a branch breaker opens": {"text": "The transmitter itself must interrupt the energized circuit under the stated condition.", "sections": ["726.121(A)(2)"]},
+          "Transfer the fault current to the equipment grounding conductor indefinitely": {"text": "The rule requires interruption rather than indefinite continued energization.", "sections": ["726.121(A)(2)"]}
+        }
+      }
+    },
+    {
+      "id": 21,
+      "question": "A component of a listed fire-resistive cable system is damaged. May a component from a different listed fire-resistive system be substituted?",
+      "choices": [
+        "No; components are not interchangeable between systems",
+        "Yes, if the conductor size is the same",
+        "Yes, if both systems have metal raceway",
+        "Yes, with only the installer's written approval"
+      ],
+      "answer": "No; components are not interchangeable between systems",
+      "explanation": {
+        "correct": {
+          "text": "Fire-resistive cables, conductors, and components are tested and listed as a complete system and are not interchangeable between systems.",
+          "indexKeywords": ["Fire-resistive system -> complete listed system", "Components -> not interchangeable"],
+          "sections": ["728.4"]
+        },
+        "choices": {
+          "No; components are not interchangeable between systems": {"text": "This directly states the system-component limitation.", "sections": ["728.4"]},
+          "Yes, if the conductor size is the same": {"text": "Matching conductor size does not make components interchangeable between listed systems.", "sections": ["728.4"]},
+          "Yes, if both systems have metal raceway": {"text": "A common raceway material does not authorize component substitution.", "sections": ["728.4"]},
+          "Yes, with only the installer's written approval": {"text": "Installer approval does not replace the complete-system listing.", "sections": ["728.4"]}
+        }
+      }
+    },
+    {
+      "id": 22,
+      "question": "Which information must appear in the marking of a fire-resistive cable system?",
+      "choices": [
+        "The suffix FRR, the circuit-integrity duration in hours, and the system identifier",
+        "Only the conductor size and voltage",
+        "Only the manufacturer's name",
+        "The word PLENUM with no system identifier"
+      ],
+      "answer": "The suffix FRR, the circuit-integrity duration in hours, and the system identifier",
+      "explanation": {
+        "correct": {
+          "text": "The required marking includes the suffix FRR, the circuit-integrity duration in hours, and the fire-resistive system identifier.",
+          "indexKeywords": ["Fire-resistive marking -> FRR", "Marking -> duration and system identifier"],
+          "sections": ["728.120"]
+        },
+        "choices": {
+          "The suffix FRR, the circuit-integrity duration in hours, and the system identifier": {"text": "These are the specified marking elements.", "sections": ["728.120"]},
+          "Only the conductor size and voltage": {"text": "Those items omit the required fire-resistive designation information.", "sections": ["728.120"]},
+          "Only the manufacturer's name": {"text": "A manufacturer's name alone does not provide the required marking.", "sections": ["728.120"]},
+          "The word PLENUM with no system identifier": {"text": "The fire-resistive marking requires the system identifier and specified FRR information.", "sections": ["728.120"]}
+        }
+      }
+    },
+    {
+      "id": 23,
+      "question": "Which load is an energy management system prohibited from disconnecting?",
+      "choices": ["Emergency lighting", "General office receptacles", "Decorative exterior lighting", "A nonessential break-room appliance"],
+      "answer": "Emergency lighting",
+      "explanation": {
+        "correct": {
+          "text": "Emergency lighting is included among the loads an energy management system is not permitted to disconnect.",
+          "indexKeywords": ["Energy management system -> disconnection prohibited", "Emergency lighting -> must not disconnect"],
+          "sections": ["750.30(B)(4)"]
+        },
+        "choices": {
+          "Emergency lighting": {"text": "This load is expressly protected from EMS disconnection.", "sections": ["750.30(B)(4)"]},
+          "General office receptacles": {"text": "This is not the expressly identified protected load in this choice set.", "sections": ["750.30(B)"]},
+          "Decorative exterior lighting": {"text": "This is not the emergency-lighting prohibition stated by the rule.", "sections": ["750.30(B)(4)"]},
+          "A nonessential break-room appliance": {"text": "This is not the protected load identified by the cited provision.", "sections": ["750.30(B)"]}
+        }
+      }
+    },
+    {
+      "id": 24,
+      "question": "An energy management system remotely controls electrical loads. What must its required directory identify?",
+      "choices": [
+        "Each device and circuit controlled by the system",
+        "Only the building owner's telephone number",
+        "Only loads rated over 100 amperes",
+        "The purchase date of every controller"
+      ],
+      "answer": "Each device and circuit controlled by the system",
+      "explanation": {
+        "correct": {
+          "text": "Where remote control is used, the directory must identify each device and circuit controlled by the energy management system.",
+          "indexKeywords": ["Remote EMS -> directory", "Directory -> each controlled device and circuit"],
+          "sections": ["750.50"]
+        },
+        "choices": {
+          "Each device and circuit controlled by the system": {"text": "This is the required directory content.", "sections": ["750.50"]},
+          "Only the building owner's telephone number": {"text": "Owner contact information does not replace identification of controlled devices and circuits.", "sections": ["750.50"]},
+          "Only loads rated over 100 amperes": {"text": "The directory requirement is not limited to loads above 100 amperes.", "sections": ["750.50"]},
+          "The purchase date of every controller": {"text": "Purchase dates are not the required directory information.", "sections": ["750.50"]}
+        }
+      }
+    },
+    {
+      "id": 25,
+      "question": "What is the maximum nominal output voltage permitted for the power source of a non-power-limited fire alarm circuit?",
+      "choices": ["600 volts", "30 volts", "1000 volts", "No voltage limit"],
+      "answer": "600 volts",
+      "explanation": {
+        "correct": {
+          "text": "The power-source output voltage for a non-power-limited fire alarm circuit must not exceed 600 volts nominal.",
+          "indexKeywords": ["NPLFA power source -> output voltage", "Maximum nominal voltage -> 600 V"],
+          "sections": ["760.41(A)"]
+        },
+        "choices": {
+          "600 volts": {"text": "This is the stated maximum nominal output voltage.", "sections": ["760.41(A)"]},
+          "30 volts": {"text": "This is not the maximum stated for a non-power-limited fire alarm source.", "sections": ["760.41(A)"]},
+          "1000 volts": {"text": "This exceeds the stated maximum.", "sections": ["760.41(A)"]},
+          "No voltage limit": {"text": "The source is subject to a stated nominal-voltage limit.", "sections": ["760.41(A)"]}
+        }
+      }
+    },
+    {
+      "id": 26,
+      "question": "What are the maximum overcurrent-protection ratings for 18 AWG and 16 AWG conductors in a non-power-limited fire alarm circuit?",
+      "choices": ["7 amperes for 18 AWG and 10 amperes for 16 AWG", "10 amperes for 18 AWG and 15 amperes for 16 AWG", "15 amperes for both sizes", "20 amperes for both sizes"],
+      "answer": "7 amperes for 18 AWG and 10 amperes for 16 AWG",
+      "explanation": {
+        "correct": {
+          "text": "Overcurrent protection must not exceed 7 amperes for 18 AWG conductors and 10 amperes for 16 AWG conductors.",
+          "indexKeywords": ["NPLFA 18 AWG -> 7 A maximum", "NPLFA 16 AWG -> 10 A maximum"],
+          "sections": ["760.43"]
+        },
+        "choices": {
+          "7 amperes for 18 AWG and 10 amperes for 16 AWG": {"text": "This pair matches the stated limits.", "sections": ["760.43"]},
+          "10 amperes for 18 AWG and 15 amperes for 16 AWG": {"text": "Both values exceed the specified limits.", "sections": ["760.43"]},
+          "15 amperes for both sizes": {"text": "The provision gives lower size-specific limits.", "sections": ["760.43"]},
+          "20 amperes for both sizes": {"text": "Twenty amperes exceeds both specified limits.", "sections": ["760.43"]}
+        }
+      }
+    },
+    {
+      "id": 27,
+      "question": "A multiconductor non-power-limited fire alarm cable is installed directly in a space used for environmental air. Absent an applicable exception, which cable type is required?",
+      "choices": ["Type NPLFP", "Type NPLFR", "Type NPLF", "Type FPLR"],
+      "answer": "Type NPLFP",
+      "explanation": {
+        "correct": {
+          "text": "Type NPLFP is the non-power-limited fire alarm circuit cable identified for use in other spaces used for environmental air.",
+          "indexKeywords": ["NPLFA cable in environmental-air space -> NPLFP", "NPLFP -> plenum use"],
+          "sections": ["760.53(B)(2)", "Table 760.176(G)"]
+        },
+        "choices": {
+          "Type NPLFP": {"text": "This is the required non-power-limited fire alarm plenum cable type.", "sections": ["760.53(B)(2)", "Table 760.176(G)"]},
+          "Type NPLFR": {"text": "NPLFR is identified as non-power-limited fire alarm riser cable.", "sections": ["Table 760.176(G)"]},
+          "Type NPLF": {"text": "NPLF is the general non-power-limited fire alarm circuit cable marking, not the plenum marking.", "sections": ["Table 760.176(G)"]},
+          "Type FPLR": {"text": "FPLR is a power-limited fire alarm riser designation, not the required NPLFA plenum type.", "sections": ["760.53(B)(2)"]}
+        }
+      }
+    },
+    {
+      "id": 28,
+      "question": "Optical fiber cable will be installed directly in a space used for environmental air without relying on a raceway or covered cable-tray allowance. Which cable types are permitted?",
+      "choices": ["Types OFNP and OFCP", "Types OFNR and OFCR", "Types OFNG and OFCG", "Types OFN and OFC"],
+      "answer": "Types OFNP and OFCP",
+      "explanation": {
+        "correct": {
+          "text": "Types OFNP and OFCP are permitted for direct installation in other spaces used for environmental air.",
+          "indexKeywords": ["Optical fiber in plenum -> OFNP and OFCP", "Environmental-air space -> permitted cable types"],
+          "sections": ["770.113(C)(1)(1)"]
+        },
+        "choices": {
+          "Types OFNP and OFCP": {"text": "These are the directly permitted plenum optical-fiber cable types.", "sections": ["770.113(C)(1)(1)"]},
+          "Types OFNR and OFCR": {"text": "These riser types are not permitted for the stated direct plenum installation.", "sections": ["770.113(C)(2)"]},
+          "Types OFNG and OFCG": {"text": "These general-purpose types are not permitted for the stated direct plenum installation.", "sections": ["770.113(C)(2)"]},
+          "Types OFN and OFC": {"text": "These general-purpose types are not permitted for the stated direct plenum installation.", "sections": ["770.113(C)(2)"]}
+        }
+      }
+    },
+    {
+      "id": 29,
+      "question": "A conductive optical fiber cable without an armored or metal-clad-type sheath shares a raceway with power conductors operating at 1000 volts or less. What arrangement is required?",
+      "choices": [
+        "The power conductors must be separated from all optical fiber cables by a permanent barrier or listed divider",
+        "No separation is required when the fiber contains no current-carrying conductor",
+        "The fiber cable must be taped to the power conductors",
+        "Only a warning label is required"
+      ],
+      "answer": "The power conductors must be separated from all optical fiber cables by a permanent barrier or listed divider",
+      "explanation": {
+        "correct": {
+          "text": "For the stated shared raceway, the electrical conductors must be separated from all optical fiber cables by a permanent barrier or listed divider.",
+          "indexKeywords": ["Unarmored conductive optical fiber with power -> separation", "Required separator -> permanent barrier or listed divider"],
+          "sections": ["770.133(A)"]
+        },
+        "choices": {
+          "The power conductors must be separated from all optical fiber cables by a permanent barrier or listed divider": {"text": "This is the specified separation method.", "sections": ["770.133(A)"]},
+          "No separation is required when the fiber contains no current-carrying conductor": {"text": "The rule specifically addresses conductive optical fiber cable without an armored or metal-clad sheath.", "sections": ["770.133(A)"]},
+          "The fiber cable must be taped to the power conductors": {"text": "Taping the cables together does not provide the required separation.", "sections": ["770.133(A)"]},
+          "Only a warning label is required": {"text": "A label does not replace the permanent barrier or listed divider.", "sections": ["770.133(A)"]}
+        }
+      }
+    },
+    {
+      "id": 30,
+      "question": "May an optical fiber cable be strapped, taped, or otherwise attached to the exterior of a conduit or raceway as its means of support?",
+      "choices": [
+        "No, except for the permitted overhead-span attachment to a raceway-type mast intended to support the cable",
+        "Yes, whenever plastic tape is used",
+        "Yes, if the cable is nonconductive",
+        "Yes, for any indoor run shorter than 3 m (10 ft)"
+      ],
+      "answer": "No, except for the permitted overhead-span attachment to a raceway-type mast intended to support the cable",
+      "explanation": {
+        "correct": {
+          "text": "Optical fiber cable must not be strapped, taped, or attached to the exterior of conduit or raceway for support; the stated exception permits overhead spans to attach to an intended raceway-type mast.",
+          "indexKeywords": ["Optical fiber support -> not attached to raceway exterior", "Exception -> overhead span on intended mast"],
+          "sections": ["770.133(D)"]
+        },
+        "choices": {
+          "No, except for the permitted overhead-span attachment to a raceway-type mast intended to support the cable": {"text": "This states both the prohibition and its exception.", "sections": ["770.133(D)"]},
+          "Yes, whenever plastic tape is used": {"text": "The prohibition expressly includes taping.", "sections": ["770.133(D)"]},
+          "Yes, if the cable is nonconductive": {"text": "The support prohibition is not waived merely because the fiber cable is nonconductive.", "sections": ["770.133(D)"]},
+          "Yes, for any indoor run shorter than 3 m (10 ft)": {"text": "No general short-run exception of this kind is stated.", "sections": ["770.133(D)"]}
+        }
+      }
+    }
+  ]
+}

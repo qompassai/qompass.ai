@@ -1,0 +1,367 @@
+{
+  "id": "pretest-a",
+  "title": "WA Telecom Admin — Pretest A",
+  "description": "30-question NEC 2023 book-reference pretest. Distribution: Introduction 2; General Requirements 3; Grounding and Bonding 3; Wiring Methods 3; Hazardous Locations 1; Special Conditions 4; Communications Systems 8; General Trade Knowledge and Theory 6.",
+  "questions": [
+    {
+      "id": 1,
+      "question": "Fill in the blank: The purpose of the Code is the practical safeguarding of ______ from hazards arising from the use of electricity.",
+      "choices": [
+        "persons and property",
+        "utilities and manufacturers",
+        "designers and inspectors",
+        "equipment and energy efficiency"
+      ],
+      "answer": "persons and property",
+      "explanation": "The NEC states that its purpose is the practical safeguarding of persons and property from hazards arising from the use of electricity. Reference: 90.2(A), 2023 NEC."
+    },
+    {
+      "id": 2,
+      "question": "Which words characterize a mandatory Code rule?",
+      "choices": [
+        "shall or shall not",
+        "should or should not",
+        "may or might",
+        "recommended or preferred"
+      ],
+      "answer": "shall or shall not",
+      "explanation": "Mandatory rules identify required or prohibited actions and are characterized by the terms shall or shall not. Reference: 90.5(A), 2023 NEC."
+    },
+    {
+      "id": 3,
+      "question": "Which choice completes the definition of accessible as applied to equipment?",
+      "choices": [
+        "Capable of being reached for operation, renewal, and inspection",
+        "Capable of being reached only with a portable ladder",
+        "Hidden behind the building finish but shown on drawings",
+        "Restricted to access by the serving utility"
+      ],
+      "answer": "Capable of being reached for operation, renewal, and inspection",
+      "explanation": "Accessible as applied to equipment means capable of being reached for operation, renewal, and inspection. Reference: Article 100, Accessible (as applied to equipment), 2023 NEC."
+    },
+    {
+      "id": 4,
+      "question": "Which description matches the Code definition of a qualified person?",
+      "choices": [
+        "One who has skills and knowledge related to the construction and operation of electrical equipment and installations and has received safety training to recognize and avoid the hazards involved",
+        "Anyone employed by an electrical contractor for at least six months",
+        "Only a person holding an engineering license",
+        "A person who has read the equipment nameplate"
+      ],
+      "answer": "One who has skills and knowledge related to the construction and operation of electrical equipment and installations and has received safety training to recognize and avoid the hazards involved",
+      "explanation": "This choice follows the Article 100 definition of Qualified Person. Reference: Article 100, Qualified Person, 2023 NEC."
+    },
+    {
+      "id": 5,
+      "question": "Listed or labeled equipment must be installed and used in accordance with what?",
+      "choices": [
+        "Any instructions included in the listing or labeling",
+        "Only the installer’s customary practice",
+        "The lowest-cost available installation method",
+        "Instructions for any similar product"
+      ],
+      "answer": "Any instructions included in the listing or labeling",
+      "explanation": "Equipment that is listed, labeled, or identified for a use must be installed and used in accordance with instructions included in the listing, labeling, or identification. Reference: 110.3(B), 2023 NEC."
+    },
+    {
+      "id": 6,
+      "question": "Why is a grounded electrical system connected to earth?",
+      "choices": [
+        "To limit voltage imposed by lightning, line surges, or unintentional contact with higher-voltage lines and to stabilize voltage to earth during normal operation",
+        "To make earth the normal return path for all load current",
+        "To eliminate the need for overcurrent protection",
+        "To prevent all current from entering the building"
+      ],
+      "answer": "To limit voltage imposed by lightning, line surges, or unintentional contact with higher-voltage lines and to stabilize voltage to earth during normal operation",
+      "explanation": "The grounding requirement states these voltage-limiting and voltage-stabilizing purposes. Reference: 250.4(A)(1), 2023 NEC."
+    },
+    {
+      "id": 7,
+      "question": "An effective ground-fault current path must create what kind of circuit?",
+      "choices": [
+        "A low-impedance circuit that facilitates operation of the overcurrent device or ground detector",
+        "A high-impedance path through earth only",
+        "A normal load-current path through exposed metal",
+        "An isolated circuit that prevents an overcurrent device from opening"
+      ],
+      "answer": "A low-impedance circuit that facilitates operation of the overcurrent device or ground detector",
+      "explanation": "The effective ground-fault current path must be low impedance and facilitate operation of the protective device. Reference: 250.4(A)(5), 2023 NEC."
+    },
+    {
+      "id": 8,
+      "question": "What must be done with all qualifying grounding electrodes that are present at a building or structure?",
+      "choices": [
+        "They must be bonded together to form the grounding electrode system",
+        "Only the electrode with the lowest resistance may be connected",
+        "They must remain electrically isolated from one another",
+        "Only a metal water pipe electrode may be used"
+      ],
+      "answer": "They must be bonded together to form the grounding electrode system",
+      "explanation": "All grounding electrodes described by the specified electrode list and present at the building or structure must be bonded together. Reference: 250.50, 2023 NEC."
+    },
+    {
+      "id": 9,
+      "question": "A cable passes through a bored hole in a wood framing member where nails or screws could penetrate it. How far must the edge of the hole be from the nearest edge of the wood member unless other protection is provided?",
+      "choices": [
+        "Not less than 32 mm (1¼ in.)",
+        "Not less than 13 mm (½ in.)",
+        "Not less than 19 mm (¾ in.)",
+        "Not less than 50 mm (2 in.)"
+      ],
+      "answer": "Not less than 32 mm (1¼ in.)",
+      "explanation": "Bored holes must place the cable or raceway at least 32 mm (1¼ in.) from the edge unless protected by the permitted steel protection. Reference: 300.4(A)(1), 2023 NEC."
+    },
+    {
+      "id": 10,
+      "question": "Fill in the blank: At least ______ of free conductor, measured from where it emerges from its raceway or cable sheath, must generally be left at each outlet, junction, and switch point.",
+      "choices": [
+        "150 mm (6 in.)",
+        "75 mm (3 in.)",
+        "200 mm (8 in.)",
+        "300 mm (12 in.)"
+      ],
+      "answer": "150 mm (6 in.)",
+      "explanation": "The general free-conductor length is at least 150 mm (6 in.). Reference: 300.14, 2023 NEC."
+    },
+    {
+      "id": 11,
+      "question": "What are the general fastening distances for electrical metallic tubing?",
+      "choices": [
+        "At intervals not exceeding 3 m (10 ft) and within 900 mm (3 ft) of each termination",
+        "At intervals not exceeding 6 m (20 ft) and within 1.8 m (6 ft) of each termination",
+        "Only at each end of the tubing",
+        "At intervals not exceeding 300 mm (12 in.)"
+      ],
+      "answer": "At intervals not exceeding 3 m (10 ft) and within 900 mm (3 ft) of each termination",
+      "explanation": "EMT is generally fastened at intervals not over 3 m (10 ft) and within 900 mm (3 ft) of boxes, cabinets, conduit bodies, and other terminations. Reference: 358.30(A), 2023 NEC."
+    },
+    {
+      "id": 12,
+      "question": "What makes a location a Class I hazardous location?",
+      "choices": [
+        "Flammable gases, flammable liquid-produced vapors, or combustible liquid-produced vapors may be present in quantities sufficient to produce explosive or ignitible mixtures",
+        "Combustible dust is the only possible hazard",
+        "Ignitible fibers and flyings are stored but never handled",
+        "The location contains electrical equipment operating above 1000 volts"
+      ],
+      "answer": "Flammable gases, flammable liquid-produced vapors, or combustible liquid-produced vapors may be present in quantities sufficient to produce explosive or ignitible mixtures",
+      "explanation": "This is the defining language for Class I locations. Reference: 500.5(B), 2023 NEC."
+    },
+    {
+      "id": 13,
+      "question": "Interconnection and interactive equipment will connect to or operate in parallel with power production sources. What approval is required?",
+      "choices": [
+        "It must be listed for the required interactive function or evaluated for that function and have a field label applied, or both",
+        "It needs only a handwritten warning label",
+        "It may be unlisted when installed indoors",
+        "It requires approval only from the equipment owner"
+      ],
+      "answer": "It must be listed for the required interactive function or evaluated for that function and have a field label applied, or both",
+      "explanation": "The equipment-approval rule states these listing or evaluation and field-label options. Reference: 705.6, 2023 NEC."
+    },
+    {
+      "id": 14,
+      "question": "An energy storage system disconnect is located within sight of the system. What is the maximum permitted distance from the system?",
+      "choices": [
+        "3 m (10 ft)",
+        "1.8 m (6 ft)",
+        "7.5 m (25 ft)",
+        "15 m (50 ft)"
+      ],
+      "answer": "3 m (10 ft)",
+      "explanation": "One permitted location is within sight and within 3 m (10 ft) of the energy storage system. Reference: 706.15(B)(2), 2023 NEC."
+    },
+    {
+      "id": 15,
+      "question": "What is the maximum nominal output voltage permitted for the power source of a non-power-limited fire alarm circuit?",
+      "choices": [
+        "600 volts",
+        "30 volts",
+        "1000 volts",
+        "No voltage limit"
+      ],
+      "answer": "600 volts",
+      "explanation": "The output voltage of the non-power-limited fire alarm power source must not exceed 600 volts nominal. Reference: 760.41(A), 2023 NEC."
+    },
+    {
+      "id": 16,
+      "question": "Optical fiber cable is installed directly in a space used for environmental air without using one of the raceway or covered-tray allowances. Which types are permitted?",
+      "choices": [
+        "OFNP and OFCP",
+        "OFNR and OFCR",
+        "OFNG and OFCG",
+        "OFN and OFC"
+      ],
+      "answer": "OFNP and OFCP",
+      "explanation": "Types OFNP and OFCP are permitted for direct installation in other spaces used for environmental air. Reference: 770.113(C)(1)(1), 2023 NEC."
+    },
+    {
+      "id": 17,
+      "question": "Which requirements from Chapters 1 through 7 apply to communications systems in Chapter 8?",
+      "choices": [
+        "Only the sections specifically referenced in Chapter 8",
+        "Every requirement in Chapters 1 through 7 without exception",
+        "Only Chapter 3 requirements",
+        "None of the requirements, even when specifically referenced"
+      ],
+      "answer": "Only the sections specifically referenced in Chapter 8",
+      "explanation": "Only sections of Chapters 1 through 7 referenced in Chapter 8 apply to Chapter 8. Reference: 800.3, 2023 NEC."
+    },
+    {
+      "id": 18,
+      "question": "Fill in the blank: The accessible portion of abandoned communications cables must be ______.",
+      "choices": [
+        "removed",
+        "painted red",
+        "grounded at both ends",
+        "left in place without identification"
+      ],
+      "answer": "removed",
+      "explanation": "The accessible portion of abandoned cables must be removed; identified cables intended for future use are addressed separately. Reference: 800.25, 2023 NEC."
+    },
+    {
+      "id": 19,
+      "question": "An unlisted outside-plant communications cable enters a building and terminates in the permitted enclosure or protector. What is the maximum cable length generally permitted inside the building?",
+      "choices": [
+        "15 m (50 ft)",
+        "3 m (10 ft)",
+        "30 m (100 ft)",
+        "No length limit"
+      ],
+      "answer": "15 m (50 ft)",
+      "explanation": "The unlisted outside-plant cable length inside the building generally must not exceed 15 m (50 ft) from its point of entrance. Reference: 800.48, 2023 NEC."
+    },
+    {
+      "id": 20,
+      "question": "What is the minimum size for a communications cable bonding conductor or grounding electrode conductor?",
+      "choices": [
+        "14 AWG",
+        "18 AWG",
+        "10 AWG",
+        "6 AWG"
+      ],
+      "answer": "14 AWG",
+      "explanation": "The communications bonding conductor or grounding electrode conductor must not be smaller than 14 AWG and is not required to exceed 6 AWG. Reference: 800.100(A)(3), 2023 NEC."
+    },
+    {
+      "id": 21,
+      "question": "A communications circuit runs partly in aerial cable that is not confined within a block. What protective device is required?",
+      "choices": [
+        "A listed primary protector",
+        "A listed antenna discharge unit only",
+        "A 20-ampere branch-circuit breaker",
+        "No protective device"
+      ],
+      "answer": "A listed primary protector",
+      "explanation": "A listed primary protector is required on each communications circuit run partly or entirely in aerial wire or cable not confined within a block. Reference: 805.90(A), 2023 NEC."
+    },
+    {
+      "id": 22,
+      "question": "What must generally be done with masts and metal structures supporting antennas?",
+      "choices": [
+        "They must be grounded or bonded unless the antenna and support are within the defined zone of protection",
+        "They must always remain isolated from ground",
+        "They must be connected only to a grounded circuit conductor",
+        "They require grounding only when made of aluminum"
+      ],
+      "answer": "They must be grounded or bonded unless the antenna and support are within the defined zone of protection",
+      "explanation": "Masts and metal antenna-supporting structures must be grounded or bonded, with the stated zone-of-protection exception. Reference: 810.15, 2023 NEC."
+    },
+    {
+      "id": 23,
+      "question": "Where must the outer conductive shield of a coaxial cable entering a building be grounded?",
+      "choices": [
+        "As close as practicable to the point of entrance",
+        "Only at the farthest outlet",
+        "At the midpoint of the cable run",
+        "Only at the utility transformer"
+      ],
+      "answer": "As close as practicable to the point of entrance",
+      "explanation": "For a coaxial cable entering a building, the outer conductive shield must be grounded as close as practicable to the point of entrance. Reference: 820.93(A), 2023 NEC."
+    },
+    {
+      "id": 24,
+      "question": "Where must a required primary protector for network-powered broadband communications be located?",
+      "choices": [
+        "As close as practicable to the point of entrance",
+        "At least 15 m (50 ft) from the entrance",
+        "Only in a hazardous location",
+        "At the most distant network outlet"
+      ],
+      "answer": "As close as practicable to the point of entrance",
+      "explanation": "A primary protector, whether integral or external to the network interface unit, must be located as close as practicable to the point of entrance. Reference: 830.90(B), 2023 NEC."
+    },
+    {
+      "id": 25,
+      "question": "An ideal transformer has 600 primary turns and 150 secondary turns. If the primary current is 5 amperes, what is the secondary current?",
+      "choices": [
+        "20 amperes",
+        "5 amperes",
+        "1.25 amperes",
+        "80 amperes"
+      ],
+      "answer": "20 amperes",
+      "explanation": "For an ideal transformer, current varies inversely with turns: Is = Ip × Np ÷ Ns = 5 × 600 ÷ 150 = 20 amperes. Reference: General trade theory — ideal transformer current ratio."
+    },
+    {
+      "id": 26,
+      "question": "A conductor carrying 12 amperes passes through a current-transformer window three times. What total ampere-turns does the current transformer see?",
+      "choices": [
+        "36 ampere-turns",
+        "4 ampere-turns",
+        "12 ampere-turns",
+        "144 ampere-turns"
+      ],
+      "answer": "36 ampere-turns",
+      "explanation": "Ampere-turns equal current multiplied by the number of turns: 12 A × 3 turns = 36 ampere-turns. Reference: General trade theory — ampere-turn relationship."
+    },
+    {
+      "id": 27,
+      "question": "Which statement defines a nonlinear load?",
+      "choices": [
+        "A load where the wave shape of the steady-state current does not follow the wave shape of the applied voltage",
+        "A load whose current is always zero",
+        "A load having only resistance and a perfectly sinusoidal current",
+        "A load connected only line to line"
+      ],
+      "answer": "A load where the wave shape of the steady-state current does not follow the wave shape of the applied voltage",
+      "explanation": "This is the NEC definition of Nonlinear Load. Reference: Article 100, Nonlinear Load, 2023 NEC."
+    },
+    {
+      "id": 28,
+      "question": "A four-wire, three-phase wye circuit supplies a major portion of nonlinear load. How is the neutral treated when applying conductor-ampacity adjustment rules?",
+      "choices": [
+        "It is considered a current-carrying conductor because harmonic currents are present",
+        "It is never considered a current-carrying conductor",
+        "It is counted only when the load is perfectly linear",
+        "It may be omitted from the circuit"
+      ],
+      "answer": "It is considered a current-carrying conductor because harmonic currents are present",
+      "explanation": "The NEC states that harmonic currents are present in the neutral of this nonlinear-load arrangement, so the neutral is considered current carrying. Reference: 310.15(E)(3), 2023 NEC."
+    },
+    {
+      "id": 29,
+      "question": "A 120-volt source is applied across a 24-ohm load. What current flows?",
+      "choices": [
+        "5 amperes",
+        "0.2 ampere",
+        "24 amperes",
+        "2880 amperes"
+      ],
+      "answer": "5 amperes",
+      "explanation": "Ohm’s law gives I = V ÷ R = 120 ÷ 24 = 5 amperes. Reference: General trade theory — Ohm’s law."
+    },
+    {
+      "id": 30,
+      "question": "A 48-volt dc telecommunications load draws 2.5 amperes. How much power does it consume?",
+      "choices": [
+        "120 watts",
+        "19.2 watts",
+        "50.5 watts",
+        "192 watts"
+      ],
+      "answer": "120 watts",
+      "explanation": "Power is P = V × I = 48 × 2.5 = 120 watts. Reference: General trade theory — electric power formula."
+    }
+  ]
+}

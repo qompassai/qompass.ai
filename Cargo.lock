@@ -1611,6 +1611,7 @@ dependencies = [
  "leptos_router",
  "pulldown-cmark",
  "serde",
+ "serde_json",
  "tokio",
  "toml 0.9.12+spec-1.1.0",
  "wasm-bindgen",

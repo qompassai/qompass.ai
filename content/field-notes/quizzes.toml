@@ -1,0 +1,22 @@
+# The telco-admin practice sets, in the order the source quiz app
+# lists them (phaedrusflow/tds, ta/quizzes/data/manifest.json). Each
+# file in quizzes/ is byte-for-byte the source file of the same name;
+# build.rs refuses a list that does not name exactly the files present.
+#
+# Not ported: Pretest C (ta/mock/pretest-c.json), which the source app
+# gates behind a password as a mock exam; the older docs/data sets and
+# the ta/archive backups, which the live sets supersede.
+order = [
+    "general-theory.json",
+    "nec-250-grounding-bonding.json",
+    "nec-300-398-wiring-methods.json",
+    "nec-500-516-hazardous-locations.json",
+    "nec-705-780-special-conditions.json",
+    "nec-800-830-communications.json",
+    "nec-90-100-110-general.json",
+    "nec-mixed-02.json",
+    "pretest-a.json",
+    "pretest-b.json",
+    "rcw-19-28.json",
+    "wa-wac-296-46b.json",
+]
