@@ -2,10 +2,11 @@
 //!
 //! One bearing (degrees clockwise from north) drives everything: the
 //! card turns under a fixed lubber line, and the readout blends the
-//! two cardinals nearest the bearing by proximity weight. The
-//! directory under it lists every solution in plain prerendered HTML —
-//! that list is the guarantee, complete and readable with JavaScript
-//! off; the compass is presentation over the same table.
+//! solutions of the two cardinals nearest the bearing, by proximity
+//! weight, into one list. The cardinal cards on /solutions list every
+//! solution in plain prerendered HTML — that list is the guarantee,
+//! complete and readable with JavaScript off; the compass is
+//! presentation over the same table.
 //!
 //! The instrument mirrors the /about identity card (src/pages/identity.rs):
 //! inline SVG, fixed lubber, the card angle written to a CSS custom
@@ -16,24 +17,6 @@
 //! discrete ticks, this one turns through a continuous bearing.
 
 use leptos::prelude::*;
-
-/// Whether a solution has earned its place yet. `Complete` needs the
-/// solution doing its job AND its testing verified passing; anything
-/// unfinished, untested, failing, or unverifiable is `InProgress`.
-#[derive(Clone, Copy, Debug, PartialEq, Eq)]
-pub enum Status {
-    Complete,
-    InProgress,
-}
-
-impl Status {
-    pub const fn label(self) -> Option<&'static str> {
-        match self {
-            Self::Complete => None,
-            Self::InProgress => Some("In Progress"),
-        }
-    }
-}
 
 /// One of the four services, centered on its cardinal bearing.
 pub struct Cardinal {
@@ -80,73 +63,123 @@ const E: usize = 1;
 const S: usize = 2;
 const W: usize = 3;
 
-/// One published solution under one cardinal.
+const GITHUB: &str = "https://github.com/qompassai/";
+
+/// One published solution under one cardinal. `slug` is its page,
+/// `/solutions/<slug>`; `href` is where it lives (GitHub or `LuaRocks`).
 pub struct Solution {
     pub name: &'static str,
+    pub slug: &'static str,
     pub href: &'static str,
     pub cardinal: usize,
-    pub status: Status,
+    pub version: Option<&'static str>,
 }
 
-const fn sol(name: &'static str, href: &'static str, cardinal: usize, status: Status) -> Solution {
-    Solution { name, href, cardinal, status }
+impl Solution {
+    /// Where the version points: the GitHub release tagged `v<version>`
+    /// (any `#fragment` on the href dropped), or the `LuaRocks` module page.
+    pub fn version_href(&self) -> Option<String> {
+        let version = self.version?;
+        Some(self.href.strip_prefix(GITHUB).map_or_else(
+            || self.href.to_owned(),
+            |rest| {
+                let repo = rest.split('#').next().unwrap_or(rest);
+                format!("{GITHUB}{repo}/releases/tag/v{version}")
+            },
+        ))
+    }
+
+    /// The project mark, for the solutions that have one of the twelve.
+    pub const fn mark(&self) -> Option<&'static str> {
+        match self.slug.as_bytes() {
+            b"bunker" => Some("/img/projects/bunker.webp"),
+            b"diver" => Some("/img/projects/diver.webp"),
+            b"fathom" => Some("/img/projects/fathom.webp"),
+            b"phlow-mcp-server" => Some("/img/projects/phlow.webp"),
+            b"vongola" => Some("/img/projects/vongola.webp"),
+            _ => None,
+        }
+    }
 }
 
-use Status::InProgress as WIP;
+const fn sol(
+    name: &'static str,
+    slug: &'static str,
+    href: &'static str,
+    cardinal: usize,
+    version: Option<&'static str>,
+) -> Solution {
+    Solution { name, slug, href, cardinal, version }
+}
 
-/// Every solution on the compass, and its status — the one place a
-/// label flips when a solution truly completes.
+/// The `v1.00` release, published 2026-10-15 on every GitHub repository.
+const V1: Option<&str> = Some("1.00");
+/// The phaedrusflow `LuaRocks` releases, verified 2026-10-15.
+const ROCK: Option<&str> = Some("0.1.0-1");
+
+/// Every solution on the compass, with its page slug and version.
 ///
-/// Audited 2026-10-14: none of these repositories has a GitHub Actions
-/// run on record and no test run was verified for any of them, so
-/// every ruling is In Progress. Per cardinal: the org profile's set
-/// first, in its order, then the published additions — MCP servers and
-/// the phaedrusflow `LuaRocks` modules (crates.io: none published).
+/// Per cardinal: the org profile's set first, in its order, then the
+/// published additions — MCP servers and the phaedrusflow `LuaRocks`
+/// modules (crates.io: none published). rose.nvim has no version: the
+/// repository is archived (GitHub refuses it a release) and rose now
+/// lives inside Diver.
 pub const SOLUTIONS: [Solution; 43] = [
-    sol("Qompass-Hold", "https://github.com/qompassai/qompass-hold", N, WIP),
-    sol("Qssl", "https://github.com/qompassai/qssl", N, WIP),
-    sol("Radar", "https://github.com/qompassai/radar", N, WIP),
-    sol("Redteam", "https://github.com/qompassai/redteam", N, WIP),
-    sol("Tor", "https://github.com/qompassai/tor", N, WIP),
-    sol("Vongola", "https://github.com/qompassai/vongola", N, WIP),
-    sol("fathom", "https://github.com/qompassai/fathom", N, WIP),
-    sol("diver-security", "https://luarocks.org/modules/phaedrusflow/diver-security", N, WIP),
-    sol("blaze-ts.nvim", "https://github.com/qompassai/blaze-ts.nvim", E, WIP),
-    sol("blaze.nvim", "https://github.com/qompassai/blaze.nvim", E, WIP),
-    sol("Diver", "https://github.com/qompassai/Diver", E, WIP),
-    sol("PathFinders", "https://github.com/qompassai/PathFinders", E, WIP),
-    sol("Qluv", "https://github.com/qompassai/qluv", E, WIP),
-    sol("Rose.nvim", "https://github.com/qompassai/rose.nvim", E, WIP),
-    sol("Tuxtype", "https://github.com/qompassai/tuxtype", E, WIP),
-    sol("Unreal", "https://github.com/qompassai/unreal", E, WIP),
-    sol("eigenstyle", "https://github.com/qompassai/eigenstyle", E, WIP),
-    sol("blaze.nvim (LuaRocks)", "https://luarocks.org/modules/phaedrusflow/blaze.nvim", E, WIP),
-    sol("diver-research", "https://luarocks.org/modules/phaedrusflow/diver-research", E, WIP),
-    sol("Azimuth", "https://github.com/qompassai/Azimuth", S, WIP),
-    sol("Current", "https://github.com/qompassai/current", S, WIP),
-    sol("Dotfiles", "https://github.com/qompassai/dotfiles", S, WIP),
-    sol("Qonfig", "https://github.com/qompassai/qonfig", S, WIP),
-    sol("Qudaz", "https://github.com/qompassai/qudaz", S, WIP),
-    sol("Qxet", "https://github.com/qompassai/qxet", S, WIP),
-    sol("Rose", "https://github.com/qompassai/rose", S, WIP),
-    sol("lumen", "https://github.com/qompassai/lumen", S, WIP),
-    sol("phlow MCP server", "https://github.com/qompassai/phlow#mcp-wire-contract", S, WIP),
-    sol("diver-ai", "https://luarocks.org/modules/phaedrusflow/diver-ai", S, WIP),
-    sol("diver-comms", "https://luarocks.org/modules/phaedrusflow/diver-comms", S, WIP),
-    sol("diver-config", "https://luarocks.org/modules/phaedrusflow/diver-config", S, WIP),
-    sol("diver-dap", "https://luarocks.org/modules/phaedrusflow/diver-dap", S, WIP),
-    sol("diver-dev", "https://luarocks.org/modules/phaedrusflow/diver-dev", S, WIP),
-    sol("diver-games", "https://luarocks.org/modules/phaedrusflow/diver-games", S, WIP),
-    sol("diver-lintfmt", "https://luarocks.org/modules/phaedrusflow/diver-lintfmt", S, WIP),
-    sol("diver-utils", "https://luarocks.org/modules/phaedrusflow/diver-utils", S, WIP),
-    sol("hyprlua", "https://luarocks.org/modules/phaedrusflow/hyprlua", S, WIP),
-    sol("beacon", "https://github.com/qompassai/beacon", W, WIP),
-    sol("bunker", "https://github.com/qompassai/bunker", W, WIP),
-    sol("debian", "https://github.com/qompassai/debian", W, WIP),
-    sol("network", "https://github.com/qompassai/network", W, WIP),
-    sol("NUR", "https://github.com/qompassai/NUR", W, WIP),
-    sol("qjp", "https://github.com/qompassai/qjp", W, WIP),
+    sol("Qompass-Hold", "qompass-hold", "https://github.com/qompassai/qompass-hold", N, V1),
+    sol("Qssl", "qssl", "https://github.com/qompassai/qssl", N, V1),
+    sol("Radar", "radar", "https://github.com/qompassai/radar", N, V1),
+    sol("Redteam", "redteam", "https://github.com/qompassai/redteam", N, V1),
+    sol("Tor", "tor", "https://github.com/qompassai/tor", N, V1),
+    sol("Vongola", "vongola", "https://github.com/qompassai/vongola", N, V1),
+    sol("fathom", "fathom", "https://github.com/qompassai/fathom", N, V1),
+    sol("diver-security", "diver-security", "https://luarocks.org/modules/phaedrusflow/diver-security", N, ROCK),
+    sol("blaze-ts.nvim", "blaze-ts-nvim", "https://github.com/qompassai/blaze-ts.nvim", E, V1),
+    sol("blaze.nvim", "blaze-nvim", "https://github.com/qompassai/blaze.nvim", E, V1),
+    sol("Diver", "diver", "https://github.com/qompassai/Diver", E, V1),
+    sol("PathFinders", "pathfinders", "https://github.com/qompassai/PathFinders", E, V1),
+    sol("Qluv", "qluv", "https://github.com/qompassai/qluv", E, V1),
+    sol("Rose.nvim", "rose-nvim", "https://github.com/qompassai/rose.nvim", E, None),
+    sol("Tuxtype", "tuxtype", "https://github.com/qompassai/tuxtype", E, V1),
+    sol("Unreal", "unreal", "https://github.com/qompassai/unreal", E, V1),
+    sol("eigenstyle", "eigenstyle", "https://github.com/qompassai/eigenstyle", E, V1),
+    sol(
+        "blaze.nvim (LuaRocks)",
+        "blaze-nvim-luarocks",
+        "https://luarocks.org/modules/phaedrusflow/blaze.nvim",
+        E,
+        Some("1.0-1"),
+    ),
+    sol("diver-research", "diver-research", "https://luarocks.org/modules/phaedrusflow/diver-research", E, ROCK),
+    sol("Azimuth", "azimuth", "https://github.com/qompassai/Azimuth", S, V1),
+    sol("Current", "current", "https://github.com/qompassai/current", S, V1),
+    sol("Dotfiles", "dotfiles", "https://github.com/qompassai/dotfiles", S, V1),
+    sol("Qonfig", "qonfig", "https://github.com/qompassai/qonfig", S, V1),
+    sol("Qudaz", "qudaz", "https://github.com/qompassai/qudaz", S, V1),
+    sol("Qxet", "qxet", "https://github.com/qompassai/qxet", S, V1),
+    sol("Rose", "rose", "https://github.com/qompassai/rose", S, V1),
+    sol("lumen", "lumen", "https://github.com/qompassai/lumen", S, V1),
+    sol("phlow MCP server", "phlow-mcp-server", "https://github.com/qompassai/phlow#mcp-wire-contract", S, V1),
+    sol("diver-ai", "diver-ai", "https://luarocks.org/modules/phaedrusflow/diver-ai", S, ROCK),
+    sol("diver-comms", "diver-comms", "https://luarocks.org/modules/phaedrusflow/diver-comms", S, ROCK),
+    sol("diver-config", "diver-config", "https://luarocks.org/modules/phaedrusflow/diver-config", S, ROCK),
+    sol("diver-dap", "diver-dap", "https://luarocks.org/modules/phaedrusflow/diver-dap", S, ROCK),
+    sol("diver-dev", "diver-dev", "https://luarocks.org/modules/phaedrusflow/diver-dev", S, ROCK),
+    sol("diver-games", "diver-games", "https://luarocks.org/modules/phaedrusflow/diver-games", S, ROCK),
+    sol("diver-lintfmt", "diver-lintfmt", "https://luarocks.org/modules/phaedrusflow/diver-lintfmt", S, ROCK),
+    sol("diver-utils", "diver-utils", "https://luarocks.org/modules/phaedrusflow/diver-utils", S, ROCK),
+    sol("hyprlua", "hyprlua", "https://luarocks.org/modules/phaedrusflow/hyprlua", S, ROCK),
+    sol("beacon", "beacon", "https://github.com/qompassai/beacon", W, V1),
+    sol("bunker", "bunker", "https://github.com/qompassai/bunker", W, V1),
+    sol("debian", "debian", "https://github.com/qompassai/debian", W, V1),
+    sol("network", "network", "https://github.com/qompassai/network", W, V1),
+    sol("NUR", "nur", "https://github.com/qompassai/NUR", W, V1),
+    sol("qjp", "qjp", "https://github.com/qompassai/qjp", W, V1),
 ];
+
+/// The solution whose page is `/solutions/<slug>`, if any.
+pub fn solution_page(slug: &str) -> Option<&'static Solution> {
+    SOLUTIONS.iter().find(|s| s.slug == slug)
+}
 
 /// A cardinal stays in the readout up to this far off the bearing
 /// (raw weight cos 80° ≈ 0.17); past it the share is too small to read.
@@ -244,11 +277,6 @@ pub fn value_text(bearing: u16) -> String {
     format!("{b:03} degrees — {} — {}", point_name(b), names.join(" and "))
 }
 
-/// A share as a whole percentage, for display.
-pub fn percent(share: f64) -> String {
-    format!("{:.0}%", share * 100.0)
-}
-
 /// Screen angle of a point `(dx, dy)` from the dial center, degrees
 /// clockwise from straight up (screen y grows downward).
 #[cfg(any(test, feature = "hydrate"))]
@@ -272,26 +300,60 @@ fn solutions_of(cardinal: usize) -> impl Iterator<Item = &'static Solution> {
     SOLUTIONS.iter().filter(move |s| s.cardinal == cardinal)
 }
 
-/// The links of one cardinal, each In Progress solution marked in text.
-fn solution_links(cardinal: usize) -> impl IntoView {
+/// The version of one solution, linked out to its release; nothing for
+/// a solution without one.
+pub fn version_link(s: &'static Solution) -> impl IntoView {
+    s.version.zip(s.version_href()).map(|(v, href)| {
+        view! {
+            <a class="cs-version" href=href aria-label=format!("{} version {v}", s.name)>
+                {v}
+            </a>
+        }
+    })
+}
+
+/// One solution: its page on this site, then its version.
+fn solution_item(s: &'static Solution) -> impl IntoView {
     view! {
-        <ul class="service-links">
-            {solutions_of(cardinal)
-                .map(|s| {
-                    view! {
-                        <li>
-                            <a href=s.href>{s.name}</a>
-                            {s.status.label().map(|l| view! { <span class="cs-status">{l}</span> })}
-                        </li>
-                    }
-                })
-                .collect_view()}
-        </ul>
+        <li>
+            <a class="cs-solution" href=format!("/solutions/{}", s.slug)>
+                {s.name}
+            </a>
+            {version_link(s)}
+        </li>
     }
 }
 
-/// The section: compass and readout, the binding line, and the full
-/// directory.
+/// The links of one cardinal.
+fn solution_links(cardinal: usize) -> impl IntoView {
+    view! { <ul class="service-links">{solutions_of(cardinal).map(solution_item).collect_view()}</ul> }
+}
+
+/// The four cardinal cards, every solution listed under its cardinal —
+/// shown on /solutions under the fleet.
+#[component]
+pub fn CardinalCards() -> impl IntoView {
+    view! {
+        <div class="cs-directory">
+            {CARDINALS
+                .iter()
+                .enumerate()
+                .map(|(i, c)| {
+                    view! {
+                        <article class="cs-group">
+                            <p class="pillar-mark">{c.mark}</p>
+                            <h2>{c.name}</h2>
+                            <p>{c.brief}</p>
+                            {solution_links(i)}
+                        </article>
+                    }
+                })
+                .collect_view()}
+        </div>
+    }
+}
+
+/// The section: compass and readout, and the binding line.
 ///
 /// Every piece of state is a signal named here:
 /// - `bearing` — the readout's bearing, always in `0..360`, because
@@ -453,33 +515,9 @@ pub fn CompassServices() -> impl IntoView {
         })
         .collect_view();
 
-    let readout_groups = move || {
-        shares
-            .get()
-            .into_iter()
-            .enumerate()
-            .filter_map(|(rank, s)| CARDINALS.get(s.cardinal).map(|c| (rank, s, c)))
-            .map(|(rank, s, c)| {
-                view! {
-                    <div
-                        class=if rank == 0 { "cs-r-group is-primary" } else { "cs-r-group" }
-                        style=format!("--cs-share: {:.3}", s.share)
-                    >
-                        <p class="cs-r-head">
-                            <span class="pillar-mark">{c.mark}</span>
-                            <span class="cs-r-name">{c.name}</span>
-                            <span class="cs-r-share">{percent(s.share)}</span>
-                        </p>
-                        <span class="cs-r-bar" aria-hidden="true">
-                            <span style=format!("width: {:.1}%", s.share * 100.0)></span>
-                        </span>
-                        <p class="cs-r-brief">{c.brief}</p>
-                        {solution_links(s.cardinal)}
-                    </div>
-                }
-            })
-            .collect_view()
-    };
+    // One blended list: the primary cardinal's solutions first.
+    let readout_links =
+        move || shares.get().into_iter().flat_map(|s| solutions_of(s.cardinal)).map(solution_item).collect_view();
 
     view! {
         <section class="services-band" aria-labelledby="services-head">
@@ -540,31 +578,14 @@ pub fn CompassServices() -> impl IntoView {
                 </div>
                 <div class="compass-services-readout" aria-live=move || if sweeping.get() { "off" } else { "polite" }>
                     <p class="cs-r-bearing">{move || bearing_text(bearing.get())}</p>
-                    {readout_groups}
+                    <ul class="service-links">{readout_links}</ul>
                 </div>
             </div>
             <p class="cs-binding">
                 "Every solution on this compass is built under " <a href="/standards">"Standards"</a>
                 ", weighed in " <a href="/analysis">"Analysis"</a> ", and proven in "
-                <a href="/field-notes">"Field Notes"</a>
-                " — and the ones still earning their place say so: In Progress."
+                <a href="/field-notes">"Field Notes"</a> "."
             </p>
-            <div class="cs-directory">
-                {CARDINALS
-                    .iter()
-                    .enumerate()
-                    .map(|(i, c)| {
-                        view! {
-                            <article class="cs-group">
-                                <p class="pillar-mark">{c.mark}</p>
-                                <h2>{c.name}</h2>
-                                <p>{c.brief}</p>
-                                {solution_links(i)}
-                            </article>
-                        }
-                    })
-                    .collect_view()}
-            </div>
         </section>
     }
     // Type-erased at the boundary, like the identity section: the full
@@ -644,7 +665,7 @@ mod tests {
         assert_eq!(names_at(9), vec!["Security"]);
         let b = blend(10);
         assert_eq!(names_at(10), vec!["Security", "Education"]);
-        assert_eq!(b.iter().map(|s| percent(s.share)).collect::<Vec<_>>(), vec!["85%", "15%"]);
+        assert_eq!(b.iter().map(|s| (s.share * 100.0).round()).collect::<Vec<_>>(), vec![85.0, 15.0]);
         assert_eq!(names_at(80), vec!["Education", "Security"]);
         assert_eq!(names_at(81), vec!["Education"]);
     }
@@ -789,9 +810,74 @@ mod tests {
     }
 
     #[test]
-    fn in_progress_is_said_in_words() {
-        assert_eq!(Status::InProgress.label(), Some("In Progress"));
-        assert_eq!(Status::Complete.label(), None);
+    fn every_slug_is_unique_lowercase_hyphenated_and_resolves() {
+        for (i, s) in SOLUTIONS.iter().enumerate() {
+            assert!(!s.slug.is_empty() && !s.slug.starts_with('-') && !s.slug.ends_with('-'), "{}", s.name);
+            assert!(s.slug.bytes().all(|b| b.is_ascii_lowercase() || b.is_ascii_digit() || b == b'-'), "{}", s.slug);
+            assert!(SOLUTIONS.iter().skip(i + 1).all(|o| o.slug != s.slug), "{}", s.slug);
+            assert_eq!(solution_page(s.slug).map(|p| p.name), Some(s.name), "{}", s.slug);
+        }
+        for (name, slug) in [
+            ("blaze.nvim", "blaze-nvim"),
+            ("blaze.nvim (LuaRocks)", "blaze-nvim-luarocks"),
+            ("phlow MCP server", "phlow-mcp-server"),
+            ("blaze-ts.nvim", "blaze-ts-nvim"),
+            ("Rose.nvim", "rose-nvim"),
+        ] {
+            assert_eq!(SOLUTIONS.iter().find(|s| s.name == name).map(|s| s.slug), Some(slug), "{name}");
+        }
+    }
+
+    #[test]
+    fn a_slug_off_the_table_resolves_to_nothing() {
+        for slug in ["", "Diver", "blaze.nvim", "../diver", "diver/", "diver ", "phlow", "rose%2Dnvim", "nur\0"] {
+            assert!(solution_page(slug).is_none(), "{slug:?}");
+        }
+    }
+
+    #[test]
+    fn github_solutions_carry_v1_00_except_the_archived_rose_nvim() {
+        for s in SOLUTIONS.iter().filter(|s| s.href.starts_with(GITHUB)) {
+            if s.slug == "rose-nvim" {
+                assert_eq!(s.version, None);
+                assert_eq!(s.version_href(), None);
+            } else {
+                assert_eq!(s.version, Some("1.00"), "{}", s.name);
+            }
+        }
+        let release = |slug| solution_page(slug).and_then(Solution::version_href);
+        assert_eq!(release("qssl").as_deref(), Some("https://github.com/qompassai/qssl/releases/tag/v1.00"));
+        assert_eq!(release("diver").as_deref(), Some("https://github.com/qompassai/Diver/releases/tag/v1.00"));
+        // The fragment on the href is not part of the repository.
+        assert_eq!(
+            release("phlow-mcp-server").as_deref(),
+            Some("https://github.com/qompassai/phlow/releases/tag/v1.00")
+        );
+    }
+
+    #[test]
+    fn luarocks_solutions_carry_their_published_versions_never_1_00() {
+        let rocks: Vec<(&str, Option<&str>, Option<String>)> = SOLUTIONS
+            .iter()
+            .filter(|s| !s.href.starts_with(GITHUB))
+            .map(|s| (s.slug, s.version, s.version_href()))
+            .collect();
+        assert_eq!(rocks.len(), 12);
+        for (slug, version, href) in &rocks {
+            let want = if *slug == "blaze-nvim-luarocks" { "1.0-1" } else { "0.1.0-1" };
+            assert_eq!(*version, Some(want), "{slug}");
+            assert_eq!(href.as_deref(), solution_page(slug).map(|s| s.href), "{slug}");
+        }
+    }
+
+    #[test]
+    fn marks_exist_only_for_the_twelve_project_images() {
+        let marked: Vec<&str> = SOLUTIONS.iter().filter(|s| s.mark().is_some()).map(|s| s.slug).collect();
+        assert_eq!(marked, ["vongola", "fathom", "diver", "phlow-mcp-server", "bunker"]);
+        for mark in SOLUTIONS.iter().filter_map(Solution::mark) {
+            let path = format!("{}/public{mark}", env!("CARGO_MANIFEST_DIR"));
+            assert!(std::path::Path::new(&path).is_file(), "{path}");
+        }
     }
 
     #[test]

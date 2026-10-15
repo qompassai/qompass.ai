@@ -1,3 +1,4 @@
+use crate::pages::compass_services::CardinalCards;
 use crate::pages::project::DownloadBoxes;
 use leptos::prelude::*;
 use leptos_meta::Title;
@@ -140,6 +141,7 @@ pub fn Projects() -> impl IntoView {
                     <StudyLink slug="fathom" />
                 </article>
             </div>
+            <CardinalCards />
         </section>
     }
 }

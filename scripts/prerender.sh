@@ -67,6 +67,22 @@ for route in "${NOTE_ROUTES[@]}"; do
     echo "prerendered $route -> $DIST$route/index.html"
 done
 
+# Solution pages: one page per solution the /solutions cardinal cards
+# link, so SOLUTIONS in src/pages/compass_services.rs is the one place
+# to add a solution. Study pages above are skipped, already rendered.
+mapfile -t SOLUTION_ROUTES < <(grep -o 'href="/solutions/[a-z0-9-]*"' "$DIST/solutions/index.html" \
+    | sed -e 's/^href="//' -e 's/"$//' | sort -u)
+if [ "${#SOLUTION_ROUTES[@]}" -eq 0 ]; then
+    echo "prerender: /solutions links no solution pages" >&2
+    exit 1
+fi
+for route in "${SOLUTION_ROUTES[@]}"; do
+    [ -e "$DIST$route/index.html" ] && continue
+    mkdir -p "$DIST$route"
+    curl -sf "http://127.0.0.1:3000$route" -o "$DIST$route/index.html"
+    echo "prerendered $route -> $DIST$route/index.html"
+done
+
 kill "$SERVER_PID"
 trap - EXIT
 

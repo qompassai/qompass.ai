@@ -449,62 +449,17 @@ h3 {
   letter-spacing: 0.08em;
   margin: 0 0 0.9rem;
 }
-.cs-r-group {
-  background: rgba(14, 25, 48, calc(0.35 + 0.65 * var(--cs-share, 1)));
-  border: 1px solid var(--chart-line);
-  border-left: 3px solid var(--brass-dim);
-  border-radius: 4px;
-  margin-bottom: 1rem;
-  padding: 1rem 1.1rem;
-}
-.cs-r-group.is-primary {
-  border-left-color: var(--brass);
-}
-.cs-r-head {
-  align-items: baseline;
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.3rem 0.8rem;
-  margin: 0;
-}
-.cs-r-name {
-  font-family: var(--font-display);
-  font-size: calc(1rem + 0.4rem * var(--cs-share, 1));
-  font-weight: 600;
-}
-.cs-r-share {
-  color: var(--cherenkov-soft);
-  font-family: var(--font-mono);
-  font-size: 0.85rem;
-  margin-left: auto;
-}
-.cs-r-bar {
-  background: var(--chart-line);
-  display: block;
-  height: 3px;
-  margin: 0.5rem 0 0.6rem;
-}
-.cs-r-bar span {
-  background: var(--brass);
-  display: block;
-  height: 100%;
-}
-.cs-r-brief,
 .cs-group p {
   color: var(--fog);
 }
-.cs-r-brief {
-  font-size: 0.95rem;
-  margin: 0;
-}
-.cs-status {
-  color: var(--fog);
+.cs-version {
+  color: var(--brass-dim);
   font-size: 0.72rem;
   letter-spacing: 0.04em;
   margin-left: 0.35rem;
   white-space: nowrap;
 }
-.cs-status::before {
+.cs-version::before {
   content: "· ";
 }
 .cs-binding {

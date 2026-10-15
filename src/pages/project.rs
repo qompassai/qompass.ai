@@ -1,4 +1,5 @@
-//! Project study pages — `/solutions/<slug>`.
+//! Project study pages — `/solutions/<slug>` — and the generated page
+//! of every other solution on the compass.
 //!
 //! A study page is an `IMRaD` write-up (abstract, methods, results,
 //! discussion, conclusion) rendered from the compiled-in content model
@@ -14,6 +15,7 @@
 //! `KaTeX` under `/vendor/katex` (loaded only on these pages). With no
 //! JavaScript the raw LaTeX remains visible in a styled mono span —
 //! degraded, never broken.
+use crate::pages::compass_services::{solution_page, version_link, Solution, CARDINALS};
 use crate::project_data::{project_page, Benchmark};
 use leptos::prelude::*;
 use leptos_meta::Title;
@@ -254,14 +256,18 @@ fn ProjectGraphic(id: &'static str) -> impl IntoView {
 }
 
 /// Route entry for `/solutions/:slug`. The slug is dispatched against
-/// the compiled-in (ready-only) page list: a match renders the study,
-/// anything else renders the same "Off chart" fallback as any unknown
-/// bearing on the site — a non-ready project has no page here.
+/// the compiled-in (ready-only) page list first: a match renders the
+/// study. Otherwise a solution on the compass renders its generated
+/// page, and anything else renders the same "Off chart" fallback as any
+/// unknown bearing on the site.
 #[component]
 pub fn ProjectDispatch() -> impl IntoView {
     let params = use_params_map();
-    let page = params.with(|map| map.get("slug").and_then(|slug| project_page(slug.as_str())));
-    page.map_or_else(
+    let slug = params.with(|map| map.get("slug")).unwrap_or_default();
+    if let Some(page) = project_page(&slug) {
+        return view! { <ProjectStudy slug=page.slug /> }.into_any();
+    }
+    solution_page(&slug).map_or_else(
         || {
             view! {
                 <section class="page">
@@ -271,8 +277,57 @@ pub fn ProjectDispatch() -> impl IntoView {
             }
             .into_any()
         },
-        |page| view! { <ProjectStudy slug=page.slug /> }.into_any(),
+        |solution| view! { <SolutionPage solution=solution /> }.into_any(),
     )
+}
+
+/// The generated page for one solution on the compass: its mark where
+/// it has one, its cardinal and that service's brief, its version linked
+/// to the release, and the way out to where it lives.
+#[component]
+fn SolutionPage(solution: &'static Solution) -> impl IntoView {
+    let cardinal = CARDINALS.get(solution.cardinal);
+    let source =
+        if solution.href.starts_with("https://luarocks.org/") { "Module on LuaRocks" } else { "Source on GitHub" };
+    view! {
+        <Title text=format!("{} - Qompass AI", solution.name) />
+        <section class="page project-page">
+            <article class="project-article">
+                <header class="study-head">
+                    <p class="page-bearing">{cardinal.map(|c| c.mark)}</p>
+                    {solution
+                        .mark()
+                        .map(|mark| view! { <img class="project-mark" src=mark alt=solution.name /> })}
+                    <h1>{solution.name}</h1>
+                    <p class="study-meta">
+                        {solution
+                            .version
+                            .is_some()
+                            .then(|| view! { <span>"Version " {version_link(solution)}</span> })}
+                        <a href=solution.href>{source}</a>
+                    </p>
+                </header>
+                {(solution.slug == "rose-nvim")
+                    .then(|| {
+                        view! {
+                            <p>
+                                "rose.nvim now lives inside " <a href="/solutions/diver">"Diver"</a>
+                                ". This repository is archived and carries no release."
+                            </p>
+                        }
+                    })}
+                {cardinal
+                    .map(|c| {
+                        view! {
+                            <section class="study-section">
+                                <p class="band-label">{c.name.to_uppercase()}</p>
+                                <p>{c.brief}</p>
+                            </section>
+                        }
+                    })}
+            </article>
+        </section>
+    }
 }
 
 /// The study page for one ready project.
