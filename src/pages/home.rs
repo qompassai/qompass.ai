@@ -1,3 +1,4 @@
+use crate::pages::compass_services::CompassServices;
 use leptos::prelude::*;
 use leptos_meta::Title;
 
@@ -168,7 +169,6 @@ pub fn Home() -> impl IntoView {
         <section class="hero">
             <canvas id="qompass-hero" aria-hidden="true"></canvas>
             <div class="hero-copy">
-                <p class="hero-bearing">"47.66° N · 117.43° W — SPOKANE, FIXED"</p>
                 <h1>
                     "Navigating deep tech's " <span class="glow">"murky waters"</span> "."
                 </h1>
@@ -177,142 +177,16 @@ pub fn Home() -> impl IntoView {
                     "research, and deployment tooling, measured, not marketed."
                 </p>
                 <p class="hero-ctas">
-                    <a class="cta cta-brass" href="/solutions">
-                        "See the work"
+                    <a class="cta cta-brass" href="/standards">
+                        "Start with the Standards"
                     </a>
-                    <a class="cta cta-quiet" href="/research">
-                        "Read the research"
+                    <a class="cta cta-quiet" href="/solutions">
+                        "See the solutions"
                     </a>
                 </p>
             </div>
         </section>
-        <section class="services-band">
-            <p class="band-label">"FOUR CARDINAL SERVICES"</p>
-            <div class="services">
-                <article class="service-card">
-                    <p class="pillar-mark">"N — NORTH"</p>
-                    <h2>"Security"</h2>
-                    <p>
-                        "NIST-compliant security solutions — post-quantum cryptography, "
-                        "red-team tooling, and privacy infrastructure, built in the open."
-                    </p>
-                    <ul class="service-links">
-                        <li>
-                            <a href="https://github.com/qompassai/qompass-hold">"Qompass-Hold"</a>
-                        </li>
-                        <li>
-                            <a href="https://github.com/qompassai/qssl">"Qssl"</a>
-                        </li>
-                        <li>
-                            <a href="https://github.com/qompassai/radar">"Radar"</a>
-                        </li>
-                        <li>
-                            <a href="https://github.com/qompassai/redteam">"Redteam"</a>
-                        </li>
-                        <li>
-                            <a href="https://github.com/qompassai/tor">"Tor"</a>
-                        </li>
-                        <li>
-                            <a href="https://github.com/qompassai/vongola">"Vongola"</a>
-                        </li>
-                    </ul>
-                </article>
-                <article class="service-card">
-                    <p class="pillar-mark">"E — EAST"</p>
-                    <h2>"Education"</h2>
-                    <p>
-                        "Empowering education solutions — learning tools that live in the "
-                        "editor, and PathFinders, our internship program for new builders."
-                    </p>
-                    <ul class="service-links">
-                        <li>
-                            <a href="https://github.com/qompassai/blaze-ts.nvim">"blaze-ts.nvim"</a>
-                        </li>
-                        <li>
-                            <a href="https://github.com/qompassai/blaze.nvim">"blaze.nvim"</a>
-                        </li>
-                        <li>
-                            <a href="https://github.com/qompassai/Diver">"Diver"</a>
-                        </li>
-                        <li>
-                            <a href="https://github.com/qompassai/PathFinders">"PathFinders"</a>
-                        </li>
-                        <li>
-                            <a href="https://github.com/qompassai/qluv">"Qluv"</a>
-                        </li>
-                        <li>
-                            <a href="https://github.com/qompassai/rose.nvim">"Rose.nvim"</a>
-                        </li>
-                        <li>
-                            <a href="https://github.com/qompassai/tuxtype">"Tuxtype"</a>
-                        </li>
-                        <li>
-                            <a href="https://github.com/qompassai/unreal">"Unreal"</a>
-                        </li>
-                    </ul>
-                </article>
-                <article class="service-card">
-                    <p class="pillar-mark">"S — SOUTH"</p>
-                    <h2>"Deployment"</h2>
-                    <p>
-                        "Quality deployment solutions — dotfiles, configuration, and "
-                        "release tooling that carry a project from first checkout to "
-                        "production."
-                    </p>
-                    <ul class="service-links">
-                        <li>
-                            <a href="https://github.com/qompassai/Azimuth">"Azimuth"</a>
-                        </li>
-                        <li>
-                            <a href="https://github.com/qompassai/current">"Current"</a>
-                        </li>
-                        <li>
-                            <a href="https://github.com/qompassai/dotfiles">"Dotfiles"</a>
-                        </li>
-                        <li>
-                            <a href="https://github.com/qompassai/qonfig">"Qonfig"</a>
-                        </li>
-                        <li>
-                            <a href="https://github.com/qompassai/qudaz">"Qudaz"</a>
-                        </li>
-                        <li>
-                            <a href="https://github.com/qompassai/qxet">"Qxet"</a>
-                        </li>
-                        <li>
-                            <a href="https://github.com/qompassai/rose">"Rose"</a>
-                        </li>
-                    </ul>
-                </article>
-                <article class="service-card">
-                    <p class="pillar-mark">"W — WEST"</p>
-                    <h2>"Servers"</h2>
-                    <p>
-                        "Efficient server solutions — Nix packaging, a signed binary "
-                        "cache, and the network plumbing the rest of the fleet runs on."
-                    </p>
-                    <ul class="service-links">
-                        <li>
-                            <a href="https://github.com/qompassai/beacon">"beacon"</a>
-                        </li>
-                        <li>
-                            <a href="https://github.com/qompassai/bunker">"bunker"</a>
-                        </li>
-                        <li>
-                            <a href="https://github.com/qompassai/debian">"debian"</a>
-                        </li>
-                        <li>
-                            <a href="https://github.com/qompassai/network">"network"</a>
-                        </li>
-                        <li>
-                            <a href="https://github.com/qompassai/NUR">"NUR"</a>
-                        </li>
-                        <li>
-                            <a href="https://github.com/qompassai/qjp">"qjp"</a>
-                        </li>
-                    </ul>
-                </article>
-            </div>
-        </section>
+        <CompassServices />
         <Quickstart />
         <section class="proof-band">
             <p class="band-label">"SUPPORTED BY"</p>

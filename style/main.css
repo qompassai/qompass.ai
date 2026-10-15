@@ -192,7 +192,6 @@ h3 {
 .hero-copy a {
   pointer-events: auto;
 }
-.hero-bearing,
 .page-bearing,
 .pillar-mark,
 .entry-kind,
@@ -206,7 +205,7 @@ h3 {
 .hero h1 {
   font-size: clamp(2.5rem, 6.5vw, 4.4rem);
   font-weight: 700;
-  margin: 0.8rem 0 1.1rem;
+  margin: 0 0 1.1rem;
   max-width: 13ch;
 }
 .hero h1 .glow {
@@ -299,28 +298,262 @@ h3 {
 }
 
 /* — Cardinal services —————————————————————— */
-.services {
+/* The bearing compass over its plain directory. Static by default at
+   000°; hydration owns the bearing and writes --cs-turn, nothing reads
+   the angle back. Glides live only in the prefers-reduced-motion:
+   no-preference block at the end of this group. */
+.cs-layout {
+  align-items: start;
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-  gap: 1.6rem;
+  gap: 2rem;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
   margin-top: 1.4rem;
 }
-.service-card {
+.cs-housing {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.cs-instrument {
+  aspect-ratio: 1;
+  cursor: grab;
+  position: relative;
+  touch-action: none;
+  user-select: none;
+  width: min(82vw, 30rem);
+}
+.cs-instrument.is-dragging {
+  cursor: grabbing;
+}
+.cs-dial {
+  display: block;
+  height: 100%;
+  inset: 0;
+  overflow: visible;
+  position: absolute;
+  width: 100%;
+}
+.cs-card {
+  transform: rotate(var(--cs-turn, 0deg));
+  transform-box: view-box;
+  transform-origin: 50% 50%;
+}
+.cs-rim {
+  fill: var(--chart);
+  stroke: var(--brass-dim);
+  stroke-width: 2;
+}
+.cs-inner {
+  fill: var(--abyss);
+  stroke: var(--brass-dim);
+  stroke-width: 1;
+}
+.cs-fine {
+  stroke: var(--chart-line);
+  stroke-width: 1.5;
+}
+.cs-minor {
+  stroke: var(--fog);
+  stroke-width: 1.5;
+}
+.cs-major {
+  stroke: var(--brass);
+  stroke-width: 3;
+}
+.cs-service-name {
+  fill: var(--fog);
+  font-family: var(--font-mono);
+  font-size: 15px;
+  letter-spacing: 0.18em;
+  text-anchor: middle;
+}
+.cs-tick {
+  cursor: pointer;
+}
+.cs-tick:focus-visible {
+  outline: none;
+}
+.cs-hit {
+  fill: transparent;
+}
+.cs-tick:focus-visible .cs-hit {
+  stroke: var(--cherenkov);
+  stroke-width: 2;
+}
+.cs-wind {
+  dominant-baseline: central;
+  fill: var(--fog);
+  font-family: var(--font-mono);
+  font-size: 22px;
+  text-anchor: middle;
+}
+.cs-wind.is-cardinal {
+  fill: var(--starlight);
+  font-size: 32px;
+  font-weight: 600;
+}
+.cs-tick:hover .cs-wind,
+.cs-tick.is-heading .cs-wind {
+  fill: var(--brass);
+}
+.cs-lubber {
+  fill: var(--brass);
+  stroke: var(--brass);
+  stroke-width: 2;
+}
+.cs-hub {
+  align-items: center;
+  border-radius: 50%;
+  display: flex;
+  flex-direction: column;
+  height: 44%;
+  justify-content: center;
+  left: 50%;
+  position: absolute;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  width: 44%;
+}
+.cs-hub:focus-visible {
+  outline: 2px solid var(--cherenkov);
+  outline-offset: 2px;
+}
+.cs-hub-label {
+  color: var(--brass);
+  font-family: var(--font-mono);
+  font-size: 0.66rem;
+  letter-spacing: 0.22em;
+}
+.cs-hub-value {
+  color: var(--starlight);
+  font-family: var(--font-mono);
+  font-size: clamp(1rem, 4.2vw, 1.45rem);
+  white-space: nowrap;
+}
+.cs-plate {
+  border: 1px solid var(--brass-dim);
+  border-radius: 2px;
+  color: var(--brass-dim);
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  letter-spacing: 0.12em;
+  margin: 1rem 0 0;
+  max-width: 100%;
+  padding: 0.3rem 0.7rem;
+  text-align: center;
+}
+.cs-r-bearing {
+  color: var(--brass);
+  font-family: var(--font-mono);
+  font-size: 1.25rem;
+  letter-spacing: 0.08em;
+  margin: 0 0 0.9rem;
+}
+.cs-r-group {
+  background: rgba(14, 25, 48, calc(0.35 + 0.65 * var(--cs-share, 1)));
+  border: 1px solid var(--chart-line);
+  border-left: 3px solid var(--brass-dim);
+  border-radius: 4px;
+  margin-bottom: 1rem;
+  padding: 1rem 1.1rem;
+}
+.cs-r-group.is-primary {
+  border-left-color: var(--brass);
+}
+.cs-r-head {
+  align-items: baseline;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.3rem 0.8rem;
+  margin: 0;
+}
+.cs-r-name {
+  font-family: var(--font-display);
+  font-size: calc(1rem + 0.4rem * var(--cs-share, 1));
+  font-weight: 600;
+}
+.cs-r-share {
+  color: var(--cherenkov-soft);
+  font-family: var(--font-mono);
+  font-size: 0.85rem;
+  margin-left: auto;
+}
+.cs-r-bar {
+  background: var(--chart-line);
+  display: block;
+  height: 3px;
+  margin: 0.5rem 0 0.6rem;
+}
+.cs-r-bar span {
+  background: var(--brass);
+  display: block;
+  height: 100%;
+}
+.cs-r-brief,
+.cs-group p {
+  color: var(--fog);
+}
+.cs-r-brief {
+  font-size: 0.95rem;
+  margin: 0;
+}
+.cs-status {
+  color: var(--fog);
+  font-size: 0.72rem;
+  letter-spacing: 0.04em;
+  margin-left: 0.35rem;
+  white-space: nowrap;
+}
+.cs-status::before {
+  content: "· ";
+}
+.cs-binding {
+  color: var(--fog);
+  font-size: 0.92rem;
+  margin: 2rem auto 0;
+  max-width: 62ch;
+  text-align: center;
+}
+.cs-directory {
+  border-top: 1px solid var(--chart-line);
+  display: grid;
+  gap: 1.6rem;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  margin-top: 2rem;
+  padding-top: 2rem;
+}
+.cs-group {
   background: var(--chart);
   border: 1px solid var(--chart-line);
   border-top: 2px solid var(--brass-dim);
-  padding: 1.4rem 1.4rem 1.2rem;
   border-radius: 4px;
+  padding: 1.4rem 1.4rem 1.2rem;
 }
-.service-card h2 {
+.cs-group h2 {
   font-size: 1.3rem;
   margin: 0.55rem 0 0.6rem;
 }
-.service-card .pillar-mark {
-  color: var(--brass);
+@media (max-width: 48rem) {
+  .cs-layout {
+    grid-template-columns: minmax(0, 1fr);
+  }
 }
-.service-card p {
-  color: var(--fog);
+@media (max-width: 30rem) {
+  .cs-plate {
+    font-size: 0.6rem;
+    letter-spacing: 0.05em;
+  }
+}
+@media (prefers-reduced-motion: no-preference) {
+  .cs-card {
+    transition: transform 0.2s ease-out;
+  }
+  .cs-instrument.is-sweeping .cs-card {
+    transition: transform 0.167s linear;
+  }
+  .cs-instrument.is-dragging .cs-card {
+    transition: none;
+  }
 }
 .service-links {
   list-style: none;

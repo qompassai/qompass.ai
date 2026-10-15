@@ -1,4 +1,5 @@
 pub mod about;
+pub mod compass_services;
 pub mod fiber_timeline;
 pub mod fiber_trainer;
 pub mod field_glossary;
