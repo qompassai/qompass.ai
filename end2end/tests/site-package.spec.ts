@@ -153,7 +153,8 @@ test('(b) an unknown or malformed slug is off chart, never a solution page', asy
     await page.goto(`/solutions/${slug}`);
     await expect(page.locator('.cs-version'), slug).toHaveCount(0);
     await expect(page.locator('.study-meta'), slug).toHaveCount(0);
-    await expect(page.locator('h1'), slug).not.toHaveText(/^(Diver|blaze\.nvim|Rose\.nvim)$/);
+    const h1Texts = await page.locator('h1').allInnerTexts();
+    expect(h1Texts.join(' '), slug).not.toMatch(/^(Diver|blaze\.nvim|Rose\.nvim)$/);
   }
 });
 
