@@ -628,7 +628,7 @@ fn start_drift(
 
 /// Copy the selected identity's value to the clipboard.
 ///
-/// Same settle-or-swallow handling as the home page's Quickstart copy:
+/// Settle-or-swallow handling:
 /// the label flips only on a settled write, a denied write is consumed
 /// on the derived promise, and `forget()` hands each closure to the JS
 /// side, which frees it when called.

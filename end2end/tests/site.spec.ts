@@ -268,12 +268,12 @@ test('no CSP violations on any route, including interactions', async ({ page }) 
   };
 
   await sweep('/', async () => {
-    // Quickstart is hydration-driven: the active chip moving proves the
-    // WASM bundle instantiated and hydrated under the CSP.
-    const chips = page.locator('.qs-chip');
-    await chips.nth(1).click();
-    await expect(chips.nth(1)).toHaveClass(/qs-chip-active/);
-    await page.locator('.qs-copy').click();
+    // The compass is hydration-driven: steering the bearing with the NE
+    // tick proves the WASM bundle instantiated and hydrated under the CSP.
+    const ne = page.getByRole('button', { name: 'Set bearing to 045 degrees — NE' });
+    await ne.focus();
+    await ne.press('Enter');
+    await expect(page.locator('.cs-r-bearing')).toHaveText(/^045°/);
     await expect(page.locator('#qompass-hero')).toBeAttached();
   });
   await sweep('/research', async () => {
