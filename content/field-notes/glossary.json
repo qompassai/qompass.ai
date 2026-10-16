@@ -58,312 +58,6 @@
      ],
      "kind": "inline",
      "id": "eq001"
-    },
-    {
-     "plain": "Rearranged: current is force over turns, and turns is force over current.",
-     "legend": [
-      "\\mathcal{F}",
-      "N",
-      "I"
-     ],
-     "tex": "I=\\frac{\\mathcal{F}}{N} \\qquad N=\\frac{\\mathcal{F}}{I}",
-     "where": [
-      "ta/README.md:628"
-     ],
-     "kind": "display",
-     "id": "eq002"
-    },
-    {
-     "plain": "Worked from the source: 3 turns at 12 A make 36 ampere-turns.",
-     "legend": [
-      "\\mathcal{F}",
-      "N",
-      "I",
-      "\\text{ ampere-turns}"
-     ],
-     "tex": "\\mathcal{F}=NI=3(12)=36\\text{ ampere-turns}",
-     "where": [
-      "ta/README.md:842"
-     ],
-     "kind": "display",
-     "id": "eq003"
-    },
-    {
-     "plain": "Worked from the source: 5 turns at 4 A make 20 ampere-turns.",
-     "legend": [
-      "\\mathcal{F}",
-      "N",
-      "I",
-      "\\text{ ampere-turns}"
-     ],
-     "tex": "\\mathcal{F}=NI=5(4)=20\\text{ ampere-turns}",
-     "where": [
-      "ta/README.md:865"
-     ],
-     "kind": "display",
-     "id": "eq004"
-    },
-    {
-     "plain": "Worked from the source: 18 ampere-turns on 6 turns takes 3 A.",
-     "legend": [
-      "\\mathcal{F}",
-      "N",
-      "I",
-      "\\text{ A}"
-     ],
-     "tex": "I=\\frac{\\mathcal{F}}{N}=\\frac{18}{6}=3\\text{ A}",
-     "where": [
-      "ta/README.md:888"
-     ],
-     "kind": "display",
-     "id": "eq005"
-    },
-    {
-     "plain": "Worked from the source: 32 ampere-turns at 8 A takes 4 turns.",
-     "legend": [
-      "\\mathcal{F}",
-      "N",
-      "I",
-      "\\text{ turns}"
-     ],
-     "tex": "N=\\frac{\\mathcal{F}}{I}=\\frac{32}{8}=4\\text{ turns}",
-     "where": [
-      "ta/README.md:911"
-     ],
-     "kind": "display",
-     "id": "eq006"
-    },
-    {
-     "plain": "Worked from the source: 7 turns at 9 A make 63 ampere-turns.",
-     "legend": [
-      "\\mathcal{F}",
-      "N",
-      "I",
-      "\\text{ ampere-turns}"
-     ],
-     "tex": "\\mathcal{F}=NI=7(9)=63\\text{ ampere-turns}",
-     "where": [
-      "ta/README.md:934"
-     ],
-     "kind": "display",
-     "id": "eq007"
-    },
-    {
-     "plain": "Worked from the source: 45 ampere-turns on 9 turns takes 5 A.",
-     "legend": [
-      "\\mathcal{F}",
-      "N",
-      "I",
-      "\\text{ A}"
-     ],
-     "tex": "I=\\frac{\\mathcal{F}}{N}=\\frac{45}{9}=5\\text{ A}",
-     "where": [
-      "ta/README.md:957"
-     ],
-     "kind": "display",
-     "id": "eq008"
-    },
-    {
-     "plain": "Ampere-turns, written out: turns times current.",
-     "legend": [
-      "\\text{Ampere-turns}",
-      "N",
-      "I"
-     ],
-     "tex": "\\text{Ampere-turns} = N \\times I",
-     "where": [
-      "ta/notes/README.md:755",
-      "ta/notes/README.md:782",
-      "ta/notes/README.md:808",
-      "ta/notes/README.md:836",
-      "ta/notes/README.md:872",
-      "ta/notes/README.md:906",
-      "ta/notes/README.md:934"
-     ],
-     "kind": "display",
-     "id": "eq009"
-    },
-    {
-     "plain": "Problem 1, substituted: 3 turns times 12 A.",
-     "legend": [
-      "\\text{Ampere-turns}"
-     ],
-     "tex": "\\text{Ampere-turns} = 3 \\times 12",
-     "where": [
-      "ta/notes/README.md:786"
-     ],
-     "kind": "display",
-     "id": "eq010"
-    },
-    {
-     "plain": "Problem 1, answered: 36 ampere-turns.",
-     "legend": [
-      "\\text{Ampere-turns}"
-     ],
-     "tex": "\\text{Ampere-turns} = 36",
-     "where": [
-      "ta/notes/README.md:790"
-     ],
-     "kind": "display",
-     "id": "eq011"
-    },
-    {
-     "plain": "Problem 2, substituted: 5 turns times 4 A.",
-     "legend": [
-      "\\text{Ampere-turns}"
-     ],
-     "tex": "\\text{Ampere-turns} = 5 \\times 4",
-     "where": [
-      "ta/notes/README.md:812"
-     ],
-     "kind": "display",
-     "id": "eq012"
-    },
-    {
-     "plain": "Problem 2, answered: 20 ampere-turns.",
-     "legend": [
-      "\\text{Ampere-turns}"
-     ],
-     "tex": "\\text{Ampere-turns} = 20",
-     "where": [
-      "ta/notes/README.md:816"
-     ],
-     "kind": "display",
-     "id": "eq013"
-    },
-    {
-     "plain": "Problem 3, substituted: 18 ampere-turns equals 6 turns times the unknown current.",
-     "legend": [
-      "I"
-     ],
-     "tex": "18 = 6 \\times I",
-     "where": [
-      "ta/notes/README.md:842"
-     ],
-     "kind": "display",
-     "id": "eq014"
-    },
-    {
-     "plain": "Problem 3, solved for current: 18 divided by 6.",
-     "legend": [
-      "I"
-     ],
-     "tex": "I = \\frac{18}{6}",
-     "where": [
-      "ta/notes/README.md:848"
-     ],
-     "kind": "display",
-     "id": "eq015"
-    },
-    {
-     "plain": "Problem 3, answered: 3 A.",
-     "legend": [
-      "I",
-      "\\text{ A}"
-     ],
-     "tex": "I = 3\\ \\text{A}",
-     "where": [
-      "ta/notes/README.md:852"
-     ],
-     "kind": "display",
-     "id": "eq016"
-    },
-    {
-     "plain": "Problem 4, substituted: 32 ampere-turns equals the unknown turns times 8 A.",
-     "legend": [
-      "N"
-     ],
-     "tex": "32 = N \\times 8",
-     "where": [
-      "ta/notes/README.md:878"
-     ],
-     "kind": "display",
-     "id": "eq017"
-    },
-    {
-     "plain": "Problem 4, solved for turns: 32 divided by 8.",
-     "legend": [
-      "N"
-     ],
-     "tex": "N = \\frac{32}{8}",
-     "where": [
-      "ta/notes/README.md:884"
-     ],
-     "kind": "display",
-     "id": "eq018"
-    },
-    {
-     "plain": "Problem 4, answered: 4 turns.",
-     "legend": [
-      "N"
-     ],
-     "tex": "N = 4",
-     "where": [
-      "ta/notes/README.md:888"
-     ],
-     "kind": "display",
-     "id": "eq019"
-    },
-    {
-     "plain": "Problem 5, substituted: 7 turns times 9 A.",
-     "legend": [
-      "\\text{Ampere-turns}"
-     ],
-     "tex": "\\text{Ampere-turns} = 7 \\times 9",
-     "where": [
-      "ta/notes/README.md:910"
-     ],
-     "kind": "display",
-     "id": "eq020"
-    },
-    {
-     "plain": "Problem 5, answered: 63 ampere-turns.",
-     "legend": [
-      "\\text{Ampere-turns}"
-     ],
-     "tex": "\\text{Ampere-turns} = 63",
-     "where": [
-      "ta/notes/README.md:914"
-     ],
-     "kind": "display",
-     "id": "eq021"
-    },
-    {
-     "plain": "Problem 6, substituted: 45 ampere-turns equals 9 turns times the unknown current.",
-     "legend": [
-      "I"
-     ],
-     "tex": "45 = 9 \\times I",
-     "where": [
-      "ta/notes/README.md:940"
-     ],
-     "kind": "display",
-     "id": "eq022"
-    },
-    {
-     "plain": "Problem 6, solved for current: 45 divided by 9.",
-     "legend": [
-      "I"
-     ],
-     "tex": "I = \\frac{45}{9}",
-     "where": [
-      "ta/notes/README.md:946"
-     ],
-     "kind": "display",
-     "id": "eq023"
-    },
-    {
-     "plain": "Problem 6, answered: 5 A.",
-     "legend": [
-      "I",
-      "\\text{ A}"
-     ],
-     "tex": "I = 5\\ \\text{A}",
-     "where": [
-      "ta/notes/README.md:950"
-     ],
-     "kind": "display",
-     "id": "eq024"
     }
    ]
   },
@@ -430,33 +124,6 @@
      ],
      "kind": "display",
      "id": "eq025"
-    },
-    {
-     "plain": "In decibels the same loss is a subtraction: received power is launch power minus α times the length.",
-     "legend": [
-      "P_{\\text{dBm}}(L)",
-      "P_{0,\\text{dBm}}",
-      "\\alpha",
-      "L"
-     ],
-     "tex": "P_{\\text{dBm}}(L) = P_{0,\\text{dBm}} - \\alpha L",
-     "where": [
-      "README.md:145"
-     ],
-     "kind": "display",
-     "id": "eq026"
-    },
-    {
-     "plain": "Worked from the source: 20 km at 0.35 dB/km costs 7 dB of fiber loss.",
-     "legend": [
-      "\\text{dB}"
-     ],
-     "tex": "0.35 \\times 20 = 7\\text{ dB}",
-     "where": [
-      "README.md:153"
-     ],
-     "kind": "inline",
-     "id": "eq027"
     }
    ]
   },
@@ -497,19 +164,6 @@
     }
    ],
    "equations": [
-    {
-     "plain": "The first Bell state is an equal blend of both-zero and both-one — measure one qubit and you know the other.",
-     "legend": [
-      "|\\Phi^+\\rangle",
-      "|00\\rangle, |11\\rangle"
-     ],
-     "tex": "|\\Phi^+\\rangle = \\frac{|00\\rangle + |11\\rangle}{\\sqrt{2}}",
-     "where": [
-      "README.md:321"
-     ],
-     "kind": "display",
-     "id": "eq028"
-    },
     {
      "plain": "All four Bell states: equal blends of matching (Φ) or opposite (Ψ) qubit values, with a plus or minus sign.",
      "legend": [
@@ -626,31 +280,6 @@
      ],
      "kind": "display",
      "id": "eq031"
-    },
-    {
-     "plain": "At θ = 0 the state sits at the north pole: |0⟩.",
-     "legend": [
-      "\\theta"
-     ],
-     "tex": "\\theta=0",
-     "where": [
-      "README.md:287"
-     ],
-     "kind": "inline",
-     "id": "eq032"
-    },
-    {
-     "plain": "At θ = π the state sits at the south pole: |1⟩.",
-     "legend": [
-      "\\theta",
-      "\\pi"
-     ],
-     "tex": "\\theta=\\pi",
-     "where": [
-      "README.md:287"
-     ],
-     "kind": "inline",
-     "id": "eq033"
     }
    ]
   },
@@ -700,37 +329,6 @@
      ],
      "kind": "inline",
      "id": "eq034"
-    },
-    {
-     "plain": "The same relationship, as written in the theory section.",
-     "legend": [
-      "X_C",
-      "f",
-      "C",
-      "\\pi"
-     ],
-     "tex": "X_C=\\frac{1}{2\\pi fC}",
-     "where": [
-      "ta/README.md:653"
-     ],
-     "kind": "display",
-     "id": "eq035"
-    },
-    {
-     "plain": "The same relationship, as written in the study notes.",
-     "legend": [
-      "X_c",
-      "f",
-      "C",
-      "\\pi"
-     ],
-     "tex": "X_c = \\frac{1}{2\\pi f C}",
-     "where": [
-      "ta/notes/README.md:459",
-      "ta/notes/README.md:597"
-     ],
-     "kind": "display",
-     "id": "eq036"
     }
    ]
   },
@@ -785,19 +383,6 @@
      ],
      "kind": "display",
      "id": "eq037"
-    },
-    {
-     "plain": "Worked from the source: a 1:4 (6.0 dB) feeding a 1:8 (9.0 dB) loses 15.0 dB ideal — the same as one 1:32.",
-     "legend": [
-      "IL",
-      "\\text{dB (ideal)}"
-     ],
-     "tex": "IL = 6.0 + 9.0 = 15.0 \\text{ dB (ideal)}",
-     "where": [
-      "README.md:185"
-     ],
-     "kind": "display",
-     "id": "eq038"
     }
    ]
   },
@@ -903,15 +488,6 @@
      ],
      "kind": "display",
      "id": "eq040"
-    },
-    {
-     "plain": "The same model, as written in the study notes.",
-     "tex": "\\alpha \\approx k_1 \\sqrt{f} + k_2 f",
-     "where": [
-      "ta/notes/README.md:722"
-     ],
-     "kind": "display",
-     "id": "eq041"
     }
    ]
   },
@@ -1004,50 +580,6 @@
      ],
      "kind": "inline",
      "id": "eq043"
-    },
-    {
-     "plain": "The same definition, as written in the theory section.",
-     "legend": [
-      "\\Delta P_{\\mathrm{dB}}",
-      "P_1",
-      "P_2",
-      "\\log_{10}"
-     ],
-     "tex": "\\Delta P_{\\mathrm{dB}}=10\\log_{10}\\left(\\frac{P_2}{P_1}\\right)",
-     "where": [
-      "ta/README.md:763"
-     ],
-     "kind": "display",
-     "id": "eq044"
-    },
-    {
-     "plain": "Twice the power is about 3.01 dB more.",
-     "legend": [
-      "\\log_{10}",
-      "\\text{ dB}"
-     ],
-     "tex": "10\\log_{10}(2)\\approx3.01\\text{ dB}",
-     "where": [
-      "ta/README.md:769"
-     ],
-     "kind": "display",
-     "id": "eq045"
-    },
-    {
-     "plain": "Worked from the study notes: doubling the power gives 10 × log₁₀(2) ≈ 3.01 dB.",
-     "legend": [
-      "\\Delta P_{\\text{dB}}",
-      "P_1",
-      "P_2",
-      "\\log_{10}",
-      "\\text{ dB}"
-     ],
-     "tex": "\\Delta P_{\\text{dB}} = 10 \\times \\log_{10}\\left(\\frac{P_2}{P_1}\\right) = 10 \\times \\log_{10}(2) \\approx 10 \\times 0.3010 = 3.01\\text{ dB}",
-     "where": [
-      "ta/notes/README.md:706"
-     ],
-     "kind": "display",
-     "id": "eq046"
     }
    ]
   },
@@ -1100,30 +632,6 @@
      ],
      "kind": "display",
      "id": "eq047"
-    },
-    {
-     "plain": "Constant: f gives the same output for both inputs.",
-     "legend": [
-      "f"
-     ],
-     "tex": "f(0)=f(1)",
-     "where": [
-      "README.md:339"
-     ],
-     "kind": "inline",
-     "id": "eq048"
-    },
-    {
-     "plain": "Balanced: f gives different outputs for the two inputs.",
-     "legend": [
-      "f"
-     ],
-     "tex": "f(0)\\neq f(1)",
-     "where": [
-      "README.md:339"
-     ],
-     "kind": "inline",
-     "id": "eq049"
     }
    ]
   },
@@ -1173,121 +681,6 @@
      ],
      "kind": "inline",
      "id": "eq050"
-    },
-    {
-     "plain": "The same identities, as written in the theory section.",
-     "legend": [
-      "P",
-      "V",
-      "I",
-      "R"
-     ],
-     "tex": "P=VI=I^2R=\\frac{V^2}{R}",
-     "where": [
-      "ta/README.md:675"
-     ],
-     "kind": "display",
-     "id": "eq051"
-    },
-    {
-     "plain": "Worked from the source: 4 A through 12 Ω dissipates 192 W.",
-     "legend": [
-      "P",
-      "\\text{ W}"
-     ],
-     "tex": "P=(4)^2(12)=192\\text{ W}",
-     "where": [
-      "ta/README.md:681"
-     ],
-     "kind": "display",
-     "id": "eq052"
-    },
-    {
-     "plain": "Worked from the source: 240 V across 60 Ω dissipates 960 W.",
-     "legend": [
-      "P",
-      "\\text{ W}"
-     ],
-     "tex": "P=\\frac{(240)^2}{60}=960\\text{ W}",
-     "where": [
-      "ta/README.md:685"
-     ],
-     "kind": "display",
-     "id": "eq053"
-    },
-    {
-     "plain": "Worked from the source: a 48 V circuit supplying 2.5 A delivers 120 W.",
-     "legend": [
-      "P",
-      "V",
-      "I",
-      "\\text{ W}"
-     ],
-     "tex": "P=VI=48(2.5)=120\\text{ W}",
-     "where": [
-      "ta/README.md:980"
-     ],
-     "kind": "display",
-     "id": "eq054"
-    },
-    {
-     "plain": "Worked from the study notes: 4 A through 12 Ω, via current squared, is 192 W.",
-     "legend": [
-      "P",
-      "I",
-      "R",
-      "\\text{ W}"
-     ],
-     "tex": "P = I^2 \\times R = (4)^2 \\times 12 = 16 \\times 12 = 192\\text{ W}",
-     "where": [
-      "ta/notes/README.md:502",
-      "ta/notes/README.md:640"
-     ],
-     "kind": "display",
-     "id": "eq055"
-    },
-    {
-     "plain": "Worked from the study notes: 240 V across 60 Ω, via voltage squared, is 960 W.",
-     "legend": [
-      "P",
-      "V",
-      "R",
-      "\\text{ W}"
-     ],
-     "tex": "P = \\frac{V^2}{R} = \\frac{(240)^2}{60} = \\frac{57,600}{60} = 960\\text{ W}",
-     "where": [
-      "ta/notes/README.md:513",
-      "ta/notes/README.md:651"
-     ],
-     "kind": "display",
-     "id": "eq056"
-    },
-    {
-     "plain": "Power is voltage times current.",
-     "legend": [
-      "P",
-      "V",
-      "I"
-     ],
-     "tex": "P = V \\times I",
-     "where": [
-      "ta/notes/README.md:955"
-     ],
-     "kind": "display",
-     "id": "eq057"
-    },
-    {
-     "plain": "Worked from the study notes: 48 V times 2.5 A is 120 W.",
-     "legend": [
-      "P",
-      "\\text{ W}"
-     ],
-     "tex": "P = 48 \\times 2.5 = 120\\ \\text{W}",
-     "where": [
-      "ta/notes/README.md:959"
-     ],
-     "kind": "display",
-     "id": "eq058"
     }
    ]
   },
@@ -1340,30 +733,6 @@
      ],
      "kind": "display",
      "id": "eq059"
-    },
-    {
-     "plain": "F = 1: a perfect qubit.",
-     "legend": [
-      "F"
-     ],
-     "tex": "F = 1",
-     "where": [
-      "README.md:373"
-     ],
-     "kind": "inline",
-     "id": "eq060"
-    },
-    {
-     "plain": "F = 0.5: completely mixed — no better than classical.",
-     "legend": [
-      "F"
-     ],
-     "tex": "F = 0.5",
-     "where": [
-      "README.md:373"
-     ],
-     "kind": "inline",
-     "id": "eq061"
     }
    ]
   },
@@ -1427,19 +796,6 @@
      ],
      "kind": "display",
      "id": "eq062"
-    },
-    {
-     "plain": "An n-qubit register holds 2 to the n items.",
-     "legend": [
-      "N",
-      "n"
-     ],
-     "tex": "N = 2^n",
-     "where": [
-      "README.md:353"
-     ],
-     "kind": "inline",
-     "id": "eq063"
     }
    ]
   },
@@ -1557,58 +913,6 @@
      "id": "eq067"
     },
     {
-     "plain": "Secondary voltage is the primary voltage scaled by the turns ratio.",
-     "legend": [
-      "V_p, V_s",
-      "N_p, N_s"
-     ],
-     "tex": "V_s=V_p\\left(\\frac{N_s}{N_p}\\right)",
-     "where": [
-      "ta/README.md:573"
-     ],
-     "kind": "display",
-     "id": "eq068"
-    },
-    {
-     "plain": "Worked from the source: 240 V on a 200:50 transformer gives 60 V.",
-     "legend": [
-      "V_p, V_s",
-      "\\text{ V}"
-     ],
-     "tex": "V_s=240\\left(\\frac{50}{200}\\right)=60\\text{ V}",
-     "where": [
-      "ta/README.md:579"
-     ],
-     "kind": "display",
-     "id": "eq069"
-    },
-    {
-     "plain": "Secondary current is the primary current scaled by the inverted turns ratio.",
-     "legend": [
-      "I_p, I_s",
-      "N_p, N_s"
-     ],
-     "tex": "I_s=I_p\\left(\\frac{N_p}{N_s}\\right)",
-     "where": [
-      "ta/README.md:585"
-     ],
-     "kind": "display",
-     "id": "eq070"
-    },
-    {
-     "plain": "Worked from the source: 5 A on a 600:150 transformer gives 20 A.",
-     "legend": [
-      "I_p, I_s",
-      "\\text{ A}"
-     ],
-     "tex": "I_s=5\\left(\\frac{600}{150}\\right)=20\\text{ A}",
-     "where": [
-      "ta/README.md:591"
-     ],
-     "kind": "display",
-     "id": "eq071"
-    },
-    {
      "plain": "Power in equals power out: primary volts times amps equal secondary volts times amps.",
      "legend": [
       "V_p, V_s",
@@ -1620,64 +924,6 @@
      ],
      "kind": "display",
      "id": "eq072"
-    },
-    {
-     "plain": "Worked from the source: 120 V at 8 A in, 480 V out, means 2 A out.",
-     "legend": [
-      "I_p, I_s",
-      "\\text{ A}"
-     ],
-     "tex": "I_s=\\frac{120\\times8}{480}=2\\text{ A}",
-     "where": [
-      "ta/README.md:603"
-     ],
-     "kind": "display",
-     "id": "eq073"
-    },
-    {
-     "plain": "Worked from the study notes: 240 V times 50/200 is 60 V.",
-     "legend": [
-      "V_p, V_s",
-      "N_p, N_s",
-      "\\text{ V}"
-     ],
-     "tex": "V_s = V_p \\times \\left(\\frac{N_s}{N_p}\\right) = 240 \\times \\left(\\frac{50}{200}\\right) = 60\\text{ V}",
-     "where": [
-      "ta/notes/README.md:428",
-      "ta/notes/README.md:566"
-     ],
-     "kind": "display",
-     "id": "eq074"
-    },
-    {
-     "plain": "Worked from the study notes: power balance solved for secondary current — 120 × 8 ÷ 480 = 2 A.",
-     "legend": [
-      "V_p, V_s",
-      "I_p, I_s",
-      "\\implies",
-      "\\text{ A}"
-     ],
-     "tex": "V_p \\times I_p = V_s \\times I_s \\implies I_s = \\frac{V_p \\times I_p}{V_s} = \\frac{120 \\times 8}{480} = \\frac{960}{480} = 2\\text{ A}",
-     "where": [
-      "ta/notes/README.md:542",
-      "ta/notes/README.md:680"
-     ],
-     "kind": "display",
-     "id": "eq075"
-    },
-    {
-     "plain": "Worked from the study notes: 5 A times 600/150 is 20 A.",
-     "legend": [
-      "I_p, I_s",
-      "N_p, N_s",
-      "\\text{ A}"
-     ],
-     "tex": "I_s = I_p \\times \\frac{N_p}{N_s} = 5 \\times \\frac{600}{150} = 20\\,\\text{A}",
-     "where": [
-      "ta/notes/README.md:736"
-     ],
-     "kind": "display",
-     "id": "eq076"
     }
    ]
   },
@@ -1717,16 +963,6 @@
      ],
      "kind": "inline",
      "id": "eq077"
-    },
-    {
-     "plain": "The same relationship, as written in the study notes.",
-     "tex": "X_L = 2\\pi f L",
-     "where": [
-      "ta/notes/README.md:470",
-      "ta/notes/README.md:608"
-     ],
-     "kind": "display",
-     "id": "eq078"
     }
    ]
   },
@@ -1763,64 +999,7 @@
      "meaning": "unit: amperes"
     }
    ],
-   "equations": [
-    {
-     "plain": "Worked from the source: at 120 V, a 40 Ω branch draws 3 A and a 60 Ω branch 2 A.",
-     "legend": [
-      "I_1, I_2",
-      "\\text{ A}"
-     ],
-     "tex": "I_1=\\frac{120}{40}=3\\text{ A} \\qquad I_2=\\frac{120}{60}=2\\text{ A}",
-     "where": [
-      "ta/README.md:739"
-     ],
-     "kind": "display",
-     "id": "eq079"
-    },
-    {
-     "plain": "By KCL the source supplies the branches' sum: 5 A.",
-     "legend": [
-      "I_1, I_2",
-      "I_{\\mathrm{total}}",
-      "\\text{ A}"
-     ],
-     "tex": "I_{\\mathrm{total}}=I_1+I_2=5\\text{ A}",
-     "where": [
-      "ta/README.md:747"
-     ],
-     "kind": "display",
-     "id": "eq080"
-    },
-    {
-     "plain": "The same branch currents, as written in the study notes.",
-     "legend": [
-      "I_1, I_2",
-      "\\text{ A}"
-     ],
-     "tex": "I_1 = \\frac{120}{40} = 3\\text{ A}, \\quad I_2 = \\frac{120}{60} = 2\\text{ A}",
-     "where": [
-      "ta/notes/README.md:524",
-      "ta/notes/README.md:662"
-     ],
-     "kind": "display",
-     "id": "eq081"
-    },
-    {
-     "plain": "The same total, as written in the study notes: 3 + 2 = 5 A.",
-     "legend": [
-      "I_1, I_2",
-      "I_{\\text{total}}",
-      "\\text{ A}"
-     ],
-     "tex": "I_{\\text{total}} = I_1 + I_2 = 3 + 2 = 5\\text{ A}",
-     "where": [
-      "ta/notes/README.md:526",
-      "ta/notes/README.md:664"
-     ],
-     "kind": "display",
-     "id": "eq082"
-    }
-   ]
+   "equations": []
   },
   {
    "term": "Kirchhoff's voltage law (KVL)",
@@ -2193,20 +1372,6 @@
    ],
    "equations": [
     {
-     "plain": "Reactive power is the square root of apparent power squared minus real power squared.",
-     "legend": [
-      "Q",
-      "S",
-      "P"
-     ],
-     "tex": "Q=\\sqrt{S^2-P^2}",
-     "where": [
-      "ta/README.md:563"
-     ],
-     "kind": "inline",
-     "id": "eq090"
-    },
-    {
      "plain": "Apparent power squared equals real power squared plus reactive power squared.",
      "legend": [
       "S",
@@ -2219,35 +1384,6 @@
      ],
      "kind": "display",
      "id": "eq091"
-    },
-    {
-     "plain": "Worked from the source: 10,000 VA and 8,000 W leave 6,000 VAR.",
-     "legend": [
-      "Q",
-      "\\text{ VAR}"
-     ],
-     "tex": "Q=\\sqrt{10{,}000^2-8{,}000^2}=6{,}000\\text{ VAR}",
-     "where": [
-      "ta/README.md:709"
-     ],
-     "kind": "display",
-     "id": "eq092"
-    },
-    {
-     "plain": "Worked from the study notes, every step shown: 6,000 VAR.",
-     "legend": [
-      "Q",
-      "S",
-      "P",
-      "\\text{ VAR}"
-     ],
-     "tex": "Q = \\sqrt{S^2 - P^2} = \\sqrt{10,000^2 - 8,000^2} = \\sqrt{100,000,000 - 64,000,000} = \\sqrt{36,000,000} = 6,000\\text{ VAR}",
-     "where": [
-      "ta/notes/README.md:554",
-      "ta/notes/README.md:692"
-     ],
-     "kind": "display",
-     "id": "eq093"
     }
    ]
   },
@@ -2498,49 +1634,6 @@
      ],
      "kind": "inline",
      "id": "eq098"
-    },
-    {
-     "plain": "RMS is 0.707 of the peak.",
-     "legend": [
-      "V_{\\mathrm{rms}}",
-      "V_{\\mathrm{peak}}"
-     ],
-     "tex": "V_{\\mathrm{rms}}=0.707V_{\\mathrm{peak}}",
-     "where": [
-      "ta/README.md:641"
-     ],
-     "kind": "display",
-     "id": "eq099"
-    },
-    {
-     "plain": "Worked from the source: a 170 V peak is about 120 V RMS.",
-     "legend": [
-      "V_{\\mathrm{rms}}",
-      "\\text{ V}"
-     ],
-     "tex": "V_{\\mathrm{rms}}=170\\times0.707\\approx120\\text{ V}",
-     "where": [
-      "ta/README.md:647"
-     ],
-     "kind": "display",
-     "id": "eq100"
-    },
-    {
-     "plain": "Worked from the study notes: 170 V peak times 0.707 is about 120 V.",
-     "legend": [
-      "V_{\\text{rms}}",
-      "V_{\\text{peak}}",
-      "\\text{ V}"
-     ],
-     "tex": "V_{\\text{rms}} = V_{\\text{peak}} \\times 0.707 = 170 \\times 0.707 \\approx 120\\text{ V}",
-     "where": [
-      "ta/notes/README.md:439",
-      "ta/notes/README.md:449",
-      "ta/notes/README.md:577",
-      "ta/notes/README.md:587"
-     ],
-     "kind": "display",
-     "id": "eq101"
     }
    ]
   },
@@ -2583,34 +1676,6 @@
      ],
      "kind": "display",
      "id": "eq102"
-    },
-    {
-     "plain": "Worked from the source: 10 + 15 + 25 = 50 Ω.",
-     "legend": [
-      "R_{\\mathrm{total}}",
-      "\\Omega"
-     ],
-     "tex": "R_{\\mathrm{total}}=10+15+25=50\\ \\Omega",
-     "where": [
-      "ta/README.md:733"
-     ],
-     "kind": "display",
-     "id": "eq103"
-    },
-    {
-     "plain": "Worked from the study notes: 10 + 15 + 25 = 50 Ω.",
-     "legend": [
-      "R_{\\text{total}}",
-      "R_1, R_2, R_3",
-      "\\Omega"
-     ],
-     "tex": "R_{\\text{total}} = R_1 + R_2 + R_3 = 10 + 15 + 25 = 50\\ \\Omega",
-     "where": [
-      "ta/notes/README.md:493",
-      "ta/notes/README.md:631"
-     ],
-     "kind": "display",
-     "id": "eq104"
     }
    ]
   },
@@ -2787,36 +1852,6 @@
      ],
      "kind": "inline",
      "id": "eq108"
-    },
-    {
-     "plain": "Worked from the source: 480 V, 10 A, PF 1.0 gives about 8,314 W.",
-     "legend": [
-      "P",
-      "\\text{ W}"
-     ],
-     "tex": "P=1.732(480)(10)(1.0)\\approx8{,}314\\text{ W}",
-     "where": [
-      "ta/README.md:697"
-     ],
-     "kind": "display",
-     "id": "eq109"
-    },
-    {
-     "plain": "Worked from the study notes: 1.732 × 480 × 10 × 1.0 ≈ 8,314 W.",
-     "legend": [
-      "P",
-      "V",
-      "I",
-      "\\text{PF}",
-      "\\text{ W}"
-     ],
-     "tex": "P = \\sqrt{3} \\times V \\times I \\times \\text{PF} = 1.732 \\times 480 \\times 10 \\times 1.0 \\approx 8,314\\text{ W}",
-     "where": [
-      "ta/notes/README.md:481",
-      "ta/notes/README.md:619"
-     ],
-     "kind": "display",
-     "id": "eq110"
     }
    ]
   },

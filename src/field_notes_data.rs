@@ -41,7 +41,7 @@ mod tests {
 
     #[test]
     fn glossary_is_alphabetical_with_unique_anchors() {
-        assert_eq!(equation_count(), 110);
+        assert_eq!(equation_count(), 39);
         let mut slugs: Vec<&str> = GLOSSARY.iter().map(|t| t.slug).collect();
         for pair in GLOSSARY.windows(2) {
             let [a, b] = pair else { continue };
