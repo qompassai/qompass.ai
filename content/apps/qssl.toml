@@ -158,3 +158,49 @@ control = "`pytest tests/test_qssl.py` (asserts ML-DSA / SLH-DSA key-gen/sign/ve
 [[controls]]
 action = "Select a TLS policy"
 control = "Choose a named section from `[ssl_configuration]` (`system_default`, `level3`, `fips`, `oqs`, `tpm2`) in `qssl/qssl.cnf`"
+
+[[visuals]]
+kind = "diagram"
+id = "qssl-config"
+caption = "One file drives the whole stack: qssl.cnf wires the providers (the OQS provider supplies the post-quantum algorithms), registers the ML-DSA OIDs, and names the TLS policies a connection chooses from — every element as the shipped configuration states it."
+
+[[visuals]]
+kind = "diagram"
+id = "qssl-handshake"
+caption = "A TLS 1.3 handshake under the oqs policy: hybrid key exchange (X25519 + ML-KEM-768 in a single key_share), an ML-DSA certificate, and session keys derived from both shared secrets. Message order per RFC 8446; hybrid key exchange per RFC 9954."
+
+[[visuals]]
+kind = "equation"
+latex = "ss_{\\text{hybrid}} = ss_{\\text{ML-KEM}} \\parallel ss_{\\text{X25519}}"
+define = "ss_ML-KEM is the shared secret produced by ML-KEM-768 encapsulation against the peer's encapsulation key; ss_X25519 is the X25519 Diffie–Hellman output; ∥ is byte concatenation. For the hybrid groups Qssl configures (x25519_mlkem768 and its siblings), the concatenated secret is the input keying material to TLS 1.3's HKDF key schedule, so the session is secure if either component holds — the construction RFC 9954 (the IETF hybrid key exchange design) specifies."
+caption = "The hybrid combiner: both shared secrets, concatenated, feed the TLS 1.3 key schedule."
+
+[[references]]
+title = "FIPS 203 — Module-Lattice-Based Key-Encapsulation Mechanism Standard (ML-KEM)"
+url = "https://csrc.nist.gov/pubs/fips/203/final"
+note = "The standard behind the ML-KEM-512/768/1024 groups in Qssl's level3 and oqs policies."
+
+[[references]]
+title = "FIPS 204 — Module-Lattice-Based Digital Signature Standard (ML-DSA)"
+url = "https://csrc.nist.gov/pubs/fips/204/final"
+note = "The standard behind the mldsa44/65/87 OIDs Qssl registers and the oqs policy's signature algorithms."
+
+[[references]]
+title = "RFC 8446 — The Transport Layer Security (TLS) Protocol Version 1.3"
+url = "https://www.rfc-editor.org/rfc/rfc8446"
+note = "The handshake message order, the key schedule, and the ciphersuite/group negotiation the policies pin."
+
+[[references]]
+title = "RFC 9954 — Hybrid key exchange in TLS 1.3"
+url = "https://www.rfc-editor.org/rfc/rfc9954"
+note = "How hybrid groups concatenate the component shared secrets — the equation above, as specified."
+
+[[references]]
+title = "OpenSSL config(5) manual — configuration file format"
+url = "https://docs.openssl.org/3.4/man5/config/"
+note = "The section/provider syntax qssl.cnf is written in, including the provider activation model."
+
+[[references]]
+title = "OQS Provider — Open Quantum Safe provider for OpenSSL 3"
+url = "https://github.com/open-quantum-safe/oqs-provider"
+note = "The provider Qssl activates as oqsprovider; its algorithm list is where the ML-KEM/ML-DSA/Falcon names come from."

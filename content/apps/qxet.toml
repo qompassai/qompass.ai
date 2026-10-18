@@ -111,3 +111,30 @@ control = "cargo clippy --workspace --all-targets -- -D warnings"
 [[controls]]
 action = "Test (development)"
 control = "`cargo test --workspace` (39 tests at v0.1.0)"
+
+[[visuals]]
+kind = "diagram"
+id = "qxet-cdc"
+caption = "Content-defined chunking at Qxet's configured parameters (FastCDC; 16 KiB minimum / 64 KiB average / 256 KiB maximum): a rolling Gear hash picks the cut points, each chunk is stored once under its SHA-256 in a 2-hex fan-out, and the manifest records the ordered chunk ids under the artifact's content ID."
+
+[[visuals]]
+kind = "equation"
+latex = "h_{i} = (h_{i-1} \\ll 1) + G[b_{i}]"
+define = "h_i is the rolling Gear fingerprint after consuming byte b_i of the stream; G is FastCDC's fixed table of 256 64-bit words, indexed by the current byte; ≪ is a left bit shift, the bit shifted out discarded. Each step is one shift and one add, so the fingerprint over the scanning window updates in constant time per byte — the property that makes finding cut points in a multi-gigabyte artifact cheap."
+caption = "The Gear rolling hash, from the FastCDC paper — the fingerprint the cut test reads."
+
+[[visuals]]
+kind = "equation"
+latex = "(h_{i} \\mathbin{\\&} M_{i}) = 0 \\iff \\text{cut at } i"
+define = "M_i is M_S (the strict mask) while the current chunk is shorter than the target average and M_L (the lenient mask) at or beyond it; the strict mask sets more bits, so demanding (h & M) = 0 is rarer early and more common later — FastCDC's normalized chunking, which narrows the chunk-size distribution around the average. In Qxet's configuration the average is 64 KiB; independently of the masks, cuts are suppressed before the 16 KiB minimum and forced at the 256 KiB maximum."
+caption = "The normalized cut rule: the mask relaxes once the chunk passes its target size."
+
+[[references]]
+title = "FastCDC: A Fast and Efficient Content-Defined Chunking Approach for Data Deduplication (Xia et al., USENIX ATC 2016)"
+url = "https://www.usenix.org/conference/atc16/technical-sessions/presentation/xia"
+note = "The defining paper for the chunking Qxet implements: the Gear rolling hash and normalized chunking above."
+
+[[references]]
+title = "FIPS 180-4 — Secure Hash Standard (SHA-256)"
+url = "https://csrc.nist.gov/pubs/fips/180-4/final"
+note = "The hash that names every chunk and every artifact in the store; reads re-verify against it and fail closed on mismatch."

@@ -90,3 +90,36 @@ control = "cargo ndk … build --release`, then `./gradlew bundleRelease` in `an
 [[controls]]
 action = "Windows trial build"
 control = "Extract the Releases zip, keep `assets` next to the `.exe`, double-click; SmartScreen → More info → Run anyway (unsigned trial build)"
+
+[[visuals]]
+kind = "diagram"
+id = "lightshow-budget"
+caption = "A worked link budget with the simulation's own loss figures — the ledger every route is scored by, recomputed live as components are placed. The 10 km span length is illustrative; every loss constant, and the receive window, is the game's."
+
+[[visuals]]
+kind = "equation"
+latex = "P_{rx} = P_{tx} - \\sum \\text{loss} + \\sum \\text{gain}"
+define = "All powers in dBm, all losses and gains in dB. P_tx is the OLT launch power (+3.0 dBm in the bundled levels, the GPON class B+ figure of ITU-T G.984.2). Each loss term is one placed element: fiber attenuation (0.35 dB/km at 1310 nm, 0.28 at 1490 nm, 0.21 at 1550 nm), a splitter (3.6 dB at 1×2 up to 17.7 dB at 1×32), a splice (0.075 dB fusion, 0.4 dB mechanical), a connector (0.35 dB UPC, 0.30 dB APC). The route wins when P_rx lands inside the level's receive window — for GPON, −8 to −27 dBm — and too hot fails exactly as too cold does."
+caption = "The link-budget equation, as the game's design documents state it and osp_sim computes it."
+
+[[visuals]]
+kind = "video"
+src = "/img/light-show/light-show-level1.mp4"
+poster = "/img/light-show/level1-poster.jpg"
+caption = "Actual gameplay, from the project's own documentation (docs/gameplay/): a level-one route being built from the OLT toward the customer ONT, the dB ledger tracking each placement."
+
+[[visuals]]
+kind = "video"
+src = "/img/light-show/light-show-outage.mp4"
+poster = "/img/light-show/outage-poster.jpg"
+caption = "The outage event, from the project's own documentation: a scripted fault breaks the route mid-level and the repair must beat the customer-complaint timer."
+
+[[references]]
+title = "ITU-T G.984.2 — GPON: Physical media dependent (PMD) layer specification"
+url = "https://www.itu.int/rec/T-REC-G.984.2-201902-I/en"
+note = "The class B+ optical parameters behind the game's launch power and its −8 to −27 dBm receive window."
+
+[[references]]
+title = "ITU-T G.984.1 — GPON: General characteristics"
+url = "https://www.itu.int/rec/T-REC-G.984.1"
+note = "The GPON architecture the game's outside-plant board models: OLT, splitters, and ONTs on one passive tree."
