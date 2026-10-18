@@ -129,3 +129,22 @@ control = "qluv current"
 [[controls]]
 action = "Show QLuV version"
 control = "qluv version"
+[[visuals]]
+kind = "diagram"
+id = "qluv-store"
+caption = "QLuV's version store and selection mechanism, from the qluv script itself: Lua, LuaJIT and LuaRocks versions install side by side under ~/.qluv, use switches the active version by rewriting PATH to put the selected version's bin directory first, and set-default persists the choice in a DEFAULT_* file that init re-applies on shell load. There is no shim — selection is PATH order."
+
+[[references]]
+title = "Lua — the Lua project's home"
+url = "https://www.lua.org/"
+note = "The source tarballs QLuV downloads, compiles and installs per version under ~/.qluv/lua."
+
+[[references]]
+title = "LuaJIT — the LuaJIT project's home"
+url = "https://luajit.org/"
+note = "The second toolchain QLuV installs and switches alongside Lua, under ~/.qluv/luajit."
+
+[[references]]
+title = "LuaRocks — the Lua package manager"
+url = "https://luarocks.org/"
+note = "The third toolchain QLuV manages, under ~/.qluv/luarocks, configured against the current Lua (switching it also evaluates luarocks path)."

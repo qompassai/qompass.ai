@@ -117,3 +117,17 @@ control = "--disable-built-in-plugins"
 [[controls]]
 action = "Upgrade (submodule install)"
 control = "git submodule update --remote qonfig"
+[[visuals]]
+kind = "diagram"
+id = "qonfig-pipeline"
+caption = "Qonfig's directive pipeline, from its docs and dispatcher: qonfig.yaml is a list of tasks the dispatcher hands to its plugins in order — defaults, clean, link and shell. The create directive used in some configs (including the project's own) has no plugin in the shipped tree and is logged as unhandled, so it is flagged in the figure rather than drawn as an applied step."
+
+[[references]]
+title = "YAML Specification, version 1.2.2"
+url = "https://yaml.org/spec/1.2.2/"
+note = "The YAML specification — the format qonfig.yaml task lists are written in (a JSON/JSONC form is also accepted)."
+
+[[references]]
+title = "Dotbot — a tool that bootstraps your dotfiles"
+url = "https://github.com/anishathalye/dotbot"
+note = "The upstream dotfile manager Qonfig is styled on (Dotbot-style, per the project's own description): a YAML list of directives applied in order."

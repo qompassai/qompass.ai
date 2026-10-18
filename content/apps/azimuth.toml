@@ -78,3 +78,17 @@ control = "`Ctrl-C` / SIGINT or SIGTERM — both entry points wait on a signal c
 [[controls]]
 action = "Run the stack"
 control = "`docker compose` services `nats`, `postgres`, `rose`, `bot` defined in `discord/compose.yaml` (bot `depends_on: [nats, rose, postgres]`)"
+[[visuals]]
+kind = "diagram"
+id = "azimuth-bus"
+caption = "Azimuth's bus architecture, as the shipped Discord code implements it: the bot publishes each non-bot Discord message to NATS JetStream subject msg.in.discord, the LLM worker (subscribed to msg.in.*) completes it against the local rose server and publishes the response to msg.out.discord, and the bot posts the reply to the originating channel. Postgres storage and Prometheus/Grafana/Loki observability appear in the project's architecture diagram; the email and SMS gateways are skeleton placeholders."
+
+[[references]]
+title = "NATS JetStream — concepts documentation"
+url = "https://docs.nats.io/nats-concepts/jetstream"
+note = "The durable streaming layer whose subjects (msg.in.discord, msg.in.*, msg.out.<kind>) route messages between Azimuth's gateways and its LLM worker."
+
+[[references]]
+title = "Discord developer documentation — Gateway events"
+url = "https://docs.discord.com/developers/events/gateway-events"
+note = "The Discord gateway event model the bot consumes — the message events it converts to model.Message and publishes to JetStream."

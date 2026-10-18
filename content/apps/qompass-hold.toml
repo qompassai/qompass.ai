@@ -67,3 +67,22 @@ control = "D-Bus interfaces `org.freedesktop.Secret.Collection` and `org.freedes
 [[controls]]
 action = "Read or write the underlying secrets directly"
 control = "The standard `pass` / `gpg` tooling on the same `~/.password-store` files (the store is the pass layout: one `.gpg` file per secret)"
+[[visuals]]
+kind = "diagram"
+id = "qompass-hold-map"
+caption = "How Qompass-Hold maps the freedesktop Secret Service API onto pass, from the service's own source: D-Bus collections map to a secret-service subdirectory of ~/.password-store, items are GPG-encrypted .gpg files in the pass layout, and attribute searches resolve through the attributes.redb index instead of decrypting the store. The diagram shows the mapping mechanism only — no secret names or values."
+
+[[references]]
+title = "freedesktop Secret Service specification"
+url = "https://specifications.freedesktop.org/secret-service/latest/index.html"
+note = "The D-Bus API (org.freedesktop.secrets — Service, Session, Collection and Item) that Qompass-Hold implements."
+
+[[references]]
+title = "pass — the standard Unix password manager"
+url = "https://www.passwordstore.org/"
+note = "The password store whose layout backs Hold: one GPG-encrypted file per secret under ~/.password-store."
+
+[[references]]
+title = "GnuPG — the GNU Privacy Guard"
+url = "https://gnupg.org/"
+note = "The encryption tool whose encrypted files form the store; Hold's reads run gpg --decrypt against them."

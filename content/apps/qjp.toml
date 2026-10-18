@@ -132,3 +132,17 @@ control = "sudo ota-apply-capsule-update example.Cap` then `sudo reboot"
 [[controls]]
 action = "Inspect capsule/slot status"
 control = "sudo nvbootctrl dump-slots-info"
+[[visuals]]
+kind = "diagram"
+id = "qjp-stack"
+caption = "The Qjp provisioning stack, top to bottom: NVIDIA's JetPack SDK components are packaged by the Nix flake, flashed to a device in recovery mode, and boot through EDK2 UEFI firmware into NVIDIA's 5.10 kernel with nvgpu, with the CUDA/TensorRT userland on top — every layer as the project's README, flake and modules name it."
+
+[[references]]
+title = "NVIDIA JetPack SDK documentation"
+url = "https://docs.nvidia.com/jetson/jetpack/index.html"
+note = "NVIDIA's canonical documentation for the JetPack SDK whose components Qjp packages for NixOS."
+
+[[references]]
+title = "jetpack-nixos — upstream project"
+url = "https://github.com/anduril/jetpack-nixos"
+note = "The upstream project Qjp forks; its flake exposes the same flash-*, iso_minimal and uefi-capsule-update-* attributes Qjp ships."
