@@ -16,6 +16,7 @@
 //! rather than shares that code: the identity card turns between
 //! discrete ticks, this one turns through a continuous bearing.
 
+use crate::project_data::Benchmark;
 use leptos::prelude::*;
 
 /// One of the four services, centered on its cardinal bearing.
@@ -177,6 +178,7 @@ const fn slug_mark(slug: &str) -> Option<&'static str> {
         b"network" => "/img/projects/network.webp",
         b"nur" => "/img/projects/nur.webp",
         b"qjp" => "/img/projects/qjp.webp",
+        b"moonwalk" => "/img/projects/moonwalk.webp",
         _ => return None,
     })
 }
@@ -206,7 +208,7 @@ const ROCK: Option<&str> = Some("0.1.0-1");
 /// repository is archived (GitHub refuses it a release) and rose now
 /// lives inside Diver. The telco-admin practice quizzes live on this
 /// site — their `href` is their own page — and carry no version.
-pub const SOLUTIONS: [Solution; 44] = [
+pub const SOLUTIONS: [Solution; 45] = [
     sol("Qompass-Hold", "qompass-hold", "https://github.com/qompassai/qompass-hold", N, Class::App, V1, "Qompass Secret-Service."),
     sol("Qssl", "qssl", "https://github.com/qompassai/qssl", N, Class::App, V1, "Qompass AI SSL solution."),
     sol("Radar", "radar", "https://github.com/qompassai/radar", N, Class::App, V1, "Risk Analysis Diagnostic Assessment Resolver (R.A.D.A.R)."),
@@ -227,6 +229,7 @@ pub const SOLUTIONS: [Solution; 44] = [
     sol("Blaze.nvim (LuaRocks)", "blaze-nvim-luarocks", "https://luarocks.org/modules/phaedrusflow/blaze.nvim", E, Class::Package, Some("1.0-1"), "🔥 for AI — the blaze.nvim plugin as a LuaRocks module."),
     sol("Diver-Research", "diver-research", "https://luarocks.org/modules/phaedrusflow/diver-research", E, Class::Package, ROCK, "Diver research workflow: research.* journal registry, ORCID, OpenAlex, Web of Science, Zenodo, deadlines, watchlist, templates, Zotero."),
     sol("Telco-Admin Practice Quizzes", "telco-admin-quizzes", "/solutions/telco-admin-quizzes", E, Class::App, None, "Telco-admin practice quizzes with encrypted answer keys, hosted on this site."),
+    sol("Moonwalk", "moonwalk", "https://github.com/qompassai/moonwalk", E, Class::App, V1, "A cross-platform Lua debugger and Debug Adapter Protocol server — a native, plugin-free Neovim debugging workflow, compatible with VS Code and other DAP clients."),
     sol("Azimuth", "azimuth", "https://github.com/qompassai/Azimuth", S, Class::App, V1, "Your helpful AI navigator."),
     sol("Current", "current", "https://github.com/qompassai/current", S, Class::App, V1, "Qompass AI Current: your self-hosted AI runner."),
     sol("Dotfiles", "dotfiles", "https://github.com/qompassai/dotfiles", S, Class::App, V1, "XDG dotfiles for the Qompass AI development environment — a Qonfig link map paired with a Nix flake user environment."),
@@ -478,6 +481,61 @@ pub fn solution_references(slug: &str) -> &'static [(&'static str, &'static str,
                 "https://a2a-protocol.org/latest/",
                 "The agent protocol Phlow's runtime also speaks.",
             ),
+        ],
+        _ => &[],
+    }
+}
+
+/// Measured benchmark tables for a solution page.
+///
+/// In the same `Benchmark` model the project study pages render.
+/// Every figure was measured on primo for this site (2026-10-18) —
+/// never taken from a project's own marketing — and each table's
+/// note states the method, the machine, and the raw record the
+/// values can be re-checked against. A slug with no entry renders
+/// no BENCHMARKS section.
+pub fn solution_benchmarks(slug: &str) -> &'static [Benchmark] {
+    match slug {
+        "moonwalk" => &[
+            Benchmark {
+                title: "Moonwalk — DAP session performance (measured 2026-10-18)",
+                columns: &["Measurement", "Median", "Runs"],
+                rows: &[
+                    &["Launch → first breakpoint stopped", "104.7 ms", "10"],
+                    &["Stepping (next × 200 per run)", "24.7 steps/s", "5"],
+                    &["loop.lua plain (bundled Lua 5.4, spawn → exit)", "2.24 ms", "10"],
+                    &["loop.lua under Moonwalk, no breakpoints (launch → terminated)", "130.1 ms", "10"],
+                ],
+                note: "Measured on primo (13th Gen Intel Core i7-13620H) with a release build of Moonwalk (qompassai/moonwalk @ d6a0b0a), driven over stdio by Moonwalk's own black-box DAP test client (test/dap/client.py) and fixtures (breakme.lua, loop.lua); one warm-up run discarded per measurement. Launch → stopped is timed from sending the launch request — the adapter is already spawned and initialized — to the stopped event at a line breakpoint. Stepping issues 200 next requests back-to-back, each awaiting its stopped event: DAP round-trip throughput, not raw Lua speed. The no-breakpoint figure is a whole debug session (launch → terminated) around a fixture that runs in 2.24 ms plain, so the 58× ratio of medians is the fixed cost of starting a session, not per-line overhead. Raw record: bench_moonwalk.py and moonwalk-results.json in the site-bench-20261018 work record.",
+            },
+        ],
+        "lumen" => &[
+            Benchmark {
+                title: "Lumen — style grade throughput (measured 2026-10-18)",
+                columns: &["Input", "Preset", "Median per grade", "Throughput"],
+                rows: &[
+                    &["448×448 portrait crop", "demo_toon_portrait", "7.77 ms", "25.8 Mpix/s"],
+                    &["448×448 portrait crop", "ukiyo_e", "8.23 ms", "24.4 Mpix/s"],
+                    &["1024×1024 (Lanczos3 upscale)", "demo_toon_portrait", "41.0 ms", "25.6 Mpix/s"],
+                    &["1024×1024 (Lanczos3 upscale)", "ukiyo_e", "42.6 ms", "24.6 Mpix/s"],
+                ],
+                note: "Measured on primo (13th Gen Intel Core i7-13620H) with Lumen's release build, timing lumen::style::grade_image — the pixel path behind the style_apply MCP tool — at strength 1.0: 20 timed runs per row after 3 warm-ups, the median reported; PNG decode/encode and the per-run input clone sit outside the timed region. The subject is the 448×448 Séraphine portrait crop from the 2026-10-18 Lumen study, and that crop upscaled to 1024×1024. Throughput counts input megapixels per second. Raw record: run_lumen_bench.py and lumen-results.json in the site-bench-20261018 work record.",
+            },
+        ],
+        "hyprlua" => &[
+            Benchmark {
+                title: "Hyprlua — typed coverage (counted 2026-10-18; coverage, not speed)",
+                columns: &["Surface", "Counted", "Of"],
+                rows: &[
+                    &["Annotation modules present in library/", "2", "17 planned in library/map.md"],
+                    &["Config keys named (HL.ConfigKey)", "341", "—"],
+                    &["Config keys with a declared type (HL.ConfigValueTypes)", "337", "341 (98.8%)"],
+                    &["Active ---@field annotations", "344", "—"],
+                    &["---@class definitions", "4", "—"],
+                    &["---@alias definitions", "3", "—"],
+                ],
+                note: "Counted from the addon's library/ tree (qompassai/hyprlua @ e103ee8) by line pattern: active annotations start with exactly ---@, and four commented-out ----@field lines are excluded. An annotations package has no runtime, so its honest value metric is typed coverage, not speed. The config surface is nearly fully typed — the four keys without a declared type are general.float_gaps, general.gaps_in, general.gaps_out and layout.single_window_aspect_ratio — while the module surface is early: only hl.config and hl.input of the 17 planned modules are present, and the top-level hl.lua is not yet among them. The repo does not state a total for the full Hyprland ≥ 0.55 Lua API surface, so no percentage of that surface is claimed. Raw record: count_hyprlua.py and hyprlua-results.json in the site-bench-20261018 work record.",
+            },
         ],
         _ => &[],
     }
@@ -1119,7 +1177,7 @@ mod tests {
     #[test]
     fn the_completed_membership_counts_and_links_are_sound() {
         let counts: Vec<usize> = (0..4).map(|c| solutions_of(c).count()).collect();
-        assert_eq!(counts, vec![8, 12, 18, 6]);
+        assert_eq!(counts, vec![8, 13, 18, 6]);
         for (i, s) in SOLUTIONS.iter().enumerate() {
             assert!(s.cardinal < CARDINALS.len(), "{}", s.name);
             assert!(
@@ -1206,7 +1264,7 @@ mod tests {
     #[test]
     fn the_classes_divide_the_fleet() {
         let count = |class| SOLUTIONS.iter().filter(|s| s.class == class).count();
-        assert_eq!(count(Class::App), 28);
+        assert_eq!(count(Class::App), 29);
         assert_eq!(count(Class::Mcp), 4);
         assert_eq!(count(Class::Package), 12);
         // Every package is a LuaRocks module; every MCP server lives on GitHub.
