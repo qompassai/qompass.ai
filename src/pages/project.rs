@@ -15,6 +15,7 @@
 //! `KaTeX` under `/vendor/katex` (loaded only on these pages). With no
 //! JavaScript the raw LaTeX remains visible in a styled mono span —
 //! degraded, never broken.
+use crate::app_data::{app_guide, AppGuide, GuideControl, GuideEntry};
 use crate::pages::compass_services::{solution_page, version_link, Solution, CARDINALS};
 use crate::pages::telco_quizzes::{self, TelcoQuizzes};
 use crate::project_data::{project_page, Benchmark};
@@ -256,6 +257,202 @@ fn ProjectGraphic(id: &'static str) -> impl IntoView {
     }
 }
 
+/// The how-it-works diagram for an app guide: the app's own sourced
+/// steps as a vertical flow of numbered nodes joined by a line a pulse
+/// travels down (motion in the stylesheet's no-preference block, so
+/// reduced-motion visitors get the static diagram). One figure.
+#[component]
+fn FlowDiagram(steps: &'static [&'static str]) -> impl IntoView {
+    view! {
+        <figure class="flow-diagram">
+            <ol class="flow-steps">
+                {steps
+                    .iter()
+                    .enumerate()
+                    .map(|(i, step)| {
+                        view! {
+                            <li class="flow-step">
+                                <span class="flow-node">{i + 1}</span>
+                                <span class="flow-text">{*step}</span>
+                            </li>
+                        }
+                    })
+                    .collect_view()}
+            </ol>
+            <figcaption class="study-graphic-caption">
+                "How it works, step by step — each step as the project's own documentation states it."
+            </figcaption>
+        </figure>
+    }
+}
+
+/// One configuration table from an app guide, in the design system.
+#[component]
+fn GuideConfigTable(entries: &'static [GuideEntry]) -> impl IntoView {
+    view! {
+        <figure class="bench">
+            <div class="bench-scroll">
+                <table class="bench-table guide-table">
+                    <thead>
+                        <tr>
+                            <th>"Option"</th>
+                            <th>"Default"</th>
+                            <th>"What it does"</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {entries
+                            .iter()
+                            .map(|e| {
+                                view! {
+                                    <tr>
+                                        <td>
+                                            <code>{e.name}</code>
+                                        </td>
+                                        <td>{if e.default.is_empty() { "—" } else { e.default }}</td>
+                                        <td>{e.description}</td>
+                                    </tr>
+                                }
+                            })
+                            .collect_view()}
+                    </tbody>
+                </table>
+            </div>
+        </figure>
+    }
+}
+
+/// One controls table from an app guide, in the design system.
+#[component]
+fn GuideControlsTable(entries: &'static [GuideControl]) -> impl IntoView {
+    view! {
+        <figure class="bench">
+            <div class="bench-scroll">
+                <table class="bench-table guide-table">
+                    <thead>
+                        <tr>
+                            <th>"Action"</th>
+                            <th>"Control"</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {entries
+                            .iter()
+                            .map(|e| {
+                                view! {
+                                    <tr>
+                                        <td>{e.action}</td>
+                                        <td>
+                                            <code>{e.control}</code>
+                                        </td>
+                                    </tr>
+                                }
+                            })
+                            .collect_view()}
+                    </tbody>
+                </table>
+            </div>
+        </figure>
+    }
+}
+
+/// The CONFIGURATION and CONTROLS sections of an app guide, shared by
+/// the guide page and by a study page whose project also carries a
+/// guide. A section with no sourced rows does not render.
+#[component]
+fn GuideSections(guide: &'static AppGuide) -> impl IntoView {
+    view! {
+        {(!guide.config.is_empty())
+            .then(|| {
+                view! {
+                    <section class="study-section">
+                        <p class="band-label">"CONFIGURATION"</p>
+                        <GuideConfigTable entries=guide.config />
+                    </section>
+                }
+            })}
+        {(!guide.controls.is_empty())
+            .then(|| {
+                view! {
+                    <section class="study-section">
+                        <p class="band-label">"CONTROLS"</p>
+                        <GuideControlsTable entries=guide.controls />
+                    </section>
+                }
+            })}
+    }
+}
+
+/// The app guide page for one application: what it is, how it works
+/// (the flow diagram), its real configuration options and controls,
+/// and — stated plainly — what the sources did not cover.
+#[component]
+fn AppGuidePage(guide: &'static AppGuide) -> impl IntoView {
+    let solution = solution_page(guide.slug);
+    let mark = if guide.mark.is_empty() { solution.and_then(Solution::mark) } else { Some(guide.mark) };
+    view! {
+        <Title text=format!("{} - Qompass AI", guide.name) />
+        <section class="page project-page">
+            <article class="project-article">
+                <header class="study-head">
+                    <p class="page-bearing">{guide.kind_line}</p>
+                    {mark
+                        .map(|m| {
+                            view! { <img class="project-mark" src=m alt=guide.name /> }
+                        })}
+                    <h1>{guide.name}</h1>
+                    <p class="study-meta">
+                        {solution
+                            .and_then(|s| {
+                                s.version.map(|_| {
+                                    view! { <span>"Version " {version_link(s)}</span> }
+                                })
+                            })}
+                        {(!guide.repo_url.is_empty())
+                            .then(|| {
+                                view! { <a href=guide.repo_url>"Source on GitHub"</a> }
+                            })}
+                    </p>
+                </header>
+                {(!guide.summary.is_empty())
+                    .then(|| {
+                        view! {
+                            <section class="study-section">
+                                <p class="band-label">"OVERVIEW"</p>
+                                {paragraphs(guide.summary)
+                                    .into_iter()
+                                    .map(|p| view! { <p>{p}</p> })
+                                    .collect_view()}
+                            </section>
+                        }
+                    })}
+                {(!guide.how.is_empty())
+                    .then(|| {
+                        view! {
+                            <section class="study-section">
+                                <p class="band-label">"HOW IT WORKS"</p>
+                                <FlowDiagram steps=guide.how />
+                            </section>
+                        }
+                    })}
+                <GuideSections guide=guide />
+                {(!guide.gaps.is_empty())
+                    .then(|| {
+                        view! {
+                            <section class="study-section">
+                                <p class="band-label">"NOT COVERED"</p>
+                                {paragraphs(guide.gaps)
+                                    .into_iter()
+                                    .map(|p| view! { <p>{p}</p> })
+                                    .collect_view()}
+                            </section>
+                        }
+                    })}
+            </article>
+        </section>
+    }
+}
+
 /// Route entry for `/solutions/:slug`. The telco-admin practice quizzes
 /// have their own page; every other slug is dispatched against
 /// the compiled-in (ready-only) page list first: a match renders the
@@ -271,6 +468,9 @@ pub fn ProjectDispatch() -> impl IntoView {
     }
     if let Some(page) = project_page(&slug) {
         return view! { <ProjectStudy slug=page.slug /> }.into_any();
+    }
+    if let Some(guide) = app_guide(&slug) {
+        return view! { <AppGuidePage guide=guide /> }.into_any();
     }
     solution_page(&slug).map_or_else(
         || {
@@ -451,6 +651,8 @@ pub fn ProjectStudy(slug: &'static str) -> impl IntoView {
                             </section>
                         }
                     })}
+                {app_guide(page.slug)
+                    .map(|guide| view! { <GuideSections guide=guide /> })}
                 {(!page.discussion.is_empty())
                     .then(|| {
                         view! {

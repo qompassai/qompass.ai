@@ -1,0 +1,95 @@
+slug = "nur"
+name = "NUR"
+kind_line = "Meta-repository — the Nix User Repository (qompassai fork of nix-community/NUR): an index (`repos.json`) of community package repositories"
+repo_url = "https://github.com/qompassai/NUR"
+mark = "/img/projects/nur.webp"
+ready = true
+
+summary = "NUR is a community-driven meta repository for Nix packages: it provides access to user repositories containing Nix expressions and lets you install packages via attributes such as `nur.repos.<name>.<package>`, with packages built from source and not reviewed by Nixpkgs members. This repo is Qompass AI's fork of `nix-community/NUR`; its `repos.json` indexes 581 repositories, including Qompass AI's own entry `qompassai` → `https://github.com/qompassai/nur-packages`."
+
+how = [
+    "Add NUR as a flake input (`nur.url = \"github:nix-community/NUR\"`, following your nixpkgs), or import it via `packageOverrides` with `builtins.fetchTarball` in `~/.config/nixpkgs/config.nix` / NixOS `configuration.nix`.",
+    "Use the flake's `overlays.default` or `legacyPackages`, or the NixOS/Home Manager modules (`nur.modules.nixos.default`, `nur.modules.homeManager.default`).",
+    "Install or reference packages from the namespace, e.g. `nix-shell -p nur.repos.mic92.hello-nur` or `environment.systemPackages = [ nur.repos.mic92.hello-nur ]`.",
+    "Find packages via the NUR package search at nur.nix-community.org or the nur-combined repository.",
+    "To contribute a repository: create a repo with a top-level `default.nix` returning a set of derivations, add it to `repos.json`, run `./bin/nur format-manifest`, commit only `repos.json` (not `repos.json.lock`), and open a pull request.",
+]
+
+gaps = "- This is a fork: the README, `default.nix`, `flake.nix`, and `bin/nur` are the upstream nix-community/NUR code (maintainer of record in the README is Pandapip1); no Qompass-specific code changes were identified — Qompass's participation is its `repos.json` entry pointing at the separate `qompassai/nur-packages` repo, whose contents are outside this pack's scope.\n- The README's examples use the upstream `github:nix-community/NUR` URL, not the qompassai fork URL; which remote a user should consume is not stated in the fork.\n- `ci/` and `lib/` internals (evaluation, repo fetching) were not read beyond `default.nix`/`flake.nix`."
+
+[[config]]
+name = "repos.<name>.url"
+default = "required (no default)"
+description = "Git repository URL for the member package repository; each URL must point to a git repository"
+
+[[config]]
+name = "repos.<name>.file"
+default = "`default.nix` at repo root (evaluator uses `attr.file or \"\"`)"
+description = "Use a different file as the root expression, relative to the repository root"
+
+[[config]]
+name = "repos.<name>.github-contact"
+default = "—"
+description = "Maintainer contact recorded for the entry (present on most entries)"
+
+[[config]]
+name = "repos.<name>.branch"
+default = "—"
+description = "Branch to track, when set (Qompass entry sets `main`)"
+
+[[config]]
+name = "repos.<name>.submodules"
+default = "—"
+description = "Whether the member repo is fetched with submodules (Qompass entry sets true)"
+
+[[config]]
+name = "repos.qompassai entry"
+default = "url `https://github.com/qompassai/nur-packages`, branch `main`, submodules true, github-contact `phaedrusflow`"
+description = "Qompass AI's own registered repository in this index"
+
+[[config]]
+name = "default.nix argument `repoOverrides`"
+default = "{ }"
+description = "Override or add repositories locally, merged over the manifest (`repos // repoOverrides`)"
+
+[[config]]
+name = "default.nix arguments `nurpkgs` / `pkgs`"
+default = "import <nixpkgs> { }"
+description = "Package sets NUR itself / member repos are called with"
+
+[[config]]
+name = "repos.json.lock"
+default = "generated"
+description = "Locked revisions per repository, updated by `bin/nur update` and a daily GitHub Action; contributors must not commit it with a new entry"
+
+[[controls]]
+action = "Install a package in a shell"
+control = "nix-shell -p nur.repos.mic92.hello-nur"
+
+[[controls]]
+action = "Install a package with nix-env"
+control = "nix-env -f '<nixpkgs>' -iA nur.repos.mic92.hello-nur"
+
+[[controls]]
+action = "Add a package on NixOS"
+control = "`environment.systemPackages = with pkgs; [ nur.repos.mic92.hello-nur ];` (with the overlay/packageOverrides in place)"
+
+[[controls]]
+action = "Build a member repo's package locally"
+control = "nix-build --arg pkgs 'import <nixpkgs> {}' -A hello-nur` / `nix-shell --arg pkgs 'import <nixpkgs> {}' -A hello-nur"
+
+[[controls]]
+action = "Sort/format the manifest before committing"
+control = "./bin/nur format-manifest"
+
+[[controls]]
+action = "Update and test the lock file"
+control = "`bin/nur update` (updates `repos.json.lock` and runs the evaluation check)"
+
+[[controls]]
+action = "Trigger a faster lock update after pushing your repo"
+control = "curl -XPOST https://nur-update.nix-community.org/update?repo=<name>"
+
+[[controls]]
+action = "Local evaluation check for a member repo"
+control = "nix-env -f . -qa \\* --meta --allowed-uris https://static.rust-lang.org --option restrict-eval true --option allow-import-from-derivation true --drv-path --show-trace -I nixpkgs=$(nix-instantiate --find-file nixpkgs) -I ./ --json"

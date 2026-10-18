@@ -1,0 +1,165 @@
+slug = "tor"
+name = "Tor"
+kind_line = "TOR SETUP AND CONFIGURATION — JAVASCRIPT"
+repo_url = "https://github.com/qompassai/tor"
+mark = "/img/projects/tor.webp"
+ready = true
+
+summary = "Tor is the \"Qompass AI Tor Setup\" (GitHub repo description): a user-local installer and a set of shipped configurations for The Onion Router — the tor daemon, Tor Browser, the nyx monitor, the arti Rust client, and torsocks — plus example `torrc`/torsocks/nyx configs with v3 hidden services, and a Firefox extension (\"Onion Control\") that proxies the browser through Tor. The kind line's language is GitHub's primary-language classification for the repo (the `tor-bundle/` extension)."
+
+how = [
+    "The quickstart script presents a menu — 1) tor, 2) tor-browser, 3) nyx, 4) arti, 5) torsocks, a) All, q) Quit — and installs the selected components user-locally under `$HOME/.local` (binaries in `bin`, sources in `src/tor`, browser in `opt`), adding the bin dir to the session PATH.",
+    "Tor itself is built from the pinned release tarball from dist.torproject.org and installed with a generated `$XDG_CONFIG_HOME/tor/torrc` (data directory under `~/.local/share/tor`, `ControlPort 9051`, `CookieAuthentication 1`); you launch it with `tor -f <that torrc>`.",
+    "The shipped example `torrc` shows the fuller operating shape: SOCKS, DNS, and control ports, automapping of onion hosts on resolve, and five v3 hidden services forwarding onion ports to local services (nginx, SSH, WKD, git/Forgejo, and mail ports).",
+    "Applications are torified two ways: torsocks wraps a command (`torsocks <command>`) using `example.torsocks.conf` to reach the Tor SOCKS port, and the \"Onion Control\" browser extension sets the browser's proxy/privacy settings to route through Tor, with a popup toggle and an options page.",
+    "Nyx monitors the running tor process using the shipped `nyxrc` (graphing, accounting, and torrc display enabled); arti is installed via Cargo as the next-generation Rust client when Rust is available.",
+]
+
+gaps = "- There is no narrative documentation beyond the README (boilerplate plus the embedded quickstart script) and `docs/directory.md`, which is a link directory of third-party onion sites and was not used as a product source.\n- What `tgr` is (beyond its config: a keyserver client that can route through Tor) is not documented in any file read; only its `tgr/config.toml` keys are sourced.\n- The `arti/` directory in the tree and the extension's internals (`tor-bundle/proxy.js`, `tor.js`, `privacy.js`) were listed but not read in full; extension behavior above is taken from `manifest.json` and the popup/options file layout.\n- Example-config values are examples: the example torrc's ports (9002/9017/9031) differ from the quickstart-generated torrc (ControlPort 9051) and from torsocks' default Tor port (9050); no single canonical port set is stated in the repo.\n- Primo clones are known-stale estate-wide; the tor files read via the primo clone match the GitHub tree listing, but were not diffed byte-for-byte against GitHub HEAD."
+
+[[config]]
+name = "SocksPort"
+default = "9002"
+description = "Tor SOCKS port in the example torrc"
+
+[[config]]
+name = "ControlPort"
+default = "`9031` in the example torrc; `9051` in the quickstart-generated torrc"
+description = "Tor control port"
+
+[[config]]
+name = "DNSPort"
+default = "127.0.0.1:9017"
+description = "Tor DNS resolver port"
+
+[[config]]
+name = "CookieAuthentication"
+default = "1"
+description = "Authenticate control connections with a cookie file"
+
+[[config]]
+name = "DataDirectory"
+default = "`/home/example/.config/tor/data` in the example; `~/.local/share/tor` in the quickstart-generated torrc"
+description = "Tor data directory"
+
+[[config]]
+name = "AutomapHostsOnResolve"
+default = "1"
+description = "Automap `.onion` hosts on resolve"
+
+[[config]]
+name = "HiddenServiceVersion"
+default = "3"
+description = "Hidden services are v3 (the repo test asserts this)"
+
+[[config]]
+name = "HiddenServicePort"
+default = "e.g. `80 127.0.0.1:8233` (nginx), `2040 127.0.0.1:22` (SSH), plus WKD, git, and mail forwards"
+description = "Map an onion port to a local service"
+
+[[config]]
+name = "`TorAddress` (torsocks)"
+default = "127.0.0.1"
+description = "Tor instance torsocks connects to"
+
+[[config]]
+name = "`TorPort` (torsocks)"
+default = "9050"
+description = "Tor SOCKS port for torsocks"
+
+[[config]]
+name = "`AllowInbound` (torsocks)"
+default = "0"
+description = "Disallow inbound connections through torsocks"
+
+[[config]]
+name = "`AllowOutboundLocalhost` (torsocks)"
+default = "1"
+description = "Allow outbound localhost connections through torsocks"
+
+[[config]]
+name = "`OnionAddrRange` (torsocks)"
+default = "127.42.42.0/24"
+description = "Virtual address range for onion addresses"
+
+[[config]]
+name = "`use_tor` (tgr)"
+default = "true"
+description = "Route the `tgr` tool through Tor"
+
+[[config]]
+name = "`tor_socks_port` (tgr)"
+default = "9050"
+description = "Tor SOCKS port used by `tgr`"
+
+[[config]]
+name = "`default_keyserver` (tgr)"
+default = "hkp://keys.openpgp.org"
+description = "Default OpenPGP keyserver for `tgr` (`keyservers` also lists `hkp://pgp.mit.edu`)"
+
+[[config]]
+name = "`timeout` / `max_retries` / `refresh_interval` (tgr)"
+default = "30` / `5` / `3600"
+description = "Request timeout, retry cap, and refresh interval for `tgr`"
+
+[[config]]
+name = "`color_interface` (nyx)"
+default = "true"
+description = "Colored nyx interface"
+
+[[config]]
+name = "`graph_stat` (nyx)"
+default = "resources"
+description = "Statistic shown in the nyx graph (`graph_interval`: each second)"
+
+[[config]]
+name = "`tor_socks_address` (Tor Browser settings)"
+default = "127.0.0.1:9050"
+description = "SOCKS address in `torbrowser/settings.json` (`download_over_tor: true`, mirror `https://dist.torproject.org/`)"
+
+[[config]]
+name = "`TOR_VERSION` (installer)"
+default = "0.4.8.11"
+description = "Tor release the quickstart builds"
+
+[[config]]
+name = "`TORSOCKS_VERSION` (installer)"
+default = "2.4.0"
+description = "Torsocks release the quickstart builds"
+
+[[config]]
+name = "`TOR_BROWSER_DEFAULT` (installer)"
+default = "13.0.14"
+description = "Fallback Tor Browser version if the latest cannot be determined"
+
+[[controls]]
+action = "Install components"
+control = "Run `scripts/quickstart.sh` and choose `1`–`5`, `a` (all), or `q` (quit) at the menu"
+
+[[controls]]
+action = "Launch tor"
+control = "tor -f $XDG_CONFIG_HOME/tor/torrc"
+
+[[controls]]
+action = "Launch Tor Browser"
+control = "`tor-browser` (linked by the installer)"
+
+[[controls]]
+action = "Monitor tor"
+control = "nyx --config $XDG_CONFIG_HOME/nyx/nyxrc"
+
+[[controls]]
+action = "Use arti"
+control = "`arti` (after the Cargo-based install)"
+
+[[controls]]
+action = "Torify a command"
+control = "torsocks <command>"
+
+[[controls]]
+action = "Toggle browser proxying"
+control = "\"Onion Control\" extension popup (on/off) and its options page; permissions: storage, proxy, privacy, notifications, nativeMessaging"
+
+[[controls]]
+action = "Uninstall"
+control = "Remove the user-local prefix and config dirs as printed by the installer (`$PREFIX/{bin,lib,share,opt}`, sources, `~/.cache/arti`, `$XDG_CONFIG_HOME/{tor,nyx,arti}`)"

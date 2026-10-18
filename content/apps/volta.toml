@@ -1,0 +1,164 @@
+slug = "volta"
+name = "Volta"
+kind_line = "OPENPGP KEY SERVER — RUST"
+repo_url = "https://github.com/qompassai/Volta"
+mark = "/img/projects/volta.webp"
+ready = true
+
+summary = "Volta is an OpenPGP key server derived from Hagrid, the software behind keys.openpgp.org, serving the HKP protocol, the verifying-keyserver (VKS) API, and Web Key Directory with email-verified publication. The README explicitly corrects earlier descriptions that called it a reverse proxy: \"It is not one and never has been.\""
+
+how = [
+    "The `volta` binary (Rocket 0.5 server) starts and extracts its figment configuration from `Rocket.toml` or `ROCKET_*` environment variables.",
+    "Anyone may upload a key through HKP (`/pks/add`), the VKS API (`/vks/v1/upload`), or the web UI (`/upload`).",
+    "The `volta-database` crate parses the key with Sequoia-OpenPGP, cleans it (stripping unverified and revoked material per policy), and stores it on the filesystem keyed by fingerprint, key ID, and email.",
+    "An email address is not published as searchable until its owner confirms it by clicking a verification token link mailed to that address; owners can manage or delete addresses through tokenized `/manage` links.",
+    "Lookups are served over three surfaces: HKP (`/pks/lookup`), the VKS API (`/vks/v1/by-fingerprint/<fpr>`, `/vks/v1/by-email/<email>`, `/vks/v1/by-keyid/<kid>`), and Web Key Directory (`/.well-known/openpgpkey/<domain>/hu/<hash>` and `/policy`).",
+    "Operators use `voltactl` to bulk-import keyrings into the database and regenerate the derived directory layout; a separate `volta-delete` binary removes a single key.",
+]
+
+gaps = "- `Rocket.toml.dist` is a starting-point template with debug/staging/release profiles inherited from upstream Hagrid (its staging/release `base-URI` values still name keys.openpgp.org); production Volta values are not stated in the repo files read.\n- The `rewrite/` tree in the repo contains a separate in-progress rewrite (its own crates and book); this pack describes the main tree (`src/`, `database/`, `voltactl/`) that the README and `docs/src/` describe.\n- Individual VKS/HKP request parameters (e.g. HKP `op`/`search`) were not enumerated beyond the route paths in `docs/src/introduction.md`."
+
+[[config]]
+name = "`address` (`[global]`)"
+default = "0.0.0.0` in `Rocket.toml.dist"
+description = "Rocket listen address"
+
+[[config]]
+name = "`port` (`[global]`)"
+default = "8080` in `Rocket.toml.dist"
+description = "Rocket listen port"
+
+[[config]]
+name = "ROCKET_ADDRESS` / `ROCKET_PORT"
+default = "example: `127.0.0.1` / `8080`"
+description = "Environment override used in the Quickstart run command"
+
+[[config]]
+name = "base-URI"
+default = "`http://localhost:8080` in the `[debug]` profile"
+description = "Public base URI of the server"
+
+[[config]]
+name = "base-URI-Onion"
+default = "not stated in source"
+description = "Onion base URI (named in the operations key list; present in the `[release]` profile)"
+
+[[config]]
+name = "from"
+default = "`noreply@localhost` in the `[debug]` profile"
+description = "Sender address for verification/management mail"
+
+[[config]]
+name = "token_validity"
+default = "3600` in `Rocket.toml.dist"
+description = "Validity period for mailed tokens (seconds, as written in the file)"
+
+[[config]]
+name = "token_secret"
+default = "operator-supplied (value not reproduced)"
+description = "Secret used for sealed tokens"
+
+[[config]]
+name = "template_dir"
+default = "`dist/templates` in the `[debug]` profile"
+description = "Web template directory"
+
+[[config]]
+name = "email_template_dir"
+default = "`dist/email-templates` in the `[debug]` profile"
+description = "Email template directory"
+
+[[config]]
+name = "assets_dir"
+default = "`dist/assets` in the `[debug]` profile"
+description = "Static assets directory"
+
+[[config]]
+name = "keys_internal_dir"
+default = "`state/keys-internal` in the `[debug]` profile"
+description = "Internal key storage directory"
+
+[[config]]
+name = "keys_external_dir"
+default = "`state/keys-external` in the `[debug]` profile"
+description = "External (published) key storage directory"
+
+[[config]]
+name = "token_dir"
+default = "`state/tokens` in the `[debug]` profile"
+description = "Token directory"
+
+[[config]]
+name = "tmp_dir"
+default = "`state/tmp` in the `[debug]` profile"
+description = "Temporary directory"
+
+[[config]]
+name = "maintenance_file"
+default = "`state/maintenance` in the `[debug]` profile"
+description = "Maintenance-mode flag file"
+
+[[config]]
+name = "mail_rate_limit"
+default = "60` in `[debug]`/`[staging]`; `3600` in `[release]"
+description = "Mail rate limit per profile in the dist file"
+
+[[config]]
+name = "enable_prometheus"
+default = "false` in `Rocket.toml.dist"
+description = "Enable the Prometheus `/metrics` endpoint"
+
+[[config]]
+name = "x-accel-redirect"
+default = "false` in `[debug]`; `true` in `[staging]`/`[release]"
+description = "Delegate file serving via X-Accel-Redirect"
+
+[[config]]
+name = "filemail_into"
+default = "not stated in source"
+description = "File-spool mail delivery for development (named in the operations key list)"
+
+[[config]]
+name = "root"
+default = "not stated in source"
+description = "Server root (named in the operations key list)"
+
+[[controls]]
+action = "Build"
+control = "cargo build --release"
+
+[[controls]]
+action = "Build / develop with Nix"
+control = "nix build` / `nix develop"
+
+[[controls]]
+action = "Run the server"
+control = "ROCKET_ADDRESS=127.0.0.1 ROCKET_PORT=8080 ./target/release/volta"
+
+[[controls]]
+action = "Build the documentation book"
+control = "mdbook build"
+
+[[controls]]
+action = "Bulk-import keys"
+control = "voltactl import [--dry-run/-n] <keyring files...>"
+
+[[controls]]
+action = "Regenerate the derived directory layout"
+control = "voltactl regenerate"
+
+[[controls]]
+action = "Select `voltactl` config file"
+control = "`voltactl -c/--config <FILE>` (default file named in source: `Rocket.toml`)"
+
+[[controls]]
+action = "Select `voltactl` environment"
+control = "`voltactl -e/--env <dev\\"
+
+[[controls]]
+action = "Remove a single key"
+control = "`volta-delete` binary (second binary of the root package)"
+
+[[controls]]
+action = "Upload / search / verify / manage keys (web UI)"
+control = "/upload`, `/search`, `/verify/<token>`, `/manage`, `/manage/<token>`, `/manage/unpublish"

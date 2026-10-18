@@ -1,0 +1,160 @@
+slug = "qssl"
+name = "Qssl"
+kind_line = "POST-QUANTUM OPENSSL CONFIGURATION — SHELL"
+repo_url = "https://github.com/qompassai/qssl"
+mark = "/img/projects/qssl.webp"
+ready = true
+
+summary = "Qssl is the \"Qompass AI SSL Solution\" (GitHub repo description), titled \"Quality SSL: Qompass AI SSL for the Post-Quantum Age\" / \"Qompass AI on OpenSSL\" in its README: a shipped OpenSSL configuration (`qssl/qssl.cnf` plus profile files) that turns on FIPS mode and the OQS provider, pins TLS cipher/group/signature policy including ML-KEM hybrid groups and ML-DSA signature algorithms, and ships scripts to check files for post-quantum algorithm coverage."
+
+how = [
+    "OpenSSL loads `qssl/qssl.cnf` (`openssl_conf = openssl_init`, `config_diagnostics = 1`): the init section wires the EVP settings, engines, OID section, providers, random section, and the named SSL configuration.",
+    "EVP settings turn FIPS mode on (`fips_mode = yes`), and the provider section activates `base`, `default`, `legacy`, `fips`, `oqsprovider`, and `pkcs11` providers — the OQS provider is what supplies the post-quantum algorithms.",
+    "The OID section registers the ML-DSA OIDs (`mldsa44`/`mldsa65`/`mldsa87`), so certificates and signatures using them parse with names.",
+    "A connection picks one of the named TLS policies in `[ssl_configuration]` — `system_default`, `level3`, `fips`, `oqs`, or `tpm2` — each pinning `CipherString`/`Ciphersuites`, `Groups`, `MinProtocol`/`MaxProtocol`, and `SignatureAlgorithms`; the `oqs` policy's groups are ML-KEM hybrids only and its signature algorithms are `falcon512:falcon1024:mldsa65:mldsa87`.",
+    "Certificate work uses the same file's CA/req sections: `CA_default` under `/etc/pki/qompass-ca`, `default_bits = 3072`, `default_md = sha256`, `default_keyalg = EC`, and the `server_cert`/`client_cert`/`v3_ca` extension profiles (also shipped standalone as `qssl/profiles/server_cert.cnf`).",
+    "Separately, `qssl/scripts/pq_check.sh <file>` scans a target file for occurrences of a fixed list of post-quantum algorithm names (BIKE, FrodoKEM, HQC, ML-KEM, ML-DSA, Falcon, SPHINCS+, MAYO, CROSS, OV and their hybrids) and writes a present/missing/duplicate report to `pq_report.txt`; the repo's test gate runs `scripts/tests/pqctest.sh` against the system OpenSSL and asserts PQ signature algorithms complete key-gen/sign/verify and that a tampered signature does not verify.",
+]
+
+gaps = "- The README is boilerplate (badges, contact, funding, FAQ) with no usage instructions; there is no documented install step that copies `qssl.cnf` into an OpenSSL config path or sets `OPENSSL_CONF` — the test deliberately unsets `OPENSSL_CONF`/`OPENSSL_MODULES` and tests the system OpenSSL instead.\n- Several `.include` lines and engine/module paths in `qssl.cnf` point at `/opt/QAI/qompassl/…`, `/etc/ssl/profiles/…`, and `/usr/lib/…` paths whose provisioning is not documented in the files read.\n- The remaining profile files (`ca_profiles.cnf`, `ct_log_list.cnf`, `engines_providers.cnf`, `oid.cnf`, `random_sect.cnf`, `tsa_sect.cnf`) were listed but only `server_cert.cnf` was read in full; their individual keys are not tabulated here.\n- `qssl/scripts/optbuild.sh` (a build script in the tree) was not read for this pack.\n- Primo clones are known-stale estate-wide; `qssl.cnf` and `pq_check.sh` were read from the primo clone (`~/.GH/Qompass/Qssl/`) and the same paths exist in the GitHub tree listing, but they were not diffed byte-for-byte against GitHub HEAD."
+
+[[config]]
+name = "config_diagnostics"
+default = "1"
+description = "OpenSSL config diagnostics on"
+
+[[config]]
+name = "`fips_mode` (`[evp_settings]`)"
+default = "yes"
+description = "FIPS mode for EVP operations"
+
+[[config]]
+name = "`providers` (`[provider_sect]`)"
+default = "base`, `default`, `legacy`, `fips`, `oqsprovider`, `pkcs11` all `activate = 1"
+description = "Providers loaded at startup"
+
+[[config]]
+name = "default_sect.properties"
+default = "\"provider=default\", \"security_level=3\""
+description = "Property query for the default provider"
+
+[[config]]
+name = "fips_sect.algorithms"
+default = "ALL:!X25519:!X448:!Ed25519:!Ed448"
+description = "Algorithm restriction for the FIPS provider"
+
+[[config]]
+name = "oqs_sect.module"
+default = "/opt/QAI/qompassl/lib64/ossl-modules/oqsprovider.so"
+description = "Path to the OQS provider module as written in the file"
+
+[[config]]
+name = "`mldsa44` / `mldsa65` / `mldsa87` (`[qai_oid]`)"
+default = "2.16.840.1.101.3.4.3.32` / `.33` / `.34"
+description = "Registered ML-DSA OIDs"
+
+[[config]]
+name = "`random` (`[random]`)"
+default = "CTR-DRBG"
+description = "Random generator type (alternatives named in comments: HASH-DRBG, HMAC-DRBG)"
+
+[[config]]
+name = "random.cipher"
+default = "AES-256-CTR"
+description = "Cipher for CTR-DRBG"
+
+[[config]]
+name = "random.seed"
+default = "JITTER"
+description = "Entropy seed source"
+
+[[config]]
+name = "system_default.MinProtocol` / `MaxProtocol"
+default = "TLSv1.2` / `TLSv1.3"
+description = "Protocol bounds for the system-default TLS policy"
+
+[[config]]
+name = "system_default.Groups"
+default = "P-256:P-384:P-521:X25519:X448"
+description = "Key-exchange groups for the system-default policy"
+
+[[config]]
+name = "system_default.Ciphersuites"
+default = "TLS_AES_256_GCM_SHA384:TLS_CHACHA20_POLY1305_SHA256:TLS_AES_128_GCM_SHA256"
+description = "TLS 1.3 ciphersuites for the system-default policy"
+
+[[config]]
+name = "`level3.Groups` (`tls_seclevel_3`)"
+default = "X25519:P-256:P-384:P-521:X448:x25519_mlkem768:x25519_mlkem1024:p384_mlkem768:mlkem768:mlkem512:mlkem1024"
+description = "Groups for the security-level-3 policy, including ML-KEM hybrids"
+
+[[config]]
+name = "`oqs.Groups` (`oqs_ssl_sect`)"
+default = "x25519_mlkem768:x25519_mlkem1024:p384_mlkem768:mlkem768:mlkem512:mlkem1024"
+description = "ML-KEM-only groups for the OQS policy"
+
+[[config]]
+name = "oqs.SignatureAlgorithms"
+default = "falcon512:falcon1024:mldsa65:mldsa87"
+description = "Signature algorithms for the OQS policy"
+
+[[config]]
+name = "`fips.Groups` (`fips_ssl_sect`)"
+default = "P-256:P-384:P-521"
+description = "Groups for the FIPS policy"
+
+[[config]]
+name = "CA_default.dir"
+default = "/etc/pki/qompass-ca"
+description = "CA directory (`certs`, `database`, `serial`, `certificate` derive from it)"
+
+[[config]]
+name = "CA_default.default_days"
+default = "365"
+description = "Default certificate validity"
+
+[[config]]
+name = "CA_default.default_crl_days"
+default = "30"
+description = "Default CRL validity"
+
+[[config]]
+name = "CA_default.default_md"
+default = "sha256"
+description = "Default CA message digest"
+
+[[config]]
+name = "req.default_bits"
+default = "3072"
+description = "Default key size for requests"
+
+[[config]]
+name = "req.default_keyalg"
+default = "EC"
+description = "Default key algorithm for requests"
+
+[[config]]
+name = "req.prompt"
+default = "no"
+description = "Do not prompt for the distinguished name (the `[dn]` section supplies US / Washington / Spokane / Qompass AI / Security)"
+
+[[config]]
+name = "tsa_config1.signer_digest"
+default = "sha256"
+description = "Time-stamp authority signer digest (TSA section in the same file)"
+
+[[controls]]
+action = "Check a file for post-quantum algorithm coverage"
+control = "`qssl/scripts/pq_check.sh <script_file>` (exactly one argument; report written to `pq_report.txt`)"
+
+[[controls]]
+action = "Run the post-quantum test harness"
+control = "`scripts/tests/pqctest.sh` (driven by `tests/test_qssl.py` against the system OpenSSL)"
+
+[[controls]]
+action = "Run the test gate"
+control = "`pytest tests/test_qssl.py` (asserts ML-DSA / SLH-DSA key-gen/sign/verify round-trips, classical ED25519/RSA round-trips, loud failure with no `openssl`, and tampered-signature rejection)"
+
+[[controls]]
+action = "Select a TLS policy"
+control = "Choose a named section from `[ssl_configuration]` (`system_default`, `level3`, `fips`, `oqs`, `tpm2`) in `qssl/qssl.cnf`"

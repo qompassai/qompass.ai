@@ -1,0 +1,113 @@
+slug = "qxet"
+name = "Qxet"
+kind_line = "CLI tool + Rust library — local content-addressed store for large binary artifacts"
+repo_url = "https://github.com/qompassai/qxet"
+mark = "/img/projects/qxet.webp"
+ready = true
+
+summary = "QXet (\"Quality AI eXchange\") is content-addressed storage for large binary artifacts (model weights, datasets, checkpoints): files are chunked with FastCDC content-defined chunking, every chunk is addressed by its SHA-256, identical chunks are stored once across all artifacts, and every read verifies hashes and fails closed on any mismatch — \"git semantics for large binary blobs — local-first, no network.\" Status is v0.1.0; remotes, the Hub protocol, and Python bindings are v0.2 and do not exist yet."
+
+how = [
+    "Create a store with `qxet init`, which makes `.qxet/` (chunks/, manifests/, config.toml) in the current directory.",
+    "Store a file with `qxet put <file>`: it is FastCDC-chunked, each chunk SHA-256-addressed and deduplicated, a manifest is written, and the content ID (`qxet:<sha256>`) is printed.",
+    "List what is stored with `qxet list` (content ID, name, size, chunk count, stored bytes, dedup ratio).",
+    "Retrieve with `qxet get <id> [-o <path>]`: chunks are reassembled, every chunk hash is re-verified, and output is renamed into place only after the whole artifact verifies.",
+    "Audit the store with `qxet verify`, which walks all manifests and rehashes every chunk.",
+    "Reclaim space with `qxet gc` — a dry run by default; `--apply` actually deletes unreferenced chunks.",
+]
+
+gaps = "- No install/distribution command is documented (no `cargo install`, release binary, or package); the README covers usage and development commands only.\n- `hf_xet/` (pyo3 bindings) and `data/`/`xtool` are reference fragments excluded from the workspace that do not compile; nothing in v0.1 depends on them.\n- The sandbox clone at `~/workspace/repos/qxet` is stale (no README/Cargo workspace, only `DESIGN.md` plus the fragments); this pack is based on the GitHub state, which matches `DESIGN.md`'s v0.1 command table."
+
+[[config]]
+name = "FastCDC min chunk size"
+default = "16 KiB"
+description = "Minimum content-defined chunk size, recorded in the store's `config.toml`"
+
+[[config]]
+name = "FastCDC avg chunk size"
+default = "64 KiB"
+description = "Average content-defined chunk size"
+
+[[config]]
+name = "FastCDC max chunk size"
+default = "256 KiB"
+description = "Maximum chunk size; also the largest single in-memory chunk buffer"
+
+[[config]]
+name = "Store config file"
+default = ".qxet/config.toml"
+description = "Records the chunking parameters the store was built with; a store refuses to open under a build with different parameters"
+
+[[config]]
+name = "Store layout"
+default = ".qxet/chunks/ab/cdef...`, `.qxet/manifests/<id>.json"
+description = "Chunk bytes named by SHA-256 with 2-hex fan-out; canonical JSON manifests named by content ID"
+
+[[config]]
+name = "MAX_CHUNKS_PER_ARTIFACT"
+default = "1,048,576"
+description = "Most chunks one artifact may reference"
+
+[[config]]
+name = "MAX_MANIFEST_BYTES"
+default = "128 MiB"
+description = "Largest manifest the store will read or write"
+
+[[config]]
+name = "MAX_MANIFEST_COUNT"
+default = "100,000"
+description = "Most manifests one store operation will walk"
+
+[[config]]
+name = "MAX_NAME_BYTES"
+default = "255"
+description = "Longest artifact name, in bytes"
+
+[[config]]
+name = "Toolchain pin"
+default = "stable Rust 1.99.0"
+description = "Pinned in `rust-toolchain.toml`"
+
+[[controls]]
+action = "Initialise a store"
+control = "qxet init [dir]"
+
+[[controls]]
+action = "Store a file"
+control = "qxet put <file>"
+
+[[controls]]
+action = "Retrieve an artifact"
+control = "`qxet get <id>` (`qxet:` prefix or bare hex; `-o/--out <path>` for an explicit output file)"
+
+[[controls]]
+action = "List artifacts"
+control = "qxet list"
+
+[[controls]]
+action = "Verify the whole store"
+control = "qxet verify"
+
+[[controls]]
+action = "Garbage-collect (report only)"
+control = "`qxet gc` (dry run by default; `--dry-run` says so explicitly)"
+
+[[controls]]
+action = "Garbage-collect (delete)"
+control = "qxet gc --apply"
+
+[[controls]]
+action = "Select a store explicitly"
+control = "`--store <path>` (global flag; otherwise the store is found by walking up from the current directory)"
+
+[[controls]]
+action = "Format check (development)"
+control = "cargo fmt --check"
+
+[[controls]]
+action = "Lint (development)"
+control = "cargo clippy --workspace --all-targets -- -D warnings"
+
+[[controls]]
+action = "Test (development)"
+control = "`cargo test --workspace` (39 tests at v0.1.0)"

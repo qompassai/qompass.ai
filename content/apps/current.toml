@@ -1,0 +1,93 @@
+slug = "current"
+name = "Current"
+kind_line = "App"
+repo_url = "https://github.com/qompassai/current"
+mark = "/img/projects/current.webp"
+ready = true
+
+summary = "Current is Qompass AI's self-hosted AI runner in transition: the public repo still carries the upstream GitHub Actions Runner mirror (C#/.NET, `src/Runner.*`), while the Qompass-built product is the new small Rust local check runner in `runner/` — it runs a repo's declared checks on primo one at a time, with hard timeouts and capped logs, and records JSONL results locally with no telemetry. The v1 skeleton's `run` path is real; its `poll` and `sweep` triggers are documented stubs."
+
+how = [
+    "Declare a repo's checks in a `.current.toml` manifest at the repo root — each `[[checks]]` entry names a check with a direct `argv` (no shell), a relative `workdir`, an optional `timeout_secs`, and optional `env`.",
+    "Run `current run <repo> [check] [--results <path>]`: Current resolves the repo (a path, or a bare name under `$CURRENT_REPO_ROOTS`, then `~/.GH/Qompass`, then `~/workspace/repos`), loads its `.current.toml`, and runs the selected checks one at a time, in manifest order.",
+    "Each check executes directly (no shell) with its workdir required to resolve inside the repo root; stdout/stderr are drained on separate threads with a 1 MiB retention cap per stream (draining continues past the cap; truncation is recorded), and a hard timeout kills and reaps the child.",
+    "One JSON object per check is appended to the results log (`$CURRENT_RESULTS_LOG` or `~/.local/state/current/results.jsonl`) with verdict, timing, byte totals, truncation flag, and a bounded tail of each stream; nothing is sent anywhere.",
+    "Read the exit code: 0 = all selected checks passed, 1 = a check failed or timed out, 2 = usage/manifest error.",
+    "(Upstream mirror path, still in the repo) Configure a self-hosted Actions runner instead with the sample automation: export `RUNNER_CFG_PAT`, then run `scripts/create-latest-svc.sh` to download, register, and install the runner as a systemd/Launchd service.",
+]
+
+gaps = "- Split identity: GitHub `main` and the primo `main` checkout both contain the full upstream actions/runner C# tree (`src/`) plus the Rust `runner/` skeleton (primo log: `108c646 feat(runner): Current v1 skeleton`, `144ddbc fix(runner): …` on top of the mirror tip); the mirror branch `mirror/actions-runner-2.323.0` is preserved locally on primo. Which surface the website should present as “Current” is a product call — this pack documents the Rust runner as the Qompass product and the C# tree as the carried mirror, per `runner/README.md` and the 2026-10-16 decision note (rebuild from scratch; do not carry the fork).\n- The governing spec (`~/workspace/current-rebuild/SPEC.md` in the estate workspace) is referenced by `runner/README.md` but lives outside the repo and was not read for this pack.\n- `poll` (git-fetch trigger) and `sweep` (nightly, systemd-timer-driven) are stubs by design; no daemon, schedule, or GitHub control-plane integration exists in the v1 skeleton, and no telemetry path exists in the code (per `runner/README.md`)."
+
+[[config]]
+name = "[[checks]] name"
+default = "— (required, must be unique)"
+description = "Check identifier used as `current run <repo> [check]` selector"
+
+[[config]]
+name = "[[checks]] argv"
+default = "— (required)"
+description = "Command as an argv array, executed directly with no shell; max 64 entries, max 4096 bytes per arg"
+
+[[config]]
+name = "[[checks]] workdir"
+default = "`\".\"` in the example"
+description = "Working directory, relative only, must resolve inside the repo root"
+
+[[config]]
+name = "[[checks]] timeout_secs"
+default = "`300` (`TIMEOUT_SECS_DEFAULT`)"
+description = "Per-check hard timeout; allowed range 1..=86400 (24 h max)"
+
+[[config]]
+name = "[[checks]] env"
+default = "`{ }` in the example"
+description = "Extra environment variables for the check process"
+
+[[config]]
+name = "Manifest size / check count caps"
+default = "`65536` bytes / `32` checks"
+description = "Bounded manifest parsing; unknown fields are rejected"
+
+[[config]]
+name = "Output retention cap"
+default = "1 MiB per stream"
+description = "Retained stdout/stderr per check; draining continues past the cap and truncation is recorded"
+
+[[config]]
+name = "CURRENT_REPO_ROOTS"
+default = "unset → falls back to `~/.GH/Qompass`, `~/workspace/repos`"
+description = "Colon-separated search roots for resolving a bare repo name"
+
+[[config]]
+name = "CURRENT_RESULTS_LOG"
+default = "~/.local/state/current/results.jsonl"
+description = "Results-log path override (or `--results <path>` per run)"
+
+[[config]]
+name = "Example manifest `repo` + check"
+default = "repo = \"ghost\"`; check `flake-qompass-25_05`, `timeout_secs = 3600"
+description = "Inaugural job: Ghost's `qompass-25_05` NixOS VM test via `nix build .#checks.x86_64-linux.x86_64-linux.qompass-25_05`"
+
+[[controls]]
+action = "Run a repo's checks"
+control = "current run <repo> [check] [--results <path>]"
+
+[[controls]]
+action = "Poll trigger (not implemented)"
+control = "`current poll <repo>` — refuses with exit 2 and a TODO message in the v1 skeleton"
+
+[[controls]]
+action = "Nightly sweep (not implemented)"
+control = "`current sweep` — refuses with exit 2 and a TODO message in the v1 skeleton"
+
+[[controls]]
+action = "Verify the runner itself"
+control = "cargo fmt --all -- --check`; `cargo clippy --all-targets -- -D warnings`; `cargo test"
+
+[[controls]]
+action = "Create a runner service (upstream mirror)"
+control = "`./create-latest-svc -s scope [-g ghe_domain] [-n name] [-u user] [-l labels]` with `RUNNER_CFG_PAT` exported"
+
+[[controls]]
+action = "Remove a runner service / delete an offline runner (upstream mirror)"
+control = "scripts/remove-svc.sh`; `scripts/delete.sh"

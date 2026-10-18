@@ -1,0 +1,227 @@
+slug = "ghost"
+name = "Ghost"
+kind_line = "MAIL SERVER — NIX"
+repo_url = "https://github.com/qompassai/ghost"
+mark = "/img/projects/ghost.webp"
+ready = true
+
+summary = "Ghost is the Qompass AI Ghost Mail Server (GitHub repo description): a NixOS module (`ghost = { … }`) that runs a complete mail server — Postfix, Dovecot, Rspamd, nginx, and a local DNS resolver — from one declarative configuration, plus a Tor-native Android mail client in the same repo. The README titles it \"Qompass AI Gateway Hosting Onion Secure Transmission (Ghost) Protocol.\""
+
+how = [
+    "You set the minimum DNS first (A/AAAA for `mail.<domain>`), import the module into a NixOS configuration, set `ghost.enable`, `ghost.fqdn`, and `ghost.domains`, and declare `ghost.loginAccounts` with hashed-password files.",
+    "`nixos-rebuild switch` brings up all mail components: Postfix receives/submits SMTP, Dovecot serves IMAP/POP3 and LMTP delivery, Rspamd filters spam and signs DKIM, nginx serves the ACME challenge and web surfaces, and kresd runs as the local DNS resolver.",
+    "Inbound mail is checked by Rspamd (SPF/DKIM/DMARC, greylisting, antivirus if enabled), delivered by Dovecot LMTP into `ghost.mailDirectory` — honoring per-user Sieve scripts, `+detail` filing, aliases, catch-all lists, and forwards defined in the config.",
+    "Account aliases both receive mail for the mailbox and grant send-as rights via the Postfix sender-login map; a separate send-only login can be granted exactly one sender identity via `extraSenderLogins` (the production pattern in `examples/qompass-ai.nix`).",
+    "Outbound mail is DKIM-signed by Rspamd (selector/key type from config; the rspamd service generates the public-key file you publish in DNS), and you complete deliverability by publishing MX, SPF, DKIM, DMARC, and reverse-DNS records as the quickstart prescribes.",
+    "Clients connect over the enabled services — IMAP/IMAP-TLS, submission/submission-TLS, optionally POP3 and ManageSieve — or, on Android, through the repo's Tor-only client: Tor bootstrap, then IMAP (993) + SMTP (465) through Tor's SOCKS5 proxy with OpenPGP encryption and no clearnet connection.",
+]
+
+gaps = "- The README is mostly boilerplate; the mail-server behavior above is sourced from `default.nix`, `docs/quickstart.rst`, and `examples/qompass-ai.nix`, not from a narrative README section.\n- `default.nix` was read from the sandbox clone (`~/workspace/repos/ghost`, Oct 5); the GitHub tree listing matches the same file layout, but every option default was not re-verified byte-for-byte against GitHub HEAD.\n- The repo also ships legacy mail-hosting material (`etc/`, `www/`, `setup.php`, the SquirrelMail patches); whether it is live or legacy is not stated in the files read, so it is not described above.\n- The Android client's \"What it is not (v1)\" notes in `android/README.md` say there is no message-reader detail view yet, while the source tree contains a `MessageReaderScreen.kt`; the README statement is the one recorded here and the discrepancy is flagged, not resolved."
+
+[[config]]
+name = "ghost.enable"
+default = "`false` (mkEnableOption)"
+description = "Enable the Ghost mail server"
+
+[[config]]
+name = "ghost.openFirewall"
+default = "true"
+description = "Automatically open ports in the firewall"
+
+[[config]]
+name = "ghost.fqdn"
+default = "no default (required; example `mx.example.com`)"
+description = "The fully qualified domain name of the ghost server"
+
+[[config]]
+name = "ghost.domains"
+default = "[ ]"
+description = "The domains that ghost serves"
+
+[[config]]
+name = "ghost.certificateScheme"
+default = "selfsigned"
+description = "TLS certificate scheme: `manual`, `selfsigned`, `acme-nginx`, or `acme`"
+
+[[config]]
+name = "ghost.messageSizeLimit"
+default = "20971520"
+description = "Message size limit enforced by Postfix (bytes; example `52428800`)"
+
+[[config]]
+name = "ghost.loginAccounts.<name>.hashedPasswordFile"
+default = "null"
+description = "File containing the user's hashed password (preferred over inline `hashedPassword`)"
+
+[[config]]
+name = "ghost.loginAccounts.<name>.aliases"
+default = "[ ]"
+description = "Aliases of this login account (also grant send-as rights)"
+
+[[config]]
+name = "ghost.loginAccounts.<name>.catchAll"
+default = "[ ]"
+description = "Domains for which this account acts as catch-all (production example leaves it `[ ]` — catch-all OFF)"
+
+[[config]]
+name = "ghost.loginAccounts.<name>.quota"
+default = "`null` (standard quota `100G` per the option text)"
+description = "Per-user quota, e.g. `2G`"
+
+[[config]]
+name = "ghost.loginAccounts.<name>.sendOnly"
+default = "false"
+description = "Send-only account; mail to it is rejected from unauthorized senders"
+
+[[config]]
+name = "ghost.loginAccounts.<name>.sieveScript"
+default = "null"
+description = "Per-user Sieve script"
+
+[[config]]
+name = "ghost.extraVirtualAliases"
+default = "{ }"
+description = "Virtual aliases forwarding mail to a login account (production pattern: role addresses as aliases of the human mailbox)"
+
+[[config]]
+name = "ghost.forwards"
+default = "{ }"
+description = "Forward mail to an external address"
+
+[[config]]
+name = "ghost.mailDirectory"
+default = "$XDG_DATA_HOME/mail"
+description = "Where to store mail (rootless/XDG default per the option text)"
+
+[[config]]
+name = "ghost.enableImap"
+default = "true"
+description = "IMAP with STARTTLS on port 1143 (per the option text)"
+
+[[config]]
+name = "ghost.enableImapSsl"
+default = "true"
+description = "IMAP with TLS in wrapper mode on port 1993 (per the option text)"
+
+[[config]]
+name = "ghost.enableSubmission"
+default = "true"
+description = "SMTP submission with STARTTLS on port 1587 (per the option text)"
+
+[[config]]
+name = "ghost.enableSubmissionSsl"
+default = "true"
+description = "SMTP submission with TLS in wrapper mode on port 1465 (per the option text)"
+
+[[config]]
+name = "ghost.enablePop3` / `ghost.enablePop3Ssl"
+default = "false` / `false"
+description = "POP3 (STARTTLS, port 1110) / POP3-TLS (wrapper mode, port 1995), per the option text"
+
+[[config]]
+name = "ghost.enableManageSieve"
+default = "false"
+description = "ManageSieve on port 5190"
+
+[[config]]
+name = "ghost.virusScanning"
+default = "false"
+description = "Activate virus scanning (ClamAV)"
+
+[[config]]
+name = "ghost.dkimSigning"
+default = "true"
+description = "Activate DKIM signing"
+
+[[config]]
+name = "ghost.dkimSelector"
+default = "`mail` (module default; production example uses `ghost`)"
+description = "The DKIM selector"
+
+[[config]]
+name = "ghost.dkimKeyType"
+default = "`ed25519` (module default; production example uses `rsa`)"
+description = "DKIM key type: `rsa` or `ed25519`"
+
+[[config]]
+name = "ghost.dkimKeyBits"
+default = "2048"
+description = "For RSA, number of bits in the DKIM key"
+
+[[config]]
+name = "ghost.dkimKeyDirectory"
+default = "`$HOME/.local/share/dkim` (production example overrides to `/var/lib/ghost/dkim`)"
+description = "Directory for DKIM private keys"
+
+[[config]]
+name = "ghost.localDnsResolver"
+default = "true"
+description = "Run a local DNS resolver (kresd), as recommended with Rspamd"
+
+[[config]]
+name = "ghost.recipientDelimiter"
+default = "+"
+description = "Recipient delimiter for `user+detail@` filing"
+
+[[config]]
+name = "ghost.maxConnectionsPerUser"
+default = "100"
+description = "Maximum IMAP/POP3 connections per user per IP"
+
+[[config]]
+name = "ghost.fullTextSearch.enable"
+default = "`false` (mkEnableOption)"
+description = "Full-text search indexing with Xapian via fts_flatcurve"
+
+[[config]]
+name = "ghost.fullTextSearch.autoIndex"
+default = "true"
+description = "Automatically index messages as they are received or modified"
+
+[[config]]
+name = "ghost.monitoring.enable"
+default = "`false` (mkEnableOption)"
+description = "Monitoring via monit"
+
+[[config]]
+name = "ghost.borgbackup.enable"
+default = "`false` (mkEnableOption)"
+description = "Backup via borgbackup; `borgbackup.startAt` default `hourly`"
+
+[[config]]
+name = "ghost.backup.enable"
+default = "`false` (mkEnableOption)"
+description = "Backup via rsnapshot; retain defaults hourly 24 / daily 7 / weekly 54"
+
+[[config]]
+name = "ghost.debug"
+default = "false"
+description = "Verbose logging for ghost-related services (development)"
+
+[[controls]]
+action = "Deploy / apply the server configuration"
+control = "`nixos-rebuild switch` (after importing the module and setting `ghost = { … }`)"
+
+[[controls]]
+action = "Create a login-account password hash"
+control = "nix-shell -p mkpasswd --run 'mkpasswd -sm bcrypt'"
+
+[[controls]]
+action = "Check DNS propagation during setup"
+control = "`nix-shell -p bind --command \"host -t A mail.example.com\"` (and the AAAA/MX/TXT/rDNS variants in the guide)"
+
+[[controls]]
+action = "Accept Let's Encrypt terms (with `certificateScheme = \"acme-nginx\"`)"
+control = "`security.acme.acceptTerms = true;` and `security.acme.defaults.email = \"…\";` in the NixOS config"
+
+[[controls]]
+action = "Publish the DKIM record"
+control = "Copy the public key the rspamd service generated (quickstart: `/var/dkim/example.com.mail.txt`) into a `mail._domainkey` TXT record"
+
+[[controls]]
+action = "Build the Android client"
+control = "`cd android && ./gradlew assembleRelease` (Android SDK 35, JDK 17)"
+
+[[controls]]
+action = "Use the Android client"
+control = "Tor bootstrap with progress UI, then inbox/compose over IMAP+SMTP through Tor; foreground service keeps the onion connection alive during sync"

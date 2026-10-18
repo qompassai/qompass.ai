@@ -1,0 +1,202 @@
+slug = "bunker"
+name = "Bunker"
+kind_line = "NIX BINARY CACHE SERVER — RUST"
+repo_url = "https://github.com/qompassai/bunker"
+mark = "/img/projects/bunker.webp"
+ready = true
+
+summary = "Bunker is \"The Secure Nix Cache Server\" (GitHub repo description; README title: \"Qompass AI Bunker: The Secure Nix Cache Server\"): a Rust workspace (`bunker`, `client`, `server`, `token`) that stores and serves Nix store paths as a binary cache, with chunked, compressed, deduplicated NAR storage and signed uploads."
+
+how = [
+    "`bunkerd` loads its TOML config (`-f/--config`, `--mode` default `monolithic`), runs database migrations, then runs the API server and the periodic garbage collector together.",
+    "A client logs in (`bunker login`) and records the server endpoint and token in `$XDG_CONFIG_HOME/bunker/config.toml` (Unix, mode 0600) or `%APPDATA%\\bunker\\config.toml` (Windows).",
+    "`bunker cache create` creates a named cache on the server; `bunker use` writes the local Nix configuration so Nix trusts and uses that cache.",
+    "On push, the full client reads paths, NARs, and signatures from the local Nix store through `libnixstore`, asks the server which paths are missing (`get_missing_paths`), and uploads the missing NARs (`upload_path`).",
+    "The server chunks large NARs (content-defined chunking), compresses the chunks, and stores them in local or S3 storage, indexed in its database (PostgreSQL recommended for production), so duplicate chunks are stored once.",
+    "Nix clients fetch narinfo and NAR data from the cache over the binary-cache API; garbage collection runs on the configured interval (default 12 hours) and per-cache retention periods decide what is deleted.",
+    "Release binaries can be stored and served next to the cache as artifacts (store-free), which is also the workflow the no-Nix subset client (Windows / Android-Termux) supports, together with `cache` and `login`.",
+]
+
+gaps = "- The README itself is mostly boilerplate (quick-start/about/funding); the functional description above is sourced from the config template, CLI source, and `docs/platforms.md`, not from a narrative README section.\n- The exact binary names `bunkerd` / `bunkerd-adm` are inferred from the server/adm crate layout and the template's own reference to `bunkerd --mode garbage-collector-once`; the template confirms `bunkerd`, the adm binary name was not spelled out in a file read.\n- The sandbox clone (`~/workspace/repos/bunker`) is older than GitHub HEAD (it lacks `client/src/command/artifact.rs` and `server/src/api/v1/artifacts.rs`); rows citing primo/GitHub files reflect the newer tree.\n- Per-subcommand flags for `push`, `login`, `use`, and `artifact` (beyond the subcommand names) were not enumerated for this pack."
+
+[[config]]
+name = "listen"
+default = "[::]:8080"
+description = "Socket address to listen on"
+
+[[config]]
+name = "allowed-hosts"
+default = "`[]` (all `Host` headers allowed if unconfigured/empty; must be configured for production)"
+description = "Allowed `Host` headers"
+
+[[config]]
+name = "api-endpoint"
+default = "unset (synthesized from the client's `Host` header if unconfigured)"
+description = "Canonical API endpoint exposed in `cache-config` responses; must end with a slash"
+
+[[config]]
+name = "soft-delete-caches"
+default = "`false` (commented in template)"
+description = "Soft-delete caches instead of removing them from the database"
+
+[[config]]
+name = "require-proof-of-possession"
+default = "`true` (commented in template)"
+description = "Require fully uploading a NAR even if it exists in the global cache"
+
+[[config]]
+name = "database.url"
+default = "`%database_url%` (template placeholder)"
+description = "Database connection URL; PostgreSQL recommended for production"
+
+[[config]]
+name = "database.heartbeat"
+default = "`false` (commented in template)"
+description = "Send a heartbeat query every minute"
+
+[[config]]
+name = "storage.type"
+default = "local"
+description = "Storage type: `local` or `s3`"
+
+[[config]]
+name = "storage.path"
+default = "`%storage_path%` (template placeholder)"
+description = "Local storage directory"
+
+[[config]]
+name = "storage.region` / `storage.bucket` / `storage.endpoint"
+default = "unset (commented in template)"
+description = "S3 region, bucket, and custom S3-compatible endpoint"
+
+[[config]]
+name = "AWS_ACCESS_KEY_ID` / `AWS_SECRET_ACCESS_KEY"
+default = "read from environment if `storage.credentials` is unset"
+description = "S3 credentials source"
+
+[[config]]
+name = "chunking.nar-size-threshold"
+default = "65536"
+description = "Minimum NAR size to trigger chunking (0 disables, 1 chunks all)"
+
+[[config]]
+name = "chunking.min-size"
+default = "16384"
+description = "Preferred minimum chunk size, in bytes"
+
+[[config]]
+name = "chunking.avg-size"
+default = "65536"
+description = "Preferred average chunk size, in bytes"
+
+[[config]]
+name = "chunking.max-size"
+default = "262144"
+description = "Preferred maximum chunk size, in bytes"
+
+[[config]]
+name = "compression.type"
+default = "zstd"
+description = "Compression type: `none`, `brotli`, `zstd`, or `xz`"
+
+[[config]]
+name = "compression.level"
+default = "unset (example `8` commented in template)"
+description = "Compression level"
+
+[[config]]
+name = "garbage-collection.interval"
+default = "12 hours"
+description = "GC frequency; zero disables automatic GC (manual: `bunkerd --mode garbage-collector-once`)"
+
+[[config]]
+name = "garbage-collection.default-retention-period"
+default = "zero (time-based GC disabled by default)"
+description = "Default retention period; can be enabled per cache"
+
+[[config]]
+name = "artifacts.max-size"
+default = "`1073741824` (1 GiB)"
+description = "Maximum size of a single artifact upload, in bytes"
+
+[[config]]
+name = "jwt.token-bound-issuer` / `jwt.token-bound-audiences"
+default = "unset (commented in template)"
+description = "If set, received JWTs must match this `iss` / contain one of these `aud` values"
+
+[[config]]
+name = "BUNKER_SERVER_TOKEN_ED25519_SECRET_BASE64"
+default = "alternative source for `jwt.signing.token-ed25519-secret-base64`"
+description = "Base64-encoded Ed25519 PEM private key for JWT signing"
+
+[[config]]
+name = "BUNKER_SERVER_TOKEN_ED25519_PUBKEY_BASE64"
+default = "alternative source for `jwt.signing.token-ed25519-pubkey-base64`"
+description = "Base64-encoded Ed25519 PEM public key (verify-only)"
+
+[[config]]
+name = "`default-server` (client)"
+default = "unset"
+description = "Default server to connect to"
+
+[[config]]
+name = "`servers.<name>.endpoint` (client)"
+default = "no default"
+description = "Server endpoint recorded per named server"
+
+[[config]]
+name = "`servers.<name>.token` / `token-file` (client)"
+default = "no default"
+description = "Access token inline, or path to a token file"
+
+[[controls]]
+action = "Log in to a server"
+control = "bunker login"
+
+[[controls]]
+action = "Configure Nix to use a cache"
+control = "bunker use"
+
+[[controls]]
+action = "Push store paths to a cache"
+control = "`bunker push` (full build only; subset builds refuse with a Nix-store error)"
+
+[[controls]]
+action = "Watch the local store and push new paths"
+control = "`bunker watch-store` (full build only)"
+
+[[controls]]
+action = "Manage caches"
+control = "`bunker cache create` / `bunker cache info` (plus configure/destroy subcommands in the same module)"
+
+[[controls]]
+action = "Manage release artifacts"
+control = "bunker artifact push` / `pull` / `rm"
+
+[[controls]]
+action = "Compute a path's closure"
+control = "`bunker get-closure` (hidden subcommand; full build only)"
+
+[[controls]]
+action = "Generate shell completions"
+control = "bunker gen-completions <shell>"
+
+[[controls]]
+action = "Run the server"
+control = "`bunkerd -f/--config <file> [-l/--listen <addr>] [--mode monolithic\\"
+
+[[controls]]
+action = "Make an access token (server admin)"
+control = "bunkerd-adm make-token"
+
+[[controls]]
+action = "Generate a hybrid signing key (server admin)"
+control = "bunkerd-adm generate-hybrid-key"
+
+[[controls]]
+action = "Show the hybrid public key (server admin)"
+control = "bunkerd-adm show-hybrid-public-key"
+
+[[controls]]
+action = "Build the subset (no-Nix) client"
+control = "cargo build -p bunker-client --no-default-features --release"

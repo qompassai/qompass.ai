@@ -1,0 +1,129 @@
+slug = "network"
+name = "Network"
+kind_line = "Configuration / tooling collection — Nix flake with a NixOS module, dev shell, and standalone config templates (nftables, WireGuard, NetworkManager, DNS)"
+repo_url = "https://github.com/qompassai/network"
+mark = "/img/projects/network.webp"
+ready = true
+
+summary = "\"Qompass AI Network Tooling\": a Nix flake providing a network-security and encryption environment — rage/age/OpenSSL encryption tools, collision-resistant hash utilities (BLAKE3, SHA3-256, SHA-512), NetworkManager, and Unbound DNS-over-TLS — plus standalone nftables, WireGuard, and nmcli material. The flake's `nixosModules.default` hardens kernel sysctls and configures NetworkManager, systemd-resolved, and Unbound with the settings below."
+
+how = [
+    "Clone and bootstrap: `git clone https://github.com/qompassai/network.git`, `cd network`, `chmod +x scripts/nix.sh`, `./scripts/nix.sh` — the script installs Nix if needed, enables flakes/experimental features, writes an optimised `nix.conf`, tests the tools, and drops you into the dev environment.",
+    "Or enter the environment later with `nix develop` from the repo directory.",
+    "Build just one piece, e.g. `nix build .#hash-utils` then `./result/bin/hash-utils blake3 somefile.txt`, or `nix build .#networkmanager-setup`.",
+    "Or run a tool without installing: `nix run github:qompassai/network#hash-utils blake3 myfile.txt`.",
+    "On NixOS, import the flake's `nixosModules.default` to apply the sysctl, NetworkManager, resolved, and Unbound settings.",
+    "For public Wi-Fi via nmcli: enable NetworkManager, turn the radio on, list networks, and connect.",
+]
+
+gaps = "- `wireguard/quickstart.sh`, `nmcli/quickstart.sh`, `scripts/config.sh`, `etc/NetworkManager/`, and `nftables/monero.nft` exist but were not read in full; only `nftables/nftables.conf` and `nmcli/README.md` were verified among the standalone templates.\n- `doh/` contains a single file named `doh-client-disabled`; no DNS-over-HTTPS configuration could be sourced from it.\n- `docs/IP.md` is a generic GitHub Pages custom-domain DNS table, not network-tooling documentation.\n- The README says the tools are \"presented for educational purposes ONLY\"."
+
+[[config]]
+name = "boot.kernel.sysctl `net.ipv4.conf.all.accept_redirects` / `send_redirects` (+ default and IPv6 equivalents)"
+default = "0"
+description = "ICMP redirects disabled on all/default interfaces, IPv4 and IPv6"
+
+[[config]]
+name = "networking.networkmanager.enable"
+default = "true"
+description = "NetworkManager enabled by the module"
+
+[[config]]
+name = "networking.networkmanager.dns"
+default = "systemd-resolved"
+description = "NetworkManager DNS plugin"
+
+[[config]]
+name = "networking.networkmanager.wifi.powersave"
+default = "false"
+description = "Wi-Fi power saving off"
+
+[[config]]
+name = "services.resolved.dnssec"
+default = "\"true\""
+description = "DNSSEC validation in systemd-resolved"
+
+[[config]]
+name = "services.resolved.fallbackDns"
+default = "[\"1.1.1.1\", \"9.9.9.9\"]"
+description = "Fallback DNS servers"
+
+[[config]]
+name = "services.resolved.extraConfig"
+default = "DNS=127.0.0.1`, `Cache=yes`, `DNSStubListener=yes"
+description = "Resolved points at the local Unbound"
+
+[[config]]
+name = "services.unbound.settings.server.interface"
+default = "[\"127.0.0.1\", \"::1\"]"
+description = "Unbound listens on loopback only"
+
+[[config]]
+name = "services.unbound.settings.server cache-min-ttl / cache-max-ttl"
+default = "300 / 14400"
+description = "Unbound cache TTL bounds (seconds)"
+
+[[config]]
+name = "services.unbound.settings.server hardening"
+default = "`hide-identity`, `hide-version`, `qname-minimisation`, `prefetch`, `prefetch-key`, `harden-*` all true"
+description = "Privacy and DNSSEC hardening flags"
+
+[[config]]
+name = "services.unbound.settings.forward-zone \".\""
+default = "forward-tls-upstream true; forward-addr `1.1.1.1@853`, `1.0.0.1@853`, `9.9.9.9@853` (+ IPv6)"
+description = "All queries forwarded over DNS-over-TLS (port 853)"
+
+[[config]]
+name = "scripts/nix.sh nix.conf"
+default = "`experimental-features = nix-command flakes`, `max-jobs` = cores (max 8), substituters cache.nixos.org + nix-community cachix (+ FlakeHub extra)"
+description = "User Nix configuration written by the bootstrap script"
+
+[[config]]
+name = "nftables template `table inet my_filter` chain input"
+default = "policy drop; accepts established/related, loopback, ICMP/ICMPv6 (rate-limited echo), UDP 51820 (WireGuard), TCP {22, 80, 389, 443, 636, 2375, 2376, 3000, 9001, 9030, 9050, 9051, 11371, 13340, 13342}"
+description = "Standalone template ruleset — header states it is a template and \"nothing here was applied to a live firewall\""
+
+[[config]]
+name = "devShells.default packages"
+default = "age, rage, nix-rage, openssl 3.5, b3sum/rhash, nmap, tcpdump, wireshark-cli, unbound, networkmanager (+ openvpn/openconnect plugins), gnupg, yubikey-manager, etc."
+description = "Tools provided in the dev shell (also the default package context for the module's system packages)"
+
+[[controls]]
+action = "Bootstrap the environment"
+control = "`./scripts/nix.sh` (after `git clone` + `chmod +x`)"
+
+[[controls]]
+action = "Enter the dev environment"
+control = "nix develop"
+
+[[controls]]
+action = "Build the hash utilities"
+control = "nix build .#hash-utils"
+
+[[controls]]
+action = "Hash a file"
+control = "./result/bin/hash-utils blake3 <file>` / `hash-utils sha3-256 <file>` / `hash-utils sha512 <file>"
+
+[[controls]]
+action = "Run a tool without installing"
+control = "nix run github:qompassai/network#hash-utils blake3 myfile.txt"
+
+[[controls]]
+action = "Build the user-level NetworkManager setup"
+control = "nix build .#networkmanager-setup` then `./result/bin/networkmanager-setup"
+
+[[controls]]
+action = "Check the configuration"
+control = "`network-security-check` (package in flake.nix; checks NetworkManager/Unbound activity, DNS resolution, tool versions)"
+
+[[controls]]
+action = "Generate a rage key (setup package)"
+control = "`rage-setup` (package in flake.nix; creates `~/.config/rage/key.txt` via `rage-keygen`)"
+
+[[controls]]
+action = "Encrypt a file (example)"
+control = "rage-keygen -o mykey.txt` then `rage -e -i mykey.txt -o secret.age plaintext.txt"
+
+[[controls]]
+action = "Connect to public Wi-Fi"
+control = "sudo systemctl enable --now NetworkManager`; `nmcli radio wifi on`; `nmcli device wifi list`; `sudo nmcli device wifi connect \"YOUR_SSID\" password \"YOUR_PASSWORD\" ifname wlan0"

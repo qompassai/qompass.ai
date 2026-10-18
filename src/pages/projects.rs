@@ -17,6 +17,20 @@ fn StudyLink(slug: &'static str) -> impl IntoView {
     })
 }
 
+/// Link to an app's guide page (how it works, configuration, controls),
+/// rendered only when a ready guide exists for the slug and no study
+/// page already claims the route.
+#[component]
+fn GuideLink(slug: &'static str) -> impl IntoView {
+    (crate::project_data::project_page(slug).is_none() && crate::app_data::app_guide(slug).is_some()).then(|| {
+        view! {
+            <p class="study-link">
+                <a href=format!("/solutions/{slug}")>"How it works →"</a>
+            </p>
+        }
+    })
+}
+
 #[component]
 pub fn Projects() -> impl IntoView {
     view! {
@@ -31,10 +45,10 @@ pub fn Projects() -> impl IntoView {
             </p>
             <div class="entry-list">
                 <article class="entry">
-                    <img class="project-mark" src="/img/projects/vongola.webp" alt="vongola" />
+                    <img class="project-mark" src="/img/projects/vongola.webp" alt="Vongola" />
                     <p class="entry-kind">"REVERSE PROXY — RUST"</p>
                     <h2>
-                        <a href="https://github.com/qompassai/vongola">"vongola"</a>
+                        <a href="https://github.com/qompassai/vongola">"Vongola"</a>
                     </h2>
                     <p>
                         "Post-quantum hybrid TLS reverse proxy on Pingora, with built-in ACME. "
@@ -42,12 +56,13 @@ pub fn Projects() -> impl IntoView {
                     </p>
                     <DownloadBoxes slug="vongola" />
                     <StudyLink slug="vongola" />
+                    <GuideLink slug="vongola" />
                 </article>
                 <article class="entry">
-                    <img class="project-mark" src="/img/projects/volta.webp" alt="volta" />
+                    <img class="project-mark" src="/img/projects/volta.webp" alt="Volta" />
                     <p class="entry-kind">"OPENPGP KEY SERVER — RUST"</p>
                     <h2>
-                        <a href="https://github.com/qompassai/volta">"volta"</a>
+                        <a href="https://github.com/qompassai/volta">"Volta"</a>
                     </h2>
                     <p>
                         "A Hagrid-derived key server — HKP, VKS, and Web Key Directory — with "
@@ -56,12 +71,13 @@ pub fn Projects() -> impl IntoView {
                     </p>
                     <DownloadBoxes slug="volta" />
                     <StudyLink slug="volta" />
+                    <GuideLink slug="volta" />
                 </article>
                 <article class="entry">
-                    <img class="project-mark" src="/img/projects/bunker.webp" alt="bunker" />
+                    <img class="project-mark" src="/img/projects/bunker.webp" alt="Bunker" />
                     <p class="entry-kind">"NIX BINARY CACHE — RUST"</p>
                     <h2>
-                        <a href="https://github.com/qompassai/bunker">"bunker"</a>
+                        <a href="https://github.com/qompassai/bunker">"Bunker"</a>
                     </h2>
                     <p>
                         "An Attic-based Nix binary cache with hybrid Ed25519 + ML-DSA-65 "
@@ -70,11 +86,12 @@ pub fn Projects() -> impl IntoView {
                     </p>
                     <DownloadBoxes slug="bunker" />
                     <StudyLink slug="bunker" />
+                    <GuideLink slug="bunker" />
                 </article>
                 <article class="entry">
-                    <img class="project-mark" src="/img/projects/ghost.webp" alt="ghost" />
+                    <img class="project-mark" src="/img/projects/ghost.webp" alt="Ghost" />
                     <p class="entry-kind">"PGP MAIL CLIENT — ANDROID"</p>
-                    <h2>"ghost"</h2>
+                    <h2>"Ghost"</h2>
                     <p>
                         "Encrypted mail the way it should feel: OpenPGP compose with a real "
                         "key picker, Tor transport, and key lookup against volta. Heading to "
@@ -82,12 +99,13 @@ pub fn Projects() -> impl IntoView {
                     </p>
                     <DownloadBoxes slug="ghost" />
                     <StudyLink slug="ghost" />
+                    <GuideLink slug="ghost" />
                 </article>
                 <article class="entry">
-                    <img class="project-mark" src="/img/projects/diver.webp" alt="diver" />
+                    <img class="project-mark" src="/img/projects/diver.webp" alt="Diver" />
                     <p class="entry-kind">"NEOVIM ENVIRONMENT — LUA"</p>
                     <h2>
-                        <a href="https://github.com/qompassai/diver">"diver"</a>
+                        <a href="https://github.com/qompassai/diver">"Diver"</a>
                     </h2>
                     <p>
                         "A Neovim-native development environment: 138 formatter adapters, deep "
@@ -96,12 +114,13 @@ pub fn Projects() -> impl IntoView {
                     </p>
                     <DownloadBoxes slug="diver" />
                     <StudyLink slug="diver" />
+                    <GuideLink slug="diver" />
                 </article>
                 <article class="entry">
-                    <img class="project-mark" src="/img/projects/phlow.webp" alt="phlow" />
+                    <img class="project-mark" src="/img/projects/phlow.webp" alt="Phlow" />
                     <p class="entry-kind">"AGENT RUNTIME — RUST"</p>
                     <h2>
-                        <a href="https://github.com/qompassai/phlow">"phlow"</a>
+                        <a href="https://github.com/qompassai/phlow">"Phlow"</a>
                     </h2>
                     <p>
                         "A bounded planner-coder-reviewer agent runtime: one safe core shared "
@@ -110,12 +129,13 @@ pub fn Projects() -> impl IntoView {
                     </p>
                     <DownloadBoxes slug="phlow" />
                     <StudyLink slug="phlow" />
+                    <GuideLink slug="phlow" />
                 </article>
                 <article class="entry">
-                    <img class="project-mark" src="/img/projects/light-show.webp" alt="light-show" />
+                    <img class="project-mark" src="/img/projects/light-show.webp" alt="Light Show" />
                     <p class="entry-kind">"GAME — RUST / BEVY"</p>
                     <h2>
-                        <a href="https://github.com/qompassai/light-show">"light-show"</a>
+                        <a href="https://github.com/qompassai/light-show">"Light Show"</a>
                     </h2>
                     <p>
                         "A fiber-optic cabling puzzle game — route the light, validate the "
@@ -123,15 +143,16 @@ pub fn Projects() -> impl IntoView {
                     </p>
                     <DownloadBoxes slug="light-show" />
                     <StudyLink slug="light-show" />
+                    <GuideLink slug="light-show" />
                     <p class="study-link">
                         <a href="/light-show">"Visit the game →"</a>
                     </p>
                 </article>
                 <article class="entry">
-                    <img class="project-mark" src="/img/projects/fathom.webp" alt="fathom" />
+                    <img class="project-mark" src="/img/projects/fathom.webp" alt="Fathom" />
                     <p class="entry-kind">"REVERSE ENGINEERING — RUST"</p>
                     <h2>
-                        <a href="https://github.com/qompassai/fathom">"fathom"</a>
+                        <a href="https://github.com/qompassai/fathom">"Fathom"</a>
                     </h2>
                     <p>
                         "A Rust port of the REA MCP reverse-engineering server — "
@@ -139,6 +160,7 @@ pub fn Projects() -> impl IntoView {
                     </p>
                     <DownloadBoxes slug="fathom" />
                     <StudyLink slug="fathom" />
+                    <GuideLink slug="fathom" />
                 </article>
             </div>
             <CardinalCards />

@@ -1,0 +1,108 @@
+slug = "blaze-nvim"
+name = "Blaze.nvim"
+kind_line = "NEOVIM PLUGIN (MOJO) — LUA"
+repo_url = "https://github.com/qompassai/blaze.nvim"
+mark = "/img/projects/blaze-nvim.webp"
+ready = true
+
+summary = "Blaze.nvim is \"a blazingly fast mojo.vim fork\" for Neovim that provides syntax highlighting, indentation, Tree-sitter, formatting, linting, debugging (DAP) and LSP integration for Mojo and `*.🔥` files. The README marks it \"Under Active development expect breaking changes until stable release.\""
+
+how = [
+    "Add the plugin for the `mojo`/`🔥` filetypes (lazy.nvim `{ \"qompassai/blaze.nvim\" }`, or the packer spec with `blaze-ts.nvim`, `nvim-lspconfig`, `nvim-dap`, `nvim-dap-ui` and `nvim-dap-python`), then call `require(\"blaze\").setup()`. Source: GitHub blaze.nvim README.md.",
+    "On setup, enabled subsystems wire up in order: LSP servers if `lsp.enabled`, Pixi if `pixi.enabled`, Magic if `magic.enabled`, and the emoji filetype extension if `filetypes.emoji_extension`; a FileType autocmd applies the configured indentation to Mojo buffers. Source: primo clone `~/.GH/Qompass/blaze.nvim/lua/blaze/init.lua`.",
+    "Syntax highlighting comes from Tree-sitter via `blaze-ts.nvim` when available; otherwise the fallback sets `vim.g.mojo_highlight_all` and loads the bundled syntax file on FileType. Source: primo clone `lua/blaze/init.lua` (`blaze_syntax`).",
+    "Formatting uses `mojo format` (the 🔥-fmt cheat-sheet entry) with on-save formatting; linting integrates with `nvim-lint`/null-ls; debugging is set up via `nvim-dap`. Sources: GitHub blaze.nvim README.md feature list; `docs/blaze.txt` cheat sheet.",
+    "`:Fever` runs the health check, reporting Tree-sitter parser availability, Mojo file detection, and 🔥-ls / 🔥-fmt / 🔥-lint / 🔥-dap availability. Sources: GitHub blaze.nvim README.md; `docs/blaze.txt`.",
+]
+
+gaps = "- Config shape discrepancy, both sourced: the defaults table in `lua/blaze/config.lua` nests on-save formatting as `formatting.format_on_save`, while the README's manual-setup example passes flat `format_on_save = true, enable_linting = true, keymaps = true` to `require(\"blaze.config\").setup(...)`. No source read reconciles the two shapes.\n- Only two which-key mappings (`<leader>fm`, `<leader>fh`) are documented; the Pixi keymaps behind the `<leader>p` prefix are not enumerated in any source read.\n- LSP buffer mappings (`gd`, `K`, `<leader>rn`, etc.) appear in the Diver-side lazy spec fetched as blaze.nvim's `lazy.lua` (file header: `/qompassai/diver/lua/plugins/lang/mojo.lua`), i.e. they belong to Diver's Mojo spec, not to blaze.nvim itself, so they are not listed as blaze controls.\n- No standalone install/usage documentation beyond the README and the short `docs/blaze.txt` manual was sourced."
+
+[[config]]
+name = "formatting.format_on_save"
+default = "true"
+description = "Format Mojo files on save (nested under `formatting` in the defaults table)"
+
+[[config]]
+name = "line_length"
+default = "88"
+description = "Formatter line length (also `formatting.line_length = 88`)"
+
+[[config]]
+name = "enable_linting"
+default = "true"
+description = "Enable linting integration"
+
+[[config]]
+name = "dap.enabled"
+default = "true"
+description = "Enable DAP debugging setup"
+
+[[config]]
+name = "lsp.enabled"
+default = "true"
+description = "Enable LSP integration (`lsp.mojo.enabled = true` nested)"
+
+[[config]]
+name = "indentation.expandtab"
+default = "true"
+description = "Expand tabs for Mojo buffers"
+
+[[config]]
+name = "indentation.shiftwidth"
+default = "4"
+description = "Indent width for Mojo buffers"
+
+[[config]]
+name = "filetypes.emoji_extension"
+default = "true"
+description = "Treat the `🔥` extension as the Mojo filetype"
+
+[[config]]
+name = "pixi.enabled"
+default = "true"
+description = "Enable Pixi integration (`auto_detect = true`)"
+
+[[config]]
+name = "pixi.keymaps.prefix"
+default = "<leader>p"
+description = "Prefix for Pixi keymaps (`pixi.keymaps.enabled = true`)"
+
+[[config]]
+name = "pixi.display.method / height / width"
+default = "`float` / 15 / 80"
+description = "Pixi output display (options: `split`, `vsplit`, `float`, `notify`)"
+
+[[config]]
+name = "magic.enabled"
+default = "true"
+description = "Enable Modular Magic integration (`show_output = true`, `commands.list = true`)"
+
+[[config]]
+name = "syntax.enabled"
+default = "true"
+description = "Enable syntax subsystem (`syntax.treesitter.enabled = true`; fallback enabled with `highlight_all = true`)"
+
+[[config]]
+name = "keymaps"
+default = "true (in README example)"
+description = "Optional which-key mappings, passed to `require(\"blaze.config\").setup({...})` in the README's manual-setup example"
+
+[[controls]]
+action = "Run health check"
+control = ":Fever"
+
+[[controls]]
+action = "Format Mojo file (which-key, when `keymaps = true`)"
+control = "<leader>fm"
+
+[[controls]]
+action = "Run healthcheck via `:Fever` (which-key, when `keymaps = true`)"
+control = "<leader>fh"
+
+[[controls]]
+action = "Format current file (example mapping in the manual)"
+control = "`<leader>fm` via `vim.lsp.buf.format()` (labelled \"just examples\" in the doc)"
+
+[[controls]]
+action = "Show Blaze status in lualine"
+control = "`require(\"blaze.lualine\").blaze_status` in `lualine_c` (README: \"Still in development\")"

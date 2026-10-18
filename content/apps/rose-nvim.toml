@@ -1,0 +1,233 @@
+slug = "rose-nvim"
+name = "Rose.nvim"
+kind_line = "NEOVIM PLUGIN — LUA"
+repo_url = "https://github.com/qompassai/rose.nvim"
+mark = "/img/projects/rose-nvim.webp"
+ready = true
+
+summary = "Rose.nvim runs local Ollama chat and a bounded planner → coder → validation → reviewer workflow inside Neovim, and connects to Flow over MCP stdio with an optional private native Neovim socket for Flow's editor tools; cloud model APIs and Hugging Face transfers are separate, explicitly configured opt-ins, and native mode is the default."
+
+how = [
+    "Install with `vim.pack`, lazy.nvim, or a native `pack/*/start` package — no build step or plugin dependencies in native mode — then call `require(\"rose\").setup(opts)` with a workspace and model. Source: GitHub rose.nvim README.md, \"Install\".",
+    "`:RoseAsk` chats with the configured local model with no tool execution; chat history is in memory only and bounded, in a scratch buffer that does not steal focus. Source: GitHub rose.nvim README.md, \"Use\".",
+    "`:RoseAgent` runs sequential isolated planner/coder/reviewer contexts; only the coder receives `file_write`, defaults allow at most six coder model rounds, two each for planner and reviewer, and eight tool calls per response. Source: GitHub rose.nvim README.md, \"Use\".",
+    "A host-owned validation gate decides success: each changed path needs an applicable named check returning `status=\"ok\"` plus verified lint evidence, and the independent reviewer must return `{\"approved\":true,\"issues\":[],\"summary\":\"...\"}`; missing evidence stays unverified, with at most one bounded repair cycle by default. Source: GitHub rose.nvim README.md, \"Verification means evidence, not model confidence\".",
+    "`:RoseFlow` lazily starts Flow (`flow serve`) and calls `flow_run` over newline JSON-RPC MCP stdio; Rose appends `--workspace`, conditional `--trusted`, and `--nvim <private socket>` when the bridge is available, and fails closed if a requested bridge is unavailable. Source: GitHub rose.nvim README.md, \"Flow bridge\".",
+    "Optional subsystems stay off until configured: cloud providers (requires both `providers.enabled` and `providers.allow_cloud`), speech (`speech.enabled`), Hugging Face transfers (explicit manifest + preview approval), and the loopback Web UI (`webui.enabled` plus `:RoseWebUI`). Source: GitHub rose.nvim README.md.",
+]
+
+gaps = "- `docs/configuration.md` is the complete reference (34 KB as fetched); this pack lists the top-level, Ollama, agent, Flow, provider-gate, speech-gate, Hub and Web UI defaults, but not every nested provider/speech/debug/MCP field — e.g. per-provider `key_env` defaults (`OPENAI_API_KEY`, `ANTHROPIC_API_KEY`, `XAI_API_KEY`, `NVIDIA_API_KEY`, `PERPLEXITY_API_KEY`) and debug-probe tables exist in that file and were not all transcribed.\n- Primary target is Neovim 0.13 nightly (core tested on `v0.13.0-dev-1558+g8d5ebdf986`); behaviour on stable Neovim releases is not claimed in the README.\n- No default keybindings outside the chat buffer (`q`/`i`/`<C-c>`) are documented; all other controls are Ex commands."
+
+[[config]]
+name = "workspace"
+default = "current working directory, resolved"
+description = "Existing directory, resolved to an absolute realpath"
+
+[[config]]
+name = "trusted"
+default = "false"
+description = "Allow configured workspace writes/checks/lint/debug and trusted Flow work; not an OS sandbox, not cloud consent"
+
+[[config]]
+name = "legacy"
+default = "false"
+description = "`true` switches to the separate, unsupported historical implementation"
+
+[[config]]
+name = "ollama.base_url"
+default = "http://127.0.0.1:11434"
+description = "Local model endpoint; non-loopback requires `allow_remote`"
+
+[[config]]
+name = "ollama.model"
+default = "qwen2.5-coder:7b"
+description = "Installed model ID; Rose does not install it"
+
+[[config]]
+name = "ollama.timeout"
+default = "120000 (ms)"
+description = "Request deadline, 1..3600000 ms"
+
+[[config]]
+name = "ollama.allow_remote"
+default = "false"
+description = "Explicitly permit a non-loopback Ollama endpoint"
+
+[[config]]
+name = "ollama.transport"
+default = "auto"
+description = "auto`/`curl` use the bounded safe curl adapter; `native` opts into `vim.net.request"
+
+[[config]]
+name = "agent.max_iterations"
+default = "6"
+description = "Coder model rounds per cycle (1..30); planner/reviewer capped at `min(2, max_iterations)`"
+
+[[config]]
+name = "agent.max_repair_rounds"
+default = "1"
+description = "Repair rounds after the initial cycle (0..3); `agent.max_cycles` derived default is 2"
+
+[[config]]
+name = "agent.max_tool_calls"
+default = "8"
+description = "Tool calls per model response (1..32)"
+
+[[config]]
+name = "agent.max_context"
+default = "120000 (bytes)"
+description = "Encoded message JSON bound; also bounds native chat history"
+
+[[config]]
+name = "agent.max_tool_result"
+default = "24000 (bytes)"
+description = "Encoded tool-result excerpt bound"
+
+[[config]]
+name = "checks.<name>.cmd / kind / filetypes / timeout"
+default = "cmd required; timeout adapter default 30000 ms"
+description = "Explicit named checks (argv arrays, no shell); `kind` of `lint`/`typecheck`/`diagnostics` counts as static evidence"
+
+[[config]]
+name = "flow.cmd"
+default = "{ \"flow\", \"serve\" }"
+description = "External Flow process argv prefix"
+
+[[config]]
+name = "flow.timeout"
+default = "600000 (ms)"
+description = "Flow call deadline"
+
+[[config]]
+name = "flow.bridge"
+default = "true"
+description = "Require the private native-editor bridge; failure stops rather than downgrades"
+
+[[config]]
+name = "providers.enabled"
+default = "false"
+description = "Cloud adapter gate; must be exactly `true` for cloud calls"
+
+[[config]]
+name = "providers.allow_cloud"
+default = "false"
+description = "Explicit consent for task/source/tool output to leave the device"
+
+[[config]]
+name = "providers.provider"
+default = "ollama"
+description = "Chat provider selection (`ollama`/`openai`/`anthropic`/`xai`/`nvidia`/`perplexity`)"
+
+[[config]]
+name = "speech.enabled"
+default = "false"
+description = "Master gate for dictation/read-aloud"
+
+[[config]]
+name = "speech.record.max_seconds"
+default = "60 (seconds)"
+description = "Recording duration bound, 1..600 s"
+
+[[config]]
+name = "hub.python"
+default = "python3"
+description = "Executable containing `huggingface_hub`; no automatic installation"
+
+[[config]]
+name = "hub.max_workers"
+default = "4"
+description = "Concurrent Hub file workers, 1..16"
+
+[[config]]
+name = "hub.xet"
+default = "auto"
+description = "Use available Xet or explicit HTTP (`disabled`)"
+
+[[config]]
+name = "scip.path"
+default = "index.scip.json"
+description = "Workspace-relative decoded SCIP JSON index (not raw protobuf)"
+
+[[config]]
+name = "webui.enabled"
+default = "false"
+description = "Permit explicit `:RoseWebUI`; setup alone does not listen"
+
+[[config]]
+name = "webui.host"
+default = "127.0.0.1"
+description = "Loopback host (`127.0.0.1`/`::1`/`localhost` only)"
+
+[[config]]
+name = "webui.port"
+default = "0"
+description = "0 chooses an ephemeral TCP port"
+
+[[config]]
+name = "webui.max_clients"
+default = "8"
+description = "Simultaneous Web UI clients, 1..64"
+
+[[controls]]
+action = "Chat with the configured model (no tools)"
+control = ":RoseAsk [question]"
+
+[[controls]]
+action = "Run the planner → coder → validation → reviewer agent"
+control = ":RoseAgent [task]"
+
+[[controls]]
+action = "Run a named check / all applicable checks"
+control = ":RoseCheck [name]"
+
+[[controls]]
+action = "Start Flow and run a task"
+control = ":RoseFlow [task]"
+
+[[controls]]
+action = "Cancel model/Hub requests; stop MCP, Flow socket, DAP probes"
+control = ":RoseStop"
+
+[[controls]]
+action = "Dictate / stop speech input"
+control = ":RoseDictate` / `:RoseSpeechStop"
+
+[[controls]]
+action = "Speak text or a range"
+control = ":[range]RoseSpeak [text]"
+
+[[controls]]
+action = "Speech provider status"
+control = ":RoseSpeechStatus"
+
+[[controls]]
+action = "Start / stop / inspect the Web UI"
+control = ":RoseWebUI` / `:RoseWebUIStop` / `:RoseWebUIStatus"
+
+[[controls]]
+action = "Hugging Face download / upload"
+control = ":RoseHubDownload` / `:RoseHubUpload"
+
+[[controls]]
+action = "Hub paper assets"
+control = ":RoseHubPaper"
+
+[[controls]]
+action = "Hub operation status / cancel"
+control = ":RoseHubStatus` / `:RoseHubStop"
+
+[[controls]]
+action = "Health report (no model contact)"
+control = ":checkhealth rose"
+
+[[controls]]
+action = "Hide chat buffer / ask from chat buffer / stop"
+control = "`q` / `i` / `<C-c>` (in the scratch chat buffer)"
+
+[[controls]]
+action = "Inspect resolved configuration"
+control = ":lua vim.print(require(\"rose\").options)"
+
+[[controls]]
+action = "Shut down without reinitializing"
+control = "require(\"rose\").shutdown()"

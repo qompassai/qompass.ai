@@ -1,0 +1,121 @@
+slug = "phlow"
+name = "Phlow"
+kind_line = "AGENT RUNTIME — PYTHON (repo README) / RUST (primo study page; see GAPS)"
+repo_url = "https://github.com/qompassai/phlow"
+mark = "/img/projects/phlow.webp"
+ready = true
+
+summary = "Phlow (named \"Flow\" in its README) runs local, bounded planner → coder → reviewer workflows with real file tools and a host-enforced verification gate; Ollama is the default backend, and the CLI, terminal UI and MCP server share one safe runtime. The primo study page additionally describes phlow's deterministic joint-attention protocol — adapted from MATE — in which every agent computes the same saliency snapshot over a workspace and its SHA-256 hash becomes a shared frame."
+
+how = [
+    "The operator writes a reviewed TOML config (workspace, Ollama endpoint/model, per-role models, agent budgets, named checks); workspace `config.toml`/`.flow.toml` are never auto-loaded — only `--config FILE` or `$XDG_CONFIG_HOME/flow/config.toml` (default `~/.config/flow/config.toml`) load. Source: GitHub phlow README.md, \"Approve checks, then run\" / \"Trust and security\".",
+    "A run executes planner → coder with separate fresh role contexts, within the configured budgets (`max_iterations`, `max_cycles`, `max_tool_calls`, `max_context_chars`). Source: GitHub phlow README.md.",
+    "The host runs every required named check (exact argv fixed by operator config) and requires relevant static analysis for every changed source file; failed checks feed the next bounded repair cycle. Source: GitHub phlow README.md, \"What verified means\".",
+    "A separate read-only reviewer must return structured approval; a run is `verified: true` only when budgets hold, all required checks pass, static coverage exists, the reviewer approves, and edited files/buffers are unchanged and clean. Source: GitHub phlow README.md, \"What verified means\".",
+    "The same runtime is exposed three ways: CLI (`flow run`/`check`/`status`/`tui`, one JSON object out), TUI commands, and an MCP stdio server with exactly three tools (`flow_status`, `flow_run`, `flow_check`). Source: GitHub phlow README.md.",
+    "Bidirectional Rose link: Rose calls Flow over MCP stdio; Flow calls Rose's native editor tools (`editor_context`, `editor_diagnostics`, `editor_symbols`, `editor_references`, `editor_lint`, `editor_check`, `editor_scip`, `editor_debug`) over a private Neovim socket. Source: GitHub phlow README.md, \"Rose integration\".",
+    "Attention protocol (Rust study): each target is scored from five bounded signals (task naming 0.35, diagnostic errors 0.25 saturating, SCIP centrality 0.20, recency 0.10, warnings 0.10 saturating, open-in-editor 0.01); the canonically serialised snapshot's SHA-256 is the frame, foci carry at most 8 targets, alignment is Jaccard overlap defined only within one frame, and same-top-target collisions serialize with the lexicographically smaller agent id as holder. Source: primo `~/.GH/Qompass/qompass.ai/content/projects/phlow.toml`, methods sections.",
+]
+
+gaps = "- Language/runtime conflict, both sourced: the GitHub README and repo `config.toml` describe a Python 3.11+ / uv runtime whose binary is `flow`, while the primo study page (`phlow.toml`) describes a Rust runtime (`phlow-attention` crate, `phlow serve`, kind line \"AGENT RUNTIME — RUST\"). This pack does not reconcile them; the site should not present one as the other's version without a ruling.\n- The study page states no latency/overhead numbers exist for snapshot computation, board publish or the gate, and that no live multi-agent deployment has been measured; its benchmark numbers are harness/simulation results only. Source: primo phlow.toml, discussion/results.\n- Exit codes are documented (`0` ok, `1` failed/unverified, `2` config/usage, `130` interrupted) but no full CLI flag reference beyond `--workspace`, `--model`, `--config`, `--trusted`, `--nvim`, `--editor-timeout` was sourced."
+
+[[config]]
+name = "workspace_dir"
+default = "(operator-supplied absolute path; no default in README example)"
+description = "Target project root, set at TOML root before any table header"
+
+[[config]]
+name = "ollama.base_url"
+default = "http://127.0.0.1:11434"
+description = "Ollama endpoint; loopback by default, non-loopback requires `ollama.allow_remote=true`"
+
+[[config]]
+name = "ollama.model"
+default = "qwen2.5-coder:7b"
+description = "Default model in the README/config example"
+
+[[config]]
+name = "ollama.timeout"
+default = "120 (seconds)"
+description = "Ollama request timeout"
+
+[[config]]
+name = "models.planner / models.coder / models.reviewer"
+default = "qwen2.5-coder:7b` in README example; empty string (inherit `ollama.model`) in the repo's own `config.toml"
+description = "Per-role model overrides"
+
+[[config]]
+name = "agent.max_iterations"
+default = "6"
+description = "Model turns per role invocation"
+
+[[config]]
+name = "agent.max_cycles"
+default = "2"
+description = "Coder → verification → reviewer cycles"
+
+[[config]]
+name = "agent.max_tool_calls"
+default = "64"
+description = "Total tool calls across the entire run"
+
+[[config]]
+name = "agent.max_context_chars"
+default = "100000"
+description = "Context budget in characters"
+
+[[config]]
+name = "checks.<name>.cmd / timeout / required / kind / filetypes"
+default = "(operator-defined; no built-in checks)"
+description = "Named checks with exact argv; timeout in milliseconds; `kind` of `lint`/`typecheck`/`diagnostics` counts as static evidence"
+
+[[config]]
+name = "attention gate"
+default = "false"
+description = "`[attention]` dispatch gate in the Rust runtime; opt-in, consulted after planning, losing runs end deferred with the holder named"
+
+[[config]]
+name = "file read/write limit"
+default = "256 KiB"
+description = "Cap on file-tool reads/writes; listings capped, generated directories excluded"
+
+[[config]]
+name = "editor request timeout"
+default = "120 (seconds; configurable 0.1–660)"
+description = "Timeout for Flow → Rose editor-tool requests"
+
+[[controls]]
+action = "Check workspace status (no model request)"
+control = "flow status --workspace /absolute/path/to/project"
+
+[[controls]]
+action = "Run configured checks"
+control = "flow check --config <operator.toml> --trusted"
+
+[[controls]]
+action = "Run a task"
+control = "flow run --config <operator.toml> --trusted \"<task>\""
+
+[[controls]]
+action = "Start the TUI (also the no-subcommand default)"
+control = "flow tui --config <operator.toml> --trusted"
+
+[[controls]]
+action = "Serve MCP stdio / editor bridge"
+control = "flow serve --workspace <root> --trusted --config <operator.toml> --nvim <socket> --editor-timeout 120"
+
+[[controls]]
+action = "TUI help / status / check / tools / models"
+control = "/help`, `/status`, `/check [name]`, `/tools`, `/models"
+
+[[controls]]
+action = "TUI switch model / build / clear / quit"
+control = "`/model <installed-model>`, `/build <request>`, `/clear`, `/quit` (Ctrl-D also exits)"
+
+[[controls]]
+action = "MCP status / run / check"
+control = "flow_status {}`, `flow_run {\"task\":\"...\"}`, `flow_check {}` or `{\"name\":\"...\"}"
+
+[[controls]]
+action = "MCP attention publish / focus / alignment / decide (Rust runtime)"
+control = "flow_attention_publish`, `flow_attention_focus`, `flow_attention_alignment`, `flow_attention_decide"

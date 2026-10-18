@@ -1,0 +1,108 @@
+slug = "radar"
+name = "Radar"
+kind_line = "AI TRUSTWORTHINESS TEST PLATFORM — PYTHON"
+repo_url = "https://github.com/qompassai/radar"
+mark = "/img/projects/radar.webp"
+ready = true
+
+summary = "Radar is the \"Risk Analysis Diagnostic Assessment Resolver\" aka \"R.A.D.A.R\" (GitHub repo description; README subtitle: \"Your Nist-Endorsed AI Check-up\"): NIST's software test platform for assessing the trustworthy characteristics of AI — valid and reliable, safe, secure and resilient, accountable and transparent, explainable, privacy-enhanced, and fair — supporting the Measure function of the NIST AI Risk Management Framework."
+
+how = [
+    "You generate a deployment from the repo's Cookiecutter template (`cookiecutter-templates/cookiecutter-radar-deployment/`) with Cruft, run its `init-deployment.sh`, and start the containerized micro-services with Docker Compose.",
+    "An experiment is composed as entry points, and entry points as tasks: you write an executable script plus a config file declaring its parameters (the MLflow entry-point construct), where each task is a call to a Python function in the task-plugin registry, ordered by Prefect.",
+    "You package the entry point into a tarball/zip and submit the job — archive plus parameter choices — to the Testbed REST API, the heart of the architecture, which also registers experiments, logs results and artifacts, and hosts the model registry.",
+    "A Testbed worker — a managed process in a Docker container provisioned with the job's environment — runs the entry point; task plugins (attacks, defenses, data, estimators, metrics) can be installed and updated with zero downtime.",
+    "Radar automatically snapshots resources so experiments are reproducible, and tracks the full history of experiments and their inputs (traceable by design).",
+    "You monitor job status and review results/artifacts through the REST API, the web frontend, or the MLflow tracking dashboard; models can be tested first-, second-, or third-party, including red-teaming in a controlled environment.",
+]
+
+gaps = "- This is a large upstream NIST codebase (the docs still carry the NIST copyright header and name the platform Dioptra's successor terminology in places); Qompass-specific changes versus upstream were not identified from the files read, and the README itself is boilerplate beyond the title/badges.\n- The Running Radar guide's later sections (template prompt-by-prompt descriptions, initialization details) were read only in part; Cookiecutter prompt names/defaults other than `deployment_name` (default folder `radar-deployment`) and `datasets_directory` are not tabulated.\n- Worker/queue configuration (RQ workers under `src/radar/rq/`, MLflow/MinIO/Postgres service settings in the deployment template's env files) was not enumerated for this pack.\n- The frontend view names in CONTROLS come from the repo file listing, not from a read of the router/UI source."
+
+[[config]]
+name = "RADAR_SESSION_PROTECTION"
+default = "strong"
+description = "Session protection level; must be one of `none`, `basic`, `strong` (invalid values raise)"
+
+[[config]]
+name = "RADAR_REMEMBER_COOKIE_DURATION"
+default = "`14 * 86400` (14 days, seconds)"
+description = "Remember-me cookie duration; cookie name is `radar_remember_token`"
+
+[[config]]
+name = "RADAR_REMEMBER_COOKIE_SECURE"
+default = "unset (cookie Secure flag off unless the variable is present)"
+description = "Presence of the variable enables the Secure remember-cookie flag"
+
+[[config]]
+name = "RADAR_LOGIN_DISABLED"
+default = "unset (login enabled unless the variable is present)"
+description = "Presence of the variable disables login"
+
+[[config]]
+name = "RADAR_CORS_ORIGIN"
+default = "http://localhost:5173"
+description = "CORS origin for the REST API (the frontend dev origin)"
+
+[[config]]
+name = "RADAR_PLUGINS_BUCKET"
+default = "plugins"
+description = "Object-storage bucket for task plugins"
+
+[[config]]
+name = "RADAR_SWAGGER_PATH"
+default = "/"
+description = "Path for the Swagger API docs"
+
+[[config]]
+name = "RADAR_BASE_URL"
+default = "unset (`None`)"
+description = "Base URL of the deployment"
+
+[[config]]
+name = "`RADAR_RESTAPI_DATABASE_URI` (prod)"
+default = "sqlite:///<cwd>/radar.db"
+description = "Production SQLAlchemy database URI"
+
+[[config]]
+name = "`RADAR_RESTAPI_DEV_DATABASE_URI` (dev)"
+default = "sqlite:///<cwd>/radar-dev.db"
+description = "Development SQLAlchemy database URI"
+
+[[config]]
+name = "RADAR_DEPLOY_SECRET_KEY"
+default = "not reproduced (a placeholder default exists in source)"
+description = "Flask secret key for the dev/prod/test configs"
+
+[[config]]
+name = "RADAR_BRANCH"
+default = "example `main`"
+description = "Branch the deployment template is checked out from in the Running Radar quickstart (`export RADAR_BRANCH=main`)"
+
+[[config]]
+name = "`datasets_directory` (Cookiecutter prompt)"
+default = "not stated in source"
+description = "Template variable for where datasets are stored; the guide recommends setting it when generating the deployment"
+
+[[controls]]
+action = "Generate a deployment"
+control = "`cruft create https://github.com/usnistgov/radar --checkout $RADAR_BRANCH --directory cookiecutter-templates/cookiecutter-radar-deployment` (URL as written in the guide)"
+
+[[controls]]
+action = "Initialize and start a deployment"
+control = "`cd radar-deployment` (default folder name), run `init-deployment.sh`, then start the services (Docker Compose files generated by the template)"
+
+[[controls]]
+action = "Submit a job"
+control = "Upload the entry-point archive and parameter choices to the Testbed REST API"
+
+[[controls]]
+action = "Monitor a job / review results"
+control = "Query the Testbed API, use the web frontend, or open the MLflow dashboard"
+
+[[controls]]
+action = "Work in the web frontend"
+control = "Views for Experiments, Entry Points, Jobs, Queues, Plugins, Models, Artifacts, Tags, and Groups"
+
+[[controls]]
+action = "Extend the testbed"
+control = "Write task plugins / entry points in Python via the SDK and plugin registry (Prefect-ordered tasks)"

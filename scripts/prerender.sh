@@ -7,7 +7,7 @@ cd "$(dirname "$0")/.."
 BIN="target/release/qompass-ai"
 SITE="target/site"
 DIST="dist"
-ROUTES=("/" "/research" "/solutions" "/analysis" "/standards" "/about" "/privacy" "/legal" "/ontrack/privacy" "/light-show" "/light-show/testers" "/field-notes" "/field-notes/trainer")
+ROUTES=("/" "/research" "/solutions" "/solutions/apps" "/solutions/mcp-servers" "/solutions/packages" "/analysis" "/standards" "/about" "/privacy" "/legal" "/ontrack/privacy" "/light-show" "/light-show/testers" "/field-notes" "/field-notes/trainer")
 
 # Tiger Style full references: one quiet page per imported reference,
 # linked only from its chapter on /standards.
@@ -21,6 +21,18 @@ done
 # ready = true. build.rs enforces file stem == slug, so the stem IS the
 # route's last segment.
 for toml in content/projects/*.toml; do
+    [ -e "$toml" ] || continue
+    if grep -qE '^[[:space:]]*ready[[:space:]]*=[[:space:]]*true' "$toml"; then
+        ROUTES+=("/solutions/$(basename "$toml" .toml)")
+    fi
+done
+
+# App guide pages: one route per content/apps/*.toml flagged
+# ready = true. Guides for solutions are also reachable from the
+# /solutions scrape below (already-rendered files are skipped there);
+# this loop is what guarantees the fleet-only guides (Volta, Ghost,
+# Light Show) their routes.
+for toml in content/apps/*.toml; do
     [ -e "$toml" ] || continue
     if grep -qE '^[[:space:]]*ready[[:space:]]*=[[:space:]]*true' "$toml"; then
         ROUTES+=("/solutions/$(basename "$toml" .toml)")

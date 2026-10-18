@@ -1,0 +1,80 @@
+slug = "azimuth"
+name = "Azimuth"
+kind_line = "App"
+repo_url = "https://github.com/qompassai/Azimuth"
+mark = "/img/projects/azimuth.webp"
+ready = true
+
+summary = "Azimuth is Qompass AI's AI navigator: a Go chatbot stack in which Discord messages (and, by design, email/SMS gateways) travel over NATS JetStream to an LLM worker that answers via the local rose LLM server, with Postgres storage and Prometheus/Grafana/Loki observability in the architecture diagram. The shipped code implements the Discord path end-to-end; the email and SMS gateways are skeleton placeholders."
+
+how = [
+    "Configure the environment — `DISCORD_TOKEN` is required (hard error if unset); `NATS_URL` and `ROSE_URL` fall back to deployment defaults — and start the services (`nats`, `postgres`, `rose`, `bot`) from `discord/compose.yaml` on the external `quantum-net` network.`; `discord/compose.yaml`)",
+    "A user posts in Discord; the bot service (`cmd/bot`) ignores bot authors, converts the event to a `model.Message`, and publishes it to NATS JetStream subject `msg.in.discord`.",
+    "The LLM worker (`cmd/llmworker`) subscribes to `msg.in.*`, unmarshals the message, and calls rose via `llm.RoseClient.Complete(content)`.",
+    "The worker marshals a `model.Response` and publishes it to `msg.out.<kind>` (e.g. `msg.out.discord`).`)",
+    "The bot subscribes to `msg.out.discord` and posts the response content back to the originating Discord channel with `ChannelMessageSend`.",
+    "Alternatively, the standalone `discord/main.go` bot answers the single command form `!ask <question>` directly: it POSTs to rose's `/api/generate` and posts the answer back, ignoring all other messages.",
+]
+
+gaps = "- The GitHub README is Qompass boilerplate beyond the “Your AI navigator” header — no usage, config, or command documentation; all rows above trace to the primo clone under `discord/`.\n- Two bot implementations coexist and differ: standalone `discord/main.go` (direct HTTP, `!ask` only, `DISCORD_BOT_TOKEN`, 30 s timeout) vs. the bus stack `cmd/bot` + `cmd/llmworker` (NATS + mTLS, `DISCORD_TOKEN`, 120 s timeout). Sources do not state which is the production entry point.\n- Email (`cmd/email`) and SMS (`cmd/smsgw`) gateways are TODO skeletons (“Implement IMAP/SMTP polling and NATS publishing” / “Implement Twilio/Vonage webhook → NATS bridge”) — the architecture diagram's Email/SMS → NATS path and the Postgres write path are drawn but not implemented in the files read. No Discord slash commands, admin commands, or user-facing settings were found."
+
+[[config]]
+name = "DISCORD_TOKEN"
+default = "none — required"
+description = "Discord bot token; `Load()` returns `ErrMissingDiscordToken` (“DISCORD_TOKEN is required”) if unset/empty"
+
+[[config]]
+name = "`DISCORD_BOT_TOKEN` (standalone bot only)"
+default = "none — required"
+description = "Token env var read by `discord/main.go`; process exits fatally (“DISCORD_BOT_TOKEN not set”) if empty — a different name from the `cmd/*` config"
+
+[[config]]
+name = "NATS_URL"
+default = "`nats://nats:4222` (`DefaultNATSURL`)"
+description = "NATS JetStream bus URL"
+
+[[config]]
+name = "ROSE_URL"
+default = "`https://rose:11434` (`DefaultRoseURL`)"
+description = "Rose LLM server base URL used by the mTLS client in `internal/llm`"
+
+[[config]]
+name = "Rose endpoint (standalone bot)"
+default = "`http://localhost:11434/api/generate` (`roseEndpoint` const)"
+description = "Direct HTTP endpoint used by `discord/main.go` `queryRose` — differs from the `ROSE_URL` default above"
+
+[[config]]
+name = "TLS_CERT` / `TLS_KEY` / `TLS_CA"
+default = "none — all three required for the mTLS client"
+description = "Certificate pair + CA bundle for mutual TLS to rose; TLS 1.3 minimum, verification on, X25519 only"
+
+[[config]]
+name = "Prompt / response caps (worker client)"
+default = "MaxPromptBytes = 32 KiB`, `MaxResponseBytes = 1 MiB`, `RequestTimeout = 120 s"
+description = "Bounds for one rose completion in `internal/llm` (standalone bot: same caps, `roseTimeout = 30 s`)"
+
+[[config]]
+name = "NATS subjects"
+default = "`msg.in.discord` (in), `msg.in.*` (worker sub), `msg.out.discord` / `msg.out.<kind>` (out)"
+description = "JetStream routing between gateways and the LLM worker; kinds are `discord` / `email` / `sms`"
+
+[[config]]
+name = "Compose images / users"
+default = "nats:2.10-alpine` (`-js`, user `65532:65532`), `postgres:16-alpine` (user `70:70`), `bot` user `1000:1000` with `no-new-privileges:true"
+description = "Container deployment defaults; `rose` builds from `../rose` with `runtime: nvidia`"
+
+[[controls]]
+action = "Ask the standalone bot a question"
+control = "Post `!ask <question>` in a Discord channel the bot can read; anything else (including bare `!ask` or `!askfoo`) is ignored"
+
+[[controls]]
+action = "Ask via the bus stack"
+control = "Post any (non-bot) message in a Discord channel the `cmd/bot` service reads — it publishes every such message to `msg.in.discord` (no prefix required in that code path)"
+
+[[controls]]
+action = "Stop the bot"
+control = "`Ctrl-C` / SIGINT or SIGTERM — both entry points wait on a signal channel, then close the Discord session"
+
+[[controls]]
+action = "Run the stack"
+control = "`docker compose` services `nats`, `postgres`, `rose`, `bot` defined in `discord/compose.yaml` (bot `depends_on: [nats, rose, postgres]`)"

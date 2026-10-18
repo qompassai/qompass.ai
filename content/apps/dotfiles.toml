@@ -1,0 +1,97 @@
+slug = "dotfiles"
+name = "Dotfiles"
+kind_line = "Configuration repository — XDG dotfiles plus a Nix flake user environment, applied with Qonfig"
+repo_url = "https://github.com/qompassai/dotfiles"
+mark = "/img/projects/dotfiles.webp"
+ready = true
+
+summary = "Qompass AI dotfiles (i.e. XDG `.config` files) for the Qompass AI development environment, where all configs follow the XDG convention `$XDG_CONFIG_HOME` (`~/.config`). The repo pairs a Qonfig/Dotbot-style `qonfig.yaml` link map with a flake-parts Nix flake that builds a `userEnvironment` package set."
+
+how = [
+    "Run the quick start: `curl -fsSL https://raw.githubusercontent.com/qompassai/dotfiles/main/scripts/quickstart.sh | sh`.",
+    "The script clones the repo to `$HOME/.dotfiles`, deleting any existing directory there first.",
+    "It symlinks `.config/nix/nix.conf`, `.profile.d/67-nix.sh`, `home`, `.local`, and `flake.nix` into place, then installs Nix with that config if Nix is missing.",
+    "It runs `nix flake update` inside the clone and drops into the detected shell via `nix develop --command \"$USER_SHELL\"`.",
+    "Separately, `qonfig.yaml` declares the per-file links, cleanup, and setup shell steps that a Qonfig/Dotbot-style installer applies.",
+]
+
+gaps = "- The README's embedded quick-start script differs slightly from `scripts/quickstart.sh` on disk (e.g. Nix profile paths); the on-disk script was treated as authoritative.\n- `qonfig.yaml` uses a top-level `create:` directive and per-link `if:` conditions; the sibling Qonfig tool's own plugins (`clean`, `link`, `shell`) do not document either — see the Qonfig pack.\n- No per-app settings were sampled beyond the `.config/README.md` catalogue; individual app config values are not covered."
+
+[[config]]
+name = "defaults.link.create"
+default = "true"
+description = "Create parent directories when linking"
+
+[[config]]
+name = "defaults.link.relink"
+default = "true"
+description = "Overwrite incorrect symlinks when linking"
+
+[[config]]
+name = "clean"
+default = "[\"~\", ~/.config]"
+description = "Directories checked for dead symlinks"
+
+[[config]]
+name = "create"
+default = "[~/Downloads]"
+description = "Directory created during setup"
+
+[[config]]
+name = "link targets (25 entries)"
+default = "—"
+description = "Symlink map including `~/.bashrc_user: bashrc`, `~/.zshrc_user: zshrc`, `~/.config/tmux/tmux.conf`, `~/.config/sesh/sesh.toml: sesh.toml`, `~/.config/neovide/config.toml: neovide.toml`"
+
+[[config]]
+name = "link `force: true` entries"
+default = "—"
+description = "Forcibly linked targets: lazygit config, ghostty config, kitty configs, `~/.wezterm.lua`, `~/.config/diver` (path `Diver`), zed `settings.json` (path `zed.jsonc`), `~/.cursor/mcp.json` (path `mcpservers.json5`)"
+
+[[config]]
+name = "link `if: '[ \"$(uname -s)\" = \"Darwin\" ]'` entries"
+default = "—"
+description = "macOS-only links: aerospace, yabai, skhd configs"
+
+[[config]]
+name = "flake systems"
+default = "x86_64-linux`, `aarch64-linux"
+description = "Systems the flake builds for"
+
+[[config]]
+name = "packages.x86_64-linux.userEnvironment"
+default = "large `pkgs.buildEnv` path list"
+description = "Full user environment (editors, shells, desktop, dev tools) for x86_64"
+
+[[config]]
+name = "packages.aarch64-linux.userEnvironment"
+default = "`git`, `neovim`, `python311` (name `qompass-user-environment`)"
+description = "Reduced user environment for aarch64"
+
+[[config]]
+name = ".config/ app directories"
+default = "800+ per-app directories"
+description = "One config directory per application under `$XDG_CONFIG_HOME`, catalogued A–Z"
+
+[[controls]]
+action = "Install / quick start"
+control = "`curl -fsSL https://raw.githubusercontent.com/qompassai/dotfiles/main/scripts/quickstart.sh \\"
+
+[[controls]]
+action = "Update flake inputs"
+control = "`nix flake update` (run by the quickstart script in the clone)"
+
+[[controls]]
+action = "Enter the environment"
+control = "nix develop --command \"$USER_SHELL\""
+
+[[controls]]
+action = "Sync submodules (setup shell step)"
+control = "git submodule sync --recursive"
+
+[[controls]]
+action = "Set up SSH files (setup shell step)"
+control = "`mkdir -p ~/.ssh && chmod 700 ~/.ssh` plus `known_hosts`/`authorized_keys` creation"
+
+[[controls]]
+action = "Install pre-commit hook (setup shell step)"
+control = "cp pre-commit .git/hooks/pre-commit"

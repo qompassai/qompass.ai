@@ -1,0 +1,195 @@
+slug = "vongola"
+name = "Vongola"
+kind_line = "REVERSE PROXY AND WEB SERVER — RUST"
+repo_url = "https://github.com/qompassai/vongola"
+mark = "/img/projects/vongola.webp"
+ready = true
+
+summary = "Vongola is Qompass AI's reverse proxy and web server — a clean-room rewrite on Pingora 0.9.0 that hosts qompass.ai, runs on a single small device, and scales across a fleet of small nodes sharing one versioned configuration bundle."
+
+how = [
+    "One process starts three listeners — HTTPS (Pingora proxy), HTTP, and admin — plus a background service for health checks, NAT, Tor, and discovery.",
+    "A request arrives on HTTP and is 308-redirected to HTTPS, except ACME HTTP-01 challenge answers and the Agent Card, which are served over HTTP.",
+    "On HTTPS, SNI selects the certificate through a `TlsAccept` callback; TLS is pinned to TLS 1.3 with the configured group allowlist.",
+    "`request_filter` runs before any upstream is touched: www→apex 308, route lookup by host + longest path prefix, body-size bound, then route auth (basic, JWT, or OAuth2).",
+    "The route is then served: static files for hosting routes, a chained fetch for chained routes, or round-robin over healthy upstreams for plain proxy routes — all-known-down is a 502.",
+    "`logging` records the access line and metrics through a bounded (1024) redacting log pipeline; `POST /api/reload` on the admin listener re-reads config and atomically swaps config and certificate store, keeping the old state on failure.",
+]
+
+gaps = "- No per-field defaults are stated in `docs/src/config.md` for most route, listener, Tor, ACME, or discovery fields; those rows record \"not stated in source\" rather than guessing.\n- The full TLS group allowlist is in the book's TLS chapter (`docs/src/tls.md`), which was not read for this pack; only the config reference's summary was sourced.\n- MCP tool names and A2A Agent Card fields were not enumerated from `crates/vongola/src/mcp.rs` / `a2a.rs` for this pack."
+
+[[config]]
+name = "profile"
+default = "hosting"
+description = "Deployment profile: `fleet`, `hosting`, or `lean`"
+
+[[config]]
+name = "node_name"
+default = "not stated in source"
+description = "This node's name (dashboard, card, logs)"
+
+[[config]]
+name = "bundle_version"
+default = "not stated in source"
+description = "Fleet bundle version string; fingerprinted with the config"
+
+[[config]]
+name = "state_dir"
+default = "./vongola-state"
+description = "Keys, self-signed certs, onion keys"
+
+[[config]]
+name = "worker_threads"
+default = "4"
+description = "Threads per Pingora service, wired into `ServerConf` (lean example: `2`)"
+
+[[config]]
+name = "shutdown_grace_secs"
+default = "10"
+description = "SIGTERM drain cap, wired into Pingora's `ServerConf`"
+
+[[config]]
+name = "admin_token_env"
+default = "VONGOLA_OPERATOR_TOKEN"
+description = "Env var holding the operator token"
+
+[[config]]
+name = "`listeners.<admin\\"
+default = "http\\"
+description = "https>.bind`"
+
+[[config]]
+name = "listeners.<name>.nat.enabled"
+default = "not stated in source"
+description = "Per-listener NAT traversal opt-in (PCP / NAT-PMP / UPnP IGD)"
+
+[[config]]
+name = "listeners.<name>.nat.lease_secs"
+default = "not stated in source"
+description = "NAT mapping lease; lean example sets `3600`"
+
+[[config]]
+name = "tls.min_version"
+default = "only `\"1.3\"` allowed"
+description = "TLS minimum version"
+
+[[config]]
+name = "tls.groups"
+default = "not stated in source"
+description = "TLS group allowlist (see the book's TLS chapter)"
+
+[[config]]
+name = "tor.enabled"
+default = "not stated in source"
+description = "Enable Tor onion-service publication"
+
+[[config]]
+name = "tor.exit_relay"
+default = "must be `false`"
+description = "Vongola is never a Tor exit node; enforced in config validation"
+
+[[config]]
+name = "tor.exit_policy"
+default = "only `reject *:*` allowed"
+description = "Tor exit policy"
+
+[[config]]
+name = "lets_encrypt.enabled` / `lets_encrypt.email` / `lets_encrypt.staging"
+default = "not stated in source"
+description = "ACME / Let's Encrypt issuance; placeholder emails are rejected, even when disabled"
+
+[[config]]
+name = "a2a.enabled"
+default = "not stated in source"
+description = "Publish the signed A2A Agent Card"
+
+[[config]]
+name = "routes[].host"
+default = "not stated in source"
+description = "Primary hostname; route identity is host + path-prefix set"
+
+[[config]]
+name = "routes[].path_prefixes"
+default = "not stated in source"
+description = "Prefixes this route answers; longest match wins"
+
+[[config]]
+name = "routes[].static_root"
+default = "not stated in source"
+description = "Directory for static hosting (mutually exclusive with `upstreams`)"
+
+[[config]]
+name = "routes[].upstreams[].address"
+default = "not stated in source"
+description = "Upstream `host:port`; round-robin over healthy entries"
+
+[[config]]
+name = "routes[].max_body_bytes"
+default = "16 MiB"
+description = "Request body bound; oversized is a 413"
+
+[[config]]
+name = "routes[].redirect_www_to_apex"
+default = "not stated in source"
+description = "308 `www.<host>` → apex"
+
+[[config]]
+name = "routes[].security_headers"
+default = "on"
+description = "Standard security header set on responses"
+
+[[config]]
+name = "routes[].cache.enabled` / `max_age_secs` / `max_bytes"
+default = "not stated in source"
+description = "Static in-memory cache; qompass example sets `max_age_secs: 3600`"
+
+[[config]]
+name = "routes[].chain[]"
+default = "not stated in source"
+description = "Ordered proxy-chain hops: `kind` (`http-connect`, `socks5`, `tor`, `vongola`) + `address` (optional for `tor`); max 8 hops per `docs/src/architecture.md`"
+
+[[config]]
+name = "routes[].onion.enabled"
+default = "not stated in source"
+description = "Publish as an onion service (requires `tor.enabled`)"
+
+[[config]]
+name = "routes[].self_signed_fallback"
+default = "not stated in source"
+description = "Opt-in: generate/reuse a self-signed cert when no operator cert exists; without a cert and without this flag, the handshake fails"
+
+[[controls]]
+action = "Build"
+control = "cargo build --release"
+
+[[controls]]
+action = "Validate a config without starting listeners"
+control = "./target/release/vongola validate-config --config examples/qompass.yaml"
+
+[[controls]]
+action = "Serve (default subcommand)"
+control = "./target/release/vongola serve --config examples/lean.yaml"
+
+[[controls]]
+action = "Run the stdio MCP operator server"
+control = "vongola mcp"
+
+[[controls]]
+action = "Print version"
+control = "vongola version"
+
+[[controls]]
+action = "Run the full live smoke suite"
+control = "bash scripts/smoke.sh"
+
+[[controls]]
+action = "Reload config at runtime"
+control = "`POST /api/reload` on the admin listener (operator token required)"
+
+[[controls]]
+action = "Read operator state"
+control = "Admin listener: `/healthz`, `/metrics`, `/api/state`, `/dashboard`, `/mcp`"
+
+[[controls]]
+action = "Rotate a self-signed certificate"
+control = "`POST /api/rotate-self-signed` on the admin listener"

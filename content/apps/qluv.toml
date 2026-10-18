@@ -1,0 +1,131 @@
+slug = "qluv"
+name = "QLuV"
+kind_line = "LUA VERSION MANAGER — SHELL"
+repo_url = "https://github.com/qompassai/qluv"
+mark = "/img/projects/qluv.webp"
+ready = true
+
+summary = "QLuV is the Qompass Lua Version Manager: a shell script (with `qluv.fish` and `qluv.plugin.zsh` companions in the repo root) that installs, switches, defaults and uninstalls Lua, LuaJIT and LuaRocks versions side by side under `~/.qluv`."
+
+how = [
+    "On load, `__qluv_init` creates the `~/.qluv` tree (`src`, `lua`, `luajit`, `luarocks`) if missing, then applies any saved defaults by reading the `DEFAULT_LUA`, `DEFAULT_LUAJIT` and `DEFAULT_LUAROCKS` files and switching to those versions. Source: GitHub qluv `qluv` script, `__qluv_init()`.",
+    "`qluv install <version>` downloads the Lua tarball, unpacks it under the source directory, compiles it and installs it with `PREFIX` under `~/.qluv/lua/<version>`, then offers to switch to it; LuaJIT and LuaRocks installs follow the same download → compile → prefix-install pattern (`install-luajit` from luajit.org, `install-luarocks` from luarocks.org, configured against the current Lua). Source: GitHub qluv `qluv` script, `__qluv_install_lua()` / `__qluv_install_luajit()` / `__qluv_install_luarocks()`.",
+    "`qluv use <version>` switches versions by removing previous `~/.qluv/.../bin` entries from `PATH` and prepending the selected version's `bin` directory; LuaRocks switching additionally evaluates `luarocks path`. Source: GitHub qluv `qluv` script, `__qluv_use_lua()` / `__qluv_use_luarocks()` / `__qluv_remove_previous_paths()` / `__qluv_append_path()`.",
+    "`qluv set-default <version>` persists a choice by writing the version into the matching `DEFAULT_*` file, so `__qluv_init` re-applies it on the next shell load; `unset-default` removes that file. Source: GitHub qluv `qluv` script, `__qluv_set_default_*()` / `__qluv_unset_default_*()`.",
+    "`qluv list [-r]` lists installed versions from the `~/.qluv` directories, or with `-r` fetches the remote release list (lua.org FTP for Lua, luarocks releases JSON for LuaRocks). Source: GitHub qluv `qluv` script, `__qluv_list_lua()` / `__qluv_list_luarocks()`.",
+    "Downloads use `wget` if present, else `curl`, and fail with \"'wget' or 'curl' must be installed\" if neither exists; unpacking requires `tar`. Source: GitHub qluv `qluv` script, `__qluv_download()` / `__qluv_unpack()`.",
+]
+
+gaps = "- The GitHub README contains no QLuV-specific installation, usage or configuration documentation at all: after the title/badges, its only functional section is the shared Qompass Quick Start, which is the dotfiles repo's script, not QLuV's. Every HOW/CONFIG/CONTROLS row above is sourced from the `qluv` script itself (its header, constants, usage text and function bodies), not from the README.\n- No user-facing configuration file, environment variable or option is documented or defined in the sources read; the CONFIG rows are the script's internal `__qluv_*` constants and state-file paths, which a user changes only via the `set-default` commands.\n- Shell integration specifics (how `qluv`, `qluv.fish` and `qluv.plugin.zsh` are sourced/installed — an `install.sh` exists in the repo root) were not sourced in detail; no install command for QLuV itself is claimed here.\n- One remote-list source in the script (`__qluv_list_luajit` fetching `https://luajits.org/download.html`) is transcribed as written in the code; its correctness was not verified."
+
+[[config]]
+name = "__qluv_VERSION"
+default = "1.0.0"
+description = "QLuV's own version string, printed by `qluv version`"
+
+[[config]]
+name = "__qluv_QLUV_DIR"
+default = "${HOME}/.qluv"
+description = "Root directory for all qluv-managed installs and state"
+
+[[config]]
+name = "__qluv_LUA_DIR"
+default = "${HOME}/.qluv/lua"
+description = "Install prefix root for Lua versions"
+
+[[config]]
+name = "__qluv_LUAJIT_DIR"
+default = "${HOME}/.qluv/luajit"
+description = "Install prefix root for LuaJIT versions"
+
+[[config]]
+name = "__qluv_LUAROCKS_DIR"
+default = "${HOME}/.qluv/luarocks"
+description = "Install prefix root for LuaRocks versions"
+
+[[config]]
+name = "__qluv_LUA_DEFAULT_FILE"
+default = "${HOME}/.qluv/DEFAULT_LUA"
+description = "File whose contents name the default Lua version applied at init"
+
+[[config]]
+name = "__qluv_LUAJIT_DEFAULT_FILE"
+default = "${HOME}/.qluv/DEFAULT_LUAJIT"
+description = "File whose contents name the default LuaJIT version applied at init"
+
+[[config]]
+name = "__qluv_LUAROCKS_DEFAULT_FILE"
+default = "${HOME}/.qluv/DEFAULT_LUAROCKS"
+description = "File whose contents name the default LuaRocks version applied at init"
+
+[[controls]]
+action = "Show usage"
+control = "qluv help"
+
+[[controls]]
+action = "Install Lua"
+control = "qluv install <version>"
+
+[[controls]]
+action = "Switch Lua"
+control = "qluv use <version>"
+
+[[controls]]
+action = "Set / unset default Lua"
+control = "qluv set-default <version>` / `qluv unset-default"
+
+[[controls]]
+action = "Uninstall Lua"
+control = "qluv uninstall <version>"
+
+[[controls]]
+action = "List Lua versions (`-r` = remote)"
+control = "qluv list [-r]"
+
+[[controls]]
+action = "Install LuaJIT"
+control = "qluv install-luajit <version>"
+
+[[controls]]
+action = "Switch LuaJIT"
+control = "qluv use-luajit <version>"
+
+[[controls]]
+action = "Set / unset default LuaJIT"
+control = "qluv set-default-luajit <version>` / `qluv unset-default-luajit"
+
+[[controls]]
+action = "Uninstall LuaJIT"
+control = "qluv uninstall-luajit <version>"
+
+[[controls]]
+action = "List LuaJIT versions"
+control = "qluv list-luajit [-r]"
+
+[[controls]]
+action = "Install LuaRocks"
+control = "qluv install-luarocks <version>"
+
+[[controls]]
+action = "Switch LuaRocks"
+control = "qluv use-luarocks <version>"
+
+[[controls]]
+action = "Set / unset default LuaRocks"
+control = "qluv set-default-luarocks <version>` / `qluv unset-default-luarocks"
+
+[[controls]]
+action = "Uninstall LuaRocks"
+control = "qluv uninstall-luarocks <version>"
+
+[[controls]]
+action = "List LuaRocks versions"
+control = "qluv list-luarocks [-r]"
+
+[[controls]]
+action = "Show versions in use"
+control = "qluv current"
+
+[[controls]]
+action = "Show QLuV version"
+control = "qluv version"

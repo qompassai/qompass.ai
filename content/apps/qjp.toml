@@ -1,0 +1,134 @@
+slug = "qjp"
+name = "Qjp"
+kind_line = "NixOS module collection — NVIDIA JetPack SDK packaging for Jetson devices (fork of anduril/jetpack-nixos)"
+repo_url = "https://github.com/qompassai/qjp"
+mark = "/img/projects/qjp.webp"
+ready = true
+
+summary = "Qjp (\"Qompass AI JetPack\", repo description: \"NixOS module for NVIDIA Jetson devices\") packages components from NVIDIA's JetPack SDK for NixOS — platform firmware flashing scripts, NVIDIA's 5.10 kernel with nvgpu, EDK2-based UEFI firmware, ARM Trusted Firmware/OP-TEE, and packages for CUDA/CuDNN/TensorRT, V4L2/gstreamer multimedia, Wayland/GBM/EGL/Vulkan graphics, and nvpmodel/nvfancontrol power and fan control. It targets JetPack 5.1 devices: Jetson Orin AGX, Orin NX, Xavier AGX, and Xavier NX (Nano/TX2/TX1 are not supported)."
+
+how = [
+    "Put the Jetson in recovery mode (hold recovery, press reset), connect USB, and confirm with `lsusb | grep -i NVIDIA` showing an `NVIDIA Corp. APX` device.",
+    "On an x86_64 host, build and run the flash script for your device, e.g. `nix build .#flash-xavier-agx-devkit` then `sudo ./result/bin/flash-xavier-agx-devkit` (use `nix flake show` to see options).",
+    "Build the installer ISO with `nix build .#iso_minimal` and write it to USB with `dd`.",
+    "Boot the Jetson from USB via the UEFI Boot Manager and follow the NixOS manual's UEFI installation.",
+    "Include the module in your configuration with `hardware.nvidia-jetpack.enable = true;`, `hardware.nvidia-jetpack.som = \"xavier-agx\";`, and `hardware.nvidia-jetpack.carrierBoard = \"devkit\";` before installing.",
+    "Later, update firmware from the device: check with `ota-check-firmware`, build a capsule (`nix build .#uefi-capsule-update-<device>`), copy it over, and apply with `sudo ota-apply-capsule-update example.Cap`.",
+]
+
+gaps = "- The README is inherited from upstream `anduril/jetpack-nixos`: its commands reference `github:anduril/jetpack-nixos` and a `fetchTarball` of the anduril repo, not `qompassai/qjp`. The fork's own `flake.nix` does expose the same attribute names (`flash-*`, `iso_minimal`, `uefi-capsule-update-*` for orin-agx/orin-nx/orin-nano/xavier devkits), but no qjp-specific usage doc was found.\n- The README names the auto-update option `hardware.nvidia-jetpack.bootloader.autoUpdate`; in the current code that name is a renamed alias for `hardware.nvidia-jetpack.firmware.autoUpdate` (`modules/flash-script.nix`).\n- Orin Nano support is described in the README as future (\"when the Orin Nano is released, it should be possible\"), but the current `som` enum and flake hardware configs already include `orin-nano` — README and code disagree on vintage.\n- `kernel/`, `pkgs/`, `device-pkgs/`, and `anduril/` contents were not inventoried for this pack."
+
+[[config]]
+name = "enable"
+default = "false (mkEnableOption)"
+description = "Enable NVIDIA Jetson device support"
+
+[[config]]
+name = "som"
+default = "generic"
+description = "SoM to target; enum: `generic`, `orin-agx`, `orin-agx-industrial`, `orin-nx`, `orin-nano`, `xavier-agx`, `xavier-agx-industrial`, `xavier-nx`, `xavier-nx-emmc`"
+
+[[config]]
+name = "carrierBoard"
+default = "generic"
+description = "Carrier board to target; enum: `generic`, `devkit`"
+
+[[config]]
+name = "configureCuda"
+default = "true"
+description = "Instantiate nixpkgs with `cudaSupport = true` and `cudaCapabilities` from the SoM (7.2 for Xavier, 8.7 for Orin)"
+
+[[config]]
+name = "modesetting.enable"
+default = "false"
+description = "Enable kernel modesetting (set true for Wayland, false for X11 per README)"
+
+[[config]]
+name = "maxClock"
+default = "false"
+description = "Always run at maximum clock speed (enables the `jetson_clocks` oneshot service)"
+
+[[config]]
+name = "super"
+default = "false"
+description = "Enable \"super mode\" for Jetson Orin NX and Nano"
+
+[[config]]
+name = "kernel.realtime"
+default = "false"
+description = "Enable PREEMPT_RT patches (uses the RT kernel packages)"
+
+[[config]]
+name = "console.enable"
+default = "config.console.enable"
+description = "Enable the default console kernel parameters (tty0 + Tegra Combined UART)"
+
+[[config]]
+name = "firmware.autoUpdate"
+default = "false (mkEnableOption; README refers to it by its former name `bootloader.autoUpdate`)"
+description = "Automatic firmware updates after `nixos-rebuild switch` via UEFI capsule update"
+
+[[config]]
+name = "firmware.bootOrder"
+default = "null"
+description = "Default UEFI boot order (list over scsi/usb/sata/pxev4/httpv4/pxev6/httpv6/nvme/ufs/sd/emmc/cdrom/boot.img/virtual/shell)"
+
+[[config]]
+name = "firmware.uefi.debugMode"
+default = "false"
+description = "EDK2/UEFI debug mode"
+
+[[config]]
+name = "firmware.optee.supplicant.enable"
+default = "true"
+description = "tee-supplicant daemon for OP-TEE, with `extraArgs`, `trustedApplications`, `plugins` (all default `[ ]`)"
+
+[[config]]
+name = "services.nvpmodel.enable / profileNumber"
+default = "enabled by default when a config exists for the SoM / null"
+description = "NVPModel power service; profileNumber selects a POWER_MODEL ID from the config file (null = the file's PM_CONFIG DEFAULT)"
+
+[[config]]
+name = "services.nvfancontrol.enable"
+default = "enabled by default on devkit carrier boards"
+description = "Fan control service, with per-SoM config file selected in devices.nix"
+
+[[controls]]
+action = "Verify recovery mode"
+control = "`lsusb \\"
+
+[[controls]]
+action = "List build options"
+control = "nix flake show"
+
+[[controls]]
+action = "Build a flash script"
+control = "`nix build github:anduril/jetpack-nixos#flash-xavier-agx-devkit` (README form; this fork's flake generates the same `flash-<devkit>` attributes)"
+
+[[controls]]
+action = "Flash UEFI firmware"
+control = "sudo ./result/bin/flash-xavier-agx-devkit"
+
+[[controls]]
+action = "Build the installer ISO"
+control = "`nix build github:anduril/jetpack-nixos#iso_minimal` (README form)"
+
+[[controls]]
+action = "Write the ISO to USB"
+control = "sudo dd if=./result/iso/nixos-22.11pre-git-aarch64-linux.iso of=/dev/sdX bs=1M oflag=sync status=progress"
+
+[[controls]]
+action = "Check firmware vs software version"
+control = "ota-check-firmware"
+
+[[controls]]
+action = "Build a capsule update"
+control = "nix build .#uefi-capsule-update-xavier-nx-emmc-devkit"
+
+[[controls]]
+action = "Apply a capsule update"
+control = "sudo ota-apply-capsule-update example.Cap` then `sudo reboot"
+
+[[controls]]
+action = "Inspect capsule/slot status"
+control = "sudo nvbootctrl dump-slots-info"

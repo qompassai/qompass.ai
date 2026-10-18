@@ -1,0 +1,132 @@
+slug = "blaze-ts-nvim"
+name = "Blaze-ts.nvim"
+kind_line = "TREE-SITTER GRAMMAR (MOJO) — C, PACKAGED AS A NEOVIM PLUGIN — LUA"
+repo_url = "https://github.com/qompassai/blaze-ts.nvim"
+mark = "/img/projects/blaze-ts-nvim.webp"
+ready = true
+
+summary = "Blaze-ts.nvim is a Tree-sitter grammar for the Mojo programming language, packaged as a Neovim plugin: the grammar is adapted from tree-sitter-python's architecture and extended with Mojo constructs, and the plugin ships a prebuilt parser, Tree-sitter queries and opt-in editor integrations, with nvim-treesitter not required."
+
+how = [
+    "`require(\"blaze-ts\").setup({})` registers the `.mojo` (and `.🔥`) filetype, adds the plugin's `runtime/` directory so queries resolve, and registers the bundled parser (`parser/mojo.so`, plus a WebAssembly build at `parser/mojo.wasm`) with Neovim's built-in Tree-sitter support. Source: GitHub blaze-ts.nvim README.md, \"Manual\" installation.",
+    "When nvim-treesitter is present, the plugin also registers a `mojo` parser config so `:TSInstall mojo` builds the parser from this repository's C sources (`src/parser.c`, `src/scanner.c`). Source: GitHub blaze-ts.nvim README.md.",
+    "The grammar itself extends the Python-superset base with Mojo constructs — `fn`/`struct`/`trait`, `var`/`let`/`alias`, `raises` effect specifiers, argument conventions (`inout`, `owned`, `borrowed`, `out`, `read`, `mut`, `ref`), parametric declarations and f-string interpolation — parsed by an external scanner implementing indentation/newline/string tokens with fixed-size state (indent stack 128, delimiter stack 32). Source: GitHub blaze-ts.nvim README.md.",
+    "The opinionated editor stack in `blaze-ts.config` is applied only when `setup()` receives one of its section tables (`ts`, `conform`, `lsp`, `completion`, `diagnostics`, `keymaps`, `filetype`); each integration degrades gracefully when its companion plugin or binary is absent. Source: GitHub blaze-ts.nvim README.md, \"Commands and configuration\".",
+    "Correctness is gated by a Tree-sitter corpus suite (`test/corpus`, 24 cases including malformed-input cases), regenerable with `tree-sitter generate src/grammar.js` and rebuildable with `tree-sitter build`. Source: GitHub blaze-ts.nvim README.md, \"Development\".",
+]
+
+gaps = "- The README documents the seven `setup()` section tables only as empty `{}` examples; the contents/defaults of the `conform`, `lsp`, `completion`, `diagnostics`, `keymaps` and `filetype` sections were not documented there (defaults above for the `ts` section come from `lua/blaze-ts/config.lua`).\n- The sandbox clone's README (`~/workspace/repos/blaze-ts.nvim/README.md`) is an older, different text (it routes setup through `require(\"blaze\").setup()`, contains a broken lazy spec quote, and lists only highlighting/incremental parsing/indentation/semantic analysis as blaze.nvim uses); the GitHub README above supersedes it and the two disagree.\n- Language-binding status in the README: Swift bindings are present but explicitly not verified; the Node.js binding test is blocked upstream (tree-sitter JS runtime 0.25.1 has no prebuild for Node 26's ABI). Source: GitHub blaze-ts.nvim README.md, \"Language bindings\".\n- The README states the grammar is under active development with breaking changes expected until it is fully registered with nvim-treesitter."
+
+[[config]]
+name = "ts"
+default = "(section table; `{}` enables it)"
+description = "nvim-treesitter setup + parser registration section passed to `setup()`"
+
+[[config]]
+name = "conform"
+default = "(section table; `{}` enables it)"
+description = "conform.nvim formatter definition (`mojo format`) section"
+
+[[config]]
+name = "lsp"
+default = "(section table; `{}` enables it)"
+description = "mojo-lsp-server wiring section (requires the binary on PATH)"
+
+[[config]]
+name = "completion"
+default = "(section table; `{}` enables it)"
+description = "omnifunc on Mojo buffers section"
+
+[[config]]
+name = "diagnostics"
+default = "(section table; `{}` enables it)"
+description = "`vim.diagnostic` configuration section"
+
+[[config]]
+name = "keymaps"
+default = "(section table; `{}` enables it)"
+description = "Buffer-local keymaps on Mojo buffers section"
+
+[[config]]
+name = "filetype"
+default = "(section table; `{}` enables it)"
+description = "Filetype and buffer options section"
+
+[[config]]
+name = "parser.auto_install"
+default = "true"
+description = "In the repo's `lazy.lua` spec opts: auto-install the Mojo parser"
+
+[[config]]
+name = "nvim_treesitter.highlight.enable"
+default = "true"
+description = "In `lazy.lua` opts (`additional_vim_regex_highlighting = false`)"
+
+[[config]]
+name = "nvim_treesitter.indent.enable"
+default = "true"
+description = "In `lazy.lua` opts"
+
+[[config]]
+name = "auto_install (ts setup)"
+default = "true"
+description = "default(opts.auto_install, true)` in `Config.setup_ts"
+
+[[config]]
+name = "sync_install (ts setup)"
+default = "false"
+description = "default(opts.sync_install, false)` in `Config.setup_ts"
+
+[[config]]
+name = "ensure_installed (ts setup)"
+default = "{ \"mojo\" }"
+description = "Parsers ensured by the ts setup when not overridden"
+
+[[config]]
+name = "highlight / indent / fold (ts setup)"
+default = "true each"
+description = "default(opts.highlight, true)`, `default(opts.indent, true)`, `default(opts.fold, true)"
+
+[[controls]]
+action = "Run `require(\"blaze-ts\").setup()`"
+control = ":BlazeTS"
+
+[[controls]]
+action = "Full health report (parser, queries, Mojo environment probe)"
+control = ":BlazeHealth"
+
+[[controls]]
+action = "Parser-only health (config registration, parser path, loadability)"
+control = ":BlazeParserHealth"
+
+[[controls]]
+action = "Reinstall parser (nvim-treesitter if available, else re-register bundled parser)"
+control = ":BlazeReinstallParser"
+
+[[controls]]
+action = "Blaze-TS health check (lazy spec key, Mojo buffers)"
+control = "<leader>mh"
+
+[[controls]]
+action = "Mojo parser health (lazy spec key, Mojo buffers)"
+control = "<leader>mp"
+
+[[controls]]
+action = "Reinstall Mojo parser (lazy spec key, Mojo buffers)"
+control = "<leader>mr"
+
+[[controls]]
+action = "Start / expand incremental selection"
+control = "`<C-space>` (init and node-incremental)"
+
+[[controls]]
+action = "Shrink incremental selection"
+control = "`<BS>` (node-decremental)"
+
+[[controls]]
+action = "Scope-incremental selection"
+control = "<C-s>"
+
+[[controls]]
+action = "Lua API equivalents"
+control = "require(\"blaze-ts\").health_check()`, `.parser_health()`, `.reinstall_parser()"

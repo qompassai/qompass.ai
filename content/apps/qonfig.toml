@@ -1,0 +1,119 @@
+slug = "qonfig"
+name = "Qonfig"
+kind_line = "CLI tool — Python dotfile manager (Dotbot-style), driven by a YAML/JSON config file"
+repo_url = "https://github.com/qompassai/qonfig"
+mark = "/img/projects/qonfig.webp"
+ready = true
+
+summary = "Qonfig is \"A Quality Dotfile Manager\": you fill in `qonfig.yaml` and Qonfig takes care of the rest, symlinking files, cleaning dead links, and running shell commands from a list of directives. It is installed into a dotfiles repo as a Git submodule (or Mercurial subrepo) behind a small `install` shim."
+
+how = [
+    "Add Qonfig to your dotfiles repo: `git submodule add https://github.com/qompassai/qonfig`, copy the shim with `cp qonfig/tools/git-submodule/install .`, and create `qonfig.yaml`.",
+    "Or bootstrap a new setup with `curl -fsSL https://raw.githubusercontent.com/qompassai/qonfig/main/scripts/quickstart.sh | sh`.",
+    "Fill in `qonfig.yaml` as a list of tasks using the `defaults`, `clean`, `link`, and `shell` directives.",
+    "Run `./install`; the shim updates the submodule and calls `bin/qonfig -d <base dir> -c qonfig.yaml`.",
+    "Qonfig dispatches each task to its plugin, in order, and reports \"All tasks executed successfully\" or fails.",
+    "Upgrade later with `git submodule update --remote qonfig`.",
+]
+
+gaps = "- The repo's own `qonfig.yaml`/`qonfig.jsonc` (and the dotfiles repo's) use a top-level `- create: [~/Downloads]` directive, but `plugins/` contains only `clean.py`, `link.py`, and `shell.py` and `docs/README.md` documents no `create` directive; the dispatcher logs \"Action %s not handled\" for unhandled actions (`qonfig/dispatcher.py`). Whether `create` works in the shipped build could not be verified from sources.\n- Per-link `if:` conditions used in the dotfiles repo's `qonfig.yaml` are likewise not handled in `plugins/link.py` as read.\n- `pyproject.toml` describes the package as \"Quantum AI models for healthcare and education\", which does not match the dotfile-manager documentation; treated as stale metadata."
+
+[[config]]
+name = "defaults.link.create"
+default = "true (in repo's own qonfig.yaml)"
+description = "Create parent directories for links; set via a `defaults:` task applying to following tasks"
+
+[[config]]
+name = "defaults.link.relink"
+default = "true (in repo's own qonfig.yaml)"
+description = "Overwrite incorrect symlinks"
+
+[[config]]
+name = "link.<target>.path"
+default = "target's plain value"
+description = "Source path (relative to base directory) for an extended link entry"
+
+[[config]]
+name = "link.<target>.create"
+default = "false (plugin default)"
+description = "Create the parent directory if necessary"
+
+[[config]]
+name = "link.<target>.relink"
+default = "false (plugin default)"
+description = "Automatically overwrite incorrect symbolic links"
+
+[[config]]
+name = "link.<target>.force"
+default = "false (plugin default)"
+description = "Forcibly link, overwriting existing files/directories"
+
+[[config]]
+name = "link.<target>.relative"
+default = "false (plugin default)"
+description = "Make the symlink with a relative path"
+
+[[config]]
+name = "clean"
+default = "`[\"~\", ~/.config]` (repo's own qonfig.yaml)"
+description = "Directories checked for dead symlinks pointing into the dotfiles directory; dead links are removed"
+
+[[config]]
+name = "shell[].command / description / stdin / stdout / stderr"
+default = "—"
+description = "Extended shell-command form: command plus optional description and stdio toggles"
+
+[[config]]
+name = "-c / --config-file CONFIGFILE"
+default = "required (no default)"
+description = "Config file to run"
+
+[[config]]
+name = "-d / --base-directory BASEDIR"
+default = "required (no default)"
+description = "Directory commands execute from within"
+
+[[config]]
+name = "install shim CONFIG / QONFIG_DIR"
+default = "qonfig.yaml` / `qonfig"
+description = "Config location and submodule location assumed by the `install` script; editable in the script"
+
+[[controls]]
+action = "Quick start"
+control = "`curl -fsSL https://raw.githubusercontent.com/qompassai/qonfig/main/scripts/quickstart.sh \\"
+
+[[controls]]
+action = "Set up with Git"
+control = "git submodule add https://github.com/qompassai/qonfig` then `cp qonfig/tools/git-submodule/install ."
+
+[[controls]]
+action = "Set up with Mercurial"
+control = "hg init`, write `.hgsub`, `git clone https://github.com/qompassai/qonfig`, `cp qonfig/tools/hg-subrepo/install ."
+
+[[controls]]
+action = "Apply the configuration"
+control = "`./install` (shim for `bin/qonfig -d BASEDIR -c CONFIGFILE`)"
+
+[[controls]]
+action = "Run the CLI directly"
+control = "`qonfig -d BASEDIR -c CONFIGFILE` (console script `qonfig = qonfig.cli:main`)"
+
+[[controls]]
+action = "Verbose / quiet output"
+control = "-v/--verbose`, `-q/--quiet`, `-Q/--super-quiet"
+
+[[controls]]
+action = "Load a plugin"
+control = "`-p/--plugin PLUGIN` (repeatable)"
+
+[[controls]]
+action = "Load all plugins in a directory"
+control = "`--plugin-dir PLUGIN_DIR` (repeatable)"
+
+[[controls]]
+action = "Disable built-in plugins"
+control = "--disable-built-in-plugins"
+
+[[controls]]
+action = "Upgrade (submodule install)"
+control = "git submodule update --remote qonfig"

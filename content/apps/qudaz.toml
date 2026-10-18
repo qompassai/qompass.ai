@@ -1,0 +1,63 @@
+slug = "qudaz"
+name = "Qudaz"
+kind_line = "Library — Zig bindings for NVIDIA CUDA (driver, NVRTC, cuRAND)"
+repo_url = "https://github.com/qompassai/qudaz"
+mark = "/img/projects/qudaz.webp"
+ready = true
+
+summary = "Qudaz is the \"Qompass AI Cuda library for Zig\": it provides a high-level interface to communicate with NVIDIA GPUs from Zig, and it can detect a CUDA installation and link it into a project's binary on Linux/macOS."
+
+how = [
+    "Depend on the library from your Zig project's `build.zig` and fetch its `qudaz` module (the root `build.zig` registers it with `b.addModule(\"qudaz\", ...)` rooted at `src/lib.zig`).",
+    "At build time the library locates CUDA: it checks the `-DCUDA_PATH` option first, otherwise probes `/usr`, `/usr/local/cuda`, `/opt/cuda`, `/usr/lib/cuda`, and a Windows v12.3 toolkit path for `include/cuda.h`.",
+    "Link libc plus the `cuda`, `nvrtc`, `curand`, and `cudart` system libraries, as the test build does.",
+    "In code, create a device with `Device.new(gpu)` or `Device.default()`, allocate with `alloc`/`allocZeros`, and copy with `htodCopy`.",
+    "Compile CUDA source to PTX at runtime via the `Compile` module (`cudaText`/`cudaFile`/`getPtx`) and load it with `Device.loadPtx`/`loadPtxText`.",
+]
+
+gaps = "- The README's \"Customization\" anchor is referenced (\"Check Customization to give cuda manual path\") but the README as fetched contains no Usage/Installation/Customization section — the only install/usage evidence is `build.zig` and the examples.\n- Naming is inconsistent in sources: the current root `build.zig` registers the module as `qudaz`, while `example/increment/build.zig` and its Readme still use the old `cudaz` name and clone URL (`git@github.com:akhildevelops/cudaz.git`, and the Readme says to open `example/custom_type` from the increment page). Example instructions were recorded verbatim, not reconciled.\n- No published package/registry install command (e.g. `zig fetch`) is documented in the repo."
+
+[[config]]
+name = "CUDA_PATH (build option `-DCUDA_PATH`)"
+default = "auto-detected"
+description = "\"locally installed Cuda's path\" — manual CUDA installation path given at build time"
+
+[[config]]
+name = "CUDA auto-detection roots"
+default = "/usr`, `/usr/local/cuda`, `/opt/cuda`, `/usr/lib/cuda`, `C:/Program Files/NVIDIA GPU Computing Toolkit/CUDA/v12.3"
+description = "Probed in order for `include/cuda.h`; build fails with `CUDA_INSTALLATION_NOT_FOUND` if none match"
+
+[[config]]
+name = "version"
+default = "0.1.0"
+description = "Package version"
+
+[[config]]
+name = "minimum_zig_version"
+default = "0.14.0"
+description = "Minimum Zig version"
+
+[[config]]
+name = "Public API surface"
+default = "—"
+description = "`CudaSlice`, `Device`, `Compile`, `LaunchConfig`, `CAPI`, `Rng`, `CudaError` exported from the module root"
+
+[[controls]]
+action = "Run the library tests"
+control = "zig build test"
+
+[[controls]]
+action = "Run one test file"
+control = "`zig build test-<name>` (per-file \"Individual Test\" steps registered by the build)"
+
+[[controls]]
+action = "Clean cache/artifact folders"
+control = "`zig build clean` (\"Cleans the cache folders\")"
+
+[[controls]]
+action = "Run an example"
+control = "`zig build run` (in an example project)"
+
+[[controls]]
+action = "Give a custom CUDA path in an example"
+control = "b.dependency(\"cudaz\", .{ .CUDA_PATH = \"<your cuda path>\" })"

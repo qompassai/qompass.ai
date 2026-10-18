@@ -1,0 +1,19 @@
+slug = "debian"
+name = "Debian"
+kind_line = "Repository — titled \"Debian Linux: For Stable Servers\"; no Debian-specific configuration or tooling sourced"
+repo_url = "https://github.com/qompassai/debian"
+mark = "/img/projects/debian.webp"
+ready = true
+
+summary = "The repo is titled \"Debian Linux: For Stable Servers\" with the heading \"Qompass AI on Debian\", but its tree contains only a README, metadata files, and a metadata test — no Debian configuration, packages, or scripts were found. The README's only quick-start block is the Qompass AI dotfiles quick-start script, reproduced verbatim."
+
+how = [
+    "The README presents a \"Qompass AI Quick Start\" whose embedded script is the dotfiles installer (it clones `qompassai/dotfiles` to `$HOME/.dotfiles`) — it installs dotfiles/Nix, not anything Debian-specific.",
+    "No further steps are documented: there are no other docs, scripts, or configuration directories in the repo.",
+]
+
+gaps = "- No Debian-specific content could be sourced: no apt/dpkg configuration, no package lists, no installer, no NixOS/Debian module — the repo root contains only `README.md`, `tests/test_metadata.py`, and project metadata files (LICENSE, CITATION.cff, create_zenodo.py, etc.).\n- The README beyond the title is Qompass boilerplate (About / Support / FAQ) plus the dotfiles quick-start script; the script's own header identifies it as `/qompassai/dotfiles/scripts/quickstart.sh`.\n- The primo clone (`~/.GH/Qompass/Debian`) matches this picture: same README/metadata plus `tests/` and logs only."
+
+[[controls]]
+action = "Quick start (as printed in the README; installs the dotfiles repo, see GAPS)"
+control = "bash <quickstart script embedded in README>` — the embedded script runs `git clone https://github.com/qompassai/dotfiles` into `$HOME/.dotfiles`, symlinks the Nix config, installs Nix if missing, then `nix flake update` and `nix develop"

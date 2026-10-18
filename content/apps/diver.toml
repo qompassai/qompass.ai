@@ -1,0 +1,121 @@
+slug = "diver"
+name = "Diver"
+kind_line = "NEOVIM ENVIRONMENT — LUA"
+repo_url = "https://github.com/qompassai/Diver"
+mark = "/img/projects/diver.webp"
+ready = true
+
+summary = "Diver is Qompass AI's Neovim configuration — billed in its README as \"Your Blazingly Fast Everything Editor\" — installed at `~/.config/nvim`, targeting Neovim 0.13+ and Lua 5.1+LuaJIT, with per-language LSP configs under `lsp/`, Lua modules under `lua/`, and queries, scripts and tests in-tree."
+
+how = [
+    "Neovim loads `init.lua`, which sets `<Space>` to `<Nop>`, runs early options, and enables the Lua loader. Source: GitHub `qompassai/diver` `init.lua`.",
+    "`require('config.init').config(...)` loads the config aggregator with core, cicd, cloud, edu, lang, nav and ui enabled. Source: GitHub `qompassai/diver` `init.lua`.",
+    "The config aggregator loads core leaves (filetype, LSP, parser, quickfix, refactor, tree, whichkey) and bootstraps LSP, enabling servers from `lsp/<name>_ls.lua` on first FileType. Source: GitHub `qompassai/diver` `lua/config/init.lua`.",
+    "UI rendering, security, dev, utils, DAP and formatters are set up in a fixed order in `init.lua`; linters stay deferred until the first `BufReadPre`. Source: GitHub `qompassai/diver` `init.lua`.",
+    "Key mappings are loaded through the mappings loader, which runs its named mapping modules (aimap, cicdmap, datamap, genmap, langmap, lintmap, lspmap, navmap, and others) unless a module is set to `false`. Source: `~/workspace/repos/diver/lua/mappings/init.lua` (sandbox clone; primo clone at `~/.GH/Qompass/Diver/lua/config/mappings/init.lua` has the same loader shape).",
+    "The AI stack is set up last: `require('ai').setup()` at the end of `init.lua`. Source: GitHub `qompassai/diver` `init.lua`.",
+]
+
+gaps = "- The GitHub README documents no installation steps, no keymaps and no configuration defaults; it is largely a directory tree, About/Support sections and an FAQ. All CONFIG and CONTROLS rows above are sourced from code files actually read (`init.lua`, `lua/config/init.lua`, `lua/mappings/*.lua`, `lua/utils/options/globals.lua`), not from the README.\n- The mapping set is far larger than the representative rows above (11 mapping modules); a complete keymap catalogue was not sourced from any single documented list.\n- Path drift: `lua/config/keymaps.lua` exists in the sandbox clone but returns 404 on GitHub, where mappings live under `lua/config/mappings/` (primo clone) / `lua/mappings/` (sandbox clone layout in the README tree)."
+
+[[config]]
+name = "core"
+default = "true"
+description = "Core config subsystem enabled in the `config.init` call"
+
+[[config]]
+name = "cicd"
+default = "true"
+description = "CI/CD config subsystem enabled in the `config.init` call"
+
+[[config]]
+name = "cloud"
+default = "true"
+description = "Cloud config subsystem enabled in the `config.init` call"
+
+[[config]]
+name = "debug"
+default = "false"
+description = "Debug flag passed to `config.init` (verbose loader logging off)"
+
+[[config]]
+name = "edu"
+default = "true"
+description = "Education config subsystem enabled in the `config.init` call"
+
+[[config]]
+name = "lang"
+default = "true"
+description = "Language config subsystem enabled in the `config.init` call"
+
+[[config]]
+name = "nav"
+default = "true"
+description = "Navigation config subsystem enabled in the `config.init` call"
+
+[[config]]
+name = "ui"
+default = "true"
+description = "UI config subsystem enabled in the `config.init` call"
+
+[[config]]
+name = "MOJO_STDLIB_PATH"
+default = "`~/.local/share/mojo/.pixi/envs/default/lib/mojo` (non-Windows)"
+description = "Environment variable set at startup for the Mojo standard library"
+
+[[config]]
+name = "mapleader"
+default = "`' '` (space)"
+description = "Leader key set in global options"
+
+[[controls]]
+action = "Find file"
+control = "<leader>nf"
+
+[[controls]]
+action = "Find buffer"
+control = "<leader>nb"
+
+[[controls]]
+action = "Find command"
+control = "<leader>nc"
+
+[[controls]]
+action = "Toggle native explorer"
+control = "<leader>ne"
+
+[[controls]]
+action = "Find help tag"
+control = "<leader>nh"
+
+[[controls]]
+action = "Ripgrep to quickfix"
+control = "<leader>ng"
+
+[[controls]]
+action = "Generate SCIP index for project"
+control = "<leader>nz"
+
+[[controls]]
+action = "Document symbols"
+control = "<LocalLeader>nd"
+
+[[controls]]
+action = "Choose supported LSP action"
+control = "<LocalLeader>la"
+
+[[controls]]
+action = "Attached LSP clients"
+control = "<LocalLeader>li"
+
+[[controls]]
+action = "Toggle inlay hints"
+control = "<LocalLeader>lh"
+
+[[controls]]
+action = "Code actions here"
+control = "<LocalLeader>lc"
+
+[[controls]]
+action = "Toggle semantic tokens"
+control = "<LocalLeader>ls"

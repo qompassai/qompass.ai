@@ -1,0 +1,69 @@
+slug = "qompass-hold"
+name = "Qompass-Hold"
+kind_line = "SECRET SERVICE — RUST"
+repo_url = "https://github.com/qompassai/qompass-hold"
+mark = "/img/projects/qompass-hold.webp"
+ready = true
+
+summary = "Qompass-Hold is a \"Rust based secret service for pass\" (README subtitle; GitHub repo description: \"Qompass Secret-Service\"): it implements the freedesktop Secret Service API on D-Bus (`org.freedesktop.secrets`) with the `pass` password store — GPG-encrypted files under `~/.password-store` — as its backing store."
+
+how = [
+    "At startup the service builds a `PasswordStore` from the environment (`PasswordStore::from_env`) and opens a session D-Bus connection.",
+    "It registers the `org.freedesktop.Secret.Service` object at `/org/freedesktop/secrets` and requests the well-known name `org.freedesktop.secrets`, so desktop clients and `libsecret` apps find it as the system's secret service.",
+    "A client opens a session (`org.freedesktop.Secret.Session`); session objects encrypt/decrypt the secret values exchanged over D-Bus.",
+    "Collections (`org.freedesktop.Secret.Collection`) map to a `secret-service` subdirectory of the password store; collection labels and aliases, and item attribute indexes, are kept in a `redb` database (`attributes.redb`) inside the store.",
+    "Items (`org.freedesktop.Secret.Item`) are the actual secrets: their values are written as GPG-encrypted `.gpg` files in the store (the `pass` layout), and reads run `gpg --decrypt` — with `--pinentry-mode=error` instead of prompting when the caller cannot prompt.",
+    "Searching a collection looks items up by their attributes in the `redb` attribute tables rather than decrypting every file; unlocking/locking and item/collection deletion are handled through the same D-Bus interfaces.",
+]
+
+gaps = "- The README contains no functional documentation beyond the one-line subtitle — everything above is sourced from the Rust source, `Cargo.toml`, and the systemd units.\n- Exact D-Bus method names/signatures were taken from the interface module structure (`Service`, `Collection`, `Item`, `Session`) rather than an enumerated method-by-method read of every handler.\n- The binary name in the systemd unit is `qpass-hold`, while the Cargo package is `qompass-hold`; which name the built binary actually ships under was not verified from a build artifact.\n- Primo clones are known-stale estate-wide; the primo `src/` files used here match the GitHub tree listing (same paths), but were not diffed byte-for-byte against GitHub HEAD."
+
+[[config]]
+name = "PASSWORD_STORE_DIR"
+default = "`~/.password-store` if unset"
+description = "Directory of the `pass` password store"
+
+[[config]]
+name = "PASSWORD_STORE_GPG_OPTS"
+default = "unset"
+description = "Extra options split on whitespace and passed to every `gpg` invocation"
+
+[[config]]
+name = "PASSWORD_STORE_UMASK"
+default = "`077` (octal; parsed with radix 8)"
+description = "Umask from which file/dir modes are derived (dir mode `!umask & 0o777`; file mode strips execute bits)"
+
+[[config]]
+name = "HOME"
+default = "required (`$HOME must be set` if `PASSWORD_STORE_DIR` is unset)"
+description = "Used to locate `~/.password-store`"
+
+[[config]]
+name = "Environment=PASSWORD_STORE_DIR=%h/.password-store"
+default = "as written in the unit"
+description = "Store location when run under the systemd user unit"
+
+[[config]]
+name = "`ExecStart` (systemd user unit)"
+default = "%h/.local/bin/qpass-hold"
+description = "Binary the user unit starts; unit is `Type=dbus`, `BusName=org.freedesktop.secrets`, `PartOf=graphical-session.target`"
+
+[[controls]]
+action = "Run the service"
+control = "Execute the binary (no arguments); it serves on the session bus until stopped"
+
+[[controls]]
+action = "Run under systemd (user)"
+control = "`qpass-secret.service` user unit (`Type=dbus`, bus name `org.freedesktop.secrets`)"
+
+[[controls]]
+action = "Open a secret session"
+control = "D-Bus interface `org.freedesktop.Secret.Service` / `org.freedesktop.Secret.Session` at `/org/freedesktop/secrets`"
+
+[[controls]]
+action = "Create / search / delete collections and items"
+control = "D-Bus interfaces `org.freedesktop.Secret.Collection` and `org.freedesktop.Secret.Item`"
+
+[[controls]]
+action = "Read or write the underlying secrets directly"
+control = "The standard `pass` / `gpg` tooling on the same `~/.password-store` files (the store is the pass layout: one `.gpg` file per secret)"

@@ -1,0 +1,120 @@
+slug = "beacon"
+name = "Beacon"
+kind_line = "App"
+repo_url = "https://github.com/qompassai/beacon"
+mark = "/img/projects/beacon.webp"
+ready = true
+
+summary = "Beacon is a modern, secure, full-featured, open-source mail server for low-maintenance self-hosted email — a single Go binary serving SMTP/IMAP/HTTPS with automatic ACME TLS, webmail, and admin/account web interfaces. The Qompass repo carries the server (module `github.com/qompassai/beacon`, derived from the mox mail server codebase) under the tagline “Self-hosted mail made simple” / “Quality e-mail solution.”"
+
+how = [
+    "Generate a working setup with `beacon quickstart [-existing-webserver] [-hostname host] user@domain [user | uid]` — it writes configuration files, prints the initial admin and account passwords and the DNS records to create, and on Linux writes a systemd service file with the commands to enable/start it.",
+    "Start the server with `beacon serve`: incoming mail is accepted over SMTP, mail is retrieved over IMAP, and HTTP listeners serve the admin/account web interfaces plus automated TLS configuration (missing essential certs are requested immediately, others on demand via ACME/Let's Encrypt). Unix only.",
+    "Administer domains, accounts, and addresses either through the admin web interface or the config CLI (`beacon config domain add/rm`, `beacon config account add/rm`, `beacon config address add/rm`); validate with `beacon config test` and `beacon config dnscheck` / `beacon config dnsrecords`.",
+    "Users read and send mail via IMAP/SMTP clients or the webmail interface; client settings are discoverable via `beacon clientconfig domain` / autoconfig.",
+    "Operate the queue and data from the CLI against the running instance (via the ctl file in the data directory): `beacon queue list/kick/drop/dump`, `beacon import/export maildir|mbox`, `beacon backup`, `beacon verifydata`, and password resets with `beacon setaccountpassword` / `beacon setadminpassword`.",
+]
+
+gaps = "- The GitHub README is Qompass boilerplate beyond the “Self-hosted mail made simple” header (its embedded quick-start even clones `qompassai/dotfiles`); every functional row above traces to the primo clone at `~/.GH/Qompass/Go/beacon` (`doc.go`, `main.go`, `config/config.go`, `quickstart.go`). There is no top-level `~/.GH/Qompass/beacon` clone — the primo copy lives under `Go/beacon`.\n- Provenance: the codebase is the mox mail server rebranded (test fixtures still named `mox.conf`, deps on `github.com/mjl-/…`); sources read do not state Qompass-specific deltas from upstream mox, so no Beacon-only features are claimed.\n- Config defaults are sconf-schema defaults documented in `config/config.go`; a full generated `beacon.conf`/`domains.conf` pair was not produced (quickstart was read, not run), and webmail/webadmin UI controls were inventoried as packages (`webmail/`, `webadmin/`, `webaccount/`) without a UI walkthrough."
+
+[[config]]
+name = "`-config` flag / `BEACONCONF` env"
+default = "`config/beacon.conf` (fallback `beacon.conf`)"
+description = "Static config file; other config files (e.g. `domains.conf`) are looked up in the same directory"
+
+[[config]]
+name = "`DataDir` (beacon.conf)"
+default = "— (set by quickstart; `data` in test fixtures)"
+description = "Directory for queue, accounts, messages, and ACME TLS certs/keys; relative paths resolve against the `beacon.conf` directory"
+
+[[config]]
+name = "`Hostname` (beacon.conf)"
+default = "— (set by quickstart)"
+description = "Full hostname of the system, e.g. `mail.<domain>`"
+
+[[config]]
+name = "`Listeners` (beacon.conf)"
+default = "—"
+description = "Named groups of IPs + enabled services (SMTP/IMAP, admin, metrics); a listener named `public` gets extra ACME/DNSBL checks"
+
+[[config]]
+name = "`ACME` port"
+default = "`443` by default"
+description = "TLS port for ACME validation; override only if port 443 cannot be listened on directly"
+
+[[config]]
+name = "`Postmaster` (beacon.conf)"
+default = "—"
+description = "Postmaster account + mailbox (e.g. `Postmaster` or `Inbox`) for postmaster mail"
+
+[[config]]
+name = "`LogLevel` (beacon.conf)"
+default = "`trace` in test fixtures"
+description = "Startup log level; runtime-adjustable via `beacon loglevels [level [pkg]]`"
+
+[[config]]
+name = "Domains / accounts (domains.conf)"
+default = "—"
+description = "`Domains:` map and `Accounts:` map with `Domain`, `Destinations`, optional `QuotaMessageSize` and `JunkFilter` (e.g. `Threshold: 0.95`)"
+
+[[config]]
+name = "`-pedantic` flag"
+default = "false"
+description = "Protocol violations become errors instead of being accepted/worked around"
+
+[[config]]
+name = "Quickstart run-as user"
+default = "beacon"
+description = "Optional `[user \\"
+
+[[controls]]
+action = "Set up a new instance"
+control = "`beacon quickstart [-existing-webserver] [-hostname host] user@domain [user \\"
+
+[[controls]]
+action = "Start the server"
+control = "`beacon serve` (SMTP/IMAP/HTTPS)"
+
+[[controls]]
+action = "Stop the server"
+control = "beacon stop"
+
+[[controls]]
+action = "Run locally for development"
+control = "beacon localserve"
+
+[[controls]]
+action = "Manage domains/accounts/addresses"
+control = "beacon config domain add/rm`, `beacon config account add/rm`, `beacon config address add/rm"
+
+[[controls]]
+action = "Check config / DNS"
+control = "beacon config test`; `beacon config dnscheck domain`; `beacon config dnsrecords domain"
+
+[[controls]]
+action = "Print generated config"
+control = "beacon config describe-static >beacon.conf`; `beacon config describe-domains >domains.conf`; `beacon config printservice >beacon.service"
+
+[[controls]]
+action = "Reset passwords"
+control = "beacon setaccountpassword account`; `beacon setadminpassword"
+
+[[controls]]
+action = "Manage the queue"
+control = "beacon queue list`; `beacon queue kick/drop [-id id] [-todomain domain] [-recipient address]`; `beacon queue dump id"
+
+[[controls]]
+action = "Import / export mail"
+control = "`beacon import maildir\\"
+
+[[controls]]
+action = "Backup / verify data"
+control = "beacon backup dest-dir`; `beacon verifydata data-dir"
+
+[[controls]]
+action = "DKIM / DMARC / SPF / DNS diagnostics"
+control = "`beacon dkim gened25519\\"
+
+[[controls]]
+action = "Show version / help"
+control = "beacon version`; `beacon help [command …]"

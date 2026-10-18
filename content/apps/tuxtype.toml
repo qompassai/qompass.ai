@@ -1,0 +1,112 @@
+slug = "tuxtype"
+name = "Tuxtype"
+kind_line = "App"
+repo_url = "https://github.com/qompassai/tuxtype"
+mark = "/img/projects/tuxtype.webp"
+ready = true
+
+summary = "Tuxtype (Tux Typing 1.8.3) is an educational typing tutor game starring Tux, the Linux penguin, for teaching typing skills to children, with falling-word games, scripted lessons, and phrase typing that measures accuracy and speed. The Qompass repo is the Tux4Kids codebase (C / SDL) carried under the Qompass AI banner."
+
+how = [
+    "Launch `tuxtype`; startup initializes hard-coded defaults, resolves data/theme paths, loads saved settings, then applies command-line overrides in that order.` — `Opts_Initialize()` → `SetupPaths()` → `LoadSettings()` → argv loop)",
+    "From the title screen / menu, choose an activity: Fish Cascade, Comet Zap, Lessons, or Phrase Typing / Practice.",
+    "In Fish Cascade, fish with letters/words fall from the top of the screen — type the letters to clear them so Tux can eat the fish.",
+    "In Comet Zap, comets fall toward cities — type the letter on a comet to have Tux destroy it with a laser and protect the city.",
+    "In Lessons, XML scripts run activities (including Practice and 43 progressive finger exercises `basic_lesson_01`–`basic_lesson_43`) in a specified order; in Phrase Typing, type phrases/complete sentences while accuracy and typing speed are measured.",
+    "Optionally add or modify custom word lists with the in-game Word List Editor (bundled lists are read-only for ordinary users).",
+]
+
+gaps = "- The GitHub README is Qompass boilerplate (badges, quick-start, About/Support/FAQ) with no gameplay, option, or config documentation; all HOW/CONFIG/CONTROLS above trace to the primo clone's upstream `doc/README`, `doc/README.md`, `legacy_install.md`, and `src/` — no Qompass-specific Tuxtype changes were found in the sources read.\n- The GitHub quick-start line points at `qompassai/tuxtype/main/scripts/quickstart.sh`, but the embedded script body in the README clones `qompassai/dotfiles` into `$HOME/.local/bin/tuxtype`; the script itself was not executed or verified.\n- In-game menu key bindings (pause, quit, difficulty keys) were not sourced — `src/menu.c` / `src/pause.c` were inventoried but their key handling was not read line-by-line, so no keyboard controls are claimed beyond typing itself and the CLI flags above."
+
+[[config]]
+name = "`fullscreen` (`DEFAULT_FULLSCREEN`)"
+default = "`1` (on)"
+description = "Start in fullscreen display; `-w`/`--window` overrides to windowed"
+
+[[config]]
+name = "`sys_sound` (`DEFAULT_SYS_SOUND`)"
+default = "`1` (on)"
+description = "Allow in-game sounds; `-ns`/`--nosound` disables"
+
+[[config]]
+name = "`tts` (`DEFAULT_TTS`)"
+default = "`0` (off)"
+description = "In-game text-to-speech accessibility; volume `DEFAULT_TTS_VOLUME = 100`"
+
+[[config]]
+name = "`braille` (`DEFAULT_BRAILLE`)"
+default = "`0` (off)"
+description = "Braille mode; enabled by `-b`/`--braille`"
+
+[[config]]
+name = "`speed_up` (`DEFAULT_SPEED_UP`)"
+default = "`0` (off)"
+description = "Speed up gameplay for slower machines (`-sp`/`--speed`)"
+
+[[config]]
+name = "`debug_on` (`DEFAULT_DEBUG_ON`)"
+default = "`0` (off)"
+description = "Debug output (`-d`/`--debug`)"
+
+[[config]]
+name = "`theme_font_name` (`DEFAULT_FONT_NAME`)"
+default = "AndikaDesRevG.ttf"
+description = "Theme font; locale default `DEFAULT_LOCALE = en_US.UTF-8`, `DEFAULT_USE_ENGLISH = 1`"
+
+[[config]]
+name = "sfx_volume` / `mus_volume` / `sound_vol"
+default = "100` / `100` / `100"
+description = "Sound-effects, music, and overall sound volumes; menu music/sound default on (`1`)"
+
+[[config]]
+name = "`~/.tuxtype/settings.txt` `[General]` keys (WSL2/Arch build note)"
+default = "`window_width=1024`, `window_height=768`, `fullscreen=0` (example)"
+description = "Window size and fullscreen override written as a settings file before building/running"
+
+[[controls]]
+action = "Start the game"
+control = "tuxtype"
+
+[[controls]]
+action = "Show help"
+control = "tuxtype -h` / `--help` / `-help"
+
+[[controls]]
+action = "Show version and exit"
+control = "`tuxtype -v` / `--version` (version 1.8.3)"
+
+[[controls]]
+action = "Fullscreen / windowed"
+control = "-f` / `--fullscreen`; `-w` / `--window"
+
+[[controls]]
+action = "Sound on / off"
+control = "-s` / `--sound`; `-ns` / `--nosound"
+
+[[controls]]
+action = "Accessibility (TTS) on / off"
+control = "-a` / `--tts`; `-na` / `--notts"
+
+[[controls]]
+action = "Braille mode"
+control = "-b` / `--braille"
+
+[[controls]]
+action = "Select theme"
+control = "`-t {THEME}` / `--theme {THEME}` (uses the theme if it exists)"
+
+[[controls]]
+action = "Speed up gameplay"
+control = "-sp` / `--speed"
+
+[[controls]]
+action = "Debug mode"
+control = "-d` / `--debug"
+
+[[controls]]
+action = "Build from source"
+control = "`./configure` then `make` (deps on Arch/WSL2: `base-devel git sdl sdl_image sdl_mixer sdl_ttf sdl_pango libpng libjpeg-turbo libvorbis`)"
+
+[[controls]]
+action = "Install on Ubuntu"
+control = "sudo apt update` then `sudo apt install tuxtype"

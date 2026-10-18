@@ -1,0 +1,38 @@
+slug = "redteam"
+name = "Redteam"
+kind_line = "App"
+repo_url = "https://github.com/qompassai/redteam"
+mark = "/img/projects/redteam.webp"
+ready = true
+
+summary = "Redteam is Qompass AI's Red Team / Penetration Testing Educational Repository: a curated collection — not one program — of reference documents (including the NIST AI RMF Playbook), BlackArch packaging, Kali build recipes, a Flipper firmware tarball, a LaTeX pentest report, reference books, and one buildable vendored tool (Hak5's wifi-coconut), gated by a structural validation test suite."
+
+how = [
+    "Browse the collection by area: `Gov/NIST/` (AI RMF Playbook PDF), `OGRed/` (Red Teaming Handbook, MITRE ATT&CK PDF, Hak5 tools, reference books), `Reports/` (LaTeX pentest report + audit), `BlackArch/` (packaging), `Kali/` (ARM build scripts + linux recipes), `Flipper/` (firmware tarball), `RedAI/` (AI red-teaming PDFs, primo only).",
+    "Read the linked method references the README badges point to — Kali documentation, the OWASP Web Security Testing Guide, and pentesting tutorials — alongside the in-repo handbooks.)",
+    "Use the helper scripts as-is: defang indicators in a file before sharing them, and generate a cvechecker config rooted in the XDG config/data/cache directories.",
+    "Build the one buildable tool if needed: Hak5 wifi-coconut (`OGRed/Hak5/wifi-coconut`, C + CMake) configures and builds with CMake (the validation suite builds it in a scratch copy, with `-DCMAKE_POLICY_VERSION_MINIMUM=3.5` for its old `cmake_minimum_required`).",
+    "Validate the collection after any change: `python3 -m pytest tests/ -q` checks every PDF's `%PDF`/`%%EOF` structure, the Flipper tarball's readability, the wifi-coconut build, the report's `\\input` graph, and `bash -n` parsing of the BlackArch shell scripts.",
+]
+
+gaps = "- No configuration surface exists to document: the repo ships documents, scripts, and vendored material with no config file, settings schema, or environment options — hence CONFIG is NONE SOURCED. The two scripts hard-code their behavior (`defang.sh` sed rules; `cvec` XDG paths + a `versions.dat` URL) rather than taking options.\n- The GitHub/sandbox README beyond the title is Qompass boilerplate (quick-start that clones `qompassai/dotfiles`, About/Support/FAQ); the collection description and gates trace to primo `tests/test_collection.py` and the repo tree. The sandbox clone (`~/workspace/repos/redteam`) lacks primo's `tests/`, `RedAI/`, `logs/`, and `Gov/` detail — primo is the fuller snapshot.\n- LaTeX report compilation is blocked by the environment, not the source (primo TeX Live lacks `pdflatex.fmt`/`texmf.cnf`, measured 2026-10-16 per the test docstring); only its `\\input` graph is gated. Nothing in the repo was executed for this pack beyond reading."
+
+[[controls]]
+action = "Validate the whole collection"
+control = "python3 -m pytest tests/ -q"
+
+[[controls]]
+action = "Defang a file's indicators"
+control = "`./scripts/defang.sh input.txt` (sed: `.` → `[.]`, `@` → `[@]`, `http` → `hxxp`, `://` → `[:]//`; header shows `./sed-defang.sh input.txt > output.txt` and `-i` forms)"
+
+[[controls]]
+action = "Generate a cvechecker config"
+control = "Run `scripts/cvec` — writes `$XDG_CONFIG_HOME/cvechecker/cvechecker.conf` (sqlite, XDG cache/data dirs)"
+
+[[controls]]
+action = "Build wifi-coconut"
+control = "`cmake -S <src> -B <build> -DCMAKE_POLICY_VERSION_MINIMUM=3.5`, then `cmake --build <build> -j4` (as exercised by the test suite)"
+
+[[controls]]
+action = "Install BlackArch tools (upstream doc carried in-repo)"
+control = "Install on an existing Arch machine, use the live ISO, or run `blackarch-install` (Full/Netinstall ISOs; Slim ISO has a GUI installer); tools install individually or in groups (2900 tools)"

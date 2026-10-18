@@ -1,0 +1,110 @@
+slug = "unreal"
+name = "Unreal"
+kind_line = "App"
+repo_url = "https://github.com/qompassai/unreal"
+mark = "/img/projects/unreal.webp"
+ready = true
+
+summary = "Qompass AI Unreal is a setup-and-content repository for Unreal Engine — “A more humane UX for AI” — whose installer clones and builds Epic's Unreal Engine from source, alongside a checked-in engine configuration tree, a C++ Learning Agents driving project, and an ML Deformer sample project. It is not itself an engine binary; the engine is cloned from Epic Games at install time."
+
+how = [
+    "Run the quickstart installer: `curl -fsSL https://raw.githubusercontent.com/qompassai/unreal/main/scripts/quickstart.sh | sh`.; primo `scripts/quickstart.sh`)",
+    "Choose an engine version at the prompt — 1) 5.6 (latest, default), 2) 5.5, 3) 5.4, 4) custom branch or tag, q) quit — and the script clones `EpicGames/UnrealEngine` branch into `$HOME/.local/UnrealEngine` (or updates the existing checkout).",
+    "Pick target platforms (multi-select, default Linux): Linux, LinuxARM64, Windows, Mac, Android, iOS, tvOS, VisionOS, or All; Android/iOS/tvOS selections trigger SDK checks at the end.",
+    "Pick a build system: 1) Official Unreal Automation Tool Installed Build (default) or 2) local developer Makefile build (Linux, Editor only).",
+    "For the Installed Build path, choose configurations (Development default; Debug / Test / Shipping / All) and extra features (Derived Data Cache, CEF, ISPC, All, or None), then the script runs `Setup.sh`, `GenerateProjectFiles.sh`, and `RunUAT.sh BuildGraph -script=Engine/Build/InstalledEngineBuild.xml -target=\"Make Installed Build Linux\"`, symlinks the built tools into `~/.local/bin`, and adds that directory to PATH in shell rc files.",
+    "Launch the editor with `UnrealEditor` (or `UnrealEditor \"/path/to/YourProject.uproject\"`; append `-game` to run as a game), then open the bundled content: `edu/` (Learning Agents car project, UE 5.3+) or `Examples/MLDeformer/` (ML Deformer sample, engine association 5.5.2).",
+]
+
+gaps = "- The GitHub README beyond the header is Qompass boilerplate (About/Support/FAQ/AI-math); every functional claim above traces to primo `scripts/quickstart.sh`, the `.config/` build configuration, and the `edu/` + `Examples/` projects — the README itself documents no controls or config.\n- The `opt/UnrealEngine/Config/` tree (dozens of stock `Base*.ini` / platform `.ini` files) was inventoried, not audited line-by-line; no per-key defaults are claimed from it beyond the UnrealBuildTool XML above.\n- The quickstart script was read, not run: clone size, Epic account / GitHub access requirements for the private `EpicGames/UnrealEngine` repo, and build success are not verified here. The Makefile (developer) build path states in-script that it is “only implemented for Linux.”"
+
+[[config]]
+name = "Engine version choice"
+default = "`5.6` (choice 1, default)"
+description = "Branch cloned from `EpicGames/UnrealEngine`; alternatives 5.5, 5.4, or a custom branch/tag"
+
+[[config]]
+name = "Install location `UE_DIR`"
+default = "`$HOME/.local/UnrealEngine` (`$LOCAL/UnrealEngine`; `LOCAL=$HOME/.local` on Linux/macOS)"
+description = "Where the engine source is cloned/updated; tools symlinked from `$UE_DIR/Engine/Binaries/<platform>` into `$HOME/.local/bin`"
+
+[[config]]
+name = "Platform selection"
+default = "`1` (Linux)"
+description = "Multi-select build platforms; `a` = Linux, LinuxArm64, Win64, Mac, Android, IOS, TVOS, VisionOS"
+
+[[config]]
+name = "Build configuration"
+default = "`Development` (choice 1)"
+description = "Installed Build game configurations: Debug / Development / Test / Shipping"
+
+[[config]]
+name = "CppStandard` / `CppStandardEngine"
+default = "Cpp20"
+description = "C++ standard in the checked-in UnrealBuildTool configuration"
+
+[[config]]
+name = "MinCpuArchX64"
+default = "AVX2"
+description = "Minimum x64 CPU architecture for engine builds"
+
+[[config]]
+name = "MaxParallelActions"
+default = "1"
+description = "Parallel build actions cap in the checked-in build configuration"
+
+[[config]]
+name = "`ThinLTOCacheDirectory` / pruning"
+default = "/home/phaedrus/.cache/ThinLTOCache`; `--cache-size-bytes=20G --cache-size-files=200000"
+description = "ThinLTO cache location and size caps (`bPreferThinLTO=true`) — path is machine-specific as checked in"
+
+[[config]]
+name = "ArtifactDirectory"
+default = "/home/phaedrus/.cache/UnrealEngine/Artifacts"
+description = "UBA artifact cache directory (`bArtifactRead`/`bArtifactWrites=true`)"
+
+[[config]]
+name = "`edu` project engine association"
+default = "5.3"
+description = "`LA_TestEnv.uproject`: Runtime module `LA_TestEnv` + plugins LearningAgents, ChaosVehiclesPlugin, RawInput, ModelingToolsEditorMode"
+
+[[config]]
+name = "ML Deformer project engine association"
+default = "5.5.2"
+description = "`MLDeformer.uproject`: module `MLDeformerSample` + plugins MLDeformerFramework, NearestNeighborModel, NeuralMorphModel, VertexDeltaModel"
+
+[[controls]]
+action = "Install / set up the engine"
+control = "`curl -fsSL https://raw.githubusercontent.com/qompassai/unreal/main/scripts/quickstart.sh \\"
+
+[[controls]]
+action = "Launch the editor"
+control = "`UnrealEditor` (after setup; `~/.local/bin` on PATH)"
+
+[[controls]]
+action = "Open a project in the editor"
+control = "`UnrealEditor \"/path/to/YourProject.uproject\"`; append `-game` to run as a game"
+
+[[controls]]
+action = "Makefile build: Editor (Development)"
+control = "Menu choice `1` in the Makefile path → `make -j$(nproc)`"
+
+[[controls]]
+action = "Makefile build: Editor (Debug)"
+control = "Menu choice `2` → `make -j$(nproc) UnrealEditor-Linux-Debug`"
+
+[[controls]]
+action = "Makefile build: essential tools"
+control = "Menu choice `3` → `make -j$(nproc) CrashReportClient ShaderCompileWorker UnrealLightmass InterchangeWorker UnrealPak UnrealEditor`"
+
+[[controls]]
+action = "Makefile build: clean rebuild / UnrealGame"
+control = "Menu choices `4` / `5`"
+
+[[controls]]
+action = "Build the ML Deformer sample (as recorded in its README)"
+control = "`dotnet …/AutomationTool.dll BuildCookRun -Build -Cook -Stage -Package -Platform=Linux -Project=…/MLDeformerSample.uproject` (paths as written in the file)"
+
+[[controls]]
+action = "Learning Agents workflow (edu project)"
+control = "In UE 5.3+ C++ project: enable the Learning Agents plugin, add `LearningAgents`/`LearningAgentsTraining` (+ `ChaosVehicles` for cars) to `Build.cs`, then build Interactor / Trainer / Policy managers for reinforcement learning, Recorder → Imitation training for imitation learning, Inference manager to deploy, and a Behavior Tree to combine network output with rules"

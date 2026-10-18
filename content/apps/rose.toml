@@ -1,0 +1,136 @@
+slug = "rose"
+name = "Rose"
+kind_line = "LOCAL MODEL SERVER — GO"
+repo_url = "https://github.com/qompassai/rose"
+mark = "/img/projects/rose.webp"
+ready = true
+
+summary = "Rose is Qompass AI's fork of Ollama, the local model server — upstream Ollama at tag v0.40.1 imported verbatim with the fork delta re-applied — built to serve phlow's local specialists (planner / coder / reviewer) on local hardware with its own identity, registry and security posture. It is not rose.nvim; the plugin talks to this server as a backend. The README tagline is \"Start building with open models.\""
+
+how = [
+    "Install/run the `rose` binary (macOS/Windows/Linux/Docker routes in the README); running `rose` prompts to run a model or connect Rose to existing agents/applications. Source: GitHub rose README.md, \"Download\" / \"Get started\".",
+    "`rose serve` starts the local server, loopback by default at `127.0.0.1:11434`; the HTTP API remains unauthenticated, as upstream's is. Source: GitHub rose `docs/rose.md`; `envconfig/config.go` (`Host()` default).",
+    "Models are pulled, run and managed from the CLI (`rose run`, `rose pull`, `rose ls`, `rose ps`, `rose stop`, `rose rm`), and customized by writing a `Modelfile` and running `rose create -f Modelfile`. Source: GitHub rose `docs/cli.mdx`.",
+    "Applications call the REST API — e.g. `POST http://localhost:11434/api/chat` with a model and messages — or the Python/JavaScript client libraries shown in the README. Source: GitHub rose README.md, \"REST API\".",
+    "Coding/agent integrations are launched and configured through `rose launch` (e.g. `rose launch claude`, `rose launch claude --model qwen3.5`, `rose launch droid --config`). Source: GitHub rose `docs/cli.mdx`.",
+    "Fork identity is enforced in configuration: only `ROSE_*` environment variables are read (`OLLAMA_*` are not aliases), the default model store is `$XDG_DATA_HOME/rose/models` (or `~/.local/share/rose/models`), `ROSE_MODELS` always wins, and unqualified model names resolve against `harbor.qompass.ai`. Source: GitHub rose `docs/rose.md`; `envconfig/config.go`.",
+]
+
+gaps = "- The GitHub README is upstream-Ollama-shaped: install commands and several links still point at ollama.com / Ollama-named artifacts, and community/library lists are inherited upstream content. The fork-specific facts above come from `docs/rose.md` and `envconfig/config.go`, not the README.\n- The sandbox clone's README (`~/workspace/repos/rose/README.md`) is older organisational boilerplate (Responsible Open Science Engine framing, FAQ, licensing essay) with no install, CLI or configuration content; it disagrees with the current GitHub README and was not used for CONFIG/CONTROLS.\n- Not in this branch, per `docs/rose.md`: the hybrid-TLS transport layer lives on a separate branch and is not ported forward yet; the HTTP API is unauthenticated.\n- Full `ROSE_*` variable list was not exhaustively transcribed; `rose serve --help` is the documented way to view settable variables, and only variables verified in `envconfig/config.go` are listed above."
+
+[[config]]
+name = "ROSE_HOST"
+default = "127.0.0.1:11434"
+description = "IP address / bind for the rose server"
+
+[[config]]
+name = "ROSE_MODELS"
+default = "$XDG_DATA_HOME/rose/models`, else `~/.local/share/rose/models"
+description = "Path to the models directory; no fallback to a stock `~/.ollama/models` store"
+
+[[config]]
+name = "ROSE_KEEP_ALIVE"
+default = "5m"
+description = "Duration models stay loaded in memory"
+
+[[config]]
+name = "ROSE_LOAD_TIMEOUT"
+default = "5m"
+description = "How long to allow model loads to stall before giving up"
+
+[[config]]
+name = "ROSE_MAX_QUEUE"
+default = "512"
+description = "Maximum number of queued requests"
+
+[[config]]
+name = "ROSE_NUM_PARALLEL"
+default = "1"
+description = "Number of parallel model requests"
+
+[[config]]
+name = "ROSE_MAX_LOADED_MODELS"
+default = "0 (as coded)"
+description = "Maximum number of loaded models per GPU"
+
+[[config]]
+name = "ROSE_MAX_TRANSFER_STREAMS"
+default = "4"
+description = "Maximum parallel transfer streams for safetensors model pulls/pushes"
+
+[[config]]
+name = "ROSE_KV_CACHE_TYPE"
+default = "`f16` (default per map description)"
+description = "Quantization type for the K/V cache"
+
+[[config]]
+name = "ROSE_CONTEXT_LENGTH"
+default = "0 (as coded)"
+description = "Context length override"
+
+[[config]]
+name = "ROSE_DEBUG"
+default = "(unset)"
+description = "Show additional debug information (e.g. `ROSE_DEBUG=1`)"
+
+[[config]]
+name = "ROSE_NO_CLOUD"
+default = "(unset / false)"
+description = "Disable Rose cloud features (remote inference and web search)"
+
+[[config]]
+name = "default registry"
+default = "harbor.qompass.ai"
+description = "Registry that unqualified model names resolve against (fork deviation from `registry.ollama.ai`)"
+
+[[controls]]
+action = "Start Rose (interactive)"
+control = "rose"
+
+[[controls]]
+action = "Run and chat with a model"
+control = "`rose run <model>` (e.g. `rose run gemma4`)"
+
+[[controls]]
+action = "Launch integrations menu"
+control = "rose launch"
+
+[[controls]]
+action = "Launch a specific integration"
+control = "`rose launch claude` (also `--model <model>`, `--config` variants in docs)"
+
+[[controls]]
+action = "Download a model"
+control = "rose pull <model>"
+
+[[controls]]
+action = "Remove a model"
+control = "rose rm <model>"
+
+[[controls]]
+action = "List models"
+control = "rose ls"
+
+[[controls]]
+action = "List running models"
+control = "rose ps"
+
+[[controls]]
+action = "Stop a running model"
+control = "rose stop <model>"
+
+[[controls]]
+action = "Create a customized model"
+control = "rose create -f Modelfile"
+
+[[controls]]
+action = "Start the server"
+control = "`rose serve` (`rose serve --help` lists settable environment variables)"
+
+[[controls]]
+action = "Sign in / sign out"
+control = "rose signin` / `rose signout"
+
+[[controls]]
+action = "Chat via REST API"
+control = "curl http://localhost:11434/api/chat -d '{\"model\":\"gemma4\",\"messages\":[...],\"stream\":false}'"

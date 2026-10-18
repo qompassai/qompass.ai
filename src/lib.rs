@@ -4,6 +4,7 @@
 #![recursion_limit = "256"]
 
 pub mod app;
+pub mod app_data;
 pub mod download_data;
 pub mod field_notes_data;
 pub mod orcid_data;

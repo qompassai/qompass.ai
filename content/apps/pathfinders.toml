@@ -1,0 +1,19 @@
+slug = "pathfinders"
+name = "PathFinders"
+kind_line = "DEEP TECH INTERN PROGRAM"
+repo_url = "https://github.com/qompassai/PathFinders"
+mark = "/img/projects/pathfinders.webp"
+ready = true
+
+summary = "PathFinders is Qompass AI's Deep Tech Intern Program: Pathfinders build cloud-native generative AI services for hybrid deployment in the cloud and on device, in alignment with regulatory guidelines, while preparing as future strategic leaders. The repo description on GitHub is \"Qompass Intern program.\""
+
+how = [
+    "No coding prerequisite: \"No. Character & Curiosity outweighs any coding ability.\" Source: GitHub PathFinders README.md, \"Do I need to know how to code to be a PathFinder?\".",
+    "Pathfinders build cloud-native generative AI services for hybrid deployment — in the cloud and on device — in alignment with regulatory guidelines from the White House community. Source: GitHub PathFinders README.md.",
+    "All software is built using Qompass's on-device implementation of post-quantum encryption protocols endorsed by NIST, plus state-of-the-art open-source AI models from industry leaders (Google/Meta/Microsoft) and HuggingFace. Source: GitHub PathFinders README.md.",
+    "The program operates in alignment with regulation from the beginning of any product or service; the README cites the October 3, 2024 OMB guidance on responsible acquisition of AI in government and the October 30, 2023 Executive Order on safe, secure and trustworthy AI. Source: GitHub PathFinders README.md, \"What Regulation?\".",
+    "Course material lives in the repo as `Lessons/` — Level 1 through Level 9 directories plus a `configs` folder — with an additional `Youth/` folder of tutorials. Source: GitHub contents listing for `qompassai/PathFinders` (`Lessons`, `Youth`).",
+    "Environment setup in the README is the shared Qompass Quick Start (the dotfiles quickstart script, which clones the dotfiles repo, sets up Nix symlinks and enters a Nix dev shell); it is presented in the README as the program's quick start, not as PathFinders-specific software. Source: GitHub PathFinders README.md, \"Qompass AI Quick Start\" (script header: `/qompassai/dotfiles/scripts/quickstart.sh`).",
+]
+
+gaps = "- PathFinders is a program, not a software product: no config options, commands, keybindings, installable artifact, application process, cohort dates, or eligibility rules beyond \"Character & Curiosity outweighs any coding ability\" were sourced from the README or repo contents read.\n- The `Lessons/` level directories and `Youth/` tutorials (e.g. `Youth/README.md` is a Nerd Fonts / WSL2 / Neovim setup guide; `Youth/OLLAMA.md` also exists) were inventoried but their full curricula were not sourced in depth; no lesson titles or learning outcomes are claimed here.\n- The README's Quick Start, About, Support and FAQ sections are shared Qompass boilerplate also found in other repos; only the PathFinder-specific sections above are treated as program facts.\n- Funding fact in other repos' boilerplate (not the PathFinders README body read here): the Pathfinders Intern Program is listed at $2,000, October 2024, in the shared Support table — flagged as cross-repo boilerplate, not verified from this repo's own program pages."

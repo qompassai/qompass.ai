@@ -1,0 +1,92 @@
+slug = "light-show"
+name = "Light Show"
+kind_line = "App"
+repo_url = "https://github.com/qompassai/light-show"
+mark = "/img/projects/light-show.webp"
+ready = true
+
+summary = "Light Show is a puzzle game about real Outside Plant (OSP) fiber-optic engineering, built in Rust with Bevy for Android (Google Play + F-Droid) and desktop, in which the player routes light from the OLT (Point A) to the customer ONT (Point B) to land inside a target receive-power window while anime-styled companions — one per access technology — react to every splice. All loss figures are real: fusion vs. mechanical splice loss, UPC vs. APC connectors, PON splitter ratios, and wavelength-dependent fiber attenuation."
+
+how = [
+    "Pick a companion from the menu before splicing — each is tied to a real access technology with its own dialogue bank (Séraphine — Fiber, Ondine — Coax, Linka — Mobile, Lattice — Ethernet in the README set).",
+    "Survey the board: a grid-based OSP map of OLT, splice enclosures, splitters, patch panels, ONT, and cable spans (aerial, buried, conduit).",
+    "Route the light by dragging fiber jumpers / choosing splice paths to connect A to B; every component placed consumes optical budget and the live dB ledger (OTDR-style) recomputes `P_rx (dBm) = P_tx (dBm) − Σ(loss) + Σ(gain)`.",
+    "Hit the window: received power at B must land inside the level's design window (e.g. −8 dBm to −27 dBm for GPON per ITU-T G.984) with a single continuous A→B path — too hot fails as well as too cold.",
+    "Survive the outage event: mid-level a fault fires (fiber cut, water intrusion, bad splice, macrobend, connector contamination) and the player must reroute, patch, or splice around it before the customer-complaint timer expires.",
+    "Progress through worlds — Splice School → Patch Panel → PON Split → Storm Season (Outages) → Long Haul → Séraphine's Route (bonus/endless) — as the companion reacts to splices, outages, and results.",
+]
+
+gaps = "- Sandbox clone (`~/workspace/repos/light-show`, Sep 2025) is older than GitHub `main` and the primo clone (`~/.GH/Qompass/LightShow`): GitHub/primo add many more levels (per-companion 10-level tracks), four extra companions in primo `game/src/waifu/mod.rs` (Clara — Calix CMS, Aino — Nokia AMS, Hikari — FTTH/OSP, Léa — WA 09 Telecom Admin prep), a chiptune soundtrack, and trial-build downloads; only the two sandbox levels (`world1_level1.json`, `world4_level1_outage.json`) were field-verified here — level counts beyond those two are primo-listing only.\n- License differs by snapshot: sandbox `Cargo.toml`/`LICENSE` say GPL-3.0-or-later; GitHub README badge/text say Apache-2.0. Not reconciled in sources read.\n- No in-game settings/config file (volume, difficulty, window size) is documented in the sources read; difficulty is per-level data, not a user option. Full outage-repair UI was listed as “next milestone” in the sandbox README but as implemented (state machine menu → playing → outage-repair → results) in the GitHub README — status text was not re-verified by running the game."
+
+[[config]]
+name = "`tx_dbm` (level JSON)"
+default = "3.0` in both bundled levels; `DEFAULT_TX_DBM = 3.0"
+description = "OLT launch power in dBm; GPON class B+ downstream per ITU-T G.984.2 unless a level overrides it"
+
+[[config]]
+name = "`window_min_dbm` / `window_max_dbm` (level JSON)"
+default = "`-27.0` / `-8.0` in both bundled levels"
+description = "Target receive-power window the routed path must land inside to win"
+
+[[config]]
+name = "`wavelength` (level JSON)"
+default = "`Nm1490` in both bundled levels"
+description = "Operating wavelength; attenuation is 0.35 dB/km at 1310 nm, 0.28 at 1490 nm, 0.21 at 1550 nm"
+
+[[config]]
+name = "Fusion splice loss"
+default = "`0.075 dB` typical (range 0.05–0.1 dB)"
+description = "Lowest-loss splice; place time 45.0 s in the sim model"
+
+[[config]]
+name = "Mechanical splice loss"
+default = "`0.4 dB` typical (range 0.3–0.5 dB)"
+description = "Faster splice used under outage pressure; place time 10.0 s"
+
+[[config]]
+name = "Connector UPC / APC loss"
+default = "`0.35 dB` / `0.30 dB` (return loss −50 dB / −60 dB)"
+description = "Patch-panel connectors; APC required on reflectance-sensitive / PON levels"
+
+[[config]]
+name = "Splitter 1×2 / 1×4 / 1×8 / 1×16 / 1×32 loss"
+default = "3.6` / `7.3` / `10.6` / `13.7` / `17.7 dB"
+description = "PLC splitter insertion loss for PON fan-out levels"
+
+[[config]]
+name = "Android `minSdk` / `targetSdk`"
+default = "26` / `34"
+description = "Android 8.0+ floor; `game/Cargo.toml` `[package.metadata.android]` (`package = ai.qompass.lightshow`, fullscreen, OpenGL ES 3.0)"
+
+[[config]]
+name = "`instrumented-test-logging` Cargo feature"
+default = "off by default"
+description = "Emits board `level_ready` / `select` / `connect` events to Logcat (tag `LightShow`) for on-device tests only; zero footprint in retail builds"
+
+[[controls]]
+action = "Run the game (desktop dev loop)"
+control = "cargo run -p light-show"
+
+[[controls]]
+action = "Run simulation tests"
+control = "cargo test -p osp_sim"
+
+[[controls]]
+action = "Pick a companion"
+control = "Click/tap a companion-picker button in the main menu (sets `SelectedCompanion`)"
+
+[[controls]]
+action = "Route / place a component"
+control = "Drag node → node with left mouse button (desktop) or touch drag (Android); press resolves the start node, release on a target node connects the chosen component"
+
+[[controls]]
+action = "Build APK (fast path)"
+control = "cargo apk build --release` in `game/` after `rustup target add …` + `cargo install cargo-apk"
+
+[[controls]]
+action = "Build Play Store bundle"
+control = "cargo ndk … build --release`, then `./gradlew bundleRelease` in `android/` → `app-release.aab"
+
+[[controls]]
+action = "Windows trial build"
+control = "Extract the Releases zip, keep `assets` next to the `.exe`, double-click; SmartScreen → More info → Run anyway (unsigned trial build)"
