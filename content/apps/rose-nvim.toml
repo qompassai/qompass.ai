@@ -231,3 +231,18 @@ control = ":lua vim.print(require(\"rose\").options)"
 [[controls]]
 action = "Shut down without reinitializing"
 control = "require(\"rose\").shutdown()"
+
+[[visuals]]
+kind = "diagram"
+id = "rose-nvim-loop"
+caption = "The bounded agent loop :RoseAgent runs inside Neovim: isolated planner and reviewer contexts around the coder — the only stage holding file_write — with a host-owned validation gate (named checks returning status ok plus verified lint evidence) and at most one repair cycle by default; beside the loop, the MCP stdio link to phlow and the private editor socket phlow calls back on. Bounds are the plugin's documented defaults."
+
+[[references]]
+title = "Model Context Protocol specification"
+url = "https://modelcontextprotocol.io/specification/2025-06-18"
+note = "The protocol of the :RoseFlow bridge: newline-delimited JSON-RPC over stdio between the plugin and the phlow server; this dated URL resolves to the currently published specification index."
+
+[[references]]
+title = "Neovim API documentation (:help api)"
+url = "https://neovim.io/doc/user/api.html"
+note = "The Nvim API reference — the buffer, window, and RPC surface the plugin's chat buffer, agent loop, and private editor socket are built on."

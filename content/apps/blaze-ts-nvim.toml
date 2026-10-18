@@ -130,3 +130,23 @@ control = "<C-s>"
 [[controls]]
 action = "Lua API equivalents"
 control = "require(\"blaze-ts\").health_check()`, `.parser_health()`, `.reinstall_parser()"
+
+[[visuals]]
+kind = "diagram"
+id = "blaze-grammar"
+caption = "The grammar pipeline: grammar.js — a Python-superset base extended with Mojo constructs — generates the C parser and external scanner; the parser builds the concrete syntax tree editors query, and highlight, indent, and fold queries resolve from the plugin's runtime directory. A corpus suite of 24 cases, malformed input included, gates the grammar, and the parser ships prebuilt (with a WebAssembly build) or is built by nvim-treesitter."
+
+[[references]]
+title = "Tree-sitter documentation"
+url = "https://tree-sitter.github.io/tree-sitter/"
+note = "The parser generator and incremental parsing library the Mojo grammar is built with."
+
+[[references]]
+title = "Tree-sitter — Creating parsers"
+url = "https://tree-sitter.github.io/tree-sitter/creating-parsers/"
+note = "The grammar.js to generated-parser workflow Blaze-ts.nvim's development loop follows: write the grammar, generate, and test against a corpus."
+
+[[references]]
+title = "Tree-sitter — Queries"
+url = "https://tree-sitter.github.io/tree-sitter/using-parsers/queries/"
+note = "The query language behind the highlight, indent, and fold captures the plugin ships."

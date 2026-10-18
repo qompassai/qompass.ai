@@ -134,3 +134,23 @@ control = "rose signin` / `rose signout"
 [[controls]]
 action = "Chat via REST API"
 control = "curl http://localhost:11434/api/chat -d '{\"model\":\"gemma4\",\"messages\":[...],\"stream\":false}'"
+
+[[visuals]]
+kind = "diagram"
+id = "rose-lifecycle"
+caption = "A request's path through the rose server: the HTTP API (loopback 127.0.0.1:11434 by default) hands work to the scheduler, which queues requests (ROSE_MAX_QUEUE 512), loads models from the GGUF store at $XDG_DATA_HOME/rose/models, and runs them in runner lanes — the planner, coder, and reviewer specialists phlow calls. The CLI drives the same server, and the configuration values shown are the server's own envconfig defaults."
+
+[[references]]
+title = "GGUF format specification (ggml)"
+url = "https://github.com/ggml-org/ggml/blob/master/docs/gguf.md"
+note = "The model file format in rose's store: the metadata and tensor layout every GGUF file the server loads follows."
+
+[[references]]
+title = "llama.cpp (ggml-org)"
+url = "https://github.com/ggml-org/llama.cpp"
+note = "The ggml-org inference project in rose's lineage: rose's own import guide names its llama-quantize tool as the way to prepare and quantize GGUF models for import."
+
+[[references]]
+title = "XDG Base Directory Specification"
+url = "https://specifications.freedesktop.org/basedir/latest/"
+note = "Defines $XDG_DATA_HOME — the variable rose's default model store, $XDG_DATA_HOME/rose/models, is built from."

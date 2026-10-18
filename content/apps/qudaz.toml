@@ -61,3 +61,28 @@ control = "`zig build run` (in an example project)"
 [[controls]]
 action = "Give a custom CUDA path in an example"
 control = "b.dependency(\"cudaz\", .{ .CUDA_PATH = \"<your cuda path>\" })"
+
+[[visuals]]
+kind = "diagram"
+id = "qudaz-stack"
+caption = "The qudaz stack: Zig code calls the library's public API (Device, Compile, Rng, CudaSlice, LaunchConfig, CudaError); the bindings sit over NVIDIA's CUDA driver API, NVRTC runtime compilation, and cuRAND libraries; and build.zig locates the CUDA installation at build time (-DCUDA_PATH first, then probed roots) and links libc plus the cuda, nvrtc, curand, and cudart system libraries."
+
+[[references]]
+title = "CUDA Driver API documentation (NVIDIA)"
+url = "https://docs.nvidia.com/cuda/cuda-driver-api/index.html"
+note = "The driver-level API qudaz's Device and CAPI layers bind: contexts, memory, and module (PTX) loading."
+
+[[references]]
+title = "NVRTC — CUDA runtime compilation documentation (NVIDIA)"
+url = "https://docs.nvidia.com/cuda/nvrtc/index.html"
+note = "The runtime compilation library behind qudaz's Compile module, which turns CUDA source into PTX at runtime."
+
+[[references]]
+title = "cuRAND library documentation (NVIDIA)"
+url = "https://docs.nvidia.com/cuda/curand/index.html"
+note = "The GPU random-number library behind qudaz's Rng export."
+
+[[references]]
+title = "Zig language reference (0.14.0)"
+url = "https://ziglang.org/documentation/0.14.0/"
+note = "The language reference for the Zig version qudaz requires as its minimum (build.zig.zon: minimum_zig_version 0.14.0), including its C interop and build system."

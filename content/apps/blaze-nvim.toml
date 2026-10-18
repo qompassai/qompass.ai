@@ -106,3 +106,23 @@ control = "`<leader>fm` via `vim.lsp.buf.format()` (labelled \"just examples\" i
 [[controls]]
 action = "Show Blaze status in lualine"
 control = "`require(\"blaze.lualine\").blaze_status` in `lualine_c` (README: \"Still in development\")"
+
+[[visuals]]
+kind = "diagram"
+id = "blaze-editor"
+caption = "One Mojo buffer, wired five ways: filetype detection for *.mojo (and the fire-emoji extension) fans out to Tree-sitter highlighting via blaze-ts.nvim — with the bundled syntax file as fallback — the Mojo LSP server, mojo format on save, linting, and DAP debugging, the subsystems the plugin's setup enables in order. Defaults shown are the plugin's own configuration values."
+
+[[references]]
+title = "Mojo manual (Modular)"
+url = "https://mojolang.org/docs/manual/"
+note = "The language reference for the Mojo this plugin supports; its formatter (mojo format) and language server are the toolchain Blaze wires into the editor."
+
+[[references]]
+title = "Neovim LSP documentation (:help lsp)"
+url = "https://neovim.io/doc/user/lsp.html"
+note = "Neovim's built-in LSP client documentation — the client Blaze's LSP integration configures for Mojo buffers."
+
+[[references]]
+title = "Tree-sitter documentation"
+url = "https://tree-sitter.github.io/tree-sitter/"
+note = "The parsing library behind the Tree-sitter highlighting path (via blaze-ts.nvim) the diagram shows."

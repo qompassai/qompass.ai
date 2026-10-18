@@ -119,3 +119,23 @@ control = "<LocalLeader>lc"
 [[controls]]
 action = "Toggle semantic tokens"
 control = "<LocalLeader>ls"
+
+[[visuals]]
+kind = "diagram"
+id = "diver-arch"
+caption = "Diver's architecture as its own startup code wires it: init.lua loads the config aggregator (core, cicd, cloud, edu, lang, nav, ui), the aggregator bootstraps per-language LSP servers from lsp/<name>_ls.lua on first FileType, and every language gets the same four tool lanes — LSP, formatters, linters, DAP — alongside the research/journal modules, the in-editor rose module, and the MCP bridge to phlow."
+
+[[references]]
+title = "Language Server Protocol specification (LSP 3.17)"
+url = "https://microsoft.github.io/language-server-protocol/specifications/lsp/3.17/specification/"
+note = "The protocol Diver's per-language servers speak: initialization, attach, and the code-action requests its lsp/*_ls.lua configurations expose."
+
+[[references]]
+title = "Model Context Protocol specification"
+url = "https://modelcontextprotocol.io/specification/2025-06-18"
+note = "The protocol behind Diver's MCP stdio bridge to phlow; this dated URL resolves to the currently published specification index."
+
+[[references]]
+title = "Neovim user documentation"
+url = "https://neovim.io/doc/user/"
+note = "Neovim's own documentation — the editor, Lua API, and built-in LSP client Diver is built entirely inside."
