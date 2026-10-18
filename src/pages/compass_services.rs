@@ -65,6 +65,35 @@ const W: usize = 3;
 
 const GITHUB: &str = "https://github.com/qompassai/";
 
+/// The three classes the fleet divides into, for the nav dropdown and
+/// the class index pages: applications, MCP servers, and packages.
+#[derive(Clone, Copy, Debug, PartialEq, Eq)]
+pub enum Class {
+    App,
+    Mcp,
+    Package,
+}
+
+impl Class {
+    /// The class label, as the nav and the index pages name it.
+    pub const fn label(self) -> &'static str {
+        match self {
+            Self::App => "Apps",
+            Self::Mcp => "MCP Servers",
+            Self::Package => "Packages",
+        }
+    }
+
+    /// The class index page's route.
+    pub const fn route(self) -> &'static str {
+        match self {
+            Self::App => "/solutions/apps",
+            Self::Mcp => "/solutions/mcp-servers",
+            Self::Package => "/solutions/packages",
+        }
+    }
+}
+
 /// One published solution under one cardinal. `slug` is its page,
 /// `/solutions/<slug>`; `href` is where it lives (GitHub, `LuaRocks`, or
 /// that page itself for a solution that lives on this site).
@@ -73,7 +102,9 @@ pub struct Solution {
     pub slug: &'static str,
     pub href: &'static str,
     pub cardinal: usize,
+    pub class: Class,
     pub version: Option<&'static str>,
+    pub blurb: &'static str,
 }
 
 impl Solution {
@@ -90,17 +121,64 @@ impl Solution {
         ))
     }
 
-    /// The project mark, for the solutions that have one of the twelve.
+    /// The project mark. Every solution carries one of the square
+    /// emblems in `public/img/projects/`, named for its slug — except
+    /// the phlow MCP server, which shares phlow's emblem.
     pub const fn mark(&self) -> Option<&'static str> {
-        match self.slug.as_bytes() {
-            b"bunker" => Some("/img/projects/bunker.webp"),
-            b"diver" => Some("/img/projects/diver.webp"),
-            b"fathom" => Some("/img/projects/fathom.webp"),
-            b"phlow-mcp-server" => Some("/img/projects/phlow.webp"),
-            b"vongola" => Some("/img/projects/vongola.webp"),
-            _ => None,
-        }
+        slug_mark(self.slug)
     }
+}
+
+/// The emblem path for a slug: `/img/projects/<slug>.webp`, spelled out
+/// per solution so the mapping stays a compile-time constant table.
+const fn slug_mark(slug: &str) -> Option<&'static str> {
+    Some(match slug.as_bytes() {
+        b"phlow-mcp-server" => "/img/projects/phlow.webp",
+        b"qompass-hold" => "/img/projects/qompass-hold.webp",
+        b"qssl" => "/img/projects/qssl.webp",
+        b"radar" => "/img/projects/radar.webp",
+        b"redteam" => "/img/projects/redteam.webp",
+        b"tor" => "/img/projects/tor.webp",
+        b"vongola" => "/img/projects/vongola.webp",
+        b"fathom" => "/img/projects/fathom.webp",
+        b"diver-security" => "/img/projects/diver-security.webp",
+        b"blaze-ts-nvim" => "/img/projects/blaze-ts-nvim.webp",
+        b"blaze-nvim" => "/img/projects/blaze-nvim.webp",
+        b"diver" => "/img/projects/diver.webp",
+        b"pathfinders" => "/img/projects/pathfinders.webp",
+        b"qluv" => "/img/projects/qluv.webp",
+        b"rose-nvim" => "/img/projects/rose-nvim.webp",
+        b"tuxtype" => "/img/projects/tuxtype.webp",
+        b"unreal" => "/img/projects/unreal.webp",
+        b"eigenstyle" => "/img/projects/eigenstyle.webp",
+        b"blaze-nvim-luarocks" => "/img/projects/blaze-nvim-luarocks.webp",
+        b"diver-research" => "/img/projects/diver-research.webp",
+        b"telco-admin-quizzes" => "/img/projects/telco-admin-quizzes.webp",
+        b"azimuth" => "/img/projects/azimuth.webp",
+        b"current" => "/img/projects/current.webp",
+        b"dotfiles" => "/img/projects/dotfiles.webp",
+        b"qonfig" => "/img/projects/qonfig.webp",
+        b"qudaz" => "/img/projects/qudaz.webp",
+        b"qxet" => "/img/projects/qxet.webp",
+        b"rose" => "/img/projects/rose.webp",
+        b"lumen" => "/img/projects/lumen.webp",
+        b"diver-ai" => "/img/projects/diver-ai.webp",
+        b"diver-comms" => "/img/projects/diver-comms.webp",
+        b"diver-config" => "/img/projects/diver-config.webp",
+        b"diver-dap" => "/img/projects/diver-dap.webp",
+        b"diver-dev" => "/img/projects/diver-dev.webp",
+        b"diver-games" => "/img/projects/diver-games.webp",
+        b"diver-lintfmt" => "/img/projects/diver-lintfmt.webp",
+        b"diver-utils" => "/img/projects/diver-utils.webp",
+        b"hyprlua" => "/img/projects/hyprlua.webp",
+        b"beacon" => "/img/projects/beacon.webp",
+        b"bunker" => "/img/projects/bunker.webp",
+        b"debian" => "/img/projects/debian.webp",
+        b"network" => "/img/projects/network.webp",
+        b"nur" => "/img/projects/nur.webp",
+        b"qjp" => "/img/projects/qjp.webp",
+        _ => return None,
+    })
 }
 
 const fn sol(
@@ -108,9 +186,11 @@ const fn sol(
     slug: &'static str,
     href: &'static str,
     cardinal: usize,
+    class: Class,
     version: Option<&'static str>,
+    blurb: &'static str,
 ) -> Solution {
-    Solution { name, slug, href, cardinal, version }
+    Solution { name, slug, href, cardinal, class, version, blurb }
 }
 
 /// The `v1.00` release, published 2026-10-15 on every GitHub repository.
@@ -127,56 +207,50 @@ const ROCK: Option<&str> = Some("0.1.0-1");
 /// lives inside Diver. The telco-admin practice quizzes live on this
 /// site — their `href` is their own page — and carry no version.
 pub const SOLUTIONS: [Solution; 44] = [
-    sol("Qompass-Hold", "qompass-hold", "https://github.com/qompassai/qompass-hold", N, V1),
-    sol("Qssl", "qssl", "https://github.com/qompassai/qssl", N, V1),
-    sol("Radar", "radar", "https://github.com/qompassai/radar", N, V1),
-    sol("Redteam", "redteam", "https://github.com/qompassai/redteam", N, V1),
-    sol("Tor", "tor", "https://github.com/qompassai/tor", N, V1),
-    sol("Vongola", "vongola", "https://github.com/qompassai/vongola", N, V1),
-    sol("fathom", "fathom", "https://github.com/qompassai/fathom", N, V1),
-    sol("diver-security", "diver-security", "https://luarocks.org/modules/phaedrusflow/diver-security", N, ROCK),
-    sol("blaze-ts.nvim", "blaze-ts-nvim", "https://github.com/qompassai/blaze-ts.nvim", E, V1),
-    sol("blaze.nvim", "blaze-nvim", "https://github.com/qompassai/blaze.nvim", E, V1),
-    sol("Diver", "diver", "https://github.com/qompassai/Diver", E, V1),
-    sol("PathFinders", "pathfinders", "https://github.com/qompassai/PathFinders", E, V1),
-    sol("Qluv", "qluv", "https://github.com/qompassai/qluv", E, V1),
-    sol("Rose.nvim", "rose-nvim", "https://github.com/qompassai/rose.nvim", E, None),
-    sol("Tuxtype", "tuxtype", "https://github.com/qompassai/tuxtype", E, V1),
-    sol("Unreal", "unreal", "https://github.com/qompassai/unreal", E, V1),
-    sol("eigenstyle", "eigenstyle", "https://github.com/qompassai/eigenstyle", E, V1),
-    sol(
-        "blaze.nvim (LuaRocks)",
-        "blaze-nvim-luarocks",
-        "https://luarocks.org/modules/phaedrusflow/blaze.nvim",
-        E,
-        Some("1.0-1"),
-    ),
-    sol("diver-research", "diver-research", "https://luarocks.org/modules/phaedrusflow/diver-research", E, ROCK),
-    sol("Telco-Admin Practice Quizzes", "telco-admin-quizzes", "/solutions/telco-admin-quizzes", E, None),
-    sol("Azimuth", "azimuth", "https://github.com/qompassai/Azimuth", S, V1),
-    sol("Current", "current", "https://github.com/qompassai/current", S, V1),
-    sol("Dotfiles", "dotfiles", "https://github.com/qompassai/dotfiles", S, V1),
-    sol("Qonfig", "qonfig", "https://github.com/qompassai/qonfig", S, V1),
-    sol("Qudaz", "qudaz", "https://github.com/qompassai/qudaz", S, V1),
-    sol("Qxet", "qxet", "https://github.com/qompassai/qxet", S, V1),
-    sol("Rose", "rose", "https://github.com/qompassai/rose", S, V1),
-    sol("lumen", "lumen", "https://github.com/qompassai/lumen", S, V1),
-    sol("phlow MCP server", "phlow-mcp-server", "https://github.com/qompassai/phlow#mcp-wire-contract", S, V1),
-    sol("diver-ai", "diver-ai", "https://luarocks.org/modules/phaedrusflow/diver-ai", S, ROCK),
-    sol("diver-comms", "diver-comms", "https://luarocks.org/modules/phaedrusflow/diver-comms", S, ROCK),
-    sol("diver-config", "diver-config", "https://luarocks.org/modules/phaedrusflow/diver-config", S, ROCK),
-    sol("diver-dap", "diver-dap", "https://luarocks.org/modules/phaedrusflow/diver-dap", S, ROCK),
-    sol("diver-dev", "diver-dev", "https://luarocks.org/modules/phaedrusflow/diver-dev", S, ROCK),
-    sol("diver-games", "diver-games", "https://luarocks.org/modules/phaedrusflow/diver-games", S, ROCK),
-    sol("diver-lintfmt", "diver-lintfmt", "https://luarocks.org/modules/phaedrusflow/diver-lintfmt", S, ROCK),
-    sol("diver-utils", "diver-utils", "https://luarocks.org/modules/phaedrusflow/diver-utils", S, ROCK),
-    sol("hyprlua", "hyprlua", "https://luarocks.org/modules/phaedrusflow/hyprlua", S, ROCK),
-    sol("beacon", "beacon", "https://github.com/qompassai/beacon", W, V1),
-    sol("bunker", "bunker", "https://github.com/qompassai/bunker", W, V1),
-    sol("debian", "debian", "https://github.com/qompassai/debian", W, V1),
-    sol("network", "network", "https://github.com/qompassai/network", W, V1),
-    sol("NUR", "nur", "https://github.com/qompassai/NUR", W, V1),
-    sol("qjp", "qjp", "https://github.com/qompassai/qjp", W, V1),
+    sol("Qompass-Hold", "qompass-hold", "https://github.com/qompassai/qompass-hold", N, Class::App, V1, "Qompass Secret-Service."),
+    sol("Qssl", "qssl", "https://github.com/qompassai/qssl", N, Class::App, V1, "Qompass AI SSL solution."),
+    sol("Radar", "radar", "https://github.com/qompassai/radar", N, Class::App, V1, "Risk Analysis Diagnostic Assessment Resolver (R.A.D.A.R)."),
+    sol("Redteam", "redteam", "https://github.com/qompassai/redteam", N, Class::App, V1, "Qompass AI on red teaming."),
+    sol("Tor", "tor", "https://github.com/qompassai/tor", N, Class::App, V1, "Qompass AI Tor setup."),
+    sol("Vongola", "vongola", "https://github.com/qompassai/vongola", N, Class::App, V1, "A secure, performant reverse-proxy server for your deep tech needs."),
+    sol("Fathom", "fathom", "https://github.com/qompassai/fathom", N, Class::Mcp, V1, "Spec-led Rust port of REA — a reverse-engineering tool provider for agents (MCP/A2A), with evidence-carrying findings and a fail-closed policy gate."),
+    sol("Diver-Security", "diver-security", "https://luarocks.org/modules/phaedrusflow/diver-security", N, Class::Package, ROCK, "Diver security toolkit: security.* RCE/MiTM/zombie/supply-chain guards, red/blue suites, pass integration, Ghidra bridge, PQC tokens."),
+    sol("Blaze-TS.nvim", "blaze-ts-nvim", "https://github.com/qompassai/blaze-ts.nvim", E, Class::App, V1, "A tree-sitter grammar for the Mojo programming language, packaged as a Neovim plugin."),
+    sol("Blaze.nvim", "blaze-nvim", "https://github.com/qompassai/blaze.nvim", E, Class::App, V1, "🔥 for Neovim."),
+    sol("Diver", "diver", "https://github.com/qompassai/Diver", E, Class::App, V1, "Your blazingly fast everything editor."),
+    sol("PathFinders", "pathfinders", "https://github.com/qompassai/PathFinders", E, Class::App, V1, "The Qompass intern program."),
+    sol("Qluv", "qluv", "https://github.com/qompassai/qluv", E, Class::App, V1, "Qompass Lua version manager."),
+    sol("Rose.nvim", "rose-nvim", "https://github.com/qompassai/rose.nvim", E, Class::App, None, "The archived Neovim front end for Rose; Rose now lives inside Diver."),
+    sol("Tuxtype", "tuxtype", "https://github.com/qompassai/tuxtype", E, Class::App, V1, "Qompass AI on TuxType."),
+    sol("Unreal", "unreal", "https://github.com/qompassai/unreal", E, Class::App, V1, "Qompass AI Unreal tooling."),
+    sol("Eigenstyle", "eigenstyle", "https://github.com/qompassai/eigenstyle", E, Class::Mcp, V1, "Your voice profile as a tool — a Rust workspace (MCP server, TUI, and GPUI GUI) over a measured writing fingerprint."),
+    sol("Blaze.nvim (LuaRocks)", "blaze-nvim-luarocks", "https://luarocks.org/modules/phaedrusflow/blaze.nvim", E, Class::Package, Some("1.0-1"), "🔥 for AI — the blaze.nvim plugin as a LuaRocks module."),
+    sol("Diver-Research", "diver-research", "https://luarocks.org/modules/phaedrusflow/diver-research", E, Class::Package, ROCK, "Diver research workflow: research.* journal registry, ORCID, OpenAlex, Web of Science, Zenodo, deadlines, watchlist, templates, Zotero."),
+    sol("Telco-Admin Practice Quizzes", "telco-admin-quizzes", "/solutions/telco-admin-quizzes", E, Class::App, None, "Telco-admin practice quizzes with encrypted answer keys, hosted on this site."),
+    sol("Azimuth", "azimuth", "https://github.com/qompassai/Azimuth", S, Class::App, V1, "Your helpful AI navigator."),
+    sol("Current", "current", "https://github.com/qompassai/current", S, Class::App, V1, "Qompass AI Current: your self-hosted AI runner."),
+    sol("Dotfiles", "dotfiles", "https://github.com/qompassai/dotfiles", S, Class::App, V1, "XDG dotfiles for the Qompass AI development environment — a Qonfig link map paired with a Nix flake user environment."),
+    sol("Qonfig", "qonfig", "https://github.com/qompassai/qonfig", S, Class::App, V1, "A quality dotfile manager."),
+    sol("Qudaz", "qudaz", "https://github.com/qompassai/qudaz", S, Class::App, V1, "Qompass AI CUDA library for Zig."),
+    sol("Qxet", "qxet", "https://github.com/qompassai/qxet", S, Class::App, V1, "QXet: Quality AI eXchange — content-addressed storage for large binary artifacts."),
+    sol("Rose", "rose", "https://github.com/qompassai/rose", S, Class::App, V1, "Qompass AI's fork of Ollama, the local model server — upstream releases with the fork delta re-applied, serving local specialists on local hardware."),
+    sol("Lumen", "lumen", "https://github.com/qompassai/lumen", S, Class::Mcp, V1, "Lux in motu — an MCP server for Aseprite sprite artistry with Bevy live-world interop."),
+    sol("Phlow MCP Server", "phlow-mcp-server", "https://github.com/qompassai/phlow#mcp-wire-contract", S, Class::Mcp, V1, "Phlow's MCP server surface: one safe runtime shared with the CLI and TUI, over the MCP wire contract."),
+    sol("Diver-AI", "diver-ai", "https://luarocks.org/modules/phaedrusflow/diver-ai", S, Class::Package, ROCK, "Diver AI suite: ai.* harness (registry/supervisor/policy), MCP, ACP, A2A, herd, rose integration, media, recon, plus salesforce.mcp."),
+    sol("Diver-Comms", "diver-comms", "https://luarocks.org/modules/phaedrusflow/diver-comms", S, Class::Package, ROCK, "Diver mail tooling: comms.* clients (aerc, neomutt), mail and MIME helpers."),
+    sol("Diver-Config", "diver-config", "https://luarocks.org/modules/phaedrusflow/diver-config", S, Class::Package, ROCK, "Diver config library modules: config.ui.* (UI library: icons, image rendering, themes, virtual text) and config.data.* (database adapters)."),
+    sol("Diver-DAP", "diver-dap", "https://luarocks.org/modules/phaedrusflow/diver-dap", S, Class::Package, ROCK, "Diver debug-adapter suite: dap.* session engine, adapters, store, lifecycle and integrations (Moonwalk, phlow)."),
+    sol("Diver-Dev", "diver-dev", "https://luarocks.org/modules/phaedrusflow/diver-dev", S, Class::Package, ROCK, "Diver developer tooling: dev.* BSP servers, SCIP indexers, browser (BiDi/CDP), apps, Salesforce suite, git/jj/cargo runners."),
+    sol("Diver-Games", "diver-games", "https://luarocks.org/modules/phaedrusflow/diver-games", S, Class::Package, ROCK, "Diver game-engine tooling: games.* for Aseprite, Blender, Godot, LÖVE, Redot, TIC-80, Unity, Unreal and Voidsprite, plus shared character kit."),
+    sol("Diver-Lintfmt", "diver-lintfmt", "https://luarocks.org/modules/phaedrusflow/diver-lintfmt", S, Class::Package, ROCK, "Diver tool catalogs: formatters.* (138 formatter adapters + engine) and linters.* (185 linter adapters + engine). One adapter per file."),
+    sol("Diver-Utils", "diver-utils", "https://luarocks.org/modules/phaedrusflow/diver-utils", S, Class::Package, ROCK, "Diver foundations: shared utility library (utils.*), tools.*, plus the shared primitives other diver rocks build on."),
+    sol("Hyprlua", "hyprlua", "https://luarocks.org/modules/phaedrusflow/hyprlua", S, Class::Package, ROCK, "LuaCATS annotations for the Hyprland 0.55+ Lua config API."),
+    sol("Beacon", "beacon", "https://github.com/qompassai/beacon", W, Class::App, V1, "Beacon: a quality e-mail solution."),
+    sol("Bunker", "bunker", "https://github.com/qompassai/bunker", W, Class::App, V1, "An Attic-based Nix binary cache with hybrid Ed25519 + ML-DSA-65 narinfo signing."),
+    sol("Debian", "debian", "https://github.com/qompassai/debian", W, Class::App, V1, "Debian Linux for stable servers — the Qompass AI base configuration."),
+    sol("Network", "network", "https://github.com/qompassai/network", W, Class::App, V1, "Qompass AI network tooling."),
+    sol("NUR", "nur", "https://github.com/qompassai/NUR", W, Class::App, V1, "Qompass AI's Nix user repository — the qompassai package set, built from source."),
+    sol("Qjp", "qjp", "https://github.com/qompassai/qjp", W, Class::App, V1, "NixOS module for NVIDIA Jetson devices."),
 ];
 
 /// The solution whose page is `/solutions/<slug>`, if any.
@@ -301,6 +375,14 @@ fn drag_bearing(start: u16, from: f64, to: f64) -> u16 {
 
 fn solutions_of(cardinal: usize) -> impl Iterator<Item = &'static Solution> {
     SOLUTIONS.iter().filter(move |s| s.cardinal == cardinal)
+}
+
+/// Every solution of one class, alphabetical by display name — the
+/// order of the class index pages.
+pub fn solutions_of_class(class: Class) -> Vec<&'static Solution> {
+    let mut out: Vec<&'static Solution> = SOLUTIONS.iter().filter(|s| s.class == class).collect();
+    out.sort_by(|a, b| a.name.cmp(b.name));
+    out
 }
 
 /// The version of one solution, linked out to its release; nothing for
@@ -822,10 +904,10 @@ mod tests {
             assert_eq!(solution_page(s.slug).map(|p| p.name), Some(s.name), "{}", s.slug);
         }
         for (name, slug) in [
-            ("blaze.nvim", "blaze-nvim"),
-            ("blaze.nvim (LuaRocks)", "blaze-nvim-luarocks"),
-            ("phlow MCP server", "phlow-mcp-server"),
-            ("blaze-ts.nvim", "blaze-ts-nvim"),
+            ("Blaze.nvim", "blaze-nvim"),
+            ("Blaze.nvim (LuaRocks)", "blaze-nvim-luarocks"),
+            ("Phlow MCP Server", "phlow-mcp-server"),
+            ("Blaze-TS.nvim", "blaze-ts-nvim"),
             ("Rose.nvim", "rose-nvim"),
         ] {
             assert_eq!(SOLUTIONS.iter().find(|s| s.name == name).map(|s| s.slug), Some(slug), "{name}");
@@ -875,13 +957,29 @@ mod tests {
     }
 
     #[test]
-    fn marks_exist_only_for_the_twelve_project_images() {
-        let marked: Vec<&str> = SOLUTIONS.iter().filter(|s| s.mark().is_some()).map(|s| s.slug).collect();
-        assert_eq!(marked, ["vongola", "fathom", "diver", "phlow-mcp-server", "bunker"]);
+    fn every_solution_carries_a_mark_that_exists() {
+        assert_eq!(SOLUTIONS.iter().filter(|s| s.mark().is_some()).count(), SOLUTIONS.len());
         for mark in SOLUTIONS.iter().filter_map(Solution::mark) {
             let path = format!("{}/public{mark}", env!("CARGO_MANIFEST_DIR"));
             assert!(std::path::Path::new(&path).is_file(), "{path}");
         }
+    }
+
+    #[test]
+    fn the_classes_divide_the_fleet() {
+        let count = |class| SOLUTIONS.iter().filter(|s| s.class == class).count();
+        assert_eq!(count(Class::App), 28);
+        assert_eq!(count(Class::Mcp), 4);
+        assert_eq!(count(Class::Package), 12);
+        // Every package is a LuaRocks module; every MCP server lives on GitHub.
+        assert!(SOLUTIONS
+            .iter()
+            .filter(|s| s.class == Class::Package)
+            .all(|s| s.href.starts_with("https://luarocks.org/")));
+        assert!(SOLUTIONS
+            .iter()
+            .filter(|s| s.class == Class::Mcp)
+            .all(|s| s.href.starts_with("https://github.com/qompassai/")));
     }
 
     #[test]
