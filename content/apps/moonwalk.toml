@@ -1,0 +1,205 @@
+slug = "moonwalk"
+name = "Moonwalk"
+kind_line = "LUA DEBUGGER — DEBUG ADAPTER PROTOCOL SERVER"
+repo_url = "https://github.com/qompassai/moonwalk"
+mark = "/img/projects/moonwalk.webp"
+ready = true
+
+summary = "Moonwalk is a cross-platform Lua debugger and Debug Adapter Protocol server. It is built for a native, plugin-free Neovim debugging workflow while remaining compatible with Visual Studio Code and other Debug Adapter Protocol clients. Moonwalk is not an nvim-dap wrapper, and it does not require users to install a Neovim debugging plugin: the debugger core is editor-independent, and the Neovim integration is implemented with native Lua, Neovim APIs, and direct DAP communication. It debugs Lua 5.1–5.4 and LuaJIT targets — local processes, Neovim processes, and remote processes — on Linux, macOS, Windows, Windows Subsystem for Linux, Android, NetBSD, and FreeBSD."
+
+how = [
+    "A native DAP registry or direct vim.debug-based client selects Moonwalk when the active buffer has the lua filetype, and registers the Lua adapter once with require(\"dap.lua\").setup(). No nvim-dap, nvim-dap-ui, mason.nvim, or other third-party debugging plugin is involved at any point. Source: Moonwalk README, 'Native Neovim configuration'.",
+    "The client spawns the moonwalk executable and opens a Debug Adapter Protocol session: initialize, then a launch request (program, cwd, stopOnEntry, luaVersion, and the rest of the launch schema in CONFIGURATION below) or an attach request against a running process. Source: Moonwalk README, 'Command model' architecture diagram; extension/package.json debugger contribution.",
+    "Moonwalk's proxy process passes the launch parameters to the debuggee and loads luadebug into the Lua virtual machine — by the standard -e argument or by injection. Parameter delivery happens in two stages: some parameters at initialization, then all of them again with the DAP initialized event. Source: Moonwalk docs/DebuggerInit.md.",
+    "The client sets breakpoints with setBreakpoints and signals configurationDone; the VM then runs under the debugger — line, function, conditional, and hit-count breakpoints, logpoints, exception breakpoints, stepping, stack frames, scopes and variables, watches, and expression evaluation. Source: Moonwalk README, 'Features'; docs/capabilities.md capability table.",
+    "Session events (stopped, output, terminated) flow back over the same DAP connection, and the editor renders debugging state with its own native signs, extmarks, windows, and buffers. In Neovim the generic debugger commands (:DebugRun, :DebugStepInto, …) are mapped buffer-locally in Lua buffers only, so the same key vocabulary serves other adapters in other filetypes. Source: Moonwalk README, 'Lua buffer mappings' and 'Command model'.",
+    "The same adapter serves any DAP client unchanged — VS Code included — because the core is editor-independent; Neovim-specific discovery (adapter path, runtime path, process selection) lives in the Lua-specific :LuaDebug* commands, kept separate from the generic command model. Source: Moonwalk README, 'Command model'.",
+]
+
+gaps = "- The sources read document the build (luamake; luamake -mode release for release) but do not state an end-user installation step for the built adapter — where the moonwalk executable and its runtime tree land after a build is not stated in source. The BENCHMARKS harness for this page ran the release tree as built in-tree under the repo's publish/ directory.\n- Lua 5.5 is explicitly not supported: the README states it must not be advertised until Moonwalk has an implemented, tested, and documented compatibility path for it.\n- docs/capabilities.md marks several DAP capabilities 'No (LuaDebug)' or 'No (VSCode)' — among them supportsStepBack, supportsDataBreakpoints, supportsCompletionsRequest, and supportsBreakpointLocationsRequest. Those are inherited limits of the LuaDebug core or the VS Code client as that table records them; they are not re-derived here.\n- Moonwalk is not published on LuaRocks (verified 2026-10-18), which is why it is classed with the Apps rather than the Packages; no rock or package-manager install command is claimed.\n- The project publishes no performance figures of its own. The BENCHMARKS table on this page was measured for this site, with the method stated in the table's note — it is not taken from the repository."
+
+[[config]]
+name = "program"
+default = "${workspaceFolder}/main.lua"
+description = "Lua program to debug — the path of the script (launch). Source: extension/package.json launch schema."
+
+[[config]]
+name = "cwd"
+default = "${workspaceFolder}"
+description = "Working directory at program startup (launch). Source: extension/package.json launch schema."
+
+[[config]]
+name = "stopOnEntry"
+default = "false"
+description = "Automatically stop after entry (launch and attach). Source: extension/package.json schemas."
+
+[[config]]
+name = "stopOnThreadEntry"
+default = "true"
+description = "Automatically stop after thread entry (launch and attach). Source: extension/package.json schemas."
+
+[[config]]
+name = "luaVersion"
+default = "lua54"
+description = "Default Lua version of the debug target (launch and attach). Source: extension/package.json schemas; extension/package.nls.json."
+
+[[config]]
+name = "console"
+default = "integratedTerminal"
+description = "The console to launch the program in: internalConsole, integratedTerminal, or externalTerminal (launch). Source: extension/package.json launch schema; extension/package.nls.json."
+
+[[config]]
+name = "arg"
+default = "[]"
+description = "Command-line arguments arg[1] … arg[n] passed to the program (launch). Source: extension/package.json launch schema."
+
+[[config]]
+name = "env"
+default = "object whose default sets PATH to ${workspaceFolder}"
+description = "Environment variables passed to the program; a null value removes the variable (launch). Source: extension/package.json launch schema."
+
+[[config]]
+name = "path"
+default = "${workspaceFolder}/?.lua"
+description = "Search path for Lua programs in the debuggee (launch). Source: extension/package.json launch schema; extension/package.nls.json."
+
+[[config]]
+name = "cpath"
+default = "${workspaceFolder}/?.so"
+description = "Search path for native libraries in the debuggee (launch). Source: extension/package.json launch schema; extension/package.nls.json."
+
+[[config]]
+name = "skipFiles"
+default = "[]"
+description = "Glob patterns for files to skip when debugging (launch and attach). Source: extension/package.json schemas."
+
+[[config]]
+name = "sourceMaps"
+default = "[['./*', '${workspaceFolder}/*']]"
+description = "Pairs mapping the source paths of the remote host to local paths (launch and attach). Source: extension/package.json schemas."
+
+[[config]]
+name = "outputCapture"
+default = "[]"
+description = "Where output messages are captured from: print, or the stdout/stderr streams (launch and attach). Source: extension/package.json schemas."
+
+[[config]]
+name = "address"
+default = "not stated in source"
+description = "Debugger address for attach: an IPv4 or IPv6 address with port, or a Unix domain socket (attach). Source: extension/package.json attach schema."
+
+[[config]]
+name = "processId"
+default = "${command:pickProcess}"
+description = "Id of the process to attach to (attach). Source: extension/package.json attach schema."
+
+[[config]]
+name = "processName"
+default = "lua.exe"
+description = "Name of the process to attach to (attach). Source: extension/package.json attach schema."
+
+[[config]]
+name = "inject"
+default = "gdb"
+description = "How the debugger is injected into the target (launch and attach). Source: extension/package.json schemas."
+
+[[controls]]
+action = "Run / continue"
+control = ":DebugRun / :DebugContinue — Lua buffers: <F5>"
+
+[[controls]]
+action = "Pause"
+control = ":DebugPause — Lua buffers: <F6>"
+
+[[controls]]
+action = "Run last configuration"
+control = ":DebugRunLast — Lua buffers: <F7>"
+
+[[controls]]
+action = "Terminate"
+control = ":DebugTerminate — Lua buffers: <F9>"
+
+[[controls]]
+action = "Toggle breakpoint"
+control = ":DebugBreakpoint — Lua buffers: <F8> / <leader>db"
+
+[[controls]]
+action = "Conditional breakpoint"
+control = ":DebugBreakpointCondition — Lua buffers: <leader>dB"
+
+[[controls]]
+action = "Logpoint"
+control = ":DebugLogpoint — Lua buffers: <leader>dl"
+
+[[controls]]
+action = "Step over"
+control = ":DebugStepOver — Lua buffers: <F10>"
+
+[[controls]]
+action = "Step into"
+control = ":DebugStepInto — Lua buffers: <F11>"
+
+[[controls]]
+action = "Step out"
+control = ":DebugStepOut — Lua buffers: <F12>"
+
+[[controls]]
+action = "Restart"
+control = ":DebugRestart — Lua buffers: <leader>dR"
+
+[[controls]]
+action = "Evaluate expression (hover)"
+control = ":DebugHover — Lua buffers: <leader>dh"
+
+[[controls]]
+action = "Scopes"
+control = ":DebugScopes — Lua buffers: <leader>ds"
+
+[[controls]]
+action = "Debug REPL"
+control = ":DebugRepl — Lua buffers: <leader>de"
+
+[[controls]]
+action = "Session status"
+control = ":DebugStatus — Lua buffers: <leader>dq"
+
+[[controls]]
+action = "Show the Lua adapter path"
+control = ":LuaDebugAdapter — Lua buffers: <leader>dmA"
+
+[[controls]]
+action = "Check the Lua environment"
+control = ":LuaDebugCheck — Lua buffers: <leader>dmC"
+
+[[controls]]
+action = "Select a Lua process"
+control = ":LuaDebugProcess — Lua buffers: <leader>dmP"
+
+[[controls]]
+action = "Show the Lua runtime path"
+control = ":LuaDebugRuntime — Lua buffers: <leader>dmR"
+
+[[visuals]]
+kind = "diagram"
+id = "moonwalk-dap"
+caption = "One Moonwalk debug session, traced from the README's own architecture diagram and docs/DebuggerInit.md: a native, plugin-free DAP client (Neovim in the project's primary workflow; the same session serves VS Code) speaks the Debug Adapter Protocol to the Moonwalk adapter, which proxies the session and loads luadebug into a Lua 5.1–5.4 or LuaJIT target — a local process, a Neovim process, or a remote process. Launch parameters reach the debuggee in two stages, at initialization and again in full with the initialized event."
+
+[[references]]
+title = "Debug Adapter Protocol — specification"
+url = "https://microsoft.github.io/debug-adapter-protocol/specification"
+note = "The protocol Moonwalk implements: the initialize, launch, setBreakpoints and configurationDone requests and the stopped and terminated events the diagram and the benchmarks on this page speak in."
+
+[[references]]
+title = "Moonwalk — DAP capability table (docs/capabilities.md)"
+url = "https://github.com/qompassai/moonwalk/blob/main/docs/capabilities.md"
+note = "The adapter's own record of which DAP capabilities are supported, and which are marked 'No (LuaDebug)' or 'No (VSCode)'."
+
+[[references]]
+title = "Lua 5.4 — reference manual"
+url = "https://www.lua.org/manual/5.4/"
+note = "The manual for the newest Lua version Moonwalk targets; the debug library (lua_Debug, hooks) documented there is the mechanism a Lua debugger is built on. Manuals for 5.1–5.3 are linked from lua.org."
+
+[[references]]
+title = "LuaJIT — the LuaJIT project"
+url = "https://luajit.org/"
+note = "The second runtime family Moonwalk debugs, alongside PUC Lua 5.1–5.4."

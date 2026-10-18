@@ -10,6 +10,7 @@ use leptos::prelude::*;
 
 /// The diagram ids this module owns.
 pub const IDS: &[&str] = &[
+    "moonwalk-dap",
     "pathfinders-pathway",
     "phlow-coordination",
     "redteam-collection",
@@ -21,6 +22,7 @@ pub const IDS: &[&str] = &[
 /// The bare `<svg>` for one of this module's ids, or `None`.
 pub fn diagram(id: &'static str) -> Option<AnyView> {
     match id {
+        "moonwalk-dap" => Some(moonwalk_dap()),
         "pathfinders-pathway" => Some(pathfinders_pathway()),
         "phlow-coordination" => Some(phlow_coordination()),
         "redteam-collection" => Some(redteam_collection()),
@@ -65,6 +67,115 @@ pub fn telco_references() -> Vec<(&'static str, &'static str, &'static str)> {
             "The Washington administrative code chapter the WAC 296-46B quiz set studies, from the Washington State Legislature's official code site.",
         ),
     ]
+}
+
+/// Moonwalk: one debug session.
+///
+/// As the project's own README architecture diagram and
+/// `docs/DebuggerInit.md` describe it — a native, plugin-free DAP
+/// client in the editor, the Moonwalk adapter as DAP server and
+/// proxy (it loads `luadebug` into the target VM; launch parameters
+/// arrive in two stages, at initialization and again in full with
+/// the `initialized` event), and the Lua 5.1–5.4 / `LuaJIT` target.
+/// The sequence strip is the session the benchmark harness on the
+/// guide page drives.
+fn moonwalk_dap() -> AnyView {
+    view! {
+        <svg
+            class="gfx"
+            viewBox="0 0 760 384"
+            role="img"
+            aria-label="Diagram: one Moonwalk debug session — a native plugin-free DAP client in Neovim (buffer-local mappings in Lua buffers only, state rendered with native signs, extmarks and windows) speaks the Debug Adapter Protocol to the Moonwalk adapter, which proxies the session and loads luadebug into a Lua 5.1 to 5.4 or LuaJIT target, local, Neovim-hosted or remote. The session sequence is initialize, launch or attach, setBreakpoints, configurationDone, the stopped event, stepping and inspection, then terminated."
+        >
+            <text class="gfx-head" x="380" y="26" text-anchor="middle">
+                "ONE DAP SESSION — CLIENT · ADAPTER · LUA VM"
+            </text>
+            <rect class="gfx-panel" x="8" y="48" width="180" height="150" rx="6" />
+            <text class="gfx-head" x="98" y="74" text-anchor="middle">
+                "DAP CLIENT"
+            </text>
+            <text class="gfx-text" x="98" y="102" text-anchor="middle">
+                "Neovim — native,"
+            </text>
+            <text class="gfx-text" x="98" y="124" text-anchor="middle">
+                "plugin-free"
+            </text>
+            <text class="gfx-note" x="98" y="152" text-anchor="middle">
+                "buffer-local maps,"
+            </text>
+            <text class="gfx-note" x="98" y="172" text-anchor="middle">
+                "Lua buffers only"
+            </text>
+            <text class="gfx-note" x="98" y="192" text-anchor="middle">
+                "signs · extmarks · windows"
+            </text>
+            <line class="gfx-arrow" x1="188" y1="123" x2="282" y2="123" />
+            <circle class="gfx-pulse" cx="196" cy="123" r="3.5" />
+            <rect class="gfx-hot" x="290" y="48" width="180" height="150" rx="6" />
+            <text class="gfx-head" x="380" y="74" text-anchor="middle">
+                "MOONWALK"
+            </text>
+            <text class="gfx-text" x="380" y="102" text-anchor="middle">
+                "DAP server + proxy"
+            </text>
+            <text class="gfx-text" x="380" y="124" text-anchor="middle">
+                "loads luadebug"
+            </text>
+            <text class="gfx-note" x="380" y="152" text-anchor="middle">
+                "breakpoints · stepping"
+            </text>
+            <text class="gfx-note" x="380" y="172" text-anchor="middle">
+                "scopes · evaluate"
+            </text>
+            <text class="gfx-note" x="380" y="192" text-anchor="middle">
+                "launch + attach"
+            </text>
+            <line class="gfx-arrow" x1="470" y1="123" x2="564" y2="123" />
+            <circle
+                class="gfx-pulse"
+                cx="478"
+                cy="123"
+                r="3.5"
+                style="animation-delay:0.6s"
+            />
+            <rect class="gfx-panel" x="572" y="48" width="180" height="150" rx="6" />
+            <text class="gfx-head" x="662" y="74" text-anchor="middle">
+                "LUA TARGET"
+            </text>
+            <text class="gfx-text" x="662" y="102" text-anchor="middle">
+                "Lua 5.1–5.4 · LuaJIT"
+            </text>
+            <text class="gfx-text" x="662" y="124" text-anchor="middle">
+                "the debuggee VM"
+            </text>
+            <text class="gfx-note" x="662" y="152" text-anchor="middle">
+                "local process"
+            </text>
+            <text class="gfx-note" x="662" y="172" text-anchor="middle">
+                "Neovim process"
+            </text>
+            <text class="gfx-note" x="662" y="192" text-anchor="middle">
+                "remote process"
+            </text>
+            <rect class="gfx-panel" x="8" y="222" width="744" height="104" rx="6" />
+            <text class="gfx-text" x="380" y="252" text-anchor="middle">
+                "initialize → launch / attach → setBreakpoints → configurationDone"
+            </text>
+            <text class="gfx-text" x="380" y="280" text-anchor="middle">
+                "→ stopped (breakpoint · step · exception) → stackTrace · scopes · evaluate"
+            </text>
+            <text class="gfx-text" x="380" y="308" text-anchor="middle">
+                "→ continue / next / stepIn / stepOut → terminated"
+            </text>
+            <text class="gfx-note" x="380" y="352" text-anchor="middle">
+                "the core is editor-independent — the same session serves VS Code and any other DAP client"
+            </text>
+            <text class="gfx-note" x="380" y="374" text-anchor="middle">
+                "parameters reach the debuggee in two stages: at initialization, then in full with the initialized event"
+            </text>
+        </svg>
+    }
+    .into_any()
 }
 
 /// `PathFinders`: the program pathway as the project's own README
