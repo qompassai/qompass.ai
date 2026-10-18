@@ -106,3 +106,18 @@ control = "Views for Experiments, Entry Points, Jobs, Queues, Plugins, Models, A
 [[controls]]
 action = "Extend the testbed"
 control = "Write task plugins / entry points in Python via the SDK and plugin registry (Prefect-ordered tasks)"
+
+[[visuals]]
+kind = "diagram"
+id = "radar-pipeline"
+caption = "Radar's assessment pipeline — scope, generate, execute, measure, report — drawn as the project's own mapping onto the Measure function of the NIST AI Risk Management Framework. The workflow is Radar's (from its own docs); the seven characteristics it measures against are the RMF's, as listed in Radar's summary."
+
+[[references]]
+title = "NIST AI Risk Management Framework 1.0 (AI RMF 1.0)"
+url = "https://doi.org/10.6028/NIST.AI.100-1"
+note = "The framework whose Measure function Radar supports and whose seven trustworthiness characteristics the pipeline measures AI systems against."
+
+[[references]]
+title = "NIST AI 100-2e2025 — Adversarial Machine Learning: A Taxonomy and Terminology of Attacks and Mitigations"
+url = "https://doi.org/10.6028/NIST.AI.100-2e2025"
+note = "NIST's current adversarial machine learning taxonomy: the attack vocabulary behind the attack task plugins in Radar's plugin registry."

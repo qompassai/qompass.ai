@@ -127,3 +127,23 @@ control = "rage-keygen -o mykey.txt` then `rage -e -i mykey.txt -o secret.age pl
 [[controls]]
 action = "Connect to public Wi-Fi"
 control = "sudo systemctl enable --now NetworkManager`; `nmcli radio wifi on`; `nmcli device wifi list`; `sudo nmcli device wifi connect \"YOUR_SSID\" password \"YOUR_PASSWORD\" ifname wlan0"
+
+[[visuals]]
+kind = "diagram"
+id = "network-dns"
+caption = "DNS resolution under the flake's NixOS module: systemd-resolved's stub listener hands queries to a loopback-only Unbound, which forwards everything upstream over DNS-over-TLS on port 853; WireGuard and the nftables template form the surrounding posture. Values are the module's own, from flake.nix and the shipped nftables template."
+
+[[references]]
+title = "RFC 7858 — Specification for DNS over Transport Layer Security (TLS)"
+url = "https://www.rfc-editor.org/rfc/rfc7858"
+note = "DNS-over-TLS: the protocol Unbound's forward-tls-upstream setting speaks to 1.1.1.1, 1.0.0.1, and 9.9.9.9 on port 853 in the module."
+
+[[references]]
+title = "WireGuard: Next Generation Kernel Network Tunnel (whitepaper)"
+url = "https://www.wireguard.com/papers/wireguard.pdf"
+note = "The WireGuard protocol paper; the repo ships WireGuard material and its nftables template admits WireGuard traffic on UDP 51820."
+
+[[references]]
+title = "nftables wiki"
+url = "https://wiki.nftables.org/"
+note = "The nftables documentation for the table, chain, and policy model the repo's standalone template ruleset (table inet my_filter, input policy drop) is written in."

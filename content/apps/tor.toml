@@ -163,3 +163,23 @@ control = "\"Onion Control\" extension popup (on/off) and its options page; perm
 [[controls]]
 action = "Uninstall"
 control = "Remove the user-local prefix and config dirs as printed by the installer (`$PREFIX/{bin,lib,share,opt}`, sources, `~/.cache/arti`, `$XDG_CONFIG_HOME/{tor,nyx,arti}`)"
+
+[[visuals]]
+kind = "diagram"
+id = "tor-circuit"
+caption = "A Tor circuit as the protocol specifies it: the client builds the circuit incrementally, wrapping the payload in one encryption layer per relay; guard, middle, and exit each peel exactly one layer, so no single relay knows both ends. This repo's torrc, torsocks, and monitor configurations operate a client on such circuits."
+
+[[references]]
+title = "Tor Specifications — index"
+url = "https://spec.torproject.org/"
+note = "The Tor Project's specification index: the documents defining the protocols this repo's daemon, shipped configs, and clients implement."
+
+[[references]]
+title = "Tor Protocol Specification (tor-spec)"
+url = "https://spec.torproject.org/tor-spec/"
+note = "The core protocol: circuit creation and incremental extension, relay cells, and the layered encryption the diagram peels hop by hop."
+
+[[references]]
+title = "Tor Rendezvous Specification, version 3 (rend-spec-v3)"
+url = "https://spec.torproject.org/rend-spec-v3"
+note = "How v3 onion services rendezvous with their clients — the shipped example torrc publishes five v3 hidden services forwarding onion ports to local services."

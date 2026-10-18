@@ -162,3 +162,23 @@ control = "`volta-delete` binary (second binary of the root package)"
 [[controls]]
 action = "Upload / search / verify / manage keys (web UI)"
 control = "/upload`, `/search`, `/verify/<token>`, `/manage`, `/manage/<token>`, `/manage/unpublish"
+
+[[visuals]]
+kind = "diagram"
+id = "volta-flows"
+caption = "Volta's two flows: publication is gated on email verification — a submitted key is parsed, cleaned, and stored, but an address becomes searchable only when its owner clicks the mailed token link — and lookups arrive over HKP, the VKS API, and Web Key Directory. Routes are Volta's own, from its book."
+
+[[references]]
+title = "RFC 9580 — OpenPGP"
+url = "https://www.rfc-editor.org/rfc/rfc9580"
+note = "The current OpenPGP specification: the key format Volta parses with Sequoia-OpenPGP, cleans, stores, and serves."
+
+[[references]]
+title = "OpenPGP Web Key Directory (IETF draft, draft-koch-openpgp-webkey-service)"
+url = "https://datatracker.ietf.org/doc/draft-koch-openpgp-webkey-service/"
+note = "The draft specifying the /.well-known/openpgpkey lookup path (hu/<hash>, and /policy) that Volta serves as its Web Key Directory surface."
+
+[[references]]
+title = "Hagrid — verifying OpenPGP keyserver"
+url = "https://gitlab.com/keys.openpgp.org/hagrid"
+note = "The upstream keyserver Volta is derived from — the software behind keys.openpgp.org; its email-verified publication model is the flow in the diagram."

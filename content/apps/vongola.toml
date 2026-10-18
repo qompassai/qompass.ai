@@ -193,3 +193,18 @@ control = "Admin listener: `/healthz`, `/metrics`, `/api/state`, `/dashboard`, `
 [[controls]]
 action = "Rotate a self-signed certificate"
 control = "`POST /api/rotate-self-signed` on the admin listener"
+
+[[visuals]]
+kind = "diagram"
+id = "vongola-phases"
+caption = "Pingora's request-lifecycle phases as Vongola implements them: the request filter routes and authenticates before any upstream is touched, peer selection chooses static, chained, or round-robin service, the response is filtered on the way back, and logging runs last. Phase names and order are the Pingora framework's; the work in each phase is Vongola's own, from its architecture book."
+
+[[references]]
+title = "Pingora — Cloudflare's Rust framework for programmable network services"
+url = "https://github.com/cloudflare/pingora"
+note = "The upstream framework Vongola builds on (Pingora 0.9.0): its proxy phase order — request filter, upstream peer selection, upstream filter, response filter, logging — and its upstream connection pooling are what the diagram shows."
+
+[[references]]
+title = "RFC 9110 — HTTP Semantics"
+url = "https://www.rfc-editor.org/rfc/rfc9110"
+note = "The HTTP semantics Vongola's routes speak: methods, the status codes in the diagram (308, 413, 502), and header fields."
