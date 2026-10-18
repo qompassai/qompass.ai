@@ -110,3 +110,19 @@ control = "`./configure` then `make` (deps on Arch/WSL2: `base-devel git sdl sdl
 [[controls]]
 action = "Install on Ubuntu"
 control = "sudo apt update` then `sudo apt install tuxtype"
+
+[[visuals]]
+kind = "diagram"
+id = "tuxtype-loop"
+caption = "The game loop across TuxType's activities: a prompt (falling letters and words in Fish Cascade and Comet Zap, or a phrase in Phrase Typing) is typed as keystrokes, accuracy and speed are scored, and the next word or scripted lesson step follows — as the upstream doc/README and src/ describe it."
+
+[[visuals]]
+kind = "equation"
+latex = "\\mathrm{WPM} = \\frac{(\\text{correct characters} / 5)}{\\text{minutes}}"
+define = "WPM is the words-per-minute speed the game reports in its practice mode. Correct characters is the count of correctly typed characters; minutes is the elapsed typing time in minutes; the divisor 5 is the standard typing-measurement convention of five characters per word. This is the game's own formula: src/practice.c computes (correct_chars / 5) / (total / 60000), with total measured in milliseconds."
+caption = "The speed the game reports: correct characters, grouped five to a word, per minute — the standard typing-measurement convention, and the game's own computation."
+
+[[references]]
+title = "Tux4Kids — Tux Typing (upstream project)"
+url = "https://github.com/tux4kids/tuxtype"
+note = "The upstream Tux4Kids project the Qompass repo carries: Tux Typing, the educational typing tutor game starring Tux, whose falling-word games, lessons and phrase typing this page documents."

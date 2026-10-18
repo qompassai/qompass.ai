@@ -36,3 +36,18 @@ control = "`cmake -S <src> -B <build> -DCMAKE_POLICY_VERSION_MINIMUM=3.5`, then 
 [[controls]]
 action = "Install BlackArch tools (upstream doc carried in-repo)"
 control = "Install on an existing Arch machine, use the live ISO, or run `blackarch-install` (Full/Netinstall ISOs; Slim ISO has a GUI installer); tools install individually or in groups (2900 tools)"
+
+[[visuals]]
+kind = "diagram"
+id = "redteam-collection"
+caption = "The collection's taxonomy — the Gov/NIST, OGRed, Reports, BlackArch, Kali, Flipper and RedAI areas — and the structural validation gate a change passes through: python3 -m pytest tests/ -q checks every PDF's structure, the Flipper tarball, the wifi-coconut build, the report's input graph, and the BlackArch shell scripts, exactly as the repo's own test suite (tests/test_collection.py) defines it."
+
+[[references]]
+title = "MITRE ATT&CK"
+url = "https://attack.mitre.org/"
+note = "MITRE's adversary tactics and techniques knowledge base; the collection carries an ATT&CK reference under OGRed/ and its red-teaming method references build on it."
+
+[[references]]
+title = "NIST AI Risk Management Framework Playbook"
+url = "https://airc.nist.gov/airmf-resources/playbook/"
+note = "NIST's companion playbook for the AI Risk Management Framework; the collection carries the Playbook PDF under Gov/NIST/. The framework itself is at nist.gov/itl/ai-risk-management-framework."

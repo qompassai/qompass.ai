@@ -119,3 +119,8 @@ control = "flow_status {}`, `flow_run {\"task\":\"...\"}`, `flow_check {}` or `{
 [[controls]]
 action = "MCP attention publish / focus / alignment / decide (Rust runtime)"
 control = "flow_attention_publish`, `flow_attention_focus`, `flow_attention_alignment`, `flow_attention_decide"
+
+[[visuals]]
+kind = "diagram"
+id = "phlow-coordination"
+caption = "Phlow's multi-agent coordination decision on a task claim, exactly as the study specifies it — and the rule is the project's own protocol design: a snapshot-hash mismatch rejects the claim; an empty focus set proceeds in parallel; a shared top target serializes, with the lexicographically smaller agent id as holder; otherwise the claim proceeds in parallel."

@@ -108,3 +108,18 @@ control = "`dotnet …/AutomationTool.dll BuildCookRun -Build -Cook -Stage -Pack
 [[controls]]
 action = "Learning Agents workflow (edu project)"
 control = "In UE 5.3+ C++ project: enable the Learning Agents plugin, add `LearningAgents`/`LearningAgentsTraining` (+ `ChaosVehicles` for cars) to `Build.cs`, then build Interactor / Trainer / Policy managers for reinforcement learning, Recorder → Imitation training for imitation learning, Inference manager to deploy, and a Behavior Tree to combine network output with rules"
+
+[[visuals]]
+kind = "diagram"
+id = "unreal-pipeline"
+caption = "The setup pipeline as the repo's quickstart script runs it: installer choices (engine version, target platforms, build system), the UnrealEngine source clone and build (Setup.sh, GenerateProjectFiles.sh, and the RunUAT Installed Build — or the Linux Makefile build), the checked-in UnrealBuildTool configuration tree, and the bundled sample projects (edu/ Learning Agents and Examples/MLDeformer/) the editor then opens."
+
+[[references]]
+title = "Unreal Engine Documentation — Epic Developer Community"
+url = "https://dev.epicgames.com/documentation/en-us/unreal-engine/"
+note = "Epic's official Unreal Engine documentation — the engine this repository installs, builds and configures."
+
+[[references]]
+title = "Linux Development Requirements for Unreal Engine — Epic Developer Community"
+url = "https://dev.epicgames.com/documentation/en-us/unreal-engine/linux-development-requirements-for-unreal-engine"
+note = "Epic's documented requirements for developing with Unreal Engine on Linux — the installer's default platform path."

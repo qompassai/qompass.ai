@@ -17,3 +17,13 @@ how = [
 ]
 
 gaps = "- PathFinders is a program, not a software product: no config options, commands, keybindings, installable artifact, application process, cohort dates, or eligibility rules beyond \"Character & Curiosity outweighs any coding ability\" were sourced from the README or repo contents read.\n- The `Lessons/` level directories and `Youth/` tutorials (e.g. `Youth/README.md` is a Nerd Fonts / WSL2 / Neovim setup guide; `Youth/OLLAMA.md` also exists) were inventoried but their full curricula were not sourced in depth; no lesson titles or learning outcomes are claimed here.\n- The README's Quick Start, About, Support and FAQ sections are shared Qompass boilerplate also found in other repos; only the PathFinder-specific sections above are treated as program facts.\n- Funding fact in other repos' boilerplate (not the PathFinders README body read here): the Pathfinders Intern Program is listed at $2,000, October 2024, in the shared Support table — flagged as cross-repo boilerplate, not verified from this repo's own program pages."
+
+[[visuals]]
+kind = "diagram"
+id = "pathfinders-pathway"
+caption = "The program pathway as the PathFinders README itself structures it: entry with no coding prerequisite, building through the Lessons curriculum (Levels 1–9, plus the Youth tutorials), deploying cloud-native generative AI services hybrid — in the cloud and on device — with regulation alignment from the beginning, and preparing as future strategic leaders."
+
+[[references]]
+title = "PathFinders — Qompass AI Deep Tech Intern Program (project repository)"
+url = "https://github.com/qompassai/PathFinders"
+note = "The program's own repository and README — the only source for the pathway above. The program design is the project's own; no external authority establishes it, and none is cited."

@@ -150,3 +150,18 @@ rows = [
   ["LBF", "0.460", "0.446"],
   ["OvercookedV2", "143.3 ± 1.4", "132.2 ± 3.0"],
 ]
+
+[[references]]
+title = "Model Context Protocol — Specification (2025-06-18)"
+url = "https://modelcontextprotocol.io/specification/2025-06-18"
+note = "The MCP specification phlow's MCP server surface is built against; the dated URL redirects to the currently published specification index."
+
+[[references]]
+title = "A2A Protocol Specification"
+url = "https://a2a-protocol.org/latest/"
+note = "The A2A (Agent2Agent) protocol specification, in its latest published form — the agent-to-agent interoperability protocol phlow's multi-agent work speaks."
+
+[[references]]
+title = "JSON-RPC 2.0 Specification"
+url = "https://www.jsonrpc.org/specification"
+note = "The request/response envelope format the MCP wire protocol is built on."
