@@ -3,7 +3,7 @@
 # ~/workspace/project-pages/phlow-content-pack.md). The pack's gap list is
 # binding: unsupported sections are omitted, never filled in.
 slug = "phlow"
-name = "phlow"
+name = "Phlow"
 kind_line = "AGENT RUNTIME — RUST"
 repo_url = "https://github.com/qompassai/phlow"
 mark = "/img/projects/phlow.webp"
