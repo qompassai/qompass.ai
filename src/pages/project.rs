@@ -74,6 +74,26 @@ fn BenchTable(bench: &'static Benchmark) -> impl IntoView {
     }
 }
 
+/// The BENCHMARKS section of a solution page: the measured tables
+/// `solution_benchmarks` carries for the slug, rendered with the same
+/// BenchTable as the study pages. A slug with no benchmarks renders
+/// nothing, so a solution page without measurements is unchanged.
+#[component]
+fn BenchmarksSection(slug: &'static str) -> impl IntoView {
+    let benches = crate::pages::compass_services::solution_benchmarks(slug);
+    (!benches.is_empty()).then(|| {
+        view! {
+            <section class="study-section">
+                <p class="band-label">"BENCHMARKS"</p>
+                {benches
+                    .iter()
+                    .map(|b| view! { <BenchTable bench={b} /> })
+                    .collect_view()}
+            </section>
+        }
+    })
+}
+
 /// The four platform download boxes for one project, in the house
 /// order: Linux x86_64, Linux aarch64, Windows, Android.
 ///
@@ -545,6 +565,7 @@ fn AppGuidePage(guide: &'static AppGuide) -> impl IntoView {
                     })}
                 <GuideVisuals guide=guide />
                 <GuideSections guide=guide />
+                <BenchmarksSection slug=guide.slug />
                 {(!guide.gaps.is_empty())
                     .then(|| {
                         view! {
@@ -688,6 +709,7 @@ fn SolutionPage(solution: &'static Solution) -> impl IntoView {
                         }
                     })
                     .collect_view()}
+                <BenchmarksSection slug=solution.slug />
                 {(!crate::pages::compass_services::solution_references(solution.slug)
                     .is_empty())
                     .then(|| {
