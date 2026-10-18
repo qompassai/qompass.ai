@@ -11,6 +11,7 @@ use crate::pages::{
     project::ProjectDispatch,
     projects::Projects,
     research::Research,
+    solution_groups::{AppsPage, McpServersPage, PackagesPage},
     tiger_style::{TigerStyle, TigerStyleDispatch},
 };
 use leptos::prelude::*;
@@ -64,7 +65,15 @@ fn Header() -> impl IntoView {
                 </A>
                 <nav class="site-nav" aria-label="Primary">
                     <A href="/research">"Research"</A>
-                    <A href="/solutions">"Solutions"</A>
+                    <details class="nav-drop">
+                        <summary class="nav-drop-summary">"Solutions"</summary>
+                        <div class="nav-menu">
+                            <A href="/solutions">"All Solutions"</A>
+                            <A href="/solutions/apps">"Apps"</A>
+                            <A href="/solutions/mcp-servers">"MCP Servers"</A>
+                            <A href="/solutions/packages">"Packages"</A>
+                        </div>
+                    </details>
                     <A href="/standards">"Standards"</A>
                     <A href="/analysis">"Analysis"</A>
                     <A href="/field-notes">"Field Notes"</A>
@@ -192,6 +201,9 @@ pub fn App() -> impl IntoView {
                     <Route path=path!("/ontrack/privacy") view=OnTrackPrivacy />
                     <Route path=path!("/legal") view=Legal />
                     <Route path=path!("/solutions") view=Projects />
+                    <Route path=path!("/solutions/apps") view=AppsPage />
+                    <Route path=path!("/solutions/mcp-servers") view=McpServersPage />
+                    <Route path=path!("/solutions/packages") view=PackagesPage />
                     <Route path=path!("/light-show") view=LightShow />
                     <Route path=path!("/light-show/testers") view=LightShowTesters />
                     <Route path=path!("/field-notes") view=FieldNotes />

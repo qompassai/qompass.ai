@@ -16,5 +16,6 @@ pub mod privacy;
 pub mod project;
 pub mod projects;
 pub mod research;
+pub mod solution_groups;
 pub mod telco_quizzes;
 pub mod tiger_style;
