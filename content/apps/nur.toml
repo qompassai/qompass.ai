@@ -93,3 +93,17 @@ control = "curl -XPOST https://nur-update.nix-community.org/update?repo=<name>"
 [[controls]]
 action = "Local evaluation check for a member repo"
 control = "nix-env -f . -qa \\* --meta --allowed-uris https://static.rust-lang.org --option restrict-eval true --option allow-import-from-derivation true --drv-path --show-trace -I nixpkgs=$(nix-instantiate --find-file nixpkgs) -I ./ --json"
+[[visuals]]
+kind = "diagram"
+id = "nur-index"
+caption = "NUR's index flow: repos.json registers 581 community repositories; evaluating default.nix resolves each into the nur.repos.<name>.<package> namespace, locked to pinned revisions, and packages build from source on the consumer's machine."
+
+[[references]]
+title = "NUR \u2014 the Nix User Repository (upstream)"
+url = "https://github.com/nix-community/NUR"
+note = "The upstream project this repository forks: its README defines the repos.json manifest, the attribute namespace, and the contribution flow."
+
+[[references]]
+title = "Nix Reference Manual"
+url = "https://nixos.org/manual/nix/stable/"
+note = "The Nix language and evaluator semantics the index relies on \u2014 attribute sets, overrides, and derivation builds from source."

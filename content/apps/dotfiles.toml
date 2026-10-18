@@ -95,3 +95,17 @@ control = "`mkdir -p ~/.ssh && chmod 700 ~/.ssh` plus `known_hosts`/`authorized_
 [[controls]]
 action = "Install pre-commit hook (setup shell step)"
 control = "cp pre-commit .git/hooks/pre-commit"
+[[visuals]]
+kind = "diagram"
+id = "dotfiles-links"
+caption = "The dotfiles deployment flow: files in the repo are mapped by the qonfig.yaml link plan (25 link targets, with cleanup and setup steps) onto their $HOME destinations under the XDG convention, while the Nix flake's userEnvironment builds the tool set the quickstart drops you into."
+
+[[references]]
+title = "XDG Base Directory Specification"
+url = "https://specifications.freedesktop.org/basedir-spec/latest/"
+note = "The specification behind the repo's layout convention: configuration lives under $XDG_CONFIG_HOME (~/.config)."
+
+[[references]]
+title = "Nix \u2014 Flakes (nix.dev concepts)"
+url = "https://nix.dev/concepts/flakes"
+note = "The flake model behind the repo's userEnvironment package sets and the nix develop entry the quickstart uses."

@@ -91,3 +91,12 @@ control = "`./create-latest-svc -s scope [-g ghe_domain] [-n name] [-u user] [-l
 [[controls]]
 action = "Remove a runner service / delete an offline runner (upstream mirror)"
 control = "scripts/remove-svc.sh`; `scripts/delete.sh"
+[[visuals]]
+kind = "diagram"
+id = "current-runner"
+caption = "Current's check lifecycle \u2014 the project's own design, drawn from runner/README.md and the runner source: a repo declares checks in .current.toml, the runner executes them one at a time under hard timeouts and per-stream log caps, and appends one JSON object per check to a local results log. Exit codes: 0 pass, 1 failure or timeout, 2 usage or manifest error."
+
+[[references]]
+title = "GitHub Actions Runner (upstream)"
+url = "https://github.com/actions/runner"
+note = "Provenance and compatibility target only: Current's public repo still carries this upstream runner as a mirror, but the runner this page documents is Qompass AI's own Rust design \u2014 no external specification establishes it."

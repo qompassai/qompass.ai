@@ -225,3 +225,32 @@ control = "`cd android && ./gradlew assembleRelease` (Android SDK 35, JDK 17)"
 [[controls]]
 action = "Use the Android client"
 control = "Tor bootstrap with progress UI, then inbox/compose over IMAP+SMTP through Tor; foreground service keeps the onion connection alive during sync"
+[[visuals]]
+kind = "diagram"
+id = "ghost-mail"
+caption = "Ghost's mail stack as its NixOS module wires it: Postfix receives SMTP, Rspamd runs the SPF/DKIM/DMARC authentication gates (with greylisting and optional antivirus), Dovecot delivers by LMTP into the maildir, and outbound mail leaves DKIM-signed by Rspamd \u2014 component roles and options as default.nix and docs/quickstart.rst state them."
+
+[[references]]
+title = "RFC 5321 \u2014 Simple Mail Transfer Protocol"
+url = "https://www.rfc-editor.org/rfc/rfc5321"
+note = "The SMTP protocol Postfix speaks when Ghost receives and submits mail."
+
+[[references]]
+title = "RFC 6376 \u2014 DomainKeys Identified Mail (DKIM) Signatures"
+url = "https://www.rfc-editor.org/rfc/rfc6376"
+note = "The signing scheme Rspamd applies to Ghost's outbound mail; the public key is the DNS TXT record the quickstart has you publish."
+
+[[references]]
+title = "RFC 7208 \u2014 Sender Policy Framework (SPF)"
+url = "https://www.rfc-editor.org/rfc/rfc7208"
+note = "The sender-policy framework one of Rspamd's inbound authentication gates evaluates."
+
+[[references]]
+title = "RFC 7489 \u2014 Domain-based Message Authentication, Reporting, and Conformance (DMARC)"
+url = "https://www.rfc-editor.org/rfc/rfc7489"
+note = "The policy layer that ties SPF and DKIM results to the sender domain on inbound checks."
+
+[[references]]
+title = "Rspamd documentation"
+url = "https://docs.rspamd.com/"
+note = "The filter Ghost embeds: its SPF/DKIM/DMARC checks, greylisting, and DKIM signing are documented here."

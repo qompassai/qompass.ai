@@ -17,3 +17,17 @@ gaps = "- No Debian-specific content could be sourced: no apt/dpkg configuration
 [[controls]]
 action = "Quick start (as printed in the README; installs the dotfiles repo, see GAPS)"
 control = "bash <quickstart script embedded in README>` — the embedded script runs `git clone https://github.com/qompassai/dotfiles` into `$HOME/.dotfiles`, symlinks the Nix config, installs Nix if missing, then `nix flake update` and `nix develop"
+[[references]]
+title = "Debian \u2014 Mirroring Debian"
+url = "https://www.debian.org/mirror/"
+note = "Debian's own documentation of what a package mirror is and how mirroring is done \u2014 the subject this repository is titled for."
+
+[[references]]
+title = "The Debian Administrator's Handbook"
+url = "https://debian-handbook.info/browse/stable/"
+note = "The project's reference handbook for administering Debian systems, including package management and mirror concepts."
+
+[[references]]
+title = "Qompass AI \u2014 Debian repository"
+url = "https://github.com/qompassai/debian"
+note = "The product repository itself: as its own tree shows, it currently carries README and metadata only \u2014 which is why this page carries references and no diagram."

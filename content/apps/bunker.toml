@@ -200,3 +200,17 @@ control = "bunkerd-adm show-hybrid-public-key"
 [[controls]]
 action = "Build the subset (no-Nix) client"
 control = "cargo build -p bunker-client --no-default-features --release"
+[[visuals]]
+kind = "diagram"
+id = "bunker-cache"
+caption = "Bunker's cache flow: the client uploads only the paths the server is missing, the server chunks (content-defined), compresses, and deduplicates the NARs, and Nix clients fetch narinfo whose Ed25519 signature they verify before substituting anything \u2014 an untrusted cache is refused, not used."
+
+[[references]]
+title = "Nix manual \u2014 Binary cache substituter"
+url = "https://nix.dev/manual/nix/stable/package-management/binary-cache-substituter"
+note = "The binary-cache model Bunker implements: narinfo metadata, signatures, and the trusted-public-keys check a client applies before trusting a cache."
+
+[[references]]
+title = "RFC 8032 \u2014 Edwards-Curve Digital Signature Algorithm (EdDSA)"
+url = "https://www.rfc-editor.org/rfc/rfc8032"
+note = "The signature scheme behind the cache signing keys \u2014 verification is the fail-closed step in the diagram."

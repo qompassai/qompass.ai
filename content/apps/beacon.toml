@@ -118,3 +118,27 @@ control = "`beacon dkim gened25519\\"
 [[controls]]
 action = "Show version / help"
 control = "beacon version`; `beacon help [command …]"
+[[visuals]]
+kind = "diagram"
+id = "beacon-mail"
+caption = "Beacon's single-binary mail flow: one Go process serves SMTP submission and delivery, IMAP access, and the HTTPS webmail and admin interfaces, with ACME (Let's Encrypt) issuing its TLS certificates \u2014 the surface doc.go and the quickstart describe."
+
+[[references]]
+title = "RFC 5321 \u2014 Simple Mail Transfer Protocol"
+url = "https://www.rfc-editor.org/rfc/rfc5321"
+note = "The SMTP protocol Beacon accepts and delivers mail with."
+
+[[references]]
+title = "RFC 9051 \u2014 Internet Message Access Protocol (IMAP) - Version 4rev2"
+url = "https://www.rfc-editor.org/rfc/rfc9051"
+note = "The current IMAP revision \u2014 the protocol Beacon serves for mailbox access."
+
+[[references]]
+title = "RFC 8555 \u2014 Automatic Certificate Management Environment (ACME)"
+url = "https://www.rfc-editor.org/rfc/rfc8555"
+note = "The protocol behind Beacon's automatic TLS: missing essential certificates are requested at startup, others on demand."
+
+[[references]]
+title = "mox \u2014 modern, secure, all-in-one mail server (upstream)"
+url = "https://github.com/mjl-/mox"
+note = "Provenance: Beacon's codebase derives from the mox mail server; the upstream repository is the reference implementation this codebase rebrands."
