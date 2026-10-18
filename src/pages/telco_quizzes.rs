@@ -22,6 +22,7 @@
 //! owns it, and hydration must not walk nodes a page script owns.
 use crate::field_notes_data::{question_count, Quiz, QuizQuestion, QUIZZES};
 use crate::pages::compass_services::{solution_page, CARDINALS};
+use crate::pages::project::ReferencesSection;
 use leptos::prelude::*;
 use leptos_meta::Title;
 
@@ -271,6 +272,19 @@ pub fn TelcoQuizzes() -> impl IntoView {
                     <h1>{name}</h1>
                 </header>
                 {quiz_section(run, enhanced)}
+                {crate::pages::diagrams::diagram("telco-answer-keys").map(|svg| {
+                    view! {
+                        <section class="study-section">
+                            <h2 class="band-label">"HOW THE KEYS STAY SEALED"</h2>
+                            <figure class="study-graphic">
+                                {svg}
+                                <figcaption class="study-graphic-caption">
+                                    {crate::pages::diagrams::diagram_caption("telco-answer-keys")}
+                                </figcaption>
+                            </figure>
+                        </section>
+                    }
+                })}
                 <section class="study-section fn-quizzes" id="answer-keys">
                     <h2 class="band-label">"ANSWER KEYS"</h2>
                     <p>
@@ -279,6 +293,7 @@ pub fn TelcoQuizzes() -> impl IntoView {
                     </p>
                     {QUIZZES.iter().map(answer_key).collect_view()}
                 </section>
+                <ReferencesSection refs={crate::pages::diagrams::b5::telco_references()} />
             </article>
             <script src="/js/answer-keys.js" defer></script>
         </section>

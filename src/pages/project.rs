@@ -15,7 +15,7 @@
 //! `KaTeX` under `/vendor/katex` (loaded only on these pages). With no
 //! JavaScript the raw LaTeX remains visible in a styled mono span —
 //! degraded, never broken.
-use crate::app_data::{app_guide, AppGuide, GuideControl, GuideEntry};
+use crate::app_data::{app_guide, AppGuide, GuideControl, GuideEntry, GuideVisual};
 use crate::pages::compass_services::{solution_page, version_link, Solution, CARDINALS};
 use crate::pages::telco_quizzes::{self, TelcoQuizzes};
 use crate::project_data::{project_page, Benchmark};
@@ -383,6 +383,114 @@ fn GuideSections(guide: &'static AppGuide) -> impl IntoView {
     }
 }
 
+/// The REFERENCES section shared by guide pages, study pages, and
+/// generated solution pages: the primary sources a reader can follow
+/// to validate the specs, protocols, and equations a page relies on.
+/// Each entry is `(title, url, note)`; the note says what the source
+/// establishes. An empty list renders nothing.
+#[component]
+pub fn ReferencesSection(refs: Vec<(&'static str, &'static str, &'static str)>) -> impl IntoView {
+    view! {
+        <section class="study-section">
+            <p class="band-label">"REFERENCES"</p>
+            <ol class="ref-list">
+                {refs
+                    .into_iter()
+                    .map(|(title, url, note)| {
+                        view! {
+                            <li>
+                                <a href={url}>{title}</a>
+                                {(!note.is_empty())
+                                    .then(|| view! { <span class="ref-note">{note}</span> })}
+                            </li>
+                        }
+                    })
+                    .collect_view()}
+            </ol>
+        </section>
+    }
+}
+
+/// One visual from a guide's `visuals` list: a registry diagram, an
+/// equation with the prose that defines its quantities, or a real
+/// media artifact (image or video) with its provenance caption. An
+/// unknown diagram id renders nothing, so a page ships a diagram only
+/// when one is registered — the same rule as `ProjectGraphic`.
+#[component]
+fn GuideVisualView(visual: &'static GuideVisual) -> impl IntoView {
+    match visual.kind {
+        "diagram" => crate::pages::diagrams::diagram(visual.id).map_or_else(
+            || ().into_any(),
+            |svg| {
+                view! {
+                    <figure class="study-graphic">
+                        {svg}
+                        <figcaption class="study-graphic-caption">{visual.caption}</figcaption>
+                    </figure>
+                }
+                .into_any()
+            },
+        ),
+        "equation" => view! {
+            <figure class="math-figure">
+                <div class="math-block">
+                    // inner_html, not a text child: KaTeX replaces the
+                    // span's content in the browser, and hydration must
+                    // not walk nodes a page script owns (as in METHODS).
+                    <span
+                        class="math-source"
+                        inner_html=format!("\\[{}\\]", visual.latex)
+                    ></span>
+                </div>
+                <p class="eq-define">{visual.define}</p>
+                <figcaption class="study-graphic-caption">{visual.caption}</figcaption>
+            </figure>
+        }
+        .into_any(),
+        "image" => view! {
+            <figure class="study-graphic visual-media">
+                <img src={visual.src} alt={visual.alt} loading="lazy" />
+                <figcaption class="study-graphic-caption">{visual.caption}</figcaption>
+            </figure>
+        }
+        .into_any(),
+        "video" => view! {
+            <figure class="study-graphic visual-media">
+                <video
+                    src={visual.src}
+                    poster={visual.poster}
+                    controls
+                    preload="none"
+                    playsinline
+                ></video>
+                <figcaption class="study-graphic-caption">{visual.caption}</figcaption>
+            </figure>
+        }
+        .into_any(),
+        _ => ().into_any(),
+    }
+}
+
+/// The CONCEPTS section of an app guide: its diagrams, equations, and
+/// real media in the order the content file authors them. Shared by
+/// the guide page and by a study page whose project also carries a
+/// guide, so the two surfaces cannot drift apart.
+#[component]
+fn GuideVisuals(guide: &'static AppGuide) -> impl IntoView {
+    (!guide.visuals.is_empty()).then(|| {
+        view! {
+            <section class="study-section">
+                <p class="band-label">"CONCEPTS"</p>
+                {guide
+                    .visuals
+                    .iter()
+                    .map(|v| view! { <GuideVisualView visual={v} /> })
+                    .collect_view()}
+            </section>
+        }
+    })
+}
+
 /// The app guide page for one application: what it is, how it works
 /// (the flow diagram), its real configuration options and controls,
 /// and — stated plainly — what the sources did not cover.
@@ -435,6 +543,7 @@ fn AppGuidePage(guide: &'static AppGuide) -> impl IntoView {
                             </section>
                         }
                     })}
+                <GuideVisuals guide=guide />
                 <GuideSections guide=guide />
                 {(!guide.gaps.is_empty())
                     .then(|| {
@@ -448,7 +557,31 @@ fn AppGuidePage(guide: &'static AppGuide) -> impl IntoView {
                             </section>
                         }
                     })}
+                {(!guide.references.is_empty())
+                    .then(|| {
+                        view! {
+                            <ReferencesSection refs={
+                                guide
+                                    .references
+                                    .iter()
+                                    .map(|r| (r.title, r.url, r.note))
+                                    .collect::<Vec<_>>()
+                            } />
+                        }
+                    })}
             </article>
+            {guide
+                .visuals
+                .iter()
+                .any(|v| v.kind == "equation")
+                .then(|| {
+                    view! {
+                        <link rel="stylesheet" href="/vendor/katex/katex.min.css" />
+                        <script src="/vendor/katex/katex.min.js"></script>
+                        <script src="/vendor/katex/contrib/auto-render.min.js"></script>
+                        <script src="/js/project.js"></script>
+                    }
+                })}
         </section>
     }
 }
@@ -530,6 +663,41 @@ fn SolutionPage(solution: &'static Solution) -> impl IntoView {
                             </section>
                         }
                     })}
+                {crate::pages::diagrams::page_diagram(solution.slug)
+                    .and_then(|id| {
+                        crate::pages::diagrams::diagram(id).map(|svg| (id, svg))
+                    })
+                    .map(|(id, svg)| {
+                        view! {
+                            <figure class="study-graphic">
+                                {svg}
+                                <figcaption class="study-graphic-caption">
+                                    {crate::pages::diagrams::diagram_caption(id)}
+                                </figcaption>
+                            </figure>
+                        }
+                    })}
+                {crate::pages::compass_services::solution_media(solution.slug)
+                    .into_iter()
+                    .map(|(src, alt, caption)| {
+                        view! {
+                            <figure class="visual-media">
+                                <img src=src alt=alt loading="lazy" />
+                                <figcaption>{caption}</figcaption>
+                            </figure>
+                        }
+                    })
+                    .collect_view()}
+                {(!crate::pages::compass_services::solution_references(solution.slug)
+                    .is_empty())
+                    .then(|| {
+                        view! {
+                            <ReferencesSection refs={
+                                crate::pages::compass_services::solution_references(solution.slug)
+                                    .to_vec()
+                            } />
+                        }
+                    })}
             </article>
         </section>
     }
@@ -577,6 +745,7 @@ pub fn ProjectStudy(slug: &'static str) -> impl IntoView {
                     <DownloadBoxes slug={page.slug} />
                 </section>
                 {(!page.graphic.is_empty()).then(|| view! { <ProjectGraphic id={page.graphic} /> })}
+                {app_guide(page.slug).map(|guide| view! { <GuideVisuals guide=guide /> })}
                 {(!page.abstract_text.is_empty())
                     .then(|| {
                         view! {
@@ -698,6 +867,18 @@ pub fn ProjectStudy(slug: &'static str) -> impl IntoView {
                                     inner_html="<p class=\"interactive-fallback\">This element is interactive in the browser; the measurements behind it are in the tables above.</p>"
                                 ></div>
                             </section>
+                        }
+                    })}
+                {(!page.references.is_empty())
+                    .then(|| {
+                        view! {
+                            <ReferencesSection refs={
+                                page
+                                    .references
+                                    .iter()
+                                    .map(|r| (r.title, r.url, r.note))
+                                    .collect::<Vec<_>>()
+                            } />
                         }
                     })}
             </article>

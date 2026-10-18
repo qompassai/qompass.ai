@@ -258,6 +258,244 @@ pub fn solution_page(slug: &str) -> Option<&'static Solution> {
     SOLUTIONS.iter().find(|s| s.slug == slug)
 }
 
+/// Primary references for a generated solution page (the MCP servers
+///
+/// and the `LuaRocks` packages carry no guide TOML, so their citations
+/// live here): `(title, url, note)` triples the page renders as its
+/// REFERENCES section. Every URL is liveness-checked when the list
+///
+/// changes; a slug with no entry renders no section.
+pub fn solution_references(slug: &str) -> &'static [(&'static str, &'static str, &'static str)] {
+    match slug {
+        "blaze-nvim-luarocks" => &[
+            (
+                "LuaRocks — the blaze.nvim rock",
+                "https://luarocks.org/modules/phaedrusflow/blaze.nvim",
+                "The Mojo language support plugin for Neovim, published as a LuaRock.",
+            ),
+            (
+                "Diver — the Neovim distribution this rock belongs to",
+                "https://github.com/qompassai/diver",
+                "Blaze ships inside the Diver distribution as its Mojo lane.",
+            ),
+        ],
+        "diver-ai" => &[
+            (
+                "LuaRocks — the diver-ai rock",
+                "https://luarocks.org/modules/phaedrusflow/diver-ai",
+                "AI tooling lane of the Diver Neovim distribution, published as a LuaRock.",
+            ),
+            (
+                "Diver — the Neovim distribution this rock belongs to",
+                "https://github.com/qompassai/diver",
+                "The source repository the rock is published from.",
+            ),
+        ],
+        "diver-comms" => &[
+            (
+                "LuaRocks — the diver-comms rock",
+                "https://luarocks.org/modules/phaedrusflow/diver-comms",
+                "Communication tooling lane of the Diver Neovim distribution, published as a LuaRock.",
+            ),
+            (
+                "Diver — the Neovim distribution this rock belongs to",
+                "https://github.com/qompassai/diver",
+                "The source repository the rock is published from.",
+            ),
+        ],
+        "diver-config" => &[
+            (
+                "LuaRocks — the diver-config rock",
+                "https://luarocks.org/modules/phaedrusflow/diver-config",
+                "Configuration lane of the Diver Neovim distribution, published as a LuaRock.",
+            ),
+            (
+                "Diver — the Neovim distribution this rock belongs to",
+                "https://github.com/qompassai/diver",
+                "The source repository the rock is published from.",
+            ),
+        ],
+        "diver-dap" => &[
+            (
+                "LuaRocks — the diver-dap rock",
+                "https://luarocks.org/modules/phaedrusflow/diver-dap",
+                "Debug-adapter lane of the Diver Neovim distribution, published as a LuaRock.",
+            ),
+            (
+                "Diver — the Neovim distribution this rock belongs to",
+                "https://github.com/qompassai/diver",
+                "The source repository the rock is published from.",
+            ),
+        ],
+        "diver-dev" => &[
+            (
+                "LuaRocks — the diver-dev rock",
+                "https://luarocks.org/modules/phaedrusflow/diver-dev",
+                "Development tooling lane of the Diver Neovim distribution, published as a LuaRock.",
+            ),
+            (
+                "Diver — the Neovim distribution this rock belongs to",
+                "https://github.com/qompassai/diver",
+                "The source repository the rock is published from.",
+            ),
+        ],
+        "diver-games" => &[
+            (
+                "LuaRocks — the diver-games rock",
+                "https://luarocks.org/modules/phaedrusflow/diver-games",
+                "Games lane of the Diver Neovim distribution, published as a LuaRock.",
+            ),
+            (
+                "Diver — the Neovim distribution this rock belongs to",
+                "https://github.com/qompassai/diver",
+                "The source repository the rock is published from.",
+            ),
+        ],
+        "diver-lintfmt" => &[
+            (
+                "LuaRocks — the diver-lintfmt rock",
+                "https://luarocks.org/modules/phaedrusflow/diver-lintfmt",
+                "Lint and format lane of the Diver Neovim distribution, published as a LuaRock.",
+            ),
+            (
+                "Diver — the Neovim distribution this rock belongs to",
+                "https://github.com/qompassai/diver",
+                "The source repository the rock is published from.",
+            ),
+        ],
+        "diver-research" => &[
+            (
+                "LuaRocks — the diver-research rock",
+                "https://luarocks.org/modules/phaedrusflow/diver-research",
+                "Research and journal lane of the Diver Neovim distribution, published as a LuaRock.",
+            ),
+            (
+                "Diver — the Neovim distribution this rock belongs to",
+                "https://github.com/qompassai/diver",
+                "The source repository the rock is published from.",
+            ),
+        ],
+        "diver-security" => &[
+            (
+                "LuaRocks — the diver-security rock",
+                "https://luarocks.org/modules/phaedrusflow/diver-security",
+                "Security tooling lane of the Diver Neovim distribution, published as a LuaRock.",
+            ),
+            (
+                "Diver — the Neovim distribution this rock belongs to",
+                "https://github.com/qompassai/diver",
+                "The source repository the rock is published from.",
+            ),
+        ],
+        "diver-utils" => &[
+            (
+                "LuaRocks — the diver-utils rock",
+                "https://luarocks.org/modules/phaedrusflow/diver-utils",
+                "Utility lane of the Diver Neovim distribution, published as a LuaRock.",
+            ),
+            (
+                "Diver — the Neovim distribution this rock belongs to",
+                "https://github.com/qompassai/diver",
+                "The source repository the rock is published from.",
+            ),
+        ],
+        "eigenstyle" => &[
+            (
+                "Model Context Protocol — specification",
+                "https://modelcontextprotocol.io/specification/2025-06-18",
+                "The MCP tool surface Eigenstyle serves: tools/list and tools/call over JSON-RPC.",
+            ),
+            (
+                "JSON-RPC 2.0 — specification",
+                "https://www.jsonrpc.org/specification",
+                "The wire format under every MCP exchange.",
+            ),
+        ],
+        "fathom" => &[
+            (
+                "Model Context Protocol — specification",
+                "https://modelcontextprotocol.io/specification/2025-06-18",
+                "Fathom serves its providers over MCP (stdio and HTTP) — the tool contract.",
+            ),
+            (
+                "A2A Protocol — Agent2Agent specification",
+                "https://a2a-protocol.org/latest/",
+                "Fathom also answers over the A2A agent protocol.",
+            ),
+            (
+                "Ghidra — NSA software reverse engineering framework",
+                "https://github.com/NationalSecurityAgency/ghidra",
+                "The upstream analysis engine behind Fathom's native binary provider.",
+            ),
+        ],
+        "hyprlua" => &[
+            (
+                "LuaRocks — the hyprlua rock",
+                "https://luarocks.org/modules/phaedrusflow/hyprlua",
+                "Lua bindings and helpers for the Hyprland compositor, published as a LuaRock.",
+            ),
+            (
+                "Hyprland wiki",
+                "https://wiki.hypr.land/",
+                "The compositor hyprlua scripts against: its IPC and configuration model.",
+            ),
+        ],
+        "lumen" => &[
+            (
+                "Model Context Protocol — specification",
+                "https://modelcontextprotocol.io/specification/2025-06-18",
+                "Lumen's style and VRM operations are served as MCP tools (stdio).",
+            ),
+            (
+                "A2A Protocol — Agent2Agent specification",
+                "https://a2a-protocol.org/latest/",
+                "Lumen also serves the same operations over the A2A agent protocol.",
+            ),
+            (
+                "VRM specification — VRM consortium",
+                "https://github.com/vrm-c/vrm-specification",
+                "The avatar format Lumen inspects and grades: a glTF 2.0 extension for humanoid avatars.",
+            ),
+            (
+                "glTF 2.0 — Khronos specification",
+                "https://registry.khronos.org/glTF/specs/2.0/glTF-2.0.html",
+                "The base 3D format under every VRM file: the GLB container Lumen parses.",
+            ),
+        ],
+        "phlow-mcp-server" => &[
+            (
+                "Model Context Protocol — specification",
+                "https://modelcontextprotocol.io/specification/2025-06-18",
+                "The server surface this package exposes for the Phlow runtime.",
+            ),
+            (
+                "JSON-RPC 2.0 — specification",
+                "https://www.jsonrpc.org/specification",
+                "The wire format under every MCP exchange.",
+            ),
+            (
+                "A2A Protocol — Agent2Agent specification",
+                "https://a2a-protocol.org/latest/",
+                "The agent protocol Phlow's runtime also speaks.",
+            ),
+        ],
+        _ => &[],
+    }
+}
+
+/// Real media artifacts shown on a generated solution page: (src, alt,
+/// caption). Only artifacts the project itself produced — outputs of the
+/// shipped engine, never illustrations. Empty for most slugs.
+pub fn solution_media(slug: &str) -> Vec<(&'static str, &'static str, &'static str)> {
+    match slug {
+        "lumen" => vec![
+            ("/img/lumen/lumen_grade_compare.webp", "Before and after panels of Lumen style grades applied to a single portrait crop", "Lumen's shipped grade presets applied to one portrait crop by the engine itself — the before/after board from the 2026-10-18 lightshow video study, produced with the engine's own style operations."),
+            ("/img/lumen/demo_toon_pixel_check.png", "The demo_toon grade checked on a pixel-art sprite", "The demo_toon preset — landed as a shipped style on 2026-10-18 — checked on a pixel sprite from the same study: the posterize step that speckles painted portraits stays clean on pixel art."),
+        ],
+        _ => Vec::new(),
+    }
+}
+
 /// A cardinal stays in the readout up to this far off the bearing
 /// (raw weight cos 80° ≈ 0.17); past it the share is too small to read.
 const READOUT_MAX_OFF: u16 = 80;

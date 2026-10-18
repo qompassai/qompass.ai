@@ -1063,6 +1063,60 @@ a.download-box .download-state {
   font-size: 11px;
   letter-spacing: 0.1em;
 }
+.gfx-dash {
+  stroke-dasharray: 4 3;
+}
+.gfx-hot {
+  fill: var(--chart-raise);
+  stroke: var(--cherenkov);
+}
+.gfx-chip {
+  fill: var(--chart-raise);
+  stroke: var(--chart-line);
+}
+.gfx-fill-brass {
+  fill: var(--brass);
+}
+.gfx-fill-cyan {
+  fill: var(--cherenkov);
+}
+.gfx-fill-fog {
+  fill: var(--fog);
+}
+.math-figure {
+  margin: 2.2rem auto 0;
+  max-width: 48rem;
+}
+.eq-define {
+  color: var(--fog);
+  font-size: 0.95rem;
+  line-height: 1.6;
+}
+.visual-media img,
+.visual-media video {
+  border: 1px solid var(--chart-line);
+  border-radius: 4px;
+  display: block;
+  height: auto;
+  margin: 0 auto;
+  max-width: 100%;
+}
+.ref-list {
+  color: var(--starlight);
+  line-height: 1.55;
+  padding-left: 1.4rem;
+}
+.ref-list li {
+  margin-bottom: 0.7rem;
+}
+.ref-list a {
+  color: var(--brass);
+}
+.ref-note {
+  color: var(--fog);
+  display: block;
+  font-size: 0.92rem;
+}
 .interactive-slot {
   background: var(--chart);
   border: 1px solid var(--chart-line);
@@ -3540,5 +3594,29 @@ a.download-box .download-state {
   .ring-card {
     transform: rotate(var(--ring-turn, 0deg));
     transition: transform 1.6s cubic-bezier(0.45, 0.05, 0.25, 1);
+  }
+}
+
+/* Vertical pulse travel for concept diagrams (Phase: visuals pass).
+   Same discipline as every other motion on the site: transform and
+   opacity only, and only when the visitor has not asked for reduced
+   motion. */
+@media (prefers-reduced-motion: no-preference) {
+  .gfx-pulse-y {
+    animation: gfx-travel-y 6s ease-in-out infinite;
+  }
+  @keyframes gfx-travel-y {
+    0% {
+      opacity: 0;
+      transform: translateY(0);
+    }
+    10% {
+      opacity: 1;
+    }
+    32%,
+    100% {
+      opacity: 0;
+      transform: translateY(32px);
+    }
   }
 }
