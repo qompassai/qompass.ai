@@ -242,6 +242,42 @@ pub fn Research() -> impl IntoView {
                     })
                     .collect_view()}
             </div>
+            <h2 class="record-head">"Manuscripts — the Odyssey Program"</h2>
+            <p class="record-meta">
+                "Eleven manuscripts in preparation, each tracked in its own Odyssey "
+                "sub-repo. This tracker is rendered from the program rollup — a "
+                "manuscript's status.json is the source of truth, and a stage changes "
+                "only when the work does."
+            </p>
+            <div class="entry-list">
+                {crate::manuscript_data::MANUSCRIPTS
+                    .iter()
+                    .map(|m| {
+                        let stage_label = match m.stage {
+                            "planned" => "STAGE — PLANNED",
+                            "drafting" => "STAGE — DRAFTING",
+                            "internal-review" => "STAGE — INTERNAL REVIEW",
+                            "preflight" => "STAGE — PREFLIGHT",
+                            "packaged" => "STAGE — PACKAGED",
+                            "submitted" => "STAGE — SUBMITTED",
+                            "under-review" => "STAGE — UNDER REVIEW",
+                            "revision" => "STAGE — REVISION",
+                            "accepted" => "STAGE — ACCEPTED",
+                            "published" => "STAGE — PUBLISHED",
+                            _ => "STAGE — WITHDRAWN",
+                        };
+                        view! {
+                            <article class="entry tracker-entry">
+                                <p class="entry-kind">
+                                    {stage_label} " · UPDATED " {m.updated}
+                                </p>
+                                <h2>{m.title}</h2>
+                                <p>{m.journal_name}</p>
+                            </article>
+                        }
+                    })
+                    .collect_view()}
+            </div>
             <h2 class="record-head">"Software"</h2>
             <p class="record-meta">
                 <span id="orcid-status">"Snapshot from build time; refreshing from ORCID…"</span>
