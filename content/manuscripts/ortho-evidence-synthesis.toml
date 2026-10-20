@@ -1,7 +1,7 @@
 slug = "ortho-evidence-synthesis"
 ready = true
 why = "Surgeons disagree about a concrete question: after a primary hip or knee replacement, does extending oral antibiotic prophylaxis beyond the standard first day reduce prosthetic joint infection — or does it mainly buy adverse drug events and resistance pressure? The trials are small, the observational studies are confounded by indication (sicker patients get longer courses), and the answer matters to every arthroplasty service.\n\nThis study answers the clinical question with a systematic review and meta-analysis reported to PRISMA 2020, with prespecified duration subgroups and explicit handling of confounding by indication — and it runs the review itself on a validated local pipeline. A team of small language models on an ordinary workstation, with no patient data and no cloud service, performs deduplication, screening and structured extraction under a deterministic record, and the paper reports the pipeline's validation (agreement with human reviewers, with confidence intervals) beside the clinical findings, so other groups can judge both the answer and the instrument that produced it."
-sources_note = "Anchor sources for this study, verified against the Crossref registry (existence and title match) on 2026-10-20."
+sources_note = "Sources for this study, verified against the Crossref and DataCite registries (existence and title match) on 2026-10-20; reports and software are cited to their publishers."
 
 [[references]]
 title = "Preferred reporting items for systematic review and meta-analysis protocols (PRISMA-P) 2015 statement"
@@ -32,3 +32,83 @@ note = "2021"
 title = "No Improvement in Infection or Complication Rate With Extended Oral Antibiotic Prophylaxis After Primary Total Joint Arthroplasty"
 url = "https://doi.org/10.1016/j.arth.2026.05.044"
 note = "2026"
+
+[[references]]
+title = "Rayyan—a web and mobile app for systematic reviews"
+url = "https://doi.org/10.1186/s13643-016-0384-4"
+note = "2016"
+
+[[references]]
+title = "New Definition for Periprosthetic Joint Infection: From the Workgroup of the Musculoskeletal Infection Society"
+url = "https://doi.org/10.1007/s11999-011-2102-9"
+note = "2011"
+
+[[references]]
+title = "The 2018 Definition of Periprosthetic Hip and Knee Infection: An Evidence-Based and Validated Criteria"
+url = "https://doi.org/10.1016/j.arth.2018.02.078"
+note = "2018"
+
+[[references]]
+title = "The EBJIS definition of periprosthetic joint infection"
+url = "https://doi.org/10.1302/0301-620X.103B1.BJJ-2020-1381.R1"
+note = "2021"
+
+[[references]]
+title = "RoB 2: a revised tool for assessing risk of bias in randomised trials"
+url = "https://doi.org/10.1136/bmj.l4898"
+note = "2019"
+
+[[references]]
+title = "ROBINS-I: a tool for assessing risk of bias in non-randomised studies of interventions"
+url = "https://doi.org/10.1136/bmj.i4919"
+note = "2016"
+
+[[references]]
+title = "The Hartung-Knapp-Sidik-Jonkman method for random effects meta-analysis is straightforward and considerably outperforms the standard DerSimonian-Laird method"
+url = "https://doi.org/10.1186/1471-2288-14-25"
+note = "2014"
+
+[[references]]
+title = "Conducting Meta-Analyses in R with the metafor Package"
+url = "https://doi.org/10.18637/jss.v036.i03"
+note = "2010"
+
+[[references]]
+title = "Synthesis without meta-analysis (SWiM) in systematic reviews: reporting guideline"
+url = "https://doi.org/10.1136/bmj.l6890"
+note = "2020"
+
+[[references]]
+title = "GRADE: an emerging consensus on rating quality of evidence and strength of recommendations"
+url = "https://doi.org/10.1136/bmj.39489.470347.AD"
+note = "2008"
+
+[[references]]
+title = "GRADE guidelines: 18. How ROBINS-I and other tools to assess risk of bias in nonrandomized studies should be used to rate the certainty of a body of evidence"
+url = "https://doi.org/10.1016/j.jclinepi.2018.01.012"
+note = "2019"
+
+[[references]]
+title = "A Coefficient of Agreement for Nominal Scales"
+url = "https://doi.org/10.1177/001316446002000104"
+note = "1960"
+
+[[references]]
+title = "Extended Oral Antibiotic Prophylaxis in High-Risk Patients Substantially Reduces Primary Total Hip and Knee Arthroplasty 90-Day Infection Rate"
+url = "https://doi.org/10.2106/JBJS.17.01485"
+note = "2018"
+
+[[references]]
+title = "Not so Fast: Extended Oral Antibiotic Prophylaxis Does Not Reduce 90-Day Infection Rate Following Joint Arthroplasty"
+url = "https://doi.org/10.1016/j.arth.2024.04.064"
+note = "2024"
+
+[[references]]
+title = "Extended Prophylactic Antibiotics for Primary and Aseptic Revision Total Joint Arthroplasty: A Meta-Analysis"
+url = "https://doi.org/10.1016/j.arth.2024.01.014"
+note = "2024"
+
+[[references]]
+title = "Single-Dose Versus Extended Antibiotic Prophylaxis in Primary Hip and Knee Arthroplasty: A Systematic Review and Meta-Analysis"
+url = "https://doi.org/10.7759/cureus.74049"
+note = "2024"

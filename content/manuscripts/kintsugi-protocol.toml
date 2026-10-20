@@ -1,7 +1,7 @@
 slug = "kintsugi-protocol"
 ready = true
 why = "Clinical AI is moving from single models to pipelines in which several agents share work — one summarises a referral, another assigns urgency, a third drafts a reply. Such pipelines inherit the coordination problem clinical teams know from handoffs: an agent can receive a goal without taking it up, and two agents can act on divergent readings of the same task with neither noticing. Medicine's fixes are known — the structured handoff that cut medical errors by 23 percent, the surgical time-out — and both work by making the receiver restate the plan before acting.\n\nThe protocol in this paper separates commitment from perception. A deterministic, append-only record holds every commitment: who holds a work item, in what phase, under what contention. Small language models act only as the perceptual layer: each compresses the record into a schema-bound goal-state and must produce a canonical uptake restatement that matches the record and the other agents before it may act. Divergence is written to the record as an event and repaired in the open, never erased, and the responsibility a model may hold widens only over measured evidence and narrows on any factual failure. The paper specifies the protocol formally, maps it to a clinical referral pipeline, and pre-specifies its validation."
-sources_note = "Anchor sources for this study, verified against the Crossref registry (existence and title match) on 2026-10-20."
+sources_note = "Sources for this study, verified against the Crossref and DataCite registries (existence and title match) on 2026-10-20; reports and software are cited to their publishers."
 
 [[references]]
 title = "Changes in Medical Errors after Implementation of a Handoff Program"
@@ -19,6 +19,41 @@ url = "https://doi.org/10.1136/bmj.320.7237.768"
 note = "2000"
 
 [[references]]
+title = "Improving Factuality and Reasoning in Language Models through Multiagent Debate"
+url = "https://doi.org/10.48550/arXiv.2305.14325"
+note = "2023"
+
+[[references]]
+title = "AutoGen: Enabling Next-Gen LLM Applications via Multi-Agent Conversation"
+url = "https://doi.org/10.48550/arXiv.2308.08155"
+note = "2023"
+
+[[references]]
+title = "Why Do Multi-Agent LLM Systems Fail?"
+url = "https://doi.org/10.48550/arXiv.2503.13657"
+note = "2025"
+
+[[references]]
+title = "Large Language Model based Multi-Agents: A Survey of Progress and Challenges"
+url = "https://doi.org/10.48550/arXiv.2402.01680"
+note = "2024"
+
+[[references]]
+title = "LoRA: Low-Rank Adaptation of Large Language Models"
+url = "https://doi.org/10.48550/arXiv.2106.09685"
+note = "2021"
+
+[[references]]
+title = "llama.cpp: LLM inference in C/C++"
+url = "https://github.com/ggml-org/llama.cpp"
+note = "2026"
+
+[[references]]
+title = "Kintsugi: joint attention for byte-size models. Shared goals in multi-agent systems through verified uptake and visible repair"
+url = "https://qompass.ai/research/kintsugi-clinical-battery"
+note = "unpublished manuscript"
+
+[[references]]
 title = "The capacity for joint visual attention in the infant"
 url = "https://doi.org/10.1038/253265a0"
 note = "1975"
@@ -32,3 +67,88 @@ note = "2005"
 title = "Grounding in communication."
 url = "https://doi.org/10.1037/10096-006"
 note = "1991"
+
+[[references]]
+title = "To Err Is Human"
+url = "https://doi.org/10.17226/9728"
+note = "2000"
+
+[[references]]
+title = "Engineering a Safer World"
+url = "https://doi.org/10.7551/mitpress/8179.001.0001"
+note = "2012"
+
+[[references]]
+title = "The Contract Net Protocol: High-Level Communication and Control in a Distributed Problem Solver"
+url = "https://doi.org/10.1109/tc.1980.1675516"
+note = "1980"
+
+[[references]]
+title = "Decentralized LLM Workflows via Sequential Auctions"
+url = "https://doi.org/10.48550/arXiv.2610.22201"
+note = "2026"
+
+[[references]]
+title = "Time, clocks, and the ordering of events in a distributed system"
+url = "https://doi.org/10.1145/359545.359563"
+note = "1978"
+
+[[references]]
+title = "A lattice model of secure information flow"
+url = "https://doi.org/10.1145/360051.360056"
+note = "1976"
+
+[[references]]
+title = "Protecting privacy using the decentralized label model"
+url = "https://doi.org/10.1145/363516.363526"
+note = "2000"
+
+[[references]]
+title = "Health system-scale language models are all-purpose prediction engines"
+url = "https://doi.org/10.1038/s41586-023-06160-y"
+note = "2023"
+
+[[references]]
+title = "Large language models in medicine"
+url = "https://doi.org/10.1038/s41591-023-02448-8"
+note = "2023"
+
+[[references]]
+title = "Do We Still Need Clinical Language Models?"
+url = "https://doi.org/10.48550/arXiv.2302.08091"
+note = "2023"
+
+[[references]]
+title = "Ethics and governance of artificial intelligence for health: guidance on large multi-modal models"
+url = "https://www.who.int/publications/i/item/9789240084759"
+note = "2024"
+
+[[references]]
+title = "Survey of Hallucination in Natural Language Generation"
+url = "https://doi.org/10.1145/3571730"
+note = "2023"
+
+[[references]]
+title = "Towards Understanding Sycophancy in Language Models"
+url = "https://doi.org/10.48550/arXiv.2310.13548"
+note = "2023"
+
+[[references]]
+title = "Probable Inference, the Law of Succession, and Statistical Inference"
+url = "https://doi.org/10.1080/01621459.1927.10502953"
+note = "1927"
+
+[[references]]
+title = "Ethics and governance of artificial intelligence for health: WHO guidance"
+url = "https://www.who.int/publications/i/item/9789240029200"
+note = "2021"
+
+[[references]]
+title = "Artificial Intelligence Risk Management Framework (AI RMF 1.0)"
+url = "https://doi.org/10.6028/nist.ai.100-1"
+note = "2023"
+
+[[references]]
+title = "Reporting guideline for the early-stage clinical evaluation of decision support systems driven by artificial intelligence: DECIDE-AI"
+url = "https://doi.org/10.1038/s41591-022-01772-9"
+note = "2022"

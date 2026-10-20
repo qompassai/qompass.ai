@@ -2,7 +2,7 @@ slug = "compute-value-accounting"
 ready = true
 why = "Hospitals choosing clinical AI rarely see its cost expressed per correct output, so model reputation and size stand in for value — the same market failure that baseball's Moneyball era exposed, where production the statistics showed was priced below reputation the market believed.\n\nThis analysis prices the alternatives properly. On identical clinical text fixtures (guideline question answering, encounter digest, triage labelling), it measures production — correct outputs per thousand tasks — for a team of small models running on existing hospital workstations, against a single large model served on premises and through a commercial cloud service. Costs are counted the way a value analysis committee counts an implant: hardware amortisation, electricity, maintenance, staff time and usage fees, reported to CHEERS 2022, with the incremental cost per additional correct output as the primary outcome and sensitivity analyses across willingness-to-pay values."
 graphic = "moneyball-roster"
-sources_note = "Anchor sources for this study, verified against the Crossref registry (existence and title match) on 2026-10-20."
+sources_note = "Sources for this study, verified against the Crossref and DataCite registries (existence and title match) on 2026-10-20; reports and software are cited to their publishers."
 
 [[references]]
 title = "Moneyball: the art of winning an unfair game"
@@ -30,6 +30,36 @@ url = "https://doi.org/10.1145/3630106.3658542"
 note = "2024"
 
 [[references]]
+title = "Phi-3 Technical Report: A Highly Capable Language Model Locally on Your Phone"
+url = "https://doi.org/10.48550/arXiv.2404.14219"
+note = "2024"
+
+[[references]]
+title = "llama.cpp: LLM inference in C/C++"
+url = "https://github.com/ggml-org/llama.cpp"
+note = "2026"
+
+[[references]]
 title = "Consolidated Health Economic Evaluation Reporting Standards 2022 (CHEERS 2022) Statement: Updated Reporting Guidance for Health Economic Evaluations"
 url = "https://doi.org/10.1016/j.jval.2021.11.1351"
 note = "2022"
+
+[[references]]
+title = "Recommendations for Conduct, Methodological Practices, and Reporting of Cost-effectiveness Analyses"
+url = "https://doi.org/10.1001/jama.2016.12195"
+note = "2016"
+
+[[references]]
+title = "The CE Plane"
+url = "https://doi.org/10.1177/0272989x9001000308"
+note = "1990"
+
+[[references]]
+title = "Model Parameter Estimation and Uncertainty: A Report of the ISPOR-SMDM Modeling Good Research Practices Task Force-6"
+url = "https://doi.org/10.1016/j.jval.2012.04.014"
+note = "2012"
+
+[[references]]
+title = "Representing uncertainty: the role of cost‐effectiveness acceptability curves"
+url = "https://doi.org/10.1002/hec.635"
+note = "2001"

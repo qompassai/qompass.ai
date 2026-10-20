@@ -1,7 +1,7 @@
 slug = "primum-protocol"
 ready = true
 why = "Clinical workflows increasingly pass work between several AI agents, and every handoff is a chance for a wrong action to be taken on the wrong data by the wrong agent. Medicine manages the same risk with the surgical time-out and the structured handoff: a verification pause before the irreversible step. Agent workflows have no equivalent, and their failures are silent — an agent that misunderstood simply proceeds.\n\nPRIMUM places a time-out at every handoff. Tasks are allocated by sequential auction; monotone labels on data and destinations gate which agents may bid — a label can rise but never fall — and a deterministic decide() check runs at award and again at dispatch, because the world may have changed in between. Measured valuation, a backward-credit ledger and an anti-monopsony floor keep the market honest, consequential action classes require a signed manifest, and a human gatekeeper remains the floor throughout. The paper pre-registers a benchmark comparing workflows with the framework off and on across six harm fixtures, and reports a feasibility deployment on the author's own computing estate as the worked example."
-sources_note = "Anchor sources for this study, verified against the Crossref registry (existence and title match) on 2026-10-20."
+sources_note = "Sources for this study, verified against the Crossref and DataCite registries (existence and title match) on 2026-10-20; reports and software are cited to their publishers."
 
 [[references]]
 title = "A Surgical Safety Checklist to Reduce Morbidity and Mortality in a Global Population"
@@ -14,9 +14,39 @@ url = "https://doi.org/10.1056/nejmsa1405556"
 note = "2014"
 
 [[references]]
+title = "AutoGen: Enabling Next-Gen LLM Applications via Multi-Agent Conversation"
+url = "https://doi.org/10.48550/arXiv.2308.08155"
+note = "2023"
+
+[[references]]
+title = "Large Language Model based Multi-Agents: A Survey of Progress and Challenges"
+url = "https://doi.org/10.48550/arXiv.2402.01680"
+note = "2024"
+
+[[references]]
+title = "Why Do Multi-Agent LLM Systems Fail?"
+url = "https://doi.org/10.48550/arXiv.2503.13657"
+note = "2025"
+
+[[references]]
+title = "Not what you've signed up for: Compromising Real-World LLM-Integrated Applications with Indirect Prompt Injection"
+url = "https://doi.org/10.48550/arXiv.2302.12173"
+note = "2023"
+
+[[references]]
+title = "Medical Hallucinations in Foundation Models and Their Impact on Healthcare"
+url = "https://doi.org/10.48550/arXiv.2503.05777"
+note = "2025"
+
+[[references]]
 title = "Human error: models and management"
 url = "https://doi.org/10.1136/bmj.320.7237.768"
 note = "2000"
+
+[[references]]
+title = "Decentralized LLM Workflows via Sequential Auctions"
+url = "https://doi.org/10.48550/arXiv.2610.22201"
+note = "2026"
 
 [[references]]
 title = "The Contract Net Protocol: High-Level Communication and Control in a Distributed Problem Solver"
@@ -32,3 +62,33 @@ note = "1961"
 title = "A lattice model of secure information flow"
 url = "https://doi.org/10.1145/360051.360056"
 note = "1976"
+
+[[references]]
+title = "Protecting privacy using the decentralized label model"
+url = "https://doi.org/10.1145/363516.363526"
+note = "2000"
+
+[[references]]
+title = "Time, clocks, and the ordering of events in a distributed system"
+url = "https://doi.org/10.1145/359545.359563"
+note = "1978"
+
+[[references]]
+title = "Engineering a Safer World"
+url = "https://doi.org/10.7551/mitpress/8179.001.0001"
+note = "2012"
+
+[[references]]
+title = "Note on the Sampling Error of the Difference Between Correlated Proportions or Percentages"
+url = "https://doi.org/10.1007/bf02295996"
+note = "1947"
+
+[[references]]
+title = "Two-sided confidence intervals for the single proportion: comparison of seven methods"
+url = "https://doi.org/10.1002/(sici)1097-0258(19980430)17:8<857::aid-sim777>3.0.co;2-e"
+note = "1998"
+
+[[references]]
+title = "Probable Inference, the Law of Succession, and Statistical Inference"
+url = "https://doi.org/10.1080/01621459.1927.10502953"
+note = "1927"

@@ -1,7 +1,12 @@
 slug = "local-ai-implementation"
 ready = true
 why = "Clinical AI is usually implemented through cloud services or graphics-processor servers that resource-limited institutions cannot buy, staff or govern. Small language models now run on ordinary workstation processors — but reports of how such a deployment is actually stood up, governed and kept safe are lacking, and implementation is where clinical AI most often quietly fails.\n\nThis SQUIRE 2.0 report describes standing up a governed small-model clinical text service on existing workstations: a team of small open-weight models, each assigned one task (guideline question answering, encounter digest, triage labelling) by measured production per unit of computing cost, running under a deterministic append-only protocol that admits a model's output only when it matches the record and agrees with its peers, and fails closed otherwise. Deployment proceeded through a five-step qualification ladder with explicit promotion and demotion rules. The report gives the implementation outcomes, the process measures, and the failure record by class — the part of an implementation that is usually edited out."
-sources_note = "Anchor sources for this study, verified against the Crossref registry (existence and title match) on 2026-10-20."
+sources_note = "Sources for this study, verified against the Crossref and DataCite registries (existence and title match) on 2026-10-20; reports and software are cited to their publishers."
+
+[[references]]
+title = "Ethics and governance of artificial intelligence for health: guidance on large multi-modal models"
+url = "https://www.who.int/publications/i/item/9789240084759"
+note = "2024"
 
 [[references]]
 title = "Artificial intelligence (AI) and global health: how can AI contribute to health in resource-poor settings?"
@@ -32,3 +37,73 @@ note = "2010"
 title = "Unintended Consequences of Machine Learning in Medicine"
 url = "https://doi.org/10.1001/jama.2017.7797"
 note = "2017"
+
+[[references]]
+title = "Do no harm: a roadmap for responsible machine learning for health care"
+url = "https://doi.org/10.1038/s41591-019-0548-6"
+note = "2019"
+
+[[references]]
+title = "Key challenges for delivering clinical impact with artificial intelligence"
+url = "https://doi.org/10.1186/s12916-019-1426-2"
+note = "2019"
+
+[[references]]
+title = "Reporting guideline for the early-stage clinical evaluation of decision support systems driven by artificial intelligence: DECIDE-AI"
+url = "https://doi.org/10.1038/s41591-022-01772-9"
+note = "2022"
+
+[[references]]
+title = "llama.cpp: LLM inference in C/C++"
+url = "https://github.com/ggml-org/llama.cpp"
+note = "2026"
+
+[[references]]
+title = "Phi-3 Technical Report: A Highly Capable Language Model Locally on Your Phone"
+url = "https://doi.org/10.48550/arXiv.2404.14219"
+note = "2024"
+
+[[references]]
+title = "Outcomes for Implementation Research: Conceptual Distinctions, Measurement Challenges, and Research Agenda"
+url = "https://doi.org/10.1007/s10488-010-0319-7"
+note = "2010"
+
+[[references]]
+title = "The updated Consolidated Framework for Implementation Research based on user feedback"
+url = "https://doi.org/10.1186/s13012-022-01245-0"
+note = "2022"
+
+[[references]]
+title = "Model Cards for Model Reporting"
+url = "https://doi.org/10.1145/3287560.3287596"
+note = "2019"
+
+[[references]]
+title = "Datasheets for datasets"
+url = "https://doi.org/10.1145/3458723"
+note = "2021"
+
+[[references]]
+title = "Kintsugi: joint attention for byte-size models. Shared goals in multi-agent systems through verified uptake and visible repair"
+url = "https://qompass.ai/research/kintsugi-clinical-battery"
+note = "unpublished manuscript"
+
+[[references]]
+title = "Psychometric assessment of three newly developed implementation outcome measures"
+url = "https://doi.org/10.1186/s13012-017-0635-3"
+note = "2017"
+
+[[references]]
+title = "The System Usability Scale: Past, Present, and Future"
+url = "https://doi.org/10.1080/10447318.2018.1455307"
+note = "2018"
+
+[[references]]
+title = "The run chart: a simple analytical tool for learning from variation in healthcare processes"
+url = "https://doi.org/10.1136/bmjqs.2009.037895"
+note = "2011"
+
+[[references]]
+title = "Statistical process control as a tool for research and healthcare improvement"
+url = "https://doi.org/10.1136/qhc.12.6.458"
+note = "2003"

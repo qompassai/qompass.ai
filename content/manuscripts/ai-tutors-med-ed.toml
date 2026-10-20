@@ -1,7 +1,7 @@
 slug = "ai-tutors-med-ed"
 ready = true
 why = "Medical learners already study with general-purpose chatbots, usually through cloud services that send their questions, notes and sometimes clinical details to a remote server. Small language models that run on an ordinary laptop change the arrangement: the learner's text stays on the learner's device, the tool costs nothing to run after download, and it works with no network connection at all.\n\nThese tools are not tutors, and they make the same classes of error as larger models — fabrication, agreement with a wrong answer, inherited bias. So the question for educators is not whether learners will use them, but how to use them so they strengthen learning rather than replace it. This article gives twelve practical tips, drawn from the learning sciences, from published evaluations of language models in medicine, and from our own measurements of small models on a single workstation: ground answers in sources, make the model ask rather than tell, space the practice, structure the feedback, teach the failure modes, and test for sycophancy."
-sources_note = "Anchor sources for this study, verified against the Crossref registry (existence and title match) on 2026-10-20."
+sources_note = "Sources for this study, verified against the Crossref and DataCite registries (existence and title match) on 2026-10-20; reports and software are cited to their publishers."
 
 [[references]]
 title = "Performance of ChatGPT on USMLE: Potential for AI-assisted medical education using large language models"
@@ -32,3 +32,103 @@ note = "2023"
 title = "A systematic review of large language models and their implications in medical education"
 url = "https://doi.org/10.1111/medu.15402"
 note = "2024"
+
+[[references]]
+title = "A scoping review of artificial intelligence in medical education: BEME Guide No. 84"
+url = "https://doi.org/10.1080/0142159x.2024.2314198"
+note = "2024"
+
+[[references]]
+title = "AI Chatbots, Health Privacy, and Challenges to HIPAA Compliance"
+url = "https://doi.org/10.1001/jama.2023.9458"
+note = "2023"
+
+[[references]]
+title = "Phi-3 Technical Report: A Highly Capable Language Model Locally on Your Phone"
+url = "https://doi.org/10.48550/arXiv.2404.14219"
+note = "2024"
+
+[[references]]
+title = "Qwen2.5 Technical Report"
+url = "https://doi.org/10.48550/arXiv.2412.15115"
+note = "2024"
+
+[[references]]
+title = "Gemma 3 Technical Report"
+url = "https://doi.org/10.48550/arXiv.2503.19786"
+note = "2025"
+
+[[references]]
+title = "llama.cpp: LLM inference in C/C++"
+url = "https://github.com/ggml-org/llama.cpp"
+note = "2026"
+
+[[references]]
+title = "Test-Enhanced Learning"
+url = "https://doi.org/10.1111/j.1467-9280.2006.01693.x"
+note = "2006"
+
+[[references]]
+title = "Test‐enhanced learning in medical education"
+url = "https://doi.org/10.1111/j.1365-2923.2008.03124.x"
+note = "2008"
+
+[[references]]
+title = "The Power of Feedback"
+url = "https://doi.org/10.3102/003465430298487"
+note = "2007"
+
+[[references]]
+title = "Ethics and governance of artificial intelligence for health: guidance on large multi-modal models"
+url = "https://www.who.int/publications/i/item/9789240084759"
+note = "2024"
+
+[[references]]
+title = "Survey of Hallucination in Natural Language Generation"
+url = "https://doi.org/10.1145/3571730"
+note = "2023"
+
+[[references]]
+title = "Medical large language models are susceptible to targeted misinformation attacks"
+url = "https://doi.org/10.1038/s41746-024-01282-7"
+note = "2024"
+
+[[references]]
+title = "Distributed practice in verbal recall tasks: A review and quantitative synthesis."
+url = "https://doi.org/10.1037/0033-2909.132.3.354"
+note = "2006"
+
+[[references]]
+title = "Entrustability of professional activities and competency‐based training"
+url = "https://doi.org/10.1111/j.1365-2929.2005.02341.x"
+note = "2005"
+
+[[references]]
+title = "Towards Understanding Sycophancy in Language Models"
+url = "https://doi.org/10.48550/arXiv.2310.13548"
+note = "2023"
+
+[[references]]
+title = "Large language models propagate race-based medicine"
+url = "https://doi.org/10.1038/s41746-023-00939-z"
+note = "2023"
+
+[[references]]
+title = "Evaluation and mitigation of the limitations of large language models in clinical decision-making"
+url = "https://doi.org/10.1038/s41591-024-03097-1"
+note = "2024"
+
+[[references]]
+title = "RadLite: Multi-Task LoRA Fine-Tuning of Small Language Models for CPU-Deployable Radiology AI"
+url = "https://doi.org/10.48550/arXiv.2605.00421"
+note = "2026"
+
+[[references]]
+title = "Kintsugi: joint attention for byte-size models. Shared goals in multi-agent systems through verified uptake and visible repair"
+url = "https://qompass.ai/research/kintsugi-clinical-battery"
+note = "unpublished manuscript"
+
+[[references]]
+title = "Internet-Based Learning in the Health Professions"
+url = "https://doi.org/10.1001/jama.300.10.1181"
+note = "2008"

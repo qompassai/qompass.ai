@@ -2,7 +2,7 @@ slug = "kintsugi-clinical-battery"
 ready = true
 why = "The flagship results in clinical language modelling come from institutions that can afford the hardware: one widely cited health-system model was pretrained on 24 graphics processors for three weeks, an amount of computation its own authors noted is not commonly accessible. Most hospitals will never run anything like it. What they could run is a team of small models on a workstation they already own — if a team, properly assembled, produces enough.\n\nThis study tests that directly. A fixture battery of three clinical text tasks (guideline question answering, encounter digest, triage labelling) is run by three arms on identical held-out fixtures: a team of small models whose seats are filled by a pre-registered roster rule — the model that produces the most per unit of computing cost on a qualifying set takes the seat — one large model, and the best single small model. Everything is served as it would be deployed, at temperature zero, scoring first answers only. Production is the primary outcome, and the resource envelope (bytes on disk, peak memory, processor throughput) is co-primary, because a result a hospital cannot run is not a result for that hospital."
 graphic = "kintsugi-battery"
-sources_note = "Anchor sources for this study, verified against the Crossref registry (existence and title match) on 2026-10-20."
+sources_note = "Sources for this study, verified against the Crossref and DataCite registries (existence and title match) on 2026-10-20; reports and software are cited to their publishers."
 
 [[references]]
 title = "Health system-scale language models are all-purpose prediction engines"
@@ -25,6 +25,11 @@ url = "https://doi.org/10.1001/jama.2024.21700"
 note = "2025"
 
 [[references]]
+title = "Holistic Evaluation of Language Models"
+url = "https://doi.org/10.48550/arXiv.2211.09110"
+note = "2022"
+
+[[references]]
 title = "Power Hungry Processing: Watts Driving the Cost of AI Deployment?"
 url = "https://doi.org/10.1145/3630106.3658542"
 note = "2024"
@@ -33,3 +38,138 @@ note = "2024"
 title = "Energy and Policy Considerations for Deep Learning in NLP"
 url = "https://doi.org/10.18653/v1/p19-1355"
 note = "2019"
+
+[[references]]
+title = "Do We Still Need Clinical Language Models?"
+url = "https://doi.org/10.48550/arXiv.2302.08091"
+note = "2023"
+
+[[references]]
+title = "Adapted large language models can outperform medical experts in clinical text summarization"
+url = "https://doi.org/10.1038/s41591-024-02855-5"
+note = "2024"
+
+[[references]]
+title = "Improving Factuality and Reasoning in Language Models through Multiagent Debate"
+url = "https://doi.org/10.48550/arXiv.2305.14325"
+note = "2023"
+
+[[references]]
+title = "Self-Consistency Improves Chain of Thought Reasoning in Language Models"
+url = "https://doi.org/10.48550/arXiv.2203.11171"
+note = "2022"
+
+[[references]]
+title = "AutoGen: Enabling Next-Gen LLM Applications via Multi-Agent Conversation"
+url = "https://doi.org/10.48550/arXiv.2308.08155"
+note = "2023"
+
+[[references]]
+title = "Large Language Model based Multi-Agents: A Survey of Progress and Challenges"
+url = "https://doi.org/10.48550/arXiv.2402.01680"
+note = "2024"
+
+[[references]]
+title = "Survey of Hallucination in Natural Language Generation"
+url = "https://doi.org/10.1145/3571730"
+note = "2023"
+
+[[references]]
+title = "Towards Understanding Sycophancy in Language Models"
+url = "https://doi.org/10.48550/arXiv.2310.13548"
+note = "2023"
+
+[[references]]
+title = "The TRIPOD-LLM reporting guideline for studies using large language models"
+url = "https://doi.org/10.1038/s41591-024-03425-5"
+note = "2025"
+
+[[references]]
+title = "TRIPOD+AI statement: updated guidance for reporting clinical prediction models that use regression or machine learning methods"
+url = "https://doi.org/10.1136/bmj-2023-078378"
+note = "2024"
+
+[[references]]
+title = "MEDITRON-70B: Scaling Medical Pretraining for Large Language Models"
+url = "https://doi.org/10.48550/arXiv.2311.16079"
+note = "2023"
+
+[[references]]
+title = "PubMedQA: A Dataset for Biomedical Research Question Answering"
+url = "https://doi.org/10.18653/v1/d19-1259"
+note = "2019"
+
+[[references]]
+title = "What Disease Does This Patient Have? A Large-Scale Open Domain Question Answering Dataset from Medical Exams"
+url = "https://doi.org/10.3390/app11146421"
+note = "2021"
+
+[[references]]
+title = "A question-entailment approach to question answering"
+url = "https://doi.org/10.1186/s12859-019-3119-4"
+note = "2019"
+
+[[references]]
+title = "An Empirical Study of Clinical Note Generation from Doctor-Patient Encounters"
+url = "https://doi.org/10.18653/v1/2023.eacl-main.168"
+note = "2023"
+
+[[references]]
+title = "Aci-bench: a Novel Ambient Clinical Intelligence Dataset for Benchmarking Automatic Visit Note Generation"
+url = "https://doi.org/10.1038/s41597-023-02487-3"
+note = "2023"
+
+[[references]]
+title = "On the Summarization of Consumer Health Questions"
+url = "https://doi.org/10.18653/v1/p19-1215"
+note = "2019"
+
+[[references]]
+title = "Synthea: An approach, method, and software mechanism for generating synthetic patients and the synthetic electronic health care record"
+url = "https://doi.org/10.1093/jamia/ocx079"
+note = "2017"
+
+[[references]]
+title = "llama.cpp: LLM inference in C/C++"
+url = "https://github.com/ggml-org/llama.cpp"
+note = "2026"
+
+[[references]]
+title = "Kintsugi: joint attention for byte-size models. Shared goals in multi-agent systems through verified uptake and visible repair"
+url = "https://qompass.ai/research/kintsugi-clinical-battery"
+note = "unpublished manuscript"
+
+[[references]]
+title = "A Coefficient of Agreement for Nominal Scales"
+url = "https://doi.org/10.1177/001316446002000104"
+note = "1960"
+
+[[references]]
+title = "Two-sided confidence intervals for the single proportion: comparison of seven methods"
+url = "https://doi.org/10.1002/(sici)1097-0258(19980430)17:8<857::aid-sim777>3.0.co;2-e"
+note = "1998"
+
+[[references]]
+title = "Note on the Sampling Error of the Difference Between Correlated Proportions or Percentages"
+url = "https://doi.org/10.1007/bf02295996"
+note = "1947"
+
+[[references]]
+title = "Probable Inference, the Law of Succession, and Statistical Inference"
+url = "https://doi.org/10.1080/01621459.1927.10502953"
+note = "1927"
+
+[[references]]
+title = "Bootstrap Methods: Another Look at the Jackknife"
+url = "https://doi.org/10.1214/aos/1176344552"
+note = "1979"
+
+[[references]]
+title = "Key challenges for delivering clinical impact with artificial intelligence"
+url = "https://doi.org/10.1186/s12916-019-1426-2"
+note = "2019"
+
+[[references]]
+title = "Reporting guideline for the early-stage clinical evaluation of decision support systems driven by artificial intelligence: DECIDE-AI"
+url = "https://doi.org/10.1038/s41591-022-01772-9"
+note = "2022"

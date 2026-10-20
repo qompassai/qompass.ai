@@ -1,7 +1,12 @@
 slug = "ai-without-infrastructure"
 ready = true
 why = "Most clinical artificial intelligence is designed for facilities that have reliable electricity, broadband connectivity, graphics processors and specialist staff. Close to a billion people in low- and lower-middle-income countries are served by health-care facilities with unreliable electricity or none at all, and those facilities are unlikely to benefit from AI built on assumptions they cannot meet.\n\nThis article describes a deployment model that makes none of those assumptions. Small open-weight models, each a few gigabytes or less, run on the processor of an ordinary laptop with no network connection and no graphics card. Each task goes to the model that produces the most correct outputs per unit of computing cost, measured on the facility's own kind of work before deployment. Every output passes a deterministic check against an append-only record, the system stops rather than guesses when the check cannot run, and a health worker decides. Deployment climbs a staged ladder whose promotion and demotion rules a non-specialist can apply, and the article sets out the resource envelope, the governance, and the policy actions that would let ministries and procurers evaluate it."
-sources_note = "Anchor sources for this study, verified against the Crossref registry (existence and title match) on 2026-10-20."
+sources_note = "Sources for this study, verified against the Crossref and DataCite registries (existence and title match) on 2026-10-20; reports and software are cited to their publishers."
+
+[[references]]
+title = "Energizing health: accelerating electricity access in health-care facilities"
+url = "https://www.who.int/publications/i/item/9789240066960"
+note = "2023"
 
 [[references]]
 title = "Artificial intelligence (AI) and global health: how can AI contribute to health in resource-poor settings?"
@@ -19,6 +24,41 @@ url = "https://doi.org/10.1038/s41746-022-00700-y"
 note = "2022"
 
 [[references]]
+title = "Ethics and governance of artificial intelligence for health: WHO guidance"
+url = "https://www.who.int/publications/i/item/9789240029200"
+note = "2021"
+
+[[references]]
+title = "Ethics and governance of artificial intelligence for health: guidance on large multi-modal models"
+url = "https://www.who.int/publications/i/item/9789240084759"
+note = "2024"
+
+[[references]]
+title = "Global strategy on digital health 2020-2025"
+url = "https://www.who.int/publications/i/item/9789240020924"
+note = "2021"
+
+[[references]]
 title = "Large language models in medicine"
 url = "https://doi.org/10.1038/s41591-023-02448-8"
 note = "2023"
+
+[[references]]
+title = "llama.cpp: LLM inference in C/C++"
+url = "https://github.com/ggml-org/llama.cpp"
+note = "2026"
+
+[[references]]
+title = "QLoRA: Efficient Finetuning of Quantized LLMs"
+url = "https://doi.org/10.48550/arXiv.2305.14314"
+note = "2023"
+
+[[references]]
+title = "The Era of 1-bit LLMs: All Large Language Models are in 1.58 Bits"
+url = "https://doi.org/10.48550/arXiv.2402.17764"
+note = "2024"
+
+[[references]]
+title = "Kintsugi: joint attention for byte-size models. Shared goals in multi-agent systems through verified uptake and visible repair"
+url = "https://qompass.ai/research/kintsugi-clinical-battery"
+note = "unpublished manuscript"

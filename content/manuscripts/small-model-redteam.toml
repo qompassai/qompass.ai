@@ -1,7 +1,7 @@
 slug = "small-model-redteam"
 ready = true
 why = "Small language models that run on a hospital's own computers are an affordable route to clinical AI, but how they fail under adversarial pressure — and whether those failures can be contained — has not been measured. Safety science's position is that failures should be classified, counted and monitored, not merely anticipated: an implant is not cleared because its designers meant well, and a model should not be either.\n\nThis study red-teams small clinical models (at most eight billion parameters, served on a processor) with a pre-specified battery of adversarial probes on clinical text: requests for unsupported facts and citations, user pushback against correct answers, instructions injected into clinical documents, misleading premises and omission pressure. Every response is assigned to a fixed failure taxonomy and graded for potential harm. Three configurations face identical probes — a single small model, a team with peer cross-checking, and a team whose claims are additionally verified against the source document by deterministic rules — so the mitigations are measured, not asserted."
-sources_note = "Anchor sources for this study, verified against the Crossref registry (existence and title match) on 2026-10-20."
+sources_note = "Sources for this study, verified against the Crossref and DataCite registries (existence and title match) on 2026-10-20; reports and software are cited to their publishers."
 
 [[references]]
 title = "To Err Is Human"
@@ -32,3 +32,108 @@ note = "2023"
 title = "A framework to assess clinical safety and hallucination rates of LLMs for medical text summarisation"
 url = "https://doi.org/10.1038/s41746-025-01670-7"
 note = "2025"
+
+[[references]]
+title = "Towards Understanding Sycophancy in Language Models"
+url = "https://doi.org/10.48550/arXiv.2310.13548"
+note = "2023"
+
+[[references]]
+title = "Not what you've signed up for: Compromising Real-World LLM-Integrated Applications with Indirect Prompt Injection"
+url = "https://doi.org/10.48550/arXiv.2302.12173"
+note = "2023"
+
+[[references]]
+title = "Prompt injection attacks on vision language models in oncology"
+url = "https://doi.org/10.1038/s41467-024-55631-x"
+note = "2025"
+
+[[references]]
+title = "Medical large language models are susceptible to targeted misinformation attacks"
+url = "https://doi.org/10.1038/s41746-024-01282-7"
+note = "2024"
+
+[[references]]
+title = "Large language models propagate race-based medicine"
+url = "https://doi.org/10.1038/s41746-023-00939-z"
+note = "2023"
+
+[[references]]
+title = "A toolbox for surfacing health equity harms and biases in large language models"
+url = "https://doi.org/10.1038/s41591-024-03258-2"
+note = "2024"
+
+[[references]]
+title = "Red Teaming Language Models to Reduce Harms: Methods, Scaling Behaviors, and Lessons Learned"
+url = "https://doi.org/10.48550/arXiv.2209.07858"
+note = "2022"
+
+[[references]]
+title = "Red Teaming Language Models with Language Models"
+url = "https://doi.org/10.48550/arXiv.2202.03286"
+note = "2022"
+
+[[references]]
+title = "Ethics and governance of artificial intelligence for health: guidance on large multi-modal models"
+url = "https://www.who.int/publications/i/item/9789240084759"
+note = "2024"
+
+[[references]]
+title = "Kintsugi: joint attention for byte-size models. Shared goals in multi-agent systems through verified uptake and visible repair"
+url = "https://qompass.ai/research/kintsugi-clinical-battery"
+note = "unpublished manuscript"
+
+[[references]]
+title = "Engineering a Safer World"
+url = "https://doi.org/10.7551/mitpress/8179.001.0001"
+note = "2012"
+
+[[references]]
+title = "Statistical process control as a tool for research and healthcare improvement"
+url = "https://doi.org/10.1136/qhc.12.6.458"
+note = "2003"
+
+[[references]]
+title = "The run chart: a simple analytical tool for learning from variation in healthcare processes"
+url = "https://doi.org/10.1136/bmjqs.2009.037895"
+note = "2011"
+
+[[references]]
+title = "An Empirical Study of Clinical Note Generation from Doctor-Patient Encounters"
+url = "https://doi.org/10.18653/v1/2023.eacl-main.168"
+note = "2023"
+
+[[references]]
+title = "Aci-bench: a Novel Ambient Clinical Intelligence Dataset for Benchmarking Automatic Visit Note Generation"
+url = "https://doi.org/10.1038/s41597-023-02487-3"
+note = "2023"
+
+[[references]]
+title = "Synthea: An approach, method, and software mechanism for generating synthetic patients and the synthetic electronic health care record"
+url = "https://doi.org/10.1093/jamia/ocx079"
+note = "2017"
+
+[[references]]
+title = "llama.cpp: LLM inference in C/C++"
+url = "https://github.com/ggml-org/llama.cpp"
+note = "2026"
+
+[[references]]
+title = "A Coefficient of Agreement for Nominal Scales"
+url = "https://doi.org/10.1177/001316446002000104"
+note = "1960"
+
+[[references]]
+title = "Probable Inference, the Law of Succession, and Statistical Inference"
+url = "https://doi.org/10.1080/01621459.1927.10502953"
+note = "1927"
+
+[[references]]
+title = "Two-sided confidence intervals for the single proportion: comparison of seven methods"
+url = "https://doi.org/10.1002/(sici)1097-0258(19980430)17:8<857::aid-sim777>3.0.co;2-e"
+note = "1998"
+
+[[references]]
+title = "Note on the Sampling Error of the Difference Between Correlated Proportions or Percentages"
+url = "https://doi.org/10.1007/bf02295996"
+note = "1947"
