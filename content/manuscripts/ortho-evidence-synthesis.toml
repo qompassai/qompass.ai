@@ -1,0 +1,34 @@
+slug = "ortho-evidence-synthesis"
+ready = true
+why = "Surgeons disagree about a concrete question: after a primary hip or knee replacement, does extending oral antibiotic prophylaxis beyond the standard first day reduce prosthetic joint infection — or does it mainly buy adverse drug events and resistance pressure? The trials are small, the observational studies are confounded by indication (sicker patients get longer courses), and the answer matters to every arthroplasty service.\n\nThis study answers the clinical question with a systematic review and meta-analysis reported to PRISMA 2020, with prespecified duration subgroups and explicit handling of confounding by indication — and it runs the review itself on a validated local pipeline. A team of small language models on an ordinary workstation, with no patient data and no cloud service, performs deduplication, screening and structured extraction under a deterministic record, and the paper reports the pipeline's validation (agreement with human reviewers, with confidence intervals) beside the clinical findings, so other groups can judge both the answer and the instrument that produced it."
+sources_note = "Anchor sources for this study, verified against the Crossref registry (existence and title match) on 2026-10-20."
+
+[[references]]
+title = "Preferred reporting items for systematic review and meta-analysis protocols (PRISMA-P) 2015 statement"
+url = "https://doi.org/10.1186/2046-4053-4-1"
+note = "2015"
+
+[[references]]
+title = "Economic Burden of Periprosthetic Joint Infection in the United States"
+url = "https://doi.org/10.1016/j.arth.2012.02.022"
+note = "2012"
+
+[[references]]
+title = "Projections of Primary and Revision Hip and Knee Arthroplasty in the United States from 2005 to 2030"
+url = "https://doi.org/10.2106/JBJS.F.00222"
+note = "2007"
+
+[[references]]
+title = "Centers for Disease Control and Prevention Guideline for the Prevention of Surgical Site Infection, 2017"
+url = "https://doi.org/10.1001/jamasurg.2017.0904"
+note = "2017"
+
+[[references]]
+title = "The AAHKS Clinical Research Award: Extended Oral Antibiotics Prevent Periprosthetic Joint Infection in High-Risk Cases: 3855 Patients With 1-Year Follow-Up"
+url = "https://doi.org/10.1016/j.arth.2021.01.051"
+note = "2021"
+
+[[references]]
+title = "No Improvement in Infection or Complication Rate With Extended Oral Antibiotic Prophylaxis After Primary Total Joint Arthroplasty"
+url = "https://doi.org/10.1016/j.arth.2026.05.044"
+note = "2026"

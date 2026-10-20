@@ -5,6 +5,7 @@ use crate::pages::{
     home::Home,
     legal::Legal,
     light_show::{LightShow, LightShowTesters},
+    manuscript::ManuscriptDispatch,
     on_ai::OnAi,
     ontrack_privacy::OnTrackPrivacy,
     privacy::Privacy,
@@ -214,6 +215,7 @@ pub fn App() -> impl IntoView {
                     <Route path=path!("/standards/:slug") view=TigerStyleDispatch />
                     <Route path=path!("/solutions/:slug") view=ProjectDispatch />
                     <Route path=path!("/research") view=Research />
+                    <Route path=path!("/research/:slug") view=ManuscriptDispatch />
                 </Routes>
             </main>
             <Footer />

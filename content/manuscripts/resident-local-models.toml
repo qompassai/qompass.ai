@@ -1,0 +1,34 @@
+slug = "resident-local-models"
+ready = true
+why = "Residents study and seek feedback in fragments of time, often on personal devices, and increasingly with cloud chatbots that send their text — sometimes including clinical details — to remote servers. A small language model that runs entirely on a resident's own laptop could provide retrieval practice and structured written feedback with no network access, no subscription cost and no data leaving the device. Whether residents will install it, keep using it, and be able to trust what it produces is unknown.\n\nThis single-program feasibility study puts the tool in residents' hands for twelve weeks, configured to generate questions from their own notes and to give structured feedback on written explanations. Feasibility is judged against prespecified progression criteria, not impressions: enrollment, installation success inside the model's memory envelope, weekly use, acceptability and usability scores, the factual error rate of audited outputs, and any events of patient information being entered — reported whichever way they fall."
+sources_note = "Anchor sources for this study, verified against the Crossref registry (existence and title match) on 2026-10-20."
+
+[[references]]
+title = "New Requirements for Resident Duty Hours"
+url = "https://doi.org/10.1001/jama.288.9.1112"
+note = "2002"
+
+[[references]]
+title = "Performance of ChatGPT on USMLE: Potential for AI-assisted medical education using large language models"
+url = "https://doi.org/10.1371/journal.pdig.0000198"
+note = "2023"
+
+[[references]]
+title = "How Does ChatGPT Perform on the United States Medical Licensing Examination (USMLE)? The Implications of Large Language Models for Medical Education and Knowledge Assessment"
+url = "https://doi.org/10.2196/45312"
+note = "2023"
+
+[[references]]
+title = "Large Language Models in Medical Education: Opportunities, Challenges, and Future Directions"
+url = "https://doi.org/10.2196/48291"
+note = "2023"
+
+[[references]]
+title = "ChatGPT and Generative Artificial Intelligence for Medical Education: Potential Impact and Opportunity"
+url = "https://doi.org/10.1097/acm.0000000000005439"
+note = "2023"
+
+[[references]]
+title = "A systematic review of large language models and their implications in medical education"
+url = "https://doi.org/10.1111/medu.15402"
+note = "2024"

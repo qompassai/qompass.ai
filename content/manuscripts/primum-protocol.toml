@@ -1,0 +1,34 @@
+slug = "primum-protocol"
+ready = true
+why = "Clinical workflows increasingly pass work between several AI agents, and every handoff is a chance for a wrong action to be taken on the wrong data by the wrong agent. Medicine manages the same risk with the surgical time-out and the structured handoff: a verification pause before the irreversible step. Agent workflows have no equivalent, and their failures are silent — an agent that misunderstood simply proceeds.\n\nPRIMUM places a time-out at every handoff. Tasks are allocated by sequential auction; monotone labels on data and destinations gate which agents may bid — a label can rise but never fall — and a deterministic decide() check runs at award and again at dispatch, because the world may have changed in between. Measured valuation, a backward-credit ledger and an anti-monopsony floor keep the market honest, consequential action classes require a signed manifest, and a human gatekeeper remains the floor throughout. The paper pre-registers a benchmark comparing workflows with the framework off and on across six harm fixtures, and reports a feasibility deployment on the author's own computing estate as the worked example."
+sources_note = "Anchor sources for this study, verified against the Crossref registry (existence and title match) on 2026-10-20."
+
+[[references]]
+title = "A Surgical Safety Checklist to Reduce Morbidity and Mortality in a Global Population"
+url = "https://doi.org/10.1056/nejmsa0810119"
+note = "2009"
+
+[[references]]
+title = "Changes in Medical Errors after Implementation of a Handoff Program"
+url = "https://doi.org/10.1056/nejmsa1405556"
+note = "2014"
+
+[[references]]
+title = "Human error: models and management"
+url = "https://doi.org/10.1136/bmj.320.7237.768"
+note = "2000"
+
+[[references]]
+title = "The Contract Net Protocol: High-Level Communication and Control in a Distributed Problem Solver"
+url = "https://doi.org/10.1109/tc.1980.1675516"
+note = "1980"
+
+[[references]]
+title = "COUNTERSPECULATION, AUCTIONS, AND COMPETITIVE SEALED TENDERS"
+url = "https://doi.org/10.1111/j.1540-6261.1961.tb02789.x"
+note = "1961"
+
+[[references]]
+title = "A lattice model of secure information flow"
+url = "https://doi.org/10.1145/360051.360056"
+note = "1976"

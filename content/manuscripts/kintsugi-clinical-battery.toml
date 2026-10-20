@@ -1,0 +1,35 @@
+slug = "kintsugi-clinical-battery"
+ready = true
+why = "The flagship results in clinical language modelling come from institutions that can afford the hardware: one widely cited health-system model was pretrained on 24 graphics processors for three weeks, an amount of computation its own authors noted is not commonly accessible. Most hospitals will never run anything like it. What they could run is a team of small models on a workstation they already own — if a team, properly assembled, produces enough.\n\nThis study tests that directly. A fixture battery of three clinical text tasks (guideline question answering, encounter digest, triage labelling) is run by three arms on identical held-out fixtures: a team of small models whose seats are filled by a pre-registered roster rule — the model that produces the most per unit of computing cost on a qualifying set takes the seat — one large model, and the best single small model. Everything is served as it would be deployed, at temperature zero, scoring first answers only. Production is the primary outcome, and the resource envelope (bytes on disk, peak memory, processor throughput) is co-primary, because a result a hospital cannot run is not a result for that hospital."
+graphic = "kintsugi-battery"
+sources_note = "Anchor sources for this study, verified against the Crossref registry (existence and title match) on 2026-10-20."
+
+[[references]]
+title = "Health system-scale language models are all-purpose prediction engines"
+url = "https://doi.org/10.1038/s41586-023-06160-y"
+note = "2023"
+
+[[references]]
+title = "Large language models in medicine"
+url = "https://doi.org/10.1038/s41591-023-02448-8"
+note = "2023"
+
+[[references]]
+title = "Large language models encode clinical knowledge"
+url = "https://doi.org/10.1038/s41586-023-06291-2"
+note = "2023"
+
+[[references]]
+title = "Testing and Evaluation of Health Care Applications of Large Language Models"
+url = "https://doi.org/10.1001/jama.2024.21700"
+note = "2025"
+
+[[references]]
+title = "Power Hungry Processing: Watts Driving the Cost of AI Deployment?"
+url = "https://doi.org/10.1145/3630106.3658542"
+note = "2024"
+
+[[references]]
+title = "Energy and Policy Considerations for Deep Learning in NLP"
+url = "https://doi.org/10.18653/v1/p19-1355"
+note = "2019"

@@ -27,6 +27,16 @@ for toml in content/projects/*.toml; do
     fi
 done
 
+# Manuscript study pages: one route per content/manuscripts/*.toml
+# flagged ready = true, under /research/<stem>. build.rs enforces
+# file stem == slug and slug membership in the rollup snapshot.
+for toml in content/manuscripts/*.toml; do
+    [ -e "$toml" ] || continue
+    if grep -qE '^[[:space:]]*ready[[:space:]]*=[[:space:]]*true' "$toml"; then
+        ROUTES+=("/research/$(basename "$toml" .toml)")
+    fi
+done
+
 # App guide pages: one route per content/apps/*.toml flagged
 # ready = true. Guides for solutions are also reachable from the
 # /solutions scrape below (already-rendered files are skipped there);

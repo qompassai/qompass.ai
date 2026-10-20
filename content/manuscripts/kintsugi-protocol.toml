@@ -1,0 +1,34 @@
+slug = "kintsugi-protocol"
+ready = true
+why = "Clinical AI is moving from single models to pipelines in which several agents share work — one summarises a referral, another assigns urgency, a third drafts a reply. Such pipelines inherit the coordination problem clinical teams know from handoffs: an agent can receive a goal without taking it up, and two agents can act on divergent readings of the same task with neither noticing. Medicine's fixes are known — the structured handoff that cut medical errors by 23 percent, the surgical time-out — and both work by making the receiver restate the plan before acting.\n\nThe protocol in this paper separates commitment from perception. A deterministic, append-only record holds every commitment: who holds a work item, in what phase, under what contention. Small language models act only as the perceptual layer: each compresses the record into a schema-bound goal-state and must produce a canonical uptake restatement that matches the record and the other agents before it may act. Divergence is written to the record as an event and repaired in the open, never erased, and the responsibility a model may hold widens only over measured evidence and narrows on any factual failure. The paper specifies the protocol formally, maps it to a clinical referral pipeline, and pre-specifies its validation."
+sources_note = "Anchor sources for this study, verified against the Crossref registry (existence and title match) on 2026-10-20."
+
+[[references]]
+title = "Changes in Medical Errors after Implementation of a Handoff Program"
+url = "https://doi.org/10.1056/nejmsa1405556"
+note = "2014"
+
+[[references]]
+title = "A Surgical Safety Checklist to Reduce Morbidity and Mortality in a Global Population"
+url = "https://doi.org/10.1056/nejmsa0810119"
+note = "2009"
+
+[[references]]
+title = "Human error: models and management"
+url = "https://doi.org/10.1136/bmj.320.7237.768"
+note = "2000"
+
+[[references]]
+title = "The capacity for joint visual attention in the infant"
+url = "https://doi.org/10.1038/253265a0"
+note = "1975"
+
+[[references]]
+title = "Understanding and sharing intentions: The origins of cultural cognition"
+url = "https://doi.org/10.1017/s0140525x05000129"
+note = "2005"
+
+[[references]]
+title = "Grounding in communication."
+url = "https://doi.org/10.1037/10096-006"
+note = "1991"

@@ -1,0 +1,35 @@
+slug = "compute-value-accounting"
+ready = true
+why = "Hospitals choosing clinical AI rarely see its cost expressed per correct output, so model reputation and size stand in for value — the same market failure that baseball's Moneyball era exposed, where production the statistics showed was priced below reputation the market believed.\n\nThis analysis prices the alternatives properly. On identical clinical text fixtures (guideline question answering, encounter digest, triage labelling), it measures production — correct outputs per thousand tasks — for a team of small models running on existing hospital workstations, against a single large model served on premises and through a commercial cloud service. Costs are counted the way a value analysis committee counts an implant: hardware amortisation, electricity, maintenance, staff time and usage fees, reported to CHEERS 2022, with the incremental cost per additional correct output as the primary outcome and sensitivity analyses across willingness-to-pay values."
+graphic = "moneyball-roster"
+sources_note = "Anchor sources for this study, verified against the Crossref registry (existence and title match) on 2026-10-20."
+
+[[references]]
+title = "Moneyball: the art of winning an unfair game"
+url = "https://doi.org/10.5860/choice.41-4733"
+note = "2004"
+
+[[references]]
+title = "Large language models in medicine"
+url = "https://doi.org/10.1038/s41591-023-02448-8"
+note = "2023"
+
+[[references]]
+title = "Systematic Review of Economic Impact Studies of Artificial Intelligence in Health Care"
+url = "https://doi.org/10.2196/16866"
+note = "2020"
+
+[[references]]
+title = "Energy and Policy Considerations for Deep Learning in NLP"
+url = "https://doi.org/10.18653/v1/p19-1355"
+note = "2019"
+
+[[references]]
+title = "Power Hungry Processing: Watts Driving the Cost of AI Deployment?"
+url = "https://doi.org/10.1145/3630106.3658542"
+note = "2024"
+
+[[references]]
+title = "Consolidated Health Economic Evaluation Reporting Standards 2022 (CHEERS 2022) Statement: Updated Reporting Guidance for Health Economic Evaluations"
+url = "https://doi.org/10.1016/j.jval.2021.11.1351"
+note = "2022"

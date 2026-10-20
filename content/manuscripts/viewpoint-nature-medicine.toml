@@ -1,0 +1,25 @@
+slug = "viewpoint-nature-medicine"
+ready = true
+why = "Many hospitals will never own the computing that frontier medical AI assumes. Close to a billion people in low- and lower-middle-income countries are served by health-care facilities with unreliable electricity or none at all; those facilities are not waiting for a data centre, and any plan for medical AI that begins with a cluster of graphics processors has already left them out.\n\nThe case made here is that small has to be measured, not assumed. A model's resource envelope — the bytes on disk, the peak memory, the speed on a processor the facility already owns — should be a primary outcome of any clinical AI evaluation, reported beside accuracy and never in a footnote. Measured that way, reputation turns out to be a poor guide: in our own program's box scores, the least regarded model in its family was the most reliable producer per gigabyte, a famous 1-bit model scored zero as shipped, and several apparent model failures were serving-path failures — correct answers the software never recognised. Models have to be evaluated as they will be served, on the hardware that will serve them."
+graphic = "viewpoint-boxscore"
+sources_note = "Anchor sources for this study, verified against the Crossref registry (existence and title match) on 2026-10-20."
+
+[[references]]
+title = "Health system-scale language models are all-purpose prediction engines"
+url = "https://doi.org/10.1038/s41586-023-06160-y"
+note = "2023"
+
+[[references]]
+title = "Large language models in medicine"
+url = "https://doi.org/10.1038/s41591-023-02448-8"
+note = "Nature Medicine · 2023"
+
+[[references]]
+title = "LoRA: Low-Rank Adaptation of Large Language Models"
+url = "https://arxiv.org/abs/2106.09685"
+note = "arXiv preprint"
+
+[[references]]
+title = "BitNet b1.58 2B4T Technical Report"
+url = "https://arxiv.org/abs/2504.12285"
+note = "arXiv preprint"

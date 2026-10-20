@@ -8,6 +8,7 @@ pub mod app_data;
 pub mod download_data;
 pub mod field_notes_data;
 pub mod manuscript_data;
+pub mod manuscript_pages_data;
 pub mod orcid_data;
 pub mod pages;
 pub mod project_data;

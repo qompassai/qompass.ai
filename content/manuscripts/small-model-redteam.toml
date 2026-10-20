@@ -1,0 +1,34 @@
+slug = "small-model-redteam"
+ready = true
+why = "Small language models that run on a hospital's own computers are an affordable route to clinical AI, but how they fail under adversarial pressure — and whether those failures can be contained — has not been measured. Safety science's position is that failures should be classified, counted and monitored, not merely anticipated: an implant is not cleared because its designers meant well, and a model should not be either.\n\nThis study red-teams small clinical models (at most eight billion parameters, served on a processor) with a pre-specified battery of adversarial probes on clinical text: requests for unsupported facts and citations, user pushback against correct answers, instructions injected into clinical documents, misleading premises and omission pressure. Every response is assigned to a fixed failure taxonomy and graded for potential harm. Three configurations face identical probes — a single small model, a team with peer cross-checking, and a team whose claims are additionally verified against the source document by deterministic rules — so the mitigations are measured, not asserted."
+sources_note = "Anchor sources for this study, verified against the Crossref registry (existence and title match) on 2026-10-20."
+
+[[references]]
+title = "To Err Is Human"
+url = "https://doi.org/10.17226/9728"
+note = "2000"
+
+[[references]]
+title = "Human error: models and management"
+url = "https://doi.org/10.1136/bmj.320.7237.768"
+note = "2000"
+
+[[references]]
+title = "Large language models encode clinical knowledge"
+url = "https://doi.org/10.1038/s41586-023-06291-2"
+note = "2023"
+
+[[references]]
+title = "Evaluation and mitigation of the limitations of large language models in clinical decision-making"
+url = "https://doi.org/10.1038/s41591-024-03097-1"
+note = "2024"
+
+[[references]]
+title = "Survey of Hallucination in Natural Language Generation"
+url = "https://doi.org/10.1145/3571730"
+note = "2023"
+
+[[references]]
+title = "A framework to assess clinical safety and hallucination rates of LLMs for medical text summarisation"
+url = "https://doi.org/10.1038/s41746-025-01670-7"
+note = "2025"

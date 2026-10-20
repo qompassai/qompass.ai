@@ -1,0 +1,24 @@
+slug = "ai-without-infrastructure"
+ready = true
+why = "Most clinical artificial intelligence is designed for facilities that have reliable electricity, broadband connectivity, graphics processors and specialist staff. Close to a billion people in low- and lower-middle-income countries are served by health-care facilities with unreliable electricity or none at all, and those facilities are unlikely to benefit from AI built on assumptions they cannot meet.\n\nThis article describes a deployment model that makes none of those assumptions. Small open-weight models, each a few gigabytes or less, run on the processor of an ordinary laptop with no network connection and no graphics card. Each task goes to the model that produces the most correct outputs per unit of computing cost, measured on the facility's own kind of work before deployment. Every output passes a deterministic check against an append-only record, the system stops rather than guesses when the check cannot run, and a health worker decides. Deployment climbs a staged ladder whose promotion and demotion rules a non-specialist can apply, and the article sets out the resource envelope, the governance, and the policy actions that would let ministries and procurers evaluate it."
+sources_note = "Anchor sources for this study, verified against the Crossref registry (existence and title match) on 2026-10-20."
+
+[[references]]
+title = "Artificial intelligence (AI) and global health: how can AI contribute to health in resource-poor settings?"
+url = "https://doi.org/10.1136/bmjgh-2018-000798"
+note = "2018"
+
+[[references]]
+title = "Artificial intelligence and the future of global health"
+url = "https://doi.org/10.1016/s0140-6736(20)30226-9"
+note = "2020"
+
+[[references]]
+title = "Artificial intelligence for strengthening healthcare systems in low- and middle-income countries: a systematic scoping review"
+url = "https://doi.org/10.1038/s41746-022-00700-y"
+note = "2022"
+
+[[references]]
+title = "Large language models in medicine"
+url = "https://doi.org/10.1038/s41591-023-02448-8"
+note = "2023"

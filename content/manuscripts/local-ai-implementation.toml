@@ -1,0 +1,34 @@
+slug = "local-ai-implementation"
+ready = true
+why = "Clinical AI is usually implemented through cloud services or graphics-processor servers that resource-limited institutions cannot buy, staff or govern. Small language models now run on ordinary workstation processors — but reports of how such a deployment is actually stood up, governed and kept safe are lacking, and implementation is where clinical AI most often quietly fails.\n\nThis SQUIRE 2.0 report describes standing up a governed small-model clinical text service on existing workstations: a team of small open-weight models, each assigned one task (guideline question answering, encounter digest, triage labelling) by measured production per unit of computing cost, running under a deterministic append-only protocol that admits a model's output only when it matches the record and agrees with its peers, and fails closed otherwise. Deployment proceeded through a five-step qualification ladder with explicit promotion and demotion rules. The report gives the implementation outcomes, the process measures, and the failure record by class — the part of an implementation that is usually edited out."
+sources_note = "Anchor sources for this study, verified against the Crossref registry (existence and title match) on 2026-10-20."
+
+[[references]]
+title = "Artificial intelligence (AI) and global health: how can AI contribute to health in resource-poor settings?"
+url = "https://doi.org/10.1136/bmjgh-2018-000798"
+note = "2018"
+
+[[references]]
+title = "Artificial intelligence for strengthening healthcare systems in low- and middle-income countries: a systematic scoping review"
+url = "https://doi.org/10.1038/s41746-022-00700-y"
+note = "2022"
+
+[[references]]
+title = "Beyond Adoption: A New Framework for Theorizing and Evaluating Nonadoption, Abandonment, and Challenges to the Scale-Up, Spread, and Sustainability of Health and Care Technologies"
+url = "https://doi.org/10.2196/jmir.8775"
+note = "2017"
+
+[[references]]
+title = "Some Unintended Consequences of Information Technology in Health Care: The Nature of Patient Care Information System-related Errors"
+url = "https://doi.org/10.1197/jamia.m1471"
+note = "2003"
+
+[[references]]
+title = "A new sociotechnical model for studying health information technology in complex adaptive healthcare systems"
+url = "https://doi.org/10.1136/qshc.2010.042085"
+note = "2010"
+
+[[references]]
+title = "Unintended Consequences of Machine Learning in Medicine"
+url = "https://doi.org/10.1001/jama.2017.7797"
+note = "2017"

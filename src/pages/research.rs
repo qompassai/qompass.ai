@@ -247,7 +247,8 @@ pub fn Research() -> impl IntoView {
                 "Eleven manuscripts in preparation, each tracked in its own Odyssey "
                 "sub-repo. This tracker is rendered from the program rollup — a "
                 "manuscript's status.json is the source of truth, and a stage changes "
-                "only when the work does."
+                "only when the work does. Each title links to the manuscript's study "
+                "page: why the study exists, the sources it rests on, and the draft itself."
             </p>
             <div class="entry-list">
                 {crate::manuscript_data::MANUSCRIPTS
@@ -271,8 +272,29 @@ pub fn Research() -> impl IntoView {
                                 <p class="entry-kind">
                                     {stage_label} " · UPDATED " {m.updated}
                                 </p>
-                                <h2>{m.title}</h2>
+                                {crate::manuscript_pages_data::manuscript_page(m.slug)
+                                    .map_or_else(
+                                        || view! { <h2>{m.title}</h2> }.into_any(),
+                                        |_| {
+                                            let href = format!("/research/{}", m.slug);
+                                            view! {
+                                                <h2>
+                                                    <a href={href}>{m.title}</a>
+                                                </h2>
+                                            }
+                                            .into_any()
+                                        },
+                                    )}
                                 <p>{m.journal_name}</p>
+                                {crate::manuscript_pages_data::manuscript_page(m.slug)
+                                    .map(|_| {
+                                        let href = format!("/research/{}", m.slug);
+                                        view! {
+                                            <p class="tracker-next">
+                                                <a href={href}>"Why this study, its sources, and the draft →"</a>
+                                            </p>
+                                        }
+                                    })}
                             </article>
                         }
                     })
