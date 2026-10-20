@@ -487,6 +487,7 @@ h3 {
 .cs-group h2 {
   font-size: 1.3rem;
   margin: 0.55rem 0 0.6rem;
+  text-align: center;
 }
 @media (max-width: 48rem) {
   .cs-layout {
@@ -694,6 +695,7 @@ h3 {
 .entry h2 {
   margin: 0.4rem 0 0.5rem;
   font-size: 1.35rem;
+  text-align: center;
 }
 .entry p {
   color: var(--fog);
@@ -972,6 +974,14 @@ a.download-box .download-state {
 .figures-note {
   color: var(--fog);
   font-size: 0.92rem;
+}
+.mcp-bench .bench-title {
+  text-align: center;
+}
+.mcp-bench .bench-table th {
+  letter-spacing: normal;
+  text-align: center;
+  text-transform: none;
 }
 .bench-note {
   margin-top: 0.6rem;

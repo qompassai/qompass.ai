@@ -191,6 +191,7 @@ pub struct McpServer {
     pub status: &'static str,
     pub detail: &'static str,
     pub href: Option<&'static str>,
+    pub registry: Option<&'static str>,
 }
 
 const fn mcp(
@@ -199,22 +200,25 @@ const fn mcp(
     status: &'static str,
     detail: &'static str,
     href: Option<&'static str>,
+    registry: Option<&'static str>,
 ) -> McpServer {
-    McpServer { name, role, status, detail, href }
+    McpServer { name, role, status, detail, href, registry }
 }
 
 /// Every MCP server Qompass AI runs or is building, alphabetical —
 /// the public mirror of the internal census, verified 2026-10-20.
 /// Upstream servers declared in Diver (git, fetch, github, the
 /// Ghidra bridge, nvidia-cuda-docs) are not Qompass products and
-/// are not listed here.
-pub const MCP_SERVERS: [McpServer; 15] = [
+/// are not listed here; neither is rea, the upstream server fathom
+/// superseded.
+pub const MCP_SERVERS: [McpServer; 14] = [
     mcp(
         "buccaneer",
         "Security-assessment engine — rose-first, chains into fathom",
         "In development",
         "Tool surface source-verified; the v1 gate is pending.",
         Some("https://github.com/qompassai/buccaneer"),
+        None,
     ),
     mcp(
         "bunker",
@@ -222,6 +226,7 @@ pub const MCP_SERVERS: [McpServer; 15] = [
         "In development",
         "The Stage C server is under construction.",
         Some("https://github.com/qompassai/bunker"),
+        None,
     ),
     mcp(
         "eigenstyle",
@@ -229,6 +234,7 @@ pub const MCP_SERVERS: [McpServer; 15] = [
         "Published",
         "MCP Registry ai.qompass/eigenstyle 0.1.1, as a bundle.",
         Some("https://github.com/qompassai/eigenstyle"),
+        Some("https://registry.modelcontextprotocol.io/?q=eigenstyle"),
     ),
     mcp(
         "fathom",
@@ -236,6 +242,7 @@ pub const MCP_SERVERS: [McpServer; 15] = [
         "Published",
         "MCP Registry ai.qompass/fathom 0.1.1 · latest release v0.1.2 · 25 tools · DOI 10.5281/zenodo.23503521.",
         Some("https://github.com/qompassai/fathom"),
+        Some("https://registry.modelcontextprotocol.io/?q=fathom"),
     ),
     mcp(
         "lumen",
@@ -243,12 +250,14 @@ pub const MCP_SERVERS: [McpServer; 15] = [
         "Live",
         "Release v0.1.1 · DOI 10.5281/zenodo.23503519 · registry publication pending.",
         Some("https://github.com/qompassai/lumen"),
+        None,
     ),
     mcp(
         "lupin",
         "Revenue alignment across the Qompass and NTRanch lanes",
         "Live",
         "v0.1.0 · runs on Qompass infrastructure.",
+        None,
         None,
     ),
     mcp(
@@ -257,12 +266,14 @@ pub const MCP_SERVERS: [McpServer; 15] = [
         "Live",
         "v0.1.0 · 16 tools.",
         Some("https://github.com/qompassai/periscope"),
+        None,
     ),
     mcp(
         "phaedrus",
         "Research feed — findings, watchlists, revenue candidates",
         "Live",
         "v0.1.0 · runs on Qompass infrastructure.",
+        None,
         None,
     ),
     mcp(
@@ -271,6 +282,7 @@ pub const MCP_SERVERS: [McpServer; 15] = [
         "Published",
         "MCP Registry ai.qompass/phlow 0.2.1 · server name “flow” · 7 tools.",
         Some("https://github.com/qompassai/phlow"),
+        Some("https://registry.modelcontextprotocol.io/?q=phlow"),
     ),
     mcp(
         "press",
@@ -278,12 +290,6 @@ pub const MCP_SERVERS: [McpServer; 15] = [
         "Commissioned",
         "Commissioned 2026-10-20 · design complete, build pending.",
         None,
-    ),
-    mcp(
-        "rea",
-        "Reverse engineering — the original server",
-        "Legacy",
-        "Superseded by fathom; kept in the inventory so its retirement is a decision, not a disappearance.",
         None,
     ),
     mcp(
@@ -292,12 +298,14 @@ pub const MCP_SERVERS: [McpServer; 15] = [
         "Commissioned",
         "Commissioned 2026-10-20 · the first channel spike is in build.",
         None,
+        None,
     ),
     mcp(
         "twilight",
         "Front desk for local inference engines",
         "Live",
         "v0.1.0 · local release; public release pending.",
+        None,
         None,
     ),
     mcp(
@@ -306,6 +314,7 @@ pub const MCP_SERVERS: [McpServer; 15] = [
         "Design stage",
         "Design complete; no repository yet.",
         None,
+        None,
     ),
     mcp(
         "vongola",
@@ -313,6 +322,7 @@ pub const MCP_SERVERS: [McpServer; 15] = [
         "In development",
         "Read-only by design: it observes the fleet — including press — and never acts.",
         Some("https://github.com/qompassai/vongola"),
+        None,
     ),
 ];
 
@@ -476,7 +486,6 @@ pub fn CardinalCards() -> impl IntoView {
                 .map(|(i, c)| {
                     view! {
                         <article class="cs-group">
-                            <p class="pillar-mark">{c.mark}</p>
                             <h2>{c.name}</h2>
                             <p>{c.brief}</p>
                             {solution_links(i)}
@@ -495,7 +504,7 @@ pub fn CardinalCards() -> impl IntoView {
 #[component]
 pub fn McpServers() -> impl IntoView {
     view! {
-        <figure class="bench">
+        <figure class="bench mcp-bench">
             <figcaption class="bench-title">"MCP servers — the estate, with status"</figcaption>
             <div class="bench-scroll">
                 <table class="bench-table">
@@ -505,6 +514,7 @@ pub fn McpServers() -> impl IntoView {
                             <th>"Role"</th>
                             <th>"Status"</th>
                             <th>"Standing"</th>
+                            <th>"Links"</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -513,16 +523,16 @@ pub fn McpServers() -> impl IntoView {
                             .map(|s| {
                                 view! {
                                     <tr>
-                                        <td>
-                                            {if let Some(href) = s.href {
-                                                view! { <a href=href>{s.name}</a> }.into_any()
-                                            } else {
-                                                view! { <span>{s.name}</span> }.into_any()
-                                            }}
-                                        </td>
+                                        <td>{s.name}</td>
                                         <td>{s.role}</td>
                                         <td>{s.status}</td>
                                         <td>{s.detail}</td>
+                                        <td>
+                                            {s.href.map(|href| view! { <a href=href>"GitHub"</a> })}
+                                            {(s.href.is_some() && s.registry.is_some())
+                                                .then(|| view! { <span>" · "</span> })}
+                                            {s.registry.map(|href| view! { <a href=href>"Registry"</a> })}
+                                        </td>
                                     </tr>
                                 }
                             })
@@ -1066,13 +1076,21 @@ mod tests {
 
     #[test]
     fn the_mcp_table_is_alphabetical_unique_and_in_vocabulary() {
-        assert_eq!(MCP_SERVERS.len(), 15);
+        assert_eq!(MCP_SERVERS.len(), 14);
         let vocab = ["Commissioned", "Design stage", "In development", "Legacy", "Live", "Published"];
         for (i, s) in MCP_SERVERS.iter().enumerate() {
             assert!(vocab.contains(&s.status), "{}: {}", s.name, s.status);
             assert!(!s.role.is_empty() && !s.detail.is_empty(), "{}", s.name);
             if let Some(href) = s.href {
                 assert!(href.starts_with("https://github.com/qompassai/"), "{}: {href}", s.name);
+            }
+            if let Some(registry) = s.registry {
+                assert!(
+                    registry.starts_with("https://registry.modelcontextprotocol.io/"),
+                    "{}: {registry}",
+                    s.name
+                );
+                assert_eq!(s.status, "Published", "{}", s.name);
             }
             if i > 0 {
                 assert!(MCP_SERVERS[i - 1].name < s.name, "{}", s.name);
@@ -1086,6 +1104,7 @@ mod tests {
             let s = MCP_SERVERS.iter().find(|s| s.name == name).expect(name);
             assert_eq!(s.status, "Published", "{name}");
             assert!(s.href.is_some(), "{name}");
+            assert!(s.registry.is_some(), "{name}");
         }
     }
 

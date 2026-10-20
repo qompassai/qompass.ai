@@ -32,7 +32,6 @@ pub fn Projects() -> impl IntoView {
             <div class="entry-list">
                 <article class="entry">
                     <img class="project-mark" src="/img/projects/vongola.webp" alt="vongola" />
-                    <p class="entry-kind">"REVERSE PROXY — RUST"</p>
                     <h2>
                         <a href="https://github.com/qompassai/vongola">"vongola"</a>
                     </h2>
@@ -45,7 +44,6 @@ pub fn Projects() -> impl IntoView {
                 </article>
                 <article class="entry">
                     <img class="project-mark" src="/img/projects/volta.webp" alt="volta" />
-                    <p class="entry-kind">"OPENPGP KEY SERVER — RUST"</p>
                     <h2>
                         <a href="https://github.com/qompassai/volta">"volta"</a>
                     </h2>
@@ -59,7 +57,6 @@ pub fn Projects() -> impl IntoView {
                 </article>
                 <article class="entry">
                     <img class="project-mark" src="/img/projects/bunker.webp" alt="bunker" />
-                    <p class="entry-kind">"NIX BINARY CACHE — RUST"</p>
                     <h2>
                         <a href="https://github.com/qompassai/bunker">"bunker"</a>
                     </h2>
@@ -73,7 +70,6 @@ pub fn Projects() -> impl IntoView {
                 </article>
                 <article class="entry">
                     <img class="project-mark" src="/img/projects/ghost.webp" alt="ghost" />
-                    <p class="entry-kind">"PGP MAIL CLIENT — ANDROID"</p>
                     <h2>"ghost"</h2>
                     <p>
                         "Encrypted mail the way it should feel: OpenPGP compose with a real "
@@ -85,7 +81,6 @@ pub fn Projects() -> impl IntoView {
                 </article>
                 <article class="entry">
                     <img class="project-mark" src="/img/projects/diver.webp" alt="diver" />
-                    <p class="entry-kind">"NEOVIM ENVIRONMENT — LUA"</p>
                     <h2>
                         <a href="https://github.com/qompassai/diver">"diver"</a>
                     </h2>
@@ -99,7 +94,6 @@ pub fn Projects() -> impl IntoView {
                 </article>
                 <article class="entry">
                     <img class="project-mark" src="/img/projects/phlow.webp" alt="phlow" />
-                    <p class="entry-kind">"AGENT RUNTIME — RUST"</p>
                     <h2>
                         <a href="https://github.com/qompassai/phlow">"phlow"</a>
                     </h2>
@@ -113,7 +107,6 @@ pub fn Projects() -> impl IntoView {
                 </article>
                 <article class="entry">
                     <img class="project-mark" src="/img/projects/light-show.webp" alt="light-show" />
-                    <p class="entry-kind">"GAME — RUST / BEVY"</p>
                     <h2>
                         <a href="https://github.com/qompassai/light-show">"light-show"</a>
                     </h2>
@@ -129,7 +122,6 @@ pub fn Projects() -> impl IntoView {
                 </article>
                 <article class="entry">
                     <img class="project-mark" src="/img/projects/fathom.webp" alt="fathom" />
-                    <p class="entry-kind">"REVERSE ENGINEERING — RUST"</p>
                     <h2>
                         <a href="https://github.com/qompassai/fathom">"fathom"</a>
                     </h2>
