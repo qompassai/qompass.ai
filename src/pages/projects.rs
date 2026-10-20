@@ -1,4 +1,4 @@
-use crate::pages::compass_services::CardinalCards;
+use crate::pages::compass_services::{CardinalCards, McpServers};
 use crate::pages::project::DownloadBoxes;
 use leptos::prelude::*;
 use leptos_meta::Title;
@@ -142,6 +142,7 @@ pub fn Projects() -> impl IntoView {
                 </article>
             </div>
             <CardinalCards />
+            <McpServers />
         </section>
     }
 }

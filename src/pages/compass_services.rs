@@ -181,6 +181,141 @@ pub fn solution_page(slug: &str) -> Option<&'static Solution> {
     SOLUTIONS.iter().find(|s| s.slug == slug)
 }
 
+/// One MCP server in the estate inventory: what it is, where it
+/// stands, and the evidence line. Statuses use the vocabulary the
+/// tests pin: Commissioned, Design stage, In development, Legacy,
+/// Live, Published.
+pub struct McpServer {
+    pub name: &'static str,
+    pub role: &'static str,
+    pub status: &'static str,
+    pub detail: &'static str,
+    pub href: Option<&'static str>,
+}
+
+const fn mcp(
+    name: &'static str,
+    role: &'static str,
+    status: &'static str,
+    detail: &'static str,
+    href: Option<&'static str>,
+) -> McpServer {
+    McpServer { name, role, status, detail, href }
+}
+
+/// Every MCP server Qompass AI runs or is building, alphabetical —
+/// the public mirror of the internal census, verified 2026-10-20.
+/// Upstream servers declared in Diver (git, fetch, github, the
+/// Ghidra bridge, nvidia-cuda-docs) are not Qompass products and
+/// are not listed here.
+pub const MCP_SERVERS: [McpServer; 15] = [
+    mcp(
+        "buccaneer",
+        "Security-assessment engine — rose-first, chains into fathom",
+        "In development",
+        "Tool surface source-verified; the v1 gate is pending.",
+        Some("https://github.com/qompassai/buccaneer"),
+    ),
+    mcp(
+        "bunker",
+        "Signed-manifest executor for consequential actions",
+        "In development",
+        "The Stage C server is under construction.",
+        Some("https://github.com/qompassai/bunker"),
+    ),
+    mcp(
+        "eigenstyle",
+        "Voice and style fingerprinting for drafts",
+        "Published",
+        "MCP Registry ai.qompass/eigenstyle 0.1.1, as a bundle.",
+        Some("https://github.com/qompassai/eigenstyle"),
+    ),
+    mcp(
+        "fathom",
+        "Reverse engineering and artifact analysis",
+        "Published",
+        "MCP Registry ai.qompass/fathom 0.1.1 · latest release v0.1.2 · 25 tools · DOI 10.5281/zenodo.23503521.",
+        Some("https://github.com/qompassai/fathom"),
+    ),
+    mcp(
+        "lumen",
+        "Deterministic conversion between 2D, 3D, and engine packages",
+        "Live",
+        "Release v0.1.1 · DOI 10.5281/zenodo.23503519 · registry publication pending.",
+        Some("https://github.com/qompassai/lumen"),
+    ),
+    mcp(
+        "lupin",
+        "Revenue alignment across the Qompass and NTRanch lanes",
+        "Live",
+        "v0.1.0 · runs on Qompass infrastructure.",
+        None,
+    ),
+    mcp(
+        "periscope",
+        "Neovim broker — editor state, LSP/DAP, shared attention",
+        "Live",
+        "v0.1.0 · 16 tools.",
+        Some("https://github.com/qompassai/periscope"),
+    ),
+    mcp(
+        "phaedrus",
+        "Research feed — findings, watchlists, revenue candidates",
+        "Live",
+        "v0.1.0 · runs on Qompass infrastructure.",
+        None,
+    ),
+    mcp(
+        "phlow",
+        "Agent runtime — CLI, TUI, and MCP over one safe core",
+        "Published",
+        "MCP Registry ai.qompass/phlow 0.2.1 · server name “flow” · 7 tools.",
+        Some("https://github.com/qompassai/phlow"),
+    ),
+    mcp(
+        "press",
+        "This website — build, verify, deploy, with a honeypot",
+        "Commissioned",
+        "Commissioned 2026-10-20 · design complete, build pending.",
+        None,
+    ),
+    mcp(
+        "rea",
+        "Reverse engineering — the original server",
+        "Legacy",
+        "Superseded by fathom; kept in the inventory so its retirement is a decision, not a disappearance.",
+        None,
+    ),
+    mcp(
+        "tackle",
+        "Editor broker — Unity first, Godot later",
+        "Commissioned",
+        "Commissioned 2026-10-20 · the first channel spike is in build.",
+        None,
+    ),
+    mcp(
+        "twilight",
+        "Front desk for local inference engines",
+        "Live",
+        "v0.1.0 · local release; public release pending.",
+        None,
+    ),
+    mcp(
+        "volta",
+        "Key service for the signed-authority chain",
+        "Design stage",
+        "Design complete; no repository yet.",
+        None,
+    ),
+    mcp(
+        "vongola",
+        "Instrumentation and read-only operations",
+        "In development",
+        "Read-only by design: it observes the fleet — including press — and never acts.",
+        Some("https://github.com/qompassai/vongola"),
+    ),
+];
+
 /// A cardinal stays in the readout up to this far off the bearing
 /// (raw weight cos 80° ≈ 0.17); past it the share is too small to read.
 const READOUT_MAX_OFF: u16 = 80;
@@ -350,6 +485,55 @@ pub fn CardinalCards() -> impl IntoView {
                 })
                 .collect_view()}
         </div>
+    }
+}
+
+/// The MCP estate as a status table, on /solutions under the
+/// cardinal directory: every server, what it is, and where it
+/// stands — including the ones with no public home yet. In the
+/// design system's bench-table dress, like the study pages.
+#[component]
+pub fn McpServers() -> impl IntoView {
+    view! {
+        <figure class="bench">
+            <figcaption class="bench-title">"MCP servers — the estate, with status"</figcaption>
+            <div class="bench-scroll">
+                <table class="bench-table">
+                    <thead>
+                        <tr>
+                            <th>"Server"</th>
+                            <th>"Role"</th>
+                            <th>"Status"</th>
+                            <th>"Standing"</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {MCP_SERVERS
+                            .iter()
+                            .map(|s| {
+                                view! {
+                                    <tr>
+                                        <td>
+                                            {if let Some(href) = s.href {
+                                                view! { <a href=href>{s.name}</a> }.into_any()
+                                            } else {
+                                                view! { <span>{s.name}</span> }.into_any()
+                                            }}
+                                        </td>
+                                        <td>{s.role}</td>
+                                        <td>{s.status}</td>
+                                        <td>{s.detail}</td>
+                                    </tr>
+                                }
+                            })
+                            .collect_view()}
+                    </tbody>
+                </table>
+            </div>
+            <figcaption class="bench-note">
+                "Verified against the estate census, 2026-10-20. “Published” means listed on the official MCP Registry; “Live” means running and probed on our infrastructure."
+            </figcaption>
+        </figure>
     }
 }
 
@@ -877,6 +1061,31 @@ mod tests {
         for mark in SOLUTIONS.iter().filter_map(Solution::mark) {
             let path = format!("{}/public{mark}", env!("CARGO_MANIFEST_DIR"));
             assert!(std::path::Path::new(&path).is_file(), "{path}");
+        }
+    }
+
+    #[test]
+    fn the_mcp_table_is_alphabetical_unique_and_in_vocabulary() {
+        assert_eq!(MCP_SERVERS.len(), 15);
+        let vocab = ["Commissioned", "Design stage", "In development", "Legacy", "Live", "Published"];
+        for (i, s) in MCP_SERVERS.iter().enumerate() {
+            assert!(vocab.contains(&s.status), "{}: {}", s.name, s.status);
+            assert!(!s.role.is_empty() && !s.detail.is_empty(), "{}", s.name);
+            if let Some(href) = s.href {
+                assert!(href.starts_with("https://github.com/qompassai/"), "{}: {href}", s.name);
+            }
+            if i > 0 {
+                assert!(MCP_SERVERS[i - 1].name < s.name, "{}", s.name);
+            }
+        }
+    }
+
+    #[test]
+    fn the_mcp_table_marks_the_registry_three_published() {
+        for name in ["eigenstyle", "fathom", "phlow"] {
+            let s = MCP_SERVERS.iter().find(|s| s.name == name).expect(name);
+            assert_eq!(s.status, "Published", "{name}");
+            assert!(s.href.is_some(), "{name}");
         }
     }
 
