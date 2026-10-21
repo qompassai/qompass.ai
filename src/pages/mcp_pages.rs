@@ -673,7 +673,7 @@ mod tests {
             assert_eq!(status(slug, "4.1"), 'U', "{slug}");
         }
         // Packaging rows read from each published server's server.json.
-        for slug in ["eigenstyle", "fathom", "lumen", "phlow"] {
+        for slug in ["eigenstyle", "fathom", "lumen", "lupin", "periscope", "phaedrus", "phlow"] {
             assert_eq!(status(slug, "9.1"), 'P', "{slug}");
         }
     }

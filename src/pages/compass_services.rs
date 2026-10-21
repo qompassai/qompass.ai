@@ -292,26 +292,26 @@ pub const MCP_SERVERS: [McpServer; 16] = [
     mcp(
         "lupin",
         "Revenue alignment across the Qompass and NTRanch lanes",
-        "Live",
-        "v0.1.0 · runs on Qompass infrastructure.",
+        "Published",
+        "MCP Registry ai.qompass/lupin 0.1.0 · 6 tools.",
         Some("https://github.com/qompassai/lupin"),
-        None,
+        Some("https://registry.modelcontextprotocol.io/?q=lupin"),
     ),
     mcp(
         "periscope",
         "Neovim broker — editor state, LSP/DAP, shared attention",
-        "Live",
-        "v0.1.0 · 16 tools.",
+        "Published",
+        "MCP Registry ai.qompass/periscope 0.1.0 · 16 tools.",
         Some("https://github.com/qompassai/periscope"),
-        None,
+        Some("https://registry.modelcontextprotocol.io/?q=periscope"),
     ),
     mcp(
         "phaedrus",
         "Research feed — findings, watchlists, revenue candidates",
-        "Live",
-        "v0.1.0 · runs on Qompass infrastructure.",
+        "Published",
+        "MCP Registry ai.qompass/phaedrus 0.1.0 · 7 tools.",
         Some("https://github.com/qompassai/phaedrus"),
-        None,
+        Some("https://registry.modelcontextprotocol.io/?q=phaedrus"),
     ),
     mcp(
         "phlow",
@@ -1147,8 +1147,8 @@ mod tests {
     }
 
     #[test]
-    fn the_mcp_table_marks_the_registry_four_published() {
-        for name in ["eigenstyle", "fathom", "lumen", "phlow"] {
+    fn the_mcp_table_marks_the_registry_seven_published() {
+        for name in ["eigenstyle", "fathom", "lumen", "lupin", "periscope", "phaedrus", "phlow"] {
             let s = MCP_SERVERS.iter().find(|s| s.name == name).expect(name);
             assert_eq!(s.status, "Published", "{name}");
             assert!(s.href.is_some(), "{name}");
