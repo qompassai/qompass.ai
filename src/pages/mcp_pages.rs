@@ -4,13 +4,16 @@
 //!
 //! The data mirrors the internal census (`SERVERS.md`, verified
 //! 2026-10-20) and the commissioning packages for the servers the
-//! census predates (press, tackle, atelier). A server with no launch
-//! command says so in plain words — no invented configs. Tool names
-//! are the census lists; descriptions are included only where the
-//! census or the commissioning package states them (fathom's full
-//! documentation lives in `fathom_doc`).
+//! census predates (press, tackle, atelier). Vongola, restored
+//! 2026-10-20, is the exception the other way: the census omits it,
+//! so its launch, tools, and descriptions are read verbatim from
+//! the server's own source (crates/vongola-mcp in its repo). A
+//! server with no launch command says so in plain words — no
+//! invented configs. Tool names are the census lists; descriptions
+//! are included only where the census or the commissioning package
+//! states them (fathom's full documentation lives in `fathom_doc`).
 
-use crate::pages::compass_services::{McpServer, MCP_SERVERS};
+use crate::pages::compass_services::{mcp_display_name, McpServer, MCP_SERVERS};
 use crate::pages::fathom_doc::FathomDoc;
 use leptos::prelude::*;
 use leptos_meta::Title;
@@ -325,6 +328,30 @@ pub const MCP_DETAILS: &[McpDetail] = &[
          signed manifest against a key whose revocation state is at most a minute old for \
          the most consequential classes.",
     ),
+    detail(
+        "vongola",
+        Some(("/home/phaedrus/workspace/repos/vongola/target/debug/vongola-mcp", &[])),
+        None,
+        &[
+            tool_d("cert_status", "Per-SNI certificate subject, issuer, notAfter, and days remaining; flags anything inside 30 days."),
+            tool_d("log_counters", "Emitted log lines by level and source (vongola, pingora, other), plus lines dropped by the bounded log pipeline."),
+            tool_d("routes_list", "Configured routes with their upstreams, chains, and SNI names."),
+            tool_d("tls_stats", "TLS handshakes by negotiated group (PQ hybrids by name, classical groups), classical-fallback rate, and handshake failures by class."),
+            tool_d("upstream_health", "Per-upstream health (up/down/unknown) and upstream latency summary from the daemon's histogram."),
+        ],
+        Some("All five tools are read-only. The server answers to the name “vongola-mcp”, version 0.1.0; a debug build is what exists locally."),
+        "The operator's window into a running vongola daemon — the estate's TLS \
+         gateway. The daemon's instrumentation (TLS handshakes by negotiated group, \
+         certificate expiry, upstream health, log volume) is served to an \
+         operator-local stdio client; the server opens no listener and carries no \
+         write tools. Its only outbound traffic is loopback reads of the daemon's \
+         admin surfaces, and when the daemon is unreachable the tools answer with a \
+         structured unavailable error — never cached or invented values. It is also \
+         the designated reader of press's append-only receipt log, so the site \
+         pipeline is observed by a server that cannot act on it. The binary is its \
+         own crate in the vongola workspace, so a default vongola build is \
+         unchanged. Usage: vongola-mcp [--config PATH], default ./vongola.yaml.",
+    ),
 ];
 
 /// The page data for one roster name, if the roster carries it.
@@ -354,11 +381,12 @@ fn config_json(name: &str, command: &str, args: &[&str]) -> String {
 #[component]
 fn McpPage(server: &'static McpServer, detail: &'static McpDetail) -> impl IntoView {
     let name = server.name;
+    let display = mcp_display_name(name);
     view! {
-        <Title text=format!("{name} MCP - Qompass AI") />
+        <Title text=format!("{display} MCP - Qompass AI") />
         <section class="page mcp-page">
             <p class="page-bearing">"CHART — THE FLEET / MCP SERVERS"</p>
-            <h1>{name}</h1>
+            <h1>{display}</h1>
             <p class="page-lede">{server.role}</p>
             <figure class="bench mcp-facts">
                 <div class="bench-scroll">

@@ -205,14 +205,33 @@ const fn mcp(
     McpServer { name, role, status, detail, href, registry }
 }
 
+/// The display form of a roster name, for titles and links: each
+/// word capitalized ("ghidra bridge" -> "Ghidra Bridge"). The
+/// roster `name` itself stays the lowercase key — slugs and client
+/// config keys derive from it; this is presentation only.
+pub fn mcp_display_name(name: &str) -> String {
+    name.split(' ')
+        .map(|word| {
+            let mut chars = word.chars();
+            match chars.next() {
+                Some(first) => first.to_uppercase().collect::<String>() + chars.as_str(),
+                None => String::new(),
+            }
+        })
+        .collect::<Vec<_>>()
+        .join(" ")
+}
+
 /// Every MCP server in the estate roster, alphabetical — the
 /// public mirror of the internal census, verified 2026-10-20, plus
 /// the day's commissions (atelier). The Ghidra bridge is upstream,
 /// not a Qompass product, and is listed as External because the
 /// estate declares and uses it; rea, the upstream server fathom
-/// superseded, is not listed. Every server has a page:
-/// `/solutions/mcp/<name>`.
-pub const MCP_SERVERS: [McpServer; 15] = [
+/// superseded, is not listed. Vongola was restored 2026-10-20: the
+/// census omits it, so its entry and page are read from the
+/// server's own source (crates/vongola-mcp). Every server has a
+/// page: `/solutions/mcp/<name>`.
+pub const MCP_SERVERS: [McpServer; 16] = [
     mcp(
         "atelier",
         "Media generation — image, video, and music behind ComfyUI",
@@ -331,6 +350,14 @@ pub const MCP_SERVERS: [McpServer; 15] = [
         "Design stage",
         "Design complete; no repository yet.",
         None,
+        None,
+    ),
+    mcp(
+        "vongola",
+        "Read-only operator instrumentation for the vongola TLS gateway",
+        "Live",
+        "v0.1.0 · 5 read-only tools · local build; landing pending.",
+        Some("https://github.com/qompassai/vongola"),
         None,
     ),
 ];
@@ -531,10 +558,11 @@ pub fn McpServers() -> impl IntoView {
                             .iter()
                             .map(|s| {
                                 let slug = s.name.replace(' ', "-");
+                                let display = mcp_display_name(s.name);
                                 view! {
                                     <tr>
                                         <td>
-                                            <a href=format!("/solutions/mcp/{slug}")>{s.name}</a>
+                                            <a href=format!("/solutions/mcp/{slug}")>{display}</a>
                                         </td>
                                         <td>{s.role}</td>
                                         <td>{s.status}</td>
@@ -1088,7 +1116,7 @@ mod tests {
 
     #[test]
     fn the_mcp_table_is_alphabetical_unique_and_in_vocabulary() {
-        assert_eq!(MCP_SERVERS.len(), 15);
+        assert_eq!(MCP_SERVERS.len(), 16);
         let vocab = ["Commissioned", "Design stage", "External", "In development", "Legacy", "Live", "Published"];
         for (i, s) in MCP_SERVERS.iter().enumerate() {
             assert!(vocab.contains(&s.status), "{}: {}", s.name, s.status);
@@ -1108,6 +1136,13 @@ mod tests {
                 assert!(MCP_SERVERS[i - 1].name < s.name, "{}", s.name);
             }
         }
+    }
+
+    #[test]
+    fn mcp_display_names_capitalize_every_word() {
+        assert_eq!(mcp_display_name("fathom"), "Fathom");
+        assert_eq!(mcp_display_name("ghidra bridge"), "Ghidra Bridge");
+        assert_eq!(mcp_display_name("vongola"), "Vongola");
     }
 
     #[test]
