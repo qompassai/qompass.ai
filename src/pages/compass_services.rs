@@ -242,6 +242,14 @@ pub const MCP_SERVERS: [McpServer; 16] = [
         None,
     ),
     mcp(
+        "broadside",
+        "This website — build, verify, deploy, with a honeypot",
+        "Commissioned",
+        "Commissioned 2026-10-20 as press; renamed broadside the same day · design complete, build pending.",
+        None,
+        None,
+    ),
+    mcp(
         "buccaneer",
         "Security-assessment engine — rose-first, chains into fathom",
         "In development",
@@ -320,14 +328,6 @@ pub const MCP_SERVERS: [McpServer; 16] = [
         "MCP Registry ai.qompass/phlow 0.2.1 · server name “flow” · 7 tools.",
         Some("https://github.com/qompassai/phlow"),
         Some("https://registry.modelcontextprotocol.io/?q=phlow"),
-    ),
-    mcp(
-        "press",
-        "This website — build, verify, deploy, with a honeypot",
-        "Commissioned",
-        "Commissioned 2026-10-20 · design complete, build pending.",
-        None,
-        None,
     ),
     mcp(
         "tackle",

@@ -4,7 +4,7 @@
 //!
 //! The data mirrors the internal census (`SERVERS.md`, verified
 //! 2026-10-20) and the commissioning packages for the servers the
-//! census predates (press, tackle, atelier). Vongola, restored
+//! census predates (broadside, tackle, atelier). Vongola, restored
 //! 2026-10-20, is the exception the other way: the census omitted
 //! it when this page was first built (the census has since been
 //! corrected), so its launch, tools, and descriptions are read
@@ -85,6 +85,34 @@ pub const MCP_DETAILS: &[McpDetail] = &[
          catalogued scenes regenerated through atelier_img2img under the ntranch profile. \
          In time, atelier's generation module is planned to fold into lumen (the trigger-gated \
          convergence recorded in its program); until then it stands alone.",
+    ),
+    detail(
+        "broadside",
+        None,
+        Some(
+            "Broadside is commissioned, not built: the study, program, and honeypot design are \
+             complete and the build stages are queued. There is no binary and no launch \
+             command yet.",
+        ),
+        &[
+            tool_d("broadside_status", "Site tree state, dist freshness, last deployed hash"),
+            tool_d("broadside_live_check", "Fetch the public pages and the published JWKS; compare status and content hashes"),
+            tool_d("broadside_build", "Build the site tree into dist, with a build receipt"),
+            tool_d("broadside_verify", "The gate battery: tests, data freshness, citation verification, the JWKS against the signed key record"),
+            tool_d("broadside_deploy", "Deploy one dist hash, only against a passing verify receipt for that hash"),
+        ],
+        Some("The designed tool surface from the broadside program (P1–P3)."),
+        "This website's own pipeline as an MCP server: build, verify, and deploy qompass.ai, \
+         with an append-only receipt log that vongola reads (vongola stays read-only; broadside \
+         holds the deploy key). The design includes a honeypot: canary endpoints and \
+         credentials, injection quarantine in the fetch pipeline, and hash-chained evidence \
+         packets — and no hack-back. Broadside also carries the estate's JWKS duty: it \
+         publishes the Agent Card JWKS at /.well-known/jwks.json in the site dist as a \
+         signed-manifest artifact, placed at build from the signed key record, and \
+         broadside_verify fails the build if the published document does not match that \
+         record — a swapped key file is a failed build, never a quiet edit. Signing itself \
+         stays with the Owner's Ed25519 key; its private half never enters broadside or the \
+         site host.",
     ),
     detail(
         "buccaneer",
@@ -269,28 +297,6 @@ pub const MCP_DETAILS: &[McpDetail] = &[
          version, capabilities, client info); an empty initialize gets no answer.",
     ),
     detail(
-        "press",
-        None,
-        Some(
-            "Press is commissioned, not built: the study, program, and honeypot design are \
-             complete and the build stages are queued. There is no binary and no launch \
-             command yet.",
-        ),
-        &[
-            tool_d("press_status", "Site tree state, dist freshness, last deployed hash"),
-            tool_d("press_live_check", "Fetch the public pages; compare status and content hashes"),
-            tool_d("press_build", "Build the site tree into dist, with a build receipt"),
-            tool_d("press_verify", "The gate battery: tests, data freshness, citation verification"),
-            tool_d("press_deploy", "Deploy one dist hash, only against a passing verify receipt for that hash"),
-        ],
-        Some("The designed tool surface from the press program (P1–P3)."),
-        "This website's own pipeline as an MCP server: build, verify, and deploy qompass.ai, \
-         with an append-only receipt log that vongola reads (vongola stays read-only; press \
-         holds the deploy key). The design includes a honeypot: canary endpoints and \
-         credentials, injection quarantine in the fetch pipeline, and hash-chained evidence \
-         packets — and no hack-back.",
-    ),
-    detail(
         "tackle",
         None,
         Some(
@@ -353,7 +359,7 @@ pub const MCP_DETAILS: &[McpDetail] = &[
          write tools. Its only outbound traffic is loopback reads of the daemon's \
          admin surfaces, and when the daemon is unreachable the tools answer with a \
          structured unavailable error — never cached or invented values. It is also \
-         the designated reader of press's append-only receipt log, so the site \
+         the designated reader of broadside's append-only receipt log, so the site \
          pipeline is observed by a server that cannot act on it. The binary is its \
          own crate in the vongola workspace, so a default vongola build is \
          unchanged. Usage: vongola-mcp [--config PATH], default ./vongola.yaml.",
@@ -668,7 +674,7 @@ mod tests {
             assert_eq!(status(slug, "1.1"), 'G', "{slug}");
         }
         // Servers the sweep could not probe are never marked passing.
-        for slug in ["atelier", "buccaneer", "bunker", "press", "tackle", "volta", "ghidra-bridge"] {
+        for slug in ["atelier", "broadside", "buccaneer", "bunker", "tackle", "volta", "ghidra-bridge"] {
             assert_eq!(status(slug, "1.1"), 'U', "{slug}");
             assert_eq!(status(slug, "4.1"), 'U', "{slug}");
         }
