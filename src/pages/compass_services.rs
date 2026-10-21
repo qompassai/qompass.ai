@@ -228,9 +228,10 @@ pub fn mcp_display_name(name: &str) -> String {
 /// not a Qompass product, and is listed as External because the
 /// estate declares and uses it; rea, the upstream server fathom
 /// superseded, is not listed. Vongola was restored 2026-10-20: the
-/// census omits it, so its entry and page are read from the
-/// server's own source (crates/vongola-mcp). Every server has a
-/// page: `/solutions/mcp/<name>`.
+/// census omitted it then (corrected the same day), so its entry
+/// and page are read from the server's own source
+/// (crates/vongola-mcp). Every server has a page:
+/// `/solutions/mcp/<name>`.
 pub const MCP_SERVERS: [McpServer; 16] = [
     mcp(
         "atelier",
@@ -293,7 +294,7 @@ pub const MCP_SERVERS: [McpServer; 16] = [
         "Revenue alignment across the Qompass and NTRanch lanes",
         "Live",
         "v0.1.0 · runs on Qompass infrastructure.",
-        None,
+        Some("https://github.com/qompassai/lupin"),
         None,
     ),
     mcp(
@@ -309,7 +310,7 @@ pub const MCP_SERVERS: [McpServer; 16] = [
         "Research feed — findings, watchlists, revenue candidates",
         "Live",
         "v0.1.0 · runs on Qompass infrastructure.",
-        None,
+        Some("https://github.com/qompassai/phaedrus"),
         None,
     ),
     mcp(

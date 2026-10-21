@@ -1,5 +1,6 @@
 pub mod about;
 pub mod compass_services;
+pub mod compliance_data;
 pub mod fathom_doc;
 pub mod fathom_doc_data;
 pub mod fiber_timeline;

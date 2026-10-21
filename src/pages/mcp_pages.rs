@@ -5,15 +5,21 @@
 //! The data mirrors the internal census (`SERVERS.md`, verified
 //! 2026-10-20) and the commissioning packages for the servers the
 //! census predates (press, tackle, atelier). Vongola, restored
-//! 2026-10-20, is the exception the other way: the census omits it,
-//! so its launch, tools, and descriptions are read verbatim from
-//! the server's own source (crates/vongola-mcp in its repo). A
-//! server with no launch command says so in plain words — no
-//! invented configs. Tool names are the census lists; descriptions
-//! are included only where the census or the commissioning package
-//! states them (fathom's full documentation lives in `fathom_doc`).
+//! 2026-10-20, is the exception the other way: the census omitted
+//! it when this page was first built (the census has since been
+//! corrected), so its launch, tools, and descriptions are read
+//! verbatim from the server's own source (crates/vongola-mcp in
+//! its repo). A server with no launch command says so in plain
+//! words — no invented configs. Tool names are the census lists;
+//! descriptions are included only where the census or the
+//! commissioning package states them (fathom's full documentation
+//! lives in `fathom_doc`). Each page closes with a "Spec
+//! compliance" section: the canonical MCP checklist from the
+//! 2026-10-20 Inspector sweep, with this server's status per row
+//! (data in `compliance_data`, generated from the sweep evidence).
 
 use crate::pages::compass_services::{mcp_display_name, McpServer, MCP_SERVERS};
+use crate::pages::compliance_data::{compliance_for, status_word, ChecklistRow, CHECKLIST_ROWS};
 use crate::pages::fathom_doc::FathomDoc;
 use leptos::prelude::*;
 use leptos_meta::Title;
@@ -377,6 +383,83 @@ fn config_json(name: &str, command: &str, args: &[&str]) -> String {
     )
 }
 
+/// The "Spec compliance" section closing each page: every row of
+/// the canonical checklist, grouped by section, with this server's
+/// status from the Inspector sweep evidence. A server the sweep
+/// could not probe reads "Not probed" on every row — never an
+/// invented pass.
+#[component]
+fn ComplianceSection(slug: &'static str) -> impl IntoView {
+    let Some(comp) = compliance_for(slug) else {
+        return view! { <></> }.into_any();
+    };
+    let codes: Vec<char> = comp.statuses.chars().collect();
+    let mut groups: Vec<(&'static str, Vec<(usize, &'static ChecklistRow)>)> = Vec::new();
+    for (i, row) in CHECKLIST_ROWS.iter().enumerate() {
+        if let Some((section, rows)) = groups.last_mut() {
+            if *section == row.section {
+                rows.push((i, row));
+                continue;
+            }
+        }
+        groups.push((row.section, vec![(i, row)]));
+    }
+    view! {
+        <h2>"Spec compliance"</h2>
+        <p>{comp.standing}</p>
+        <p class="mcp-tools-note">
+            "Every row of the estate's canonical MCP checklist (Inspector sweep, 2026-10-20), "
+            "with this server's status: Pass, Partial, Gap, Not applicable, or Not probed — "
+            "a Not probed row is one the sweep's evidence neither passes nor fails."
+        </p>
+        {groups
+            .into_iter()
+            .map(|(section, rows)| {
+                view! {
+                    <h3>{section}</h3>
+                    <figure class="bench">
+                        <div class="bench-scroll">
+                            <table class="bench-table">
+                                <thead>
+                                    <tr>
+                                        <th>"#"</th>
+                                        <th>"Requirement"</th>
+                                        <th>"Era"</th>
+                                        <th>"Level"</th>
+                                        <th>"Status"</th>
+                                        <th>"Spec"</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {rows
+                                        .into_iter()
+                                        .map(|(i, row)| {
+                                            let code = codes.get(i).copied().unwrap_or('U');
+                                            view! {
+                                                <tr>
+                                                    <td>{row.id}</td>
+                                                    <td>{row.requirement}</td>
+                                                    <td>{row.era}</td>
+                                                    <td>{row.level}</td>
+                                                    <td>{status_word(code)}</td>
+                                                    <td>
+                                                        <a href=row.spec_url>{row.spec_label}</a>
+                                                    </td>
+                                                </tr>
+                                            }
+                                        })
+                                        .collect_view()}
+                                </tbody>
+                            </table>
+                        </div>
+                    </figure>
+                }
+            })
+            .collect_view()}
+    }
+    .into_any()
+}
+
 /// One server's page: standing, config, and tools.
 #[component]
 fn McpPage(server: &'static McpServer, detail: &'static McpDetail) -> impl IntoView {
@@ -497,6 +580,7 @@ fn McpPage(server: &'static McpServer, detail: &'static McpDetail) -> impl IntoV
                         </p>
                     }
                 })}
+            <ComplianceSection slug=detail.slug />
             <p class="mcp-back">
                 <a href="/solutions">"← The fleet"</a>
             </p>
@@ -553,5 +637,44 @@ mod tests {
         let json = config_json("fathom", "/x/fathom", &["serve"]);
         assert!(json.contains("\"command\": \"/x/fathom\""), "{json}");
         assert!(json.contains("\"args\": [\"serve\"]"), "{json}");
+    }
+
+    #[test]
+    fn every_roster_server_has_a_compliance_record() {
+        use crate::pages::compliance_data::COMPLIANCE;
+        assert_eq!(COMPLIANCE.len(), MCP_SERVERS.len());
+        for s in MCP_SERVERS {
+            let slug = mcp_slug(s.name);
+            let comp = compliance_for(&slug).unwrap_or_else(|| panic!("{}", s.name));
+            assert_eq!(comp.statuses.chars().count(), CHECKLIST_ROWS.len(), "{}", s.name);
+            assert!(comp.statuses.chars().all(|c| "PHGNU".contains(c)), "{}", s.name);
+            assert!(!comp.standing.is_empty(), "{}", s.name);
+        }
+    }
+
+    #[test]
+    fn compliance_statuses_match_the_sweep_evidence() {
+        fn status(slug: &str, row_id: &str) -> char {
+            let comp = compliance_for(slug).expect(slug);
+            let idx = CHECKLIST_ROWS.iter().position(|r| r.id == row_id).expect(row_id);
+            comp.statuses.chars().nth(idx).expect(row_id)
+        }
+        // Modern-era lifecycle: the dual-era three pass discover,
+        // the legacy-only servers gap it.
+        for slug in ["phlow", "lumen", "twilight"] {
+            assert_eq!(status(slug, "1.1"), 'P', "{slug}");
+        }
+        for slug in ["fathom", "periscope", "lupin", "phaedrus", "vongola"] {
+            assert_eq!(status(slug, "1.1"), 'G', "{slug}");
+        }
+        // Servers the sweep could not probe are never marked passing.
+        for slug in ["atelier", "buccaneer", "bunker", "press", "tackle", "volta", "ghidra-bridge"] {
+            assert_eq!(status(slug, "1.1"), 'U', "{slug}");
+            assert_eq!(status(slug, "4.1"), 'U', "{slug}");
+        }
+        // Packaging rows read from each published server's server.json.
+        for slug in ["eigenstyle", "fathom", "lumen", "phlow"] {
+            assert_eq!(status(slug, "9.1"), 'P', "{slug}");
+        }
     }
 }
