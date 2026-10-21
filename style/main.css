@@ -488,6 +488,7 @@ h3 {
   font-size: 1.3rem;
   margin: 0.55rem 0 0.6rem;
   text-align: center;
+  text-transform: capitalize;
 }
 @media (max-width: 48rem) {
   .cs-layout {
@@ -696,6 +697,9 @@ h3 {
   margin: 0.4rem 0 0.5rem;
   font-size: 1.35rem;
   text-align: center;
+}
+.solutions-page .entry h2 {
+  text-transform: capitalize;
 }
 .entry p {
   color: var(--fog);
@@ -977,11 +981,177 @@ a.download-box .download-state {
 }
 .mcp-bench .bench-title {
   text-align: center;
+  text-transform: capitalize;
 }
 .mcp-bench .bench-table th {
   letter-spacing: normal;
   text-align: center;
-  text-transform: none;
+  text-transform: capitalize;
+}
+
+/* — MCP server pages (/solutions/mcp/<name>) — */
+.mcp-page h1 {
+  text-align: center;
+  text-transform: capitalize;
+}
+.mcp-page h2 {
+  margin-top: 2rem;
+}
+.mcp-facts td:first-child {
+  font-family: var(--font-mono);
+  font-size: 0.82rem;
+  letter-spacing: 0.08em;
+  white-space: nowrap;
+  width: 7.5rem;
+}
+.mcp-config {
+  background: var(--chart);
+  border: 1px solid var(--chart-line);
+  border-left: 2px solid var(--cherenkov);
+  border-radius: 4px;
+  font-size: 0.86rem;
+  line-height: 1.55;
+  overflow-x: auto;
+  padding: 1rem 1.2rem;
+}
+.mcp-tools-note {
+  color: var(--fog);
+  font-size: 0.92rem;
+}
+.mcp-stage {
+  margin: 1.2rem 0;
+}
+.mcp-stage summary {
+  color: var(--brass);
+  cursor: pointer;
+  font-family: var(--font-display);
+  font-size: 1.05rem;
+  margin-bottom: 0.6rem;
+}
+.tool-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.35rem 0.5rem;
+  list-style: none;
+  margin: 0.4rem 0 1.1rem;
+  padding: 0;
+}
+.tool-chips li {
+  background: var(--chart);
+  border: 1px solid var(--chart-line);
+  border-radius: 999px;
+  font-size: 0.8rem;
+  padding: 0.15rem 0.6rem;
+}
+.mcp-back {
+  margin-top: 2.4rem;
+}
+
+/* — RE toolchain history (/solutions/mcp/fathom/re-history) — */
+.re-sounding {
+  display: block;
+  height: 3.2rem;
+  margin: 0.5rem auto 1.5rem;
+  max-width: 38rem;
+  width: 100%;
+}
+.re-sounding polyline {
+  stroke: var(--cherenkov);
+  stroke-width: 1.5;
+}
+.re-lane-title {
+  text-align: center;
+  text-transform: capitalize;
+}
+.re-lane-tag {
+  color: var(--fog);
+  margin-top: -0.4rem;
+  text-align: center;
+}
+.re-timeline {
+  border-left: 2px solid var(--chart-line);
+  list-style: none;
+  margin: 1.6rem 0 2.2rem 0.4rem;
+  padding: 0 0 0 1.4rem;
+}
+.re-entry {
+  margin: 0 0 1.7rem;
+  position: relative;
+}
+.re-entry::before {
+  background: var(--brass);
+  border-radius: 50%;
+  content: "";
+  height: 0.55rem;
+  left: -1.72rem;
+  position: absolute;
+  top: 0.35rem;
+  width: 0.55rem;
+}
+.re-year {
+  color: var(--brass);
+  font-family: var(--font-mono);
+  font-size: 0.82rem;
+  letter-spacing: 0.1em;
+}
+.re-entry h3 {
+  margin: 0.15rem 0 0.3rem;
+}
+.re-entry p {
+  color: var(--fog);
+  margin: 0;
+}
+.re-cite {
+  font-size: 0.85em;
+}
+.re-panel {
+  background: var(--chart);
+  border: 1px solid var(--chart-line);
+  border-top: 2px solid var(--brass);
+  border-radius: 4px;
+  margin: 0 0 2.2rem;
+  padding: 1.2rem 1.4rem;
+}
+.re-panel h2 {
+  margin-top: 0;
+  text-align: center;
+}
+.re-panel li {
+  color: var(--fog);
+  margin: 0.4rem 0;
+}
+.re-cite-line {
+  color: var(--fog);
+  font-size: 0.88rem;
+}
+.re-close {
+  margin-top: 2rem;
+}
+@media (prefers-reduced-motion: no-preference) {
+  .re-entry {
+    animation: re-rise 0.7s ease-out both;
+    animation-delay: var(--re-delay, 0ms);
+  }
+  .re-sounding polyline {
+    animation: re-trace 2.4s ease-in-out both;
+    stroke-dasharray: 1400;
+    stroke-dashoffset: 1400;
+  }
+  @keyframes re-rise {
+    from {
+      opacity: 0;
+      transform: translateY(0.8rem);
+    }
+    to {
+      opacity: 1;
+      transform: none;
+    }
+  }
+  @keyframes re-trace {
+    to {
+      stroke-dashoffset: 0;
+    }
+  }
 }
 .bench-note {
   margin-top: 0.6rem;

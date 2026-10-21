@@ -21,7 +21,7 @@ fn StudyLink(slug: &'static str) -> impl IntoView {
 pub fn Projects() -> impl IntoView {
     view! {
         <Title text="Solutions - Qompass AI" />
-        <section class="page">
+        <section class="page solutions-page">
             <p class="page-bearing">"CHART — THE FLEET"</p>
             <h1>"Solutions"</h1>
             <p class="page-lede">

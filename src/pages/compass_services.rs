@@ -205,13 +205,22 @@ const fn mcp(
     McpServer { name, role, status, detail, href, registry }
 }
 
-/// Every MCP server Qompass AI runs or is building, alphabetical —
-/// the public mirror of the internal census, verified 2026-10-20.
-/// Upstream servers declared in Diver (git, fetch, github, the
-/// Ghidra bridge, nvidia-cuda-docs) are not Qompass products and
-/// are not listed here; neither is rea, the upstream server fathom
-/// superseded.
-pub const MCP_SERVERS: [McpServer; 14] = [
+/// Every MCP server in the estate roster, alphabetical — the
+/// public mirror of the internal census, verified 2026-10-20, plus
+/// the day's commissions (atelier). The Ghidra bridge is upstream,
+/// not a Qompass product, and is listed as External because the
+/// estate declares and uses it; rea, the upstream server fathom
+/// superseded, is not listed. Every server has a page:
+/// `/solutions/mcp/<name>`.
+pub const MCP_SERVERS: [McpServer; 15] = [
+    mcp(
+        "atelier",
+        "Media generation — image, video, and music behind ComfyUI",
+        "Commissioned",
+        "Commissioned 2026-10-20 · design and S1 brief complete; the image lane (Iris) is in preparation, not yet built.",
+        Some("https://github.com/qompassai/atelier"),
+        None,
+    ),
     mcp(
         "buccaneer",
         "Security-assessment engine — rose-first, chains into fathom",
@@ -240,17 +249,25 @@ pub const MCP_SERVERS: [McpServer; 14] = [
         "fathom",
         "Reverse engineering and artifact analysis",
         "Published",
-        "MCP Registry ai.qompass/fathom 0.1.1 · latest release v0.1.2 · 25 tools · DOI 10.5281/zenodo.23503521.",
+        "MCP Registry ai.qompass/fathom 0.1.1 · latest release v0.1.2 · 28 tools · DOI 10.5281/zenodo.23503521.",
         Some("https://github.com/qompassai/fathom"),
         Some("https://registry.modelcontextprotocol.io/?q=fathom"),
     ),
     mcp(
+        "ghidra bridge",
+        "GhidraMCP plugin surface over stdio, fronting a running Ghidra GUI",
+        "External",
+        "Upstream bridge declared in Diver; not a Qompass product, and not launchable headless.",
+        None,
+        None,
+    ),
+    mcp(
         "lumen",
         "Deterministic conversion between 2D, 3D, and engine packages",
-        "Live",
-        "Release v0.1.1 · DOI 10.5281/zenodo.23503519 · registry publication pending.",
+        "Published",
+        "MCP Registry ai.qompass/lumen 0.1.1 · release v0.1.1 · 7 tools · DOI 10.5281/zenodo.23503519.",
         Some("https://github.com/qompassai/lumen"),
-        None,
+        Some("https://registry.modelcontextprotocol.io/?q=lumen"),
     ),
     mcp(
         "lupin",
@@ -314,14 +331,6 @@ pub const MCP_SERVERS: [McpServer; 14] = [
         "Design stage",
         "Design complete; no repository yet.",
         None,
-        None,
-    ),
-    mcp(
-        "vongola",
-        "Instrumentation and read-only operations",
-        "In development",
-        "Read-only by design: it observes the fleet — including press — and never acts.",
-        Some("https://github.com/qompassai/vongola"),
         None,
     ),
 ];
@@ -521,9 +530,12 @@ pub fn McpServers() -> impl IntoView {
                         {MCP_SERVERS
                             .iter()
                             .map(|s| {
+                                let slug = s.name.replace(' ', "-");
                                 view! {
                                     <tr>
-                                        <td>{s.name}</td>
+                                        <td>
+                                            <a href=format!("/solutions/mcp/{slug}")>{s.name}</a>
+                                        </td>
                                         <td>{s.role}</td>
                                         <td>{s.status}</td>
                                         <td>{s.detail}</td>
@@ -541,7 +553,7 @@ pub fn McpServers() -> impl IntoView {
                 </table>
             </div>
             <figcaption class="bench-note">
-                "Verified against the estate census, 2026-10-20. “Published” means listed on the official MCP Registry; “Live” means running and probed on our infrastructure."
+                "Verified against the estate census, 2026-10-20. “Published” means listed on the official MCP Registry; “Live” means running and probed on our infrastructure. Each server's name links to its page: the full client config and tool list."
             </figcaption>
         </figure>
     }
@@ -1076,8 +1088,8 @@ mod tests {
 
     #[test]
     fn the_mcp_table_is_alphabetical_unique_and_in_vocabulary() {
-        assert_eq!(MCP_SERVERS.len(), 14);
-        let vocab = ["Commissioned", "Design stage", "In development", "Legacy", "Live", "Published"];
+        assert_eq!(MCP_SERVERS.len(), 15);
+        let vocab = ["Commissioned", "Design stage", "External", "In development", "Legacy", "Live", "Published"];
         for (i, s) in MCP_SERVERS.iter().enumerate() {
             assert!(vocab.contains(&s.status), "{}: {}", s.name, s.status);
             assert!(!s.role.is_empty() && !s.detail.is_empty(), "{}", s.name);
@@ -1099,8 +1111,8 @@ mod tests {
     }
 
     #[test]
-    fn the_mcp_table_marks_the_registry_three_published() {
-        for name in ["eigenstyle", "fathom", "phlow"] {
+    fn the_mcp_table_marks_the_registry_four_published() {
+        for name in ["eigenstyle", "fathom", "lumen", "phlow"] {
             let s = MCP_SERVERS.iter().find(|s| s.name == name).expect(name);
             assert_eq!(s.status, "Published", "{name}");
             assert!(s.href.is_some(), "{name}");

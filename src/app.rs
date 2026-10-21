@@ -5,11 +5,13 @@ use crate::pages::{
     home::Home,
     legal::Legal,
     light_show::{LightShow, LightShowTesters},
+    mcp_pages::McpDispatch,
     on_ai::OnAi,
     ontrack_privacy::OnTrackPrivacy,
     privacy::Privacy,
     project::ProjectDispatch,
     projects::Projects,
+    re_history::ReHistory,
     research::Research,
     tiger_style::{TigerStyle, TigerStyleDispatch},
 };
@@ -200,6 +202,8 @@ pub fn App() -> impl IntoView {
                     <Route path=path!("/analysis") view=OnAi />
                     <Route path=path!("/standards") view=TigerStyle />
                     <Route path=path!("/standards/:slug") view=TigerStyleDispatch />
+                    <Route path=path!("/solutions/mcp/fathom/re-history") view=ReHistory />
+                    <Route path=path!("/solutions/mcp/:name") view=McpDispatch />
                     <Route path=path!("/solutions/:slug") view=ProjectDispatch />
                     <Route path=path!("/research") view=Research />
                 </Routes>
