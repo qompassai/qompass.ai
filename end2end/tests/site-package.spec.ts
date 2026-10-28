@@ -3,7 +3,7 @@ import { expect, test } from '@playwright/test';
 // The 2026-10-15 site package: one blended compass readout, solution
 // pages on this site, versions in place of status, the cardinal cards
 // on /solutions, and the qubit hero. The table below is an independent
-// oracle for the 44 solutions — written from the package order, not
+// oracle for the 45 solutions — written from the package order, not
 // read from src/pages/compass_services.rs. Two carry no version: the
 // archived rose.nvim, and the telco-admin quizzes, which live here.
 const GH = 'https://github.com/qompassai/';
@@ -14,26 +14,22 @@ const lr = (slug: string, name: string, rock: string, version = '0.1.0-1') =>
   ({ slug, name, version, versionHref: `${LR}${rock}` });
 
 const SOLUTIONS: { slug: string; name: string; version: string | null; versionHref: string | null }[] = [
+  gh('diver', 'Diver', 'Diver'),
+  { slug: 'rose-nvim', name: 'Rose.nvim', version: null, versionHref: null },
+  gh('blaze-ts-nvim', 'Blaze-TS.nvim', 'blaze-ts.nvim'),
+  gh('blaze-nvim', 'Blaze.nvim', 'blaze.nvim'),
+  gh('pathfinders', 'PathFinders', 'PathFinders'),
+  gh('qluv', 'Qluv', 'qluv'),
+  gh('tuxtype', 'Tuxtype', 'tuxtype'),
+  gh('unreal', 'Unreal', 'unreal'),
+  lr('blaze-nvim-luarocks', 'Blaze.nvim (LuaRocks)', 'blaze.nvim', '1.0-1'),
+  gh('moonwalk', 'Moonwalk', 'moonwalk'),
+  { slug: 'telco-admin-quizzes', name: 'Telco-Admin Practice Quizzes', version: null, versionHref: null },
   gh('qompass-hold', 'Qompass-Hold', 'qompass-hold'),
   gh('qssl', 'Qssl', 'qssl'),
   gh('radar', 'Radar', 'radar'),
   gh('redteam', 'Redteam', 'redteam'),
   gh('tor', 'Tor', 'tor'),
-  gh('vongola', 'Vongola', 'vongola'),
-  gh('fathom', 'fathom', 'fathom'),
-  lr('diver-security', 'diver-security', 'diver-security'),
-  gh('blaze-ts-nvim', 'blaze-ts.nvim', 'blaze-ts.nvim'),
-  gh('blaze-nvim', 'blaze.nvim', 'blaze.nvim'),
-  gh('diver', 'Diver', 'Diver'),
-  gh('pathfinders', 'PathFinders', 'PathFinders'),
-  gh('qluv', 'Qluv', 'qluv'),
-  { slug: 'rose-nvim', name: 'Rose.nvim', version: null, versionHref: null },
-  gh('tuxtype', 'Tuxtype', 'tuxtype'),
-  gh('unreal', 'Unreal', 'unreal'),
-  gh('eigenstyle', 'eigenstyle', 'eigenstyle'),
-  lr('blaze-nvim-luarocks', 'blaze.nvim (LuaRocks)', 'blaze.nvim', '1.0-1'),
-  lr('diver-research', 'diver-research', 'diver-research'),
-  { slug: 'telco-admin-quizzes', name: 'Telco-Admin Practice Quizzes', version: null, versionHref: null },
   gh('azimuth', 'Azimuth', 'Azimuth'),
   gh('current', 'Current', 'current'),
   gh('dotfiles', 'Dotfiles', 'dotfiles'),
@@ -41,23 +37,28 @@ const SOLUTIONS: { slug: string; name: string; version: string | null; versionHr
   gh('qudaz', 'Qudaz', 'qudaz'),
   gh('qxet', 'Qxet', 'qxet'),
   gh('rose', 'Rose', 'rose'),
-  gh('lumen', 'lumen', 'lumen'),
-  gh('phlow-mcp-server', 'phlow MCP server', 'phlow'),
-  lr('diver-ai', 'diver-ai', 'diver-ai'),
-  lr('diver-comms', 'diver-comms', 'diver-comms'),
-  lr('diver-config', 'diver-config', 'diver-config'),
-  lr('diver-dap', 'diver-dap', 'diver-dap'),
-  lr('diver-dev', 'diver-dev', 'diver-dev'),
-  lr('diver-games', 'diver-games', 'diver-games'),
-  lr('diver-lintfmt', 'diver-lintfmt', 'diver-lintfmt'),
-  lr('diver-utils', 'diver-utils', 'diver-utils'),
-  lr('hyprlua', 'hyprlua', 'hyprlua'),
-  gh('beacon', 'beacon', 'beacon'),
-  gh('bunker', 'bunker', 'bunker'),
-  gh('debian', 'debian', 'debian'),
-  gh('network', 'network', 'network'),
+  gh('beacon', 'Beacon', 'beacon'),
+  gh('debian', 'Debian', 'debian'),
+  gh('network', 'Network', 'network'),
   gh('nur', 'NUR', 'NUR'),
-  gh('qjp', 'qjp', 'qjp'),
+  gh('qjp', 'Qjp', 'qjp'),
+  lr('diver-ai', 'Diver-AI', 'diver-ai'),
+  lr('diver-comms', 'Diver-Comms', 'diver-comms'),
+  lr('diver-config', 'Diver-Config', 'diver-config'),
+  lr('diver-dap', 'Diver-DAP', 'diver-dap'),
+  lr('diver-dev', 'Diver-Dev', 'diver-dev'),
+  lr('diver-games', 'Diver-Games', 'diver-games'),
+  lr('diver-lintfmt', 'Diver-Lintfmt', 'diver-lintfmt'),
+  lr('diver-research', 'Diver-Research', 'diver-research'),
+  lr('diver-security', 'Diver-Security', 'diver-security'),
+  lr('diver-utils', 'Diver-Utils', 'diver-utils'),
+  lr('hyprlua', 'Hyprlua', 'hyprlua'),
+  gh('vongola', 'Vongola', 'vongola'),
+  gh('bunker', 'Bunker', 'bunker'),
+  gh('eigenstyle', 'Eigenstyle', 'eigenstyle'),
+  gh('fathom', 'Fathom', 'fathom'),
+  gh('lumen', 'Lumen', 'lumen'),
+  gh('phlow-mcp-server', 'Phlow MCP Server', 'phlow'),
 ];
 
 test('(a) home has no static cardinal cards and no In Progress', async ({ page }) => {
@@ -82,8 +83,8 @@ test('(a) the readout is one list: no cardinal header, no percentile', async ({ 
 test('(a) the blend still moves: at NE the readout joins two cardinals, still one list', async ({ page }) => {
   await page.goto('/');
   const readout = page.locator('.compass-services-readout');
-  // Near 000: Security alone, its 8 solutions.
-  await expect(readout.locator('a.cs-solution')).toHaveCount(8);
+  // Near 000: Flagship alone, its 2 solutions.
+  await expect(readout.locator('a.cs-solution')).toHaveCount(2);
   // Steer to 045 with the NE tick. The tick turns with the idle sweep,
   // so it is never "stable" for a click: focus (which pauses the sweep)
   // and press Enter, which also stops the sweep for good.
@@ -91,20 +92,20 @@ test('(a) the blend still moves: at NE the readout joins two cardinals, still on
   await ne.focus();
   await ne.press('Enter');
   await expect(readout.locator('.cs-r-bearing')).toHaveText(/^045°/);
-  // Security (8) then Education (12), one list, no percent anywhere.
-  await expect(readout.locator('a.cs-solution')).toHaveCount(20);
+  // Flagship (2) then Education (9), one list, no percent anywhere.
+  await expect(readout.locator('a.cs-solution')).toHaveCount(11);
   await expect(readout.locator('ul')).toHaveCount(1);
   expect(await readout.innerText()).not.toMatch(/\d\s*%/);
   const hrefs = await readout.locator('a.cs-solution').evaluateAll((as) => as.map((a) => a.getAttribute('href')));
-  expect(hrefs[0]).toBe('/solutions/qompass-hold');
-  expect(hrefs[8]).toBe('/solutions/blaze-ts-nvim');
+  expect(hrefs[0]).toBe('/solutions/diver');
+  expect(hrefs[2]).toBe('/solutions/blaze-ts-nvim');
   for (const href of hrefs) expect(href).toMatch(/^\/solutions\/[a-z0-9-]+$/);
 });
 
-test('(b) all 44 solution links point to /solutions/<slug>', async ({ page }) => {
+test('(b) all 45 solution links point to /solutions/<slug>', async ({ page }) => {
   await page.goto('/solutions');
   const links = page.locator('.cs-directory a.cs-solution');
-  await expect(links).toHaveCount(44);
+  await expect(links).toHaveCount(45);
   const got = await links.evaluateAll((as) => as.map((a) => [a.getAttribute('href'), a.textContent?.trim()]));
   expect(got).toEqual(SOLUTIONS.map((s) => [`/solutions/${s.slug}`, s.name]));
   // No solution link escapes to GitHub or LuaRocks.
@@ -168,7 +169,7 @@ test('(c) /solutions shows the four cardinal cards below the eight fleet entries
   await expect(page.locator('.entry-list > .entry')).toHaveCount(8);
   const cards = page.locator('.cs-directory > .cs-group');
   await expect(cards).toHaveCount(4);
-  await expect(cards.locator('h2')).toHaveText(['Security', 'Education', 'Deployment', 'Infrastructure']);
+  await expect(cards.locator('h2')).toHaveText(['Flagship', 'Education', 'Platform', 'MCP']);
   const below = await page.evaluate(() => {
     const list = document.querySelector('.entry-list');
     const dir = document.querySelector('.cs-directory');
