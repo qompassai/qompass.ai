@@ -30,31 +30,32 @@ pub struct Cardinal {
 pub const CARDINALS: [Cardinal; 4] = [
     Cardinal {
         mark: "N — NORTH",
-        name: "Security",
-        brief: "NIST-compliant security solutions — post-quantum cryptography, \
-            red-team tooling, and privacy infrastructure, built in the open.",
+        name: "Flagship",
+        brief: "The flagship user-facing apps — Diver, the everything editor, \
+            and Rose.nvim, the in-editor AI front end that now lives inside Diver.",
         center: 0,
     },
     Cardinal {
         mark: "E — EAST",
         name: "Education",
         brief: "Empowering education solutions — learning tools that live in the \
-            editor, and PathFinders, our internship program for new builders.",
+            editor, PathFinders, our internship program for new builders, and \
+            case-by-case placements ruled on their individual merits.",
         center: 90,
     },
     Cardinal {
         mark: "S — SOUTH",
-        name: "Deployment",
-        brief: "Quality deployment solutions — dotfiles, configuration, and \
-            release tooling that carry a project from first checkout to \
-            production.",
+        name: "Platform",
+        brief: "Platform and runtime solutions — infrastructure, configuration, \
+            security tooling, and the Diver module family that carry a project \
+            from first checkout to production.",
         center: 180,
     },
     Cardinal {
         mark: "W — WEST",
-        name: "Infrastructure",
-        brief: "Efficient infrastructure solutions — Nix packaging, a signed binary \
-            cache, and the network plumbing the rest of the fleet runs on.",
+        name: "MCP",
+        brief: "MCP entire — every solution on this bearing is a Model Context \
+            Protocol server, putting Qompass tools in front of agents.",
         center: 270,
     },
 ];
@@ -204,32 +205,30 @@ const ROCK: Option<&str> = Some("0.1.0-1");
 ///
 /// Per cardinal: the org profile's set first, in its order, then the
 /// published additions — MCP servers and the phaedrusflow `LuaRocks`
-/// modules (crates.io: none published). rose.nvim has no version: the
+/// modules (crates.io: none published). Cardinal assignments are the
+/// Owner's remap, fully ruled 2026-10-25: North 2 (the flagships),
+/// East 7 + the two later East additions (Moonwalk, Telco-Admin),
+/// South 28 (platform/runtime), West 6 (MCP entire). rose.nvim has no version: the
 /// repository is archived (GitHub refuses it a release) and rose now
 /// lives inside Diver. The telco-admin practice quizzes live on this
 /// site — their `href` is their own page — and carry no version.
 pub const SOLUTIONS: [Solution; 45] = [
-    sol("Qompass-Hold", "qompass-hold", "https://github.com/qompassai/qompass-hold", N, Class::App, V1, "Qompass Secret-Service."),
-    sol("Qssl", "qssl", "https://github.com/qompassai/qssl", N, Class::App, V1, "Qompass AI SSL solution."),
-    sol("Radar", "radar", "https://github.com/qompassai/radar", N, Class::App, V1, "Risk Analysis Diagnostic Assessment Resolver (R.A.D.A.R)."),
-    sol("Redteam", "redteam", "https://github.com/qompassai/redteam", N, Class::App, V1, "Qompass AI on red teaming."),
-    sol("Tor", "tor", "https://github.com/qompassai/tor", N, Class::App, V1, "Qompass AI Tor setup."),
-    sol("Vongola", "vongola", "https://github.com/qompassai/vongola", N, Class::App, V1, "A secure, performant reverse-proxy server for your deep tech needs."),
-    sol("Fathom", "fathom", "https://github.com/qompassai/fathom", N, Class::Mcp, V1, "Spec-led Rust port of REA — a reverse-engineering tool provider for agents (MCP/A2A), with evidence-carrying findings and a fail-closed policy gate."),
-    sol("Diver-Security", "diver-security", "https://luarocks.org/modules/phaedrusflow/diver-security", N, Class::Package, ROCK, "Diver security toolkit: security.* RCE/MiTM/zombie/supply-chain guards, red/blue suites, pass integration, Ghidra bridge, PQC tokens."),
+    sol("Diver", "diver", "https://github.com/qompassai/Diver", N, Class::App, V1, "Your blazingly fast everything editor."),
+    sol("Rose.nvim", "rose-nvim", "https://github.com/qompassai/rose.nvim", N, Class::App, None, "The archived Neovim front end for Rose; Rose now lives inside Diver."),
     sol("Blaze-TS.nvim", "blaze-ts-nvim", "https://github.com/qompassai/blaze-ts.nvim", E, Class::App, V1, "A tree-sitter grammar for the Mojo programming language, packaged as a Neovim plugin."),
     sol("Blaze.nvim", "blaze-nvim", "https://github.com/qompassai/blaze.nvim", E, Class::App, V1, "🔥 for Neovim."),
-    sol("Diver", "diver", "https://github.com/qompassai/Diver", E, Class::App, V1, "Your blazingly fast everything editor."),
     sol("PathFinders", "pathfinders", "https://github.com/qompassai/PathFinders", E, Class::App, V1, "The Qompass intern program."),
     sol("Qluv", "qluv", "https://github.com/qompassai/qluv", E, Class::App, V1, "Qompass Lua version manager."),
-    sol("Rose.nvim", "rose-nvim", "https://github.com/qompassai/rose.nvim", E, Class::App, None, "The archived Neovim front end for Rose; Rose now lives inside Diver."),
     sol("Tuxtype", "tuxtype", "https://github.com/qompassai/tuxtype", E, Class::App, V1, "Qompass AI on TuxType."),
     sol("Unreal", "unreal", "https://github.com/qompassai/unreal", E, Class::App, V1, "Qompass AI Unreal tooling."),
-    sol("Eigenstyle", "eigenstyle", "https://github.com/qompassai/eigenstyle", E, Class::Mcp, V1, "Your voice profile as a tool — a Rust workspace (MCP server, TUI, and GPUI GUI) over a measured writing fingerprint."),
     sol("Blaze.nvim (LuaRocks)", "blaze-nvim-luarocks", "https://luarocks.org/modules/phaedrusflow/blaze.nvim", E, Class::Package, Some("1.0-1"), "🔥 for AI — the blaze.nvim plugin as a LuaRocks module."),
-    sol("Diver-Research", "diver-research", "https://luarocks.org/modules/phaedrusflow/diver-research", E, Class::Package, ROCK, "Diver research workflow: research.* journal registry, ORCID, OpenAlex, Web of Science, Zenodo, deadlines, watchlist, templates, Zotero."),
-    sol("Telco-Admin Practice Quizzes", "telco-admin-quizzes", "/solutions/telco-admin-quizzes", E, Class::App, None, "Telco-admin practice quizzes with encrypted answer keys, hosted on this site."),
     sol("Moonwalk", "moonwalk", "https://github.com/qompassai/moonwalk", E, Class::App, V1, "A cross-platform Lua debugger and Debug Adapter Protocol server — a native, plugin-free Neovim debugging workflow, compatible with VS Code and other DAP clients."),
+    sol("Telco-Admin Practice Quizzes", "telco-admin-quizzes", "/solutions/telco-admin-quizzes", E, Class::App, None, "Telco-admin practice quizzes with encrypted answer keys, hosted on this site."),
+    sol("Qompass-Hold", "qompass-hold", "https://github.com/qompassai/qompass-hold", S, Class::App, V1, "Qompass Secret-Service."),
+    sol("Qssl", "qssl", "https://github.com/qompassai/qssl", S, Class::App, V1, "Qompass AI SSL solution."),
+    sol("Radar", "radar", "https://github.com/qompassai/radar", S, Class::App, V1, "Risk Analysis Diagnostic Assessment Resolver (R.A.D.A.R)."),
+    sol("Redteam", "redteam", "https://github.com/qompassai/redteam", S, Class::App, V1, "Qompass AI on red teaming."),
+    sol("Tor", "tor", "https://github.com/qompassai/tor", S, Class::App, V1, "Qompass AI Tor setup."),
     sol("Azimuth", "azimuth", "https://github.com/qompassai/Azimuth", S, Class::App, V1, "Your helpful AI navigator."),
     sol("Current", "current", "https://github.com/qompassai/current", S, Class::App, V1, "Qompass AI Current: your self-hosted AI runner."),
     sol("Dotfiles", "dotfiles", "https://github.com/qompassai/dotfiles", S, Class::App, V1, "XDG dotfiles for the Qompass AI development environment — a Qonfig link map paired with a Nix flake user environment."),
@@ -237,8 +236,11 @@ pub const SOLUTIONS: [Solution; 45] = [
     sol("Qudaz", "qudaz", "https://github.com/qompassai/qudaz", S, Class::App, V1, "Qompass AI CUDA library for Zig."),
     sol("Qxet", "qxet", "https://github.com/qompassai/qxet", S, Class::App, V1, "QXet: Quality AI eXchange — content-addressed storage for large binary artifacts."),
     sol("Rose", "rose", "https://github.com/qompassai/rose", S, Class::App, V1, "Qompass AI's fork of Ollama, the local model server — upstream releases with the fork delta re-applied, serving local specialists on local hardware."),
-    sol("Lumen", "lumen", "https://github.com/qompassai/lumen", S, Class::Mcp, V1, "Lux in motu — an MCP server for Aseprite sprite artistry with Bevy live-world interop."),
-    sol("Phlow MCP Server", "phlow-mcp-server", "https://github.com/qompassai/phlow#mcp-wire-contract", S, Class::Mcp, V1, "Phlow's MCP server surface: one safe runtime shared with the CLI and TUI, over the MCP wire contract."),
+    sol("Beacon", "beacon", "https://github.com/qompassai/beacon", S, Class::App, V1, "Beacon: a quality e-mail solution."),
+    sol("Debian", "debian", "https://github.com/qompassai/debian", S, Class::App, V1, "Debian Linux for stable servers — the Qompass AI base configuration."),
+    sol("Network", "network", "https://github.com/qompassai/network", S, Class::App, V1, "Qompass AI network tooling."),
+    sol("NUR", "nur", "https://github.com/qompassai/NUR", S, Class::App, V1, "Qompass AI's Nix user repository — the qompassai package set, built from source."),
+    sol("Qjp", "qjp", "https://github.com/qompassai/qjp", S, Class::App, V1, "NixOS module for NVIDIA Jetson devices."),
     sol("Diver-AI", "diver-ai", "https://luarocks.org/modules/phaedrusflow/diver-ai", S, Class::Package, ROCK, "Diver AI suite: ai.* harness (registry/supervisor/policy), MCP, ACP, A2A, herd, rose integration, media, recon, plus salesforce.mcp."),
     sol("Diver-Comms", "diver-comms", "https://luarocks.org/modules/phaedrusflow/diver-comms", S, Class::Package, ROCK, "Diver mail tooling: comms.* clients (aerc, neomutt), mail and MIME helpers."),
     sol("Diver-Config", "diver-config", "https://luarocks.org/modules/phaedrusflow/diver-config", S, Class::Package, ROCK, "Diver config library modules: config.ui.* (UI library: icons, image rendering, themes, virtual text) and config.data.* (database adapters)."),
@@ -246,20 +248,236 @@ pub const SOLUTIONS: [Solution; 45] = [
     sol("Diver-Dev", "diver-dev", "https://luarocks.org/modules/phaedrusflow/diver-dev", S, Class::Package, ROCK, "Diver developer tooling: dev.* BSP servers, SCIP indexers, browser (BiDi/CDP), apps, Salesforce suite, git/jj/cargo runners."),
     sol("Diver-Games", "diver-games", "https://luarocks.org/modules/phaedrusflow/diver-games", S, Class::Package, ROCK, "Diver game-engine tooling: games.* for Aseprite, Blender, Godot, LÖVE, Redot, TIC-80, Unity, Unreal and Voidsprite, plus shared character kit."),
     sol("Diver-Lintfmt", "diver-lintfmt", "https://luarocks.org/modules/phaedrusflow/diver-lintfmt", S, Class::Package, ROCK, "Diver tool catalogs: formatters.* (138 formatter adapters + engine) and linters.* (185 linter adapters + engine). One adapter per file."),
+    sol("Diver-Research", "diver-research", "https://luarocks.org/modules/phaedrusflow/diver-research", S, Class::Package, ROCK, "Diver research workflow: research.* journal registry, ORCID, OpenAlex, Web of Science, Zenodo, deadlines, watchlist, templates, Zotero."),
+    sol("Diver-Security", "diver-security", "https://luarocks.org/modules/phaedrusflow/diver-security", S, Class::Package, ROCK, "Diver security toolkit: security.* RCE/MiTM/zombie/supply-chain guards, red/blue suites, pass integration, Ghidra bridge, PQC tokens."),
     sol("Diver-Utils", "diver-utils", "https://luarocks.org/modules/phaedrusflow/diver-utils", S, Class::Package, ROCK, "Diver foundations: shared utility library (utils.*), tools.*, plus the shared primitives other diver rocks build on."),
     sol("Hyprlua", "hyprlua", "https://luarocks.org/modules/phaedrusflow/hyprlua", S, Class::Package, ROCK, "LuaCATS annotations for the Hyprland 0.55+ Lua config API."),
-    sol("Beacon", "beacon", "https://github.com/qompassai/beacon", W, Class::App, V1, "Beacon: a quality e-mail solution."),
+    sol("Vongola", "vongola", "https://github.com/qompassai/vongola", W, Class::App, V1, "A secure, performant reverse-proxy server for your deep tech needs."),
     sol("Bunker", "bunker", "https://github.com/qompassai/bunker", W, Class::App, V1, "An Attic-based Nix binary cache with hybrid Ed25519 + ML-DSA-65 narinfo signing."),
-    sol("Debian", "debian", "https://github.com/qompassai/debian", W, Class::App, V1, "Debian Linux for stable servers — the Qompass AI base configuration."),
-    sol("Network", "network", "https://github.com/qompassai/network", W, Class::App, V1, "Qompass AI network tooling."),
-    sol("NUR", "nur", "https://github.com/qompassai/NUR", W, Class::App, V1, "Qompass AI's Nix user repository — the qompassai package set, built from source."),
-    sol("Qjp", "qjp", "https://github.com/qompassai/qjp", W, Class::App, V1, "NixOS module for NVIDIA Jetson devices."),
+    sol("Eigenstyle", "eigenstyle", "https://github.com/qompassai/eigenstyle", W, Class::Mcp, V1, "Your voice profile as a tool — a Rust workspace (MCP server, TUI, and GPUI GUI) over a measured writing fingerprint."),
+    sol("Fathom", "fathom", "https://github.com/qompassai/fathom", W, Class::Mcp, V1, "Spec-led Rust port of REA — a reverse-engineering tool provider for agents (MCP/A2A), with evidence-carrying findings and a fail-closed policy gate."),
+    sol("Lumen", "lumen", "https://github.com/qompassai/lumen", W, Class::Mcp, V1, "Lux in motu — a deterministic cross-media conversion engine (2D art, 3D models, engine packages), served over MCP; atelier's image lane folded in (2026-10-27)."),
+    sol("Phlow MCP Server", "phlow-mcp-server", "https://github.com/qompassai/phlow#mcp-wire-contract", W, Class::Mcp, V1, "Phlow's MCP server surface: one safe runtime shared with the CLI and TUI, over the MCP wire contract."),
 ];
 
 /// The solution whose page is `/solutions/<slug>`, if any.
 pub fn solution_page(slug: &str) -> Option<&'static Solution> {
     SOLUTIONS.iter().find(|s| s.slug == slug)
 }
+
+/// One MCP server in the estate inventory: what it is, where it
+/// stands, and the evidence line. Statuses use the vocabulary the
+/// tests pin: Commissioned, Design stage, In development, Legacy,
+/// Live, Published.
+pub struct McpServer {
+    pub name: &'static str,
+    pub role: &'static str,
+    pub status: &'static str,
+    pub detail: &'static str,
+    pub href: Option<&'static str>,
+    pub registry: Option<&'static str>,
+}
+
+const fn mcp(
+    name: &'static str,
+    role: &'static str,
+    status: &'static str,
+    detail: &'static str,
+    href: Option<&'static str>,
+    registry: Option<&'static str>,
+) -> McpServer {
+    McpServer { name, role, status, detail, href, registry }
+}
+
+/// The display form of a roster name, for titles and links: each
+/// word capitalized ("ghidra bridge" -> "Ghidra Bridge"). The
+/// roster `name` itself stays the lowercase key — slugs and client
+/// config keys derive from it; this is presentation only.
+pub fn mcp_display_name(name: &str) -> String {
+    name.split(' ')
+        .map(|word| {
+            let mut chars = word.chars();
+            match chars.next() {
+                Some(first) => first.to_uppercase().collect::<String>() + chars.as_str(),
+                None => String::new(),
+            }
+        })
+        .collect::<Vec<_>>()
+        .join(" ")
+}
+
+/// Every MCP server in the estate roster, alphabetical — the
+/// public mirror of the internal census, verified 2026-10-20, plus
+/// the day's commissions (atelier). The Ghidra bridge is upstream,
+/// not a Qompass product, and is listed as External because the
+/// estate declares and uses it; rea, the upstream server fathom
+/// superseded, is not listed. Vongola was restored 2026-10-20: the
+/// census omitted it then (corrected the same day), so its entry
+/// and page are read from the server's own source
+/// (crates/vongola-mcp). Every server has a page:
+/// `/solutions/mcp/<name>`.
+pub const MCP_SERVERS: [McpServer; 20] = [
+    mcp(
+        "atelier",
+        "Media generation — image, video, and music behind ComfyUI",
+        "Legacy",
+        "Folded into Lumen as its image lane (2026-10-27) · the standalone server was retired before it shipped; its surface lives on in lumen 0.3.0.",
+        Some("https://github.com/qompassai/atelier"),
+        None,
+    ),
+    mcp(
+        "bloch",
+        "Roadmaps, lessons, and memory — the estate's learning record",
+        "Live",
+        "v0.4.0 · 11 tools · rmcp, modern-era only · lessons_search and the memory_propose / memory_promote gate are how the fleet's servers file and recall oracle-labelled lessons. Not yet on the MCP Registry.",
+        Some("https://github.com/qompassai/bloch"),
+        None,
+    ),
+    mcp(
+        "broadside",
+        "This website — build, verify, deploy, with a honeypot",
+        "Commissioned",
+        "Commissioned 2026-10-20 as press; renamed broadside the same day · design complete, build pending.",
+        None,
+        None,
+    ),
+    mcp(
+        "buccaneer",
+        "Security-assessment engine — rose-first, chains into fathom",
+        "In development",
+        "Tool surface source-verified; the v1 gate is pending.",
+        Some("https://github.com/qompassai/buccaneer"),
+        None,
+    ),
+    mcp(
+        "bunker",
+        "Signed-manifest executor for consequential actions",
+        "In development",
+        "The Stage C server is under construction.",
+        Some("https://github.com/qompassai/bunker"),
+        None,
+    ),
+    mcp(
+        "eigenstyle",
+        "Voice and style fingerprinting for drafts",
+        "Published",
+        "MCP Registry ai.qompass/eigenstyle 0.1.1, as a bundle · the server is now 0.2.0, migrated to rmcp, modern-era only (2026-10-27); the registry bundle is still the 0.1.1 build.",
+        Some("https://github.com/qompassai/eigenstyle"),
+        Some("https://registry.modelcontextprotocol.io/?q=eigenstyle"),
+    ),
+    mcp(
+        "fathom",
+        "Reverse engineering and artifact analysis",
+        "Published",
+        "MCP Registry ai.qompass/fathom 0.1.1 · latest release v0.1.2 · 39 tools (video analysis added 2026-10-28) · DOI 10.5281/zenodo.23503521 · migrated to rmcp, modern-era only (2026-10-27).",
+        Some("https://github.com/qompassai/fathom"),
+        Some("https://registry.modelcontextprotocol.io/?q=fathom"),
+    ),
+    mcp(
+        "ghidra bridge",
+        "GhidraMCP plugin surface over stdio, fronting a running Ghidra GUI",
+        "External",
+        "Upstream bridge declared in Diver; not a Qompass product, and not launchable headless.",
+        None,
+        None,
+    ),
+    mcp(
+        "lumen",
+        "Deterministic conversion between 2D, 3D, and engine packages",
+        "Published",
+        "MCP Registry ai.qompass/lumen 0.1.1 · the server is now 0.3.0 — 11 tools, atelier folded in — migrated to rmcp, modern-era only · DOI 10.5281/zenodo.23503519.",
+        Some("https://github.com/qompassai/lumen"),
+        Some("https://registry.modelcontextprotocol.io/?q=lumen"),
+    ),
+    mcp(
+        "lupin",
+        "Revenue alignment across the Qompass and NTRanch lanes",
+        "Published",
+        "MCP Registry ai.qompass/lupin 0.1.0 · 6 tools · the server is now 0.2.0, migrated to rmcp, modern-era only (2026-10-27).",
+        Some("https://github.com/qompassai/lupin"),
+        Some("https://registry.modelcontextprotocol.io/?q=lupin"),
+    ),
+    mcp(
+        "periscope",
+        "Neovim broker — editor state, LSP/DAP, shared attention",
+        "Published",
+        "MCP Registry ai.qompass/periscope 0.1.0 · 16 tools · the server is now 0.2.0, migrated to rmcp, modern-era only (2026-10-27).",
+        Some("https://github.com/qompassai/periscope"),
+        Some("https://registry.modelcontextprotocol.io/?q=periscope"),
+    ),
+    mcp(
+        "phaedrus",
+        "Research feed — findings, watchlists, revenue candidates",
+        "Published",
+        "MCP Registry ai.qompass/phaedrus 0.1.0 · 7 tools · the server is now 0.2.0, migrated to rmcp, modern-era only (2026-10-27).",
+        Some("https://github.com/qompassai/phaedrus"),
+        Some("https://registry.modelcontextprotocol.io/?q=phaedrus"),
+    ),
+    mcp(
+        "phlow",
+        "Agent runtime — CLI, TUI, and MCP over one safe core",
+        "Published",
+        "MCP Registry ai.qompass/phlow 0.2.1 · server name “flow” · 7 tools · migration to rmcp, modern-era only, in progress (2026-10-28).",
+        Some("https://github.com/qompassai/phlow"),
+        Some("https://registry.modelcontextprotocol.io/?q=phlow"),
+    ),
+    mcp(
+        "seahawk",
+        "Broker for Unreal Engine's MCP server — curated surface, computer use",
+        "Live",
+        "Landed 2026-10-27 · token auth, execute-class default-deny through decide(), append-only op log · the downstream Unreal surface censused at 830 tools · not yet on the MCP Registry (publication not authorized).",
+        Some("https://github.com/qompassai/seahawk"),
+        None,
+    ),
+    mcp(
+        "slipway",
+        "Release certification — builds, bundles, and device verification",
+        "Published",
+        "MCP Registry ai.qompass/slipway 0.1.0 · crates.io slipway-mcp 0.1.0 · rmcp, modern-era only.",
+        Some("https://github.com/qompassai/slipway"),
+        Some("https://registry.modelcontextprotocol.io/?q=slipway"),
+    ),
+    mcp(
+        "tackle",
+        "Editor broker — Unity first, Godot later",
+        "In development",
+        "Standardized on rmcp, modern-era only · U2 write core gated 2026-10-28 (crate 0.3.0): a committed batch is exactly one undo step; landing follows the phlow migration.",
+        None,
+        None,
+    ),
+    mcp(
+        "theodolite",
+        "Headless LSP bridge — diagnostics and semantics without an editor",
+        "Published",
+        "MCP Registry ai.qompass/theodolite 0.1.0 · rmcp, modern-era only · read-only by design: no format or lint tools.",
+        Some("https://github.com/qompassai/theodolite"),
+        Some("https://registry.modelcontextprotocol.io/?q=theodolite"),
+    ),
+    mcp(
+        "twilight",
+        "Front desk for local inference engines",
+        "Live",
+        "v0.1.0 · local release; public release pending.",
+        None,
+        None,
+    ),
+    mcp(
+        "volta",
+        "Key service for the signed-authority chain",
+        "Design stage",
+        "Design complete; no repository yet.",
+        None,
+        None,
+    ),
+    mcp(
+        "vongola",
+        "Read-only operator instrumentation for the vongola TLS gateway",
+        "Live",
+        "v0.1.0 · 5 read-only tools · migrated to rmcp, modern-era only, and landed 2026-10-27.",
+        Some("https://github.com/qompassai/vongola"),
+        None,
+    ),
+];
 
 /// Primary references for a generated solution page (the MCP servers
 ///
@@ -483,6 +701,60 @@ pub fn solution_references(slug: &str) -> &'static [(&'static str, &'static str,
             ),
         ],
         _ => &[],
+    }
+}
+
+/// The MCP estate as a status table, on /solutions under the
+/// cardinal directory: every server, what it is, and where it
+/// stands — including the ones with no public home yet. In the
+/// design system's bench-table dress, like the study pages.
+#[component]
+pub fn McpServers() -> impl IntoView {
+    view! {
+        <figure class="bench mcp-bench">
+            <figcaption class="bench-title">"MCP servers — the estate, with status"</figcaption>
+            <div class="bench-scroll">
+                <table class="bench-table">
+                    <thead>
+                        <tr>
+                            <th>"Server"</th>
+                            <th>"Role"</th>
+                            <th>"Status"</th>
+                            <th>"Standing"</th>
+                            <th>"Links"</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {MCP_SERVERS
+                            .iter()
+                            .map(|s| {
+                                let slug = s.name.replace(' ', "-");
+                                let display = mcp_display_name(s.name);
+                                view! {
+                                    <tr>
+                                        <td>
+                                            <a href=format!("/solutions/mcp/{slug}")>{display}</a>
+                                        </td>
+                                        <td>{s.role}</td>
+                                        <td>{s.status}</td>
+                                        <td>{s.detail}</td>
+                                        <td>
+                                            {s.href.map(|href| view! { <a href=href>"GitHub"</a> })}
+                                            {(s.href.is_some() && s.registry.is_some())
+                                                .then(|| view! { <span>" · "</span> })}
+                                            {s.registry.map(|href| view! { <a href=href>"Registry"</a> })}
+                                        </td>
+                                    </tr>
+                                }
+                            })
+                            .collect_view()}
+                    </tbody>
+                </table>
+            </div>
+            <figcaption class="bench-note">
+                "Verified against the estate census, 2026-10-20; fleet standings refreshed 2026-10-28 against the landed trees and the live Registry. “Published” means listed on the official MCP Registry; “Live” means running and probed on our infrastructure. Each server's name links to its page: the full client config and tool list."
+            </figcaption>
+        </figure>
     }
 }
 
@@ -1138,21 +1410,22 @@ mod tests {
 
     #[test]
     fn the_org_profile_set_stands_exactly_in_order() {
+        // The org profile's set, under the Owner's 2026-10-25 cardinal
+        // remap: each cardinal's org members come first, in org order.
         let expected = [
-            (N, "https://github.com/qompassai/qompass-hold"),
-            (N, "https://github.com/qompassai/qssl"),
-            (N, "https://github.com/qompassai/radar"),
-            (N, "https://github.com/qompassai/redteam"),
-            (N, "https://github.com/qompassai/tor"),
-            (N, "https://github.com/qompassai/vongola"),
+            (N, "https://github.com/qompassai/Diver"),
+            (N, "https://github.com/qompassai/rose.nvim"),
             (E, "https://github.com/qompassai/blaze-ts.nvim"),
             (E, "https://github.com/qompassai/blaze.nvim"),
-            (E, "https://github.com/qompassai/Diver"),
             (E, "https://github.com/qompassai/PathFinders"),
             (E, "https://github.com/qompassai/qluv"),
-            (E, "https://github.com/qompassai/rose.nvim"),
             (E, "https://github.com/qompassai/tuxtype"),
             (E, "https://github.com/qompassai/unreal"),
+            (S, "https://github.com/qompassai/qompass-hold"),
+            (S, "https://github.com/qompassai/qssl"),
+            (S, "https://github.com/qompassai/radar"),
+            (S, "https://github.com/qompassai/redteam"),
+            (S, "https://github.com/qompassai/tor"),
             (S, "https://github.com/qompassai/Azimuth"),
             (S, "https://github.com/qompassai/current"),
             (S, "https://github.com/qompassai/dotfiles"),
@@ -1160,14 +1433,15 @@ mod tests {
             (S, "https://github.com/qompassai/qudaz"),
             (S, "https://github.com/qompassai/qxet"),
             (S, "https://github.com/qompassai/rose"),
-            (W, "https://github.com/qompassai/beacon"),
+            (S, "https://github.com/qompassai/beacon"),
+            (S, "https://github.com/qompassai/debian"),
+            (S, "https://github.com/qompassai/network"),
+            (S, "https://github.com/qompassai/NUR"),
+            (S, "https://github.com/qompassai/qjp"),
+            (W, "https://github.com/qompassai/vongola"),
             (W, "https://github.com/qompassai/bunker"),
-            (W, "https://github.com/qompassai/debian"),
-            (W, "https://github.com/qompassai/network"),
-            (W, "https://github.com/qompassai/NUR"),
-            (W, "https://github.com/qompassai/qjp"),
         ];
-        for (cardinal, count) in [(N, 6), (E, 8), (S, 7), (W, 6)] {
+        for (cardinal, count) in [(N, 2), (E, 6), (S, 17), (W, 2)] {
             let got: Vec<&str> = solutions_of(cardinal).take(count).map(|s| s.href).collect();
             let want: Vec<&str> = expected.iter().filter(|(c, _)| *c == cardinal).map(|(_, h)| *h).collect();
             assert_eq!(got, want, "{cardinal}");
@@ -1177,7 +1451,7 @@ mod tests {
     #[test]
     fn the_completed_membership_counts_and_links_are_sound() {
         let counts: Vec<usize> = (0..4).map(|c| solutions_of(c).count()).collect();
-        assert_eq!(counts, vec![8, 13, 18, 6]);
+        assert_eq!(counts, vec![2, 9, 28, 6]);
         for (i, s) in SOLUTIONS.iter().enumerate() {
             assert!(s.cardinal < CARDINALS.len(), "{}", s.name);
             assert!(
@@ -1279,11 +1553,51 @@ mod tests {
     }
 
     #[test]
-    fn the_west_service_is_infrastructure() {
+    fn the_mcp_table_is_alphabetical_unique_and_in_vocabulary() {
+        assert_eq!(MCP_SERVERS.len(), 20);
+        let vocab = ["Commissioned", "Design stage", "External", "In development", "Legacy", "Live", "Published"];
+        for (i, s) in MCP_SERVERS.iter().enumerate() {
+            assert!(vocab.contains(&s.status), "{}: {}", s.name, s.status);
+            assert!(!s.role.is_empty() && !s.detail.is_empty(), "{}", s.name);
+            if let Some(href) = s.href {
+                assert!(href.starts_with("https://github.com/qompassai/"), "{}: {href}", s.name);
+            }
+            if let Some(registry) = s.registry {
+                assert!(registry.starts_with("https://registry.modelcontextprotocol.io/"), "{}: {registry}", s.name);
+                assert_eq!(s.status, "Published", "{}", s.name);
+            }
+            if i > 0 {
+                assert!(MCP_SERVERS[i - 1].name < s.name, "{}", s.name);
+            }
+        }
+    }
+
+    #[test]
+    fn mcp_display_names_capitalize_every_word() {
+        assert_eq!(mcp_display_name("fathom"), "Fathom");
+        assert_eq!(mcp_display_name("ghidra bridge"), "Ghidra Bridge");
+        assert_eq!(mcp_display_name("vongola"), "Vongola");
+    }
+
+    #[test]
+    fn the_mcp_table_marks_the_registry_nine_published() {
+        for name in ["eigenstyle", "fathom", "lumen", "lupin", "periscope", "phaedrus", "phlow", "slipway", "theodolite"] {
+            let s = MCP_SERVERS.iter().find(|s| s.name == name).expect(name);
+            assert_eq!(s.status, "Published", "{name}");
+            assert!(s.href.is_some(), "{name}");
+            assert!(s.registry.is_some(), "{name}");
+        }
+    }
+
+    #[test]
+    fn the_cardinal_names_carry_the_remap_meanings() {
         assert_eq!(
             CARDINALS.iter().map(|c| c.name).collect::<Vec<_>>(),
-            ["Security", "Education", "Deployment", "Infrastructure"]
+            ["Flagship", "Education", "Platform", "MCP"]
         );
-        assert!(CARDINALS.iter().all(|c| c.name != "Servers"));
+        // West is MCP entire: every West solution is an MCP-class
+        // server or a server-bearing app (Vongola, Bunker).
+        let west: Vec<&str> = solutions_of(W).map(|s| s.slug).collect();
+        assert_eq!(west, ["vongola", "bunker", "eigenstyle", "fathom", "lumen", "phlow-mcp-server"]);
     }
 }

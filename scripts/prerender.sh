@@ -7,7 +7,7 @@ cd "$(dirname "$0")/.."
 BIN="target/release/qompass-ai"
 SITE="target/site"
 DIST="dist"
-ROUTES=("/" "/research" "/solutions" "/solutions/apps" "/solutions/mcp-servers" "/solutions/packages" "/analysis" "/standards" "/about" "/privacy" "/legal" "/ontrack/privacy" "/light-show" "/light-show/testers" "/field-notes" "/field-notes/trainer")
+ROUTES=("/" "/research" "/solutions" "/solutions/apps" "/solutions/mcp-servers" "/solutions/packages" "/solutions/mcp" "/analysis" "/standards" "/about" "/privacy" "/legal" "/ontrack/privacy" "/light-show" "/light-show/testers" "/field-notes" "/field-notes/trainer")
 
 # Tiger Style full references: one quiet page per imported reference,
 # linked only from its chapter on /standards.
@@ -100,6 +100,35 @@ if [ "${#SOLUTION_ROUTES[@]}" -eq 0 ]; then
 fi
 for route in "${SOLUTION_ROUTES[@]}"; do
     [ -e "$DIST$route/index.html" ] && continue
+    mkdir -p "$DIST$route"
+    curl -sf "http://127.0.0.1:3000$route" -o "$DIST$route/index.html"
+    echo "prerendered $route -> $DIST$route/index.html"
+done
+
+# MCP pages: one page per server the /solutions MCP table links, so
+# MCP_SERVERS in src/pages/compass_services.rs is the one place to
+# add a server.
+mapfile -t MCP_ROUTES < <(grep -o 'href="/solutions/mcp/[a-z0-9-]*"' "$DIST/solutions/index.html" \
+    | sed -e 's/^href="//' -e 's/"$//' | sort -u)
+if [ "${#MCP_ROUTES[@]}" -eq 0 ]; then
+    echo "prerender: /solutions links no MCP pages" >&2
+    exit 1
+fi
+for route in "${MCP_ROUTES[@]}"; do
+    [ -e "$DIST$route/index.html" ] && continue
+    mkdir -p "$DIST$route"
+    curl -sf "http://127.0.0.1:3000$route" -o "$DIST$route/index.html"
+    echo "prerendered $route -> $DIST$route/index.html"
+done
+
+# The RE toolchain history hangs off fathom's MCP page.
+mapfile -t RE_ROUTES < <(grep -o 'href="/solutions/mcp/fathom/re-history"' "$DIST/solutions/mcp/fathom/index.html" \
+    | sed -e 's/^href="//' -e 's/"$//' | sort -u)
+if [ "${#RE_ROUTES[@]}" -eq 0 ]; then
+    echo "prerender: fathom's MCP page links no RE history" >&2
+    exit 1
+fi
+for route in "${RE_ROUTES[@]}"; do
     mkdir -p "$DIST$route"
     curl -sf "http://127.0.0.1:3000$route" -o "$DIST$route/index.html"
     echo "prerendered $route -> $DIST$route/index.html"

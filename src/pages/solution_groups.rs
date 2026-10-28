@@ -78,7 +78,7 @@ pub fn McpServersPage() -> impl IntoView {
         <ClassPage
             class=Class::Mcp
             bearing="CHART — THE FLEET, BY CLASS"
-            lede="The MCP servers: Model Context Protocol servers that put Qompass tools in front of agents — reverse engineering, voice, sprite artistry, and the agent runtime itself."
+            lede="The MCP servers among the solutions: Model Context Protocol servers that put Qompass tools in front of agents — reverse engineering, voice, media conversion, and the agent runtime itself. The full estate roster — twenty servers, with standings — is at /solutions/mcp. The fleet migrated to rmcp, modern-era only, in October 2026."
         />
     }
 }
