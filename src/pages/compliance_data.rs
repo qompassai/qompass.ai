@@ -1,6 +1,7 @@
 //! Generated compliance data — the canonical MCP checklist
 //! (CHECKLIST.md, MCP Inspector sweep 2026-10-20) with each
 //! server's status per row, from the sweep's evidence.
+//!
 //! Regenerate, do not hand-edit: mcp-compliance-phase2/generate.py.
 
 /// One canonical checklist row.
@@ -104,7 +105,9 @@ pub const CHECKLIST_ROWS: &[ChecklistRow] = &[
 
 /// One server's compliance record: its page slug, whether the
 /// Inspector sweep probed it, a standing summary, and one status
-/// code per CHECKLIST_ROWS entry (same order): P pass, H partial,
+/// code per `CHECKLIST_ROWS` entry (same order).
+///
+/// The codes: P pass, H partial,
 /// G gap, N not applicable, U not probed.
 pub struct ServerCompliance { pub slug: &'static str, pub probed: bool, pub standing: &'static str, pub statuses: &'static str }
 

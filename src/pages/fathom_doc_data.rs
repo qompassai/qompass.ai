@@ -1,4 +1,5 @@
 //! Generated data for the fathom tool documentation page.
+//!
 //! Sources: fathom source registrations (crates/, read 2026-10-20) and
 //! the Pax-gated Ghidra parity matrix (279 rows, v6.0.0 surface).
 //! Regenerate, do not hand-edit the tables.

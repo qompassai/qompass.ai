@@ -501,6 +501,7 @@ fn config_json(name: &str, command: &str, args: &[&str]) -> String {
 /// could not probe reads "Not probed" on every row — never an
 /// invented pass.
 #[component]
+#[allow(clippy::unit_arg, reason = "the empty fragment is the deliberate no-record rendering")]
 fn ComplianceSection(slug: &'static str) -> impl IntoView {
     let Some(comp) = compliance_for(slug) else {
         return view! { <></> }.into_any();

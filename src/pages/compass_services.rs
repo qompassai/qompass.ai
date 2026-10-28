@@ -266,7 +266,9 @@ pub fn solution_page(slug: &str) -> Option<&'static Solution> {
 }
 
 /// One MCP server in the estate inventory: what it is, where it
-/// stands, and the evidence line. Statuses use the vocabulary the
+/// stands, and the evidence line.
+///
+/// Statuses use the vocabulary the
 /// tests pin: Commissioned, Design stage, In development, Legacy,
 /// Live, Published.
 pub struct McpServer {
@@ -290,17 +292,17 @@ const fn mcp(
 }
 
 /// The display form of a roster name, for titles and links: each
-/// word capitalized ("ghidra bridge" -> "Ghidra Bridge"). The
-/// roster `name` itself stays the lowercase key — slugs and client
+/// word capitalized ("ghidra bridge" -> "Ghidra Bridge").
+///
+/// The roster `name` itself stays the lowercase key — slugs and client
 /// config keys derive from it; this is presentation only.
 pub fn mcp_display_name(name: &str) -> String {
     name.split(' ')
         .map(|word| {
             let mut chars = word.chars();
-            match chars.next() {
-                Some(first) => first.to_uppercase().collect::<String>() + chars.as_str(),
-                None => String::new(),
-            }
+            chars.next().map_or_else(String::new, |first| {
+                first.to_uppercase().collect::<String>() + chars.as_str()
+            })
         })
         .collect::<Vec<_>>()
         .join(" ")
@@ -308,7 +310,9 @@ pub fn mcp_display_name(name: &str) -> String {
 
 /// Every MCP server in the estate roster, alphabetical — the
 /// public mirror of the internal census, verified 2026-10-20, plus
-/// the day's commissions (atelier). The Ghidra bridge is upstream,
+/// the day's commissions (atelier).
+///
+/// The Ghidra bridge is upstream,
 /// not a Qompass product, and is listed as External because the
 /// estate declares and uses it; rea, the upstream server fathom
 /// superseded, is not listed. Vongola was restored 2026-10-20: the
@@ -915,7 +919,7 @@ pub fn bearing_text(bearing: u16) -> String {
     format!("{b:03}° — {}", point_name(b))
 }
 
-/// The slider's spoken value: `045 degrees — NE — Security and Education`.
+/// The slider's spoken value: `045 degrees — NE — Flagship and Education`.
 pub fn value_text(bearing: u16) -> String {
     let b = bearing % 360;
     let names: Vec<&str> = blend(b).iter().filter_map(|s| CARDINALS.get(s.cardinal)).map(|c| c.name).collect();
@@ -1293,7 +1297,7 @@ mod tests {
 
     #[test]
     fn an_exact_cardinal_is_that_service_alone_at_full_share() {
-        for (bearing, name) in [(0, "Security"), (90, "Education"), (180, "Deployment"), (270, "Infrastructure")] {
+        for (bearing, name) in [(0, "Flagship"), (90, "Education"), (180, "Platform"), (270, "MCP")] {
             let b = blend(bearing);
             assert_eq!(names_at(bearing), vec![name], "{bearing}");
             assert!(b.first().is_some_and(|s| near(s.share, 1.0)), "{bearing}");
@@ -1303,10 +1307,10 @@ mod tests {
     #[test]
     fn an_exact_intercardinal_splits_fifty_fifty_clockwise_from_north() {
         for (bearing, pair) in [
-            (45, ["Security", "Education"]),
-            (135, ["Education", "Deployment"]),
-            (225, ["Deployment", "Infrastructure"]),
-            (315, ["Security", "Infrastructure"]),
+            (45, ["Flagship", "Education"]),
+            (135, ["Education", "Platform"]),
+            (225, ["Platform", "MCP"]),
+            (315, ["Flagship", "MCP"]),
         ] {
             assert_eq!(names_at(bearing), pair.to_vec(), "{bearing}");
             assert!(blend(bearing).iter().all(|s| near(s.share, 0.5)), "{bearing}");
@@ -1315,18 +1319,18 @@ mod tests {
 
     #[test]
     fn the_neighbor_appears_ten_degrees_off() {
-        assert_eq!(names_at(9), vec!["Security"]);
+        assert_eq!(names_at(9), vec!["Flagship"]);
         let b = blend(10);
-        assert_eq!(names_at(10), vec!["Security", "Education"]);
+        assert_eq!(names_at(10), vec!["Flagship", "Education"]);
         assert_eq!(b.iter().map(|s| (s.share * 100.0).round()).collect::<Vec<_>>(), vec![85.0, 15.0]);
-        assert_eq!(names_at(80), vec!["Education", "Security"]);
+        assert_eq!(names_at(80), vec!["Education", "Flagship"]);
         assert_eq!(names_at(81), vec!["Education"]);
     }
 
     #[test]
     fn the_blend_wraps_through_north() {
-        assert_eq!(names_at(359), vec!["Security"]);
-        assert_eq!(names_at(350), vec!["Security", "Infrastructure"]);
+        assert_eq!(names_at(359), vec!["Flagship"]);
+        assert_eq!(names_at(350), vec!["Flagship", "MCP"]);
         for d in 1..=44 {
             let east = blend(d);
             let west = blend(360 - d);
@@ -1357,8 +1361,8 @@ mod tests {
     fn readout_and_spoken_values_are_zero_padded() {
         assert_eq!(bearing_text(0), "000° — N");
         assert_eq!(bearing_text(45), "045° — NE");
-        assert_eq!(value_text(45), "045 degrees — NE — Security and Education");
-        assert_eq!(value_text(270), "270 degrees — W — Infrastructure");
+        assert_eq!(value_text(45), "045 degrees — NE — Flagship and Education");
+        assert_eq!(value_text(270), "270 degrees — W — MCP");
     }
 
     #[test]

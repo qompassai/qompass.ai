@@ -55,16 +55,18 @@ fn github_url(slug: &str) -> String {
 pub fn ManuscriptDispatch() -> impl IntoView {
     let params = use_params_map();
     let slug = params.with(|map| map.get("slug")).unwrap_or_default();
-    match manuscript_page(&slug) {
-        Some(page) => view! { <ManuscriptStudy page=page /> }.into_any(),
-        None => view! {
-            <section class="page">
-                <h1>"Off chart"</h1>
-                <p>"That bearing does not exist on this chart."</p>
-            </section>
-        }
-        .into_any(),
-    }
+    manuscript_page(&slug).map_or_else(
+        || {
+            view! {
+                <section class="page">
+                    <h1>"Off chart"</h1>
+                    <p>"That bearing does not exist on this chart."</p>
+                </section>
+            }
+            .into_any()
+        },
+        |page| view! { <ManuscriptStudy page=page /> }.into_any(),
+    )
 }
 
 /// One manuscript's study page: its why, its measured figure where
@@ -76,7 +78,7 @@ fn ManuscriptStudy(page: &'static ManuscriptPage) -> impl IntoView {
     let title = entry.map_or(page.slug, |m| m.title);
     let kind = entry
         .map_or_else(String::new, |m| format!("{} · {} · UPDATED {}", stage_label(m.stage), m.journal_name, m.updated));
-    let why_paragraphs: Vec<&'static str> = page.why.split("\n\n").filter(|p| !p.trim().is_empty()).collect();
+    let why_paragraphs = page.why.split("\n\n").filter(|p| !p.trim().is_empty());
     view! {
         <Title text=format!("{} - Qompass AI", title) />
         <section class="page project-page">
