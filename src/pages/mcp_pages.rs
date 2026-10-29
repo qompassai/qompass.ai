@@ -67,7 +67,7 @@ pub const MCP_DETAILS: &[McpDetail] = &[
         None,
         Some(
             "Atelier was folded into Lumen on 2026-10-27, before the standalone server \
-             shipped: its image lane lives on as part of lumen 0.3.0. There is no atelier \
+             shipped: its image lane lives on as part of lumen 1.0.0. There is no atelier \
              binary and no launch command — this page keeps the design on record.",
         ),
         &[
@@ -83,7 +83,7 @@ pub const MCP_DETAILS: &[McpDetail] = &[
          backend trait, started on demand on the A6000, loopback only, and stopped after the \
          job; atelier never touches rose. S1 acceptance is the Strobe generation test: three \
          catalogued scenes regenerated through atelier_img2img under the ntranch profile. \
-         That fold has now happened: the generation module is part of lumen 0.3.0 \
+         That fold has now happened: the generation module is part of lumen 1.0.0 \
          (2026-10-27), and this page remains as the design record.",
     ),
     detail(
@@ -191,7 +191,7 @@ pub const MCP_DETAILS: &[McpDetail] = &[
             tool("recompute_fingerprint"),
             tool("specs"),
         ],
-        Some("Source-verified 2026-10-20; the server has no built binary in the estate yet."),
+        Some("Source-verified 2026-10-20; the server is now 1.0.0, landed on GitHub main and published on crates.io as eigenstyle 1.0.0."),
         "Voice and style fingerprinting: an exemplar bank and a measured fingerprint of the \
          owner's writing, checked against drafts before they go out. Published on the MCP \
          Registry as a bundle; the estate's own binary build is deferred.",
@@ -237,7 +237,7 @@ pub const MCP_DETAILS: &[McpDetail] = &[
             tool("vrm_grade"),
             tool("vrm_inspect"),
         ],
-        Some("Live-probed 2026-10-20 against the debug build (7 tools). The server is now 0.3.0 — 11 tools, atelier folded in, rmcp modern-era only; the added image-lane tools are recorded in the repo, and this list is the probed 2026-10-20 surface."),
+        Some("Live-probed 2026-10-20 against the debug build (7 tools). The server is now 1.0.0 — 15 tools, atelier folded in, rmcp modern-era only; the added image-lane tools are recorded in the repo, and this list is the probed 2026-10-20 surface."),
         "The sprite-to-3D character factory: ingest a 2D sprite, lock the character's \
          identity, project it onto the canonical rigged base with a blendshape expression \
          set, edit body and appearance parametrically, and export glTF/GLB to Blender, \
@@ -364,7 +364,7 @@ pub const MCP_DETAILS: &[McpDetail] = &[
             tool("slipway_drive_app"),
             tool("slipway_inspect"),
         ],
-        Some("Tool names read from the server source (2026-10-28); the published record is the registry entry ai.qompass/slipway 0.1.0."),
+        Some("Tool names read from the server source (2026-10-28); the published record is crates.io slipway-mcp 1.0.0 (the registry entry ai.qompass/slipway remains 0.1.0)."),
         "Release certification as an MCP server: build a release bundle, check it, \
          and certify it against the channel gates (Google Play, F-Droid, itch) with \
          device verification. Its first witness-bundle consumer is ache; the \
