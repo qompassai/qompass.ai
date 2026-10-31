@@ -509,11 +509,11 @@ fn ComplianceSection(slug: &'static str) -> impl IntoView {
     let codes: Vec<char> = comp.statuses.chars().collect();
     let mut groups: Vec<(&'static str, Vec<(usize, &'static ChecklistRow)>)> = Vec::new();
     for (i, row) in CHECKLIST_ROWS.iter().enumerate() {
-        if let Some((section, rows)) = groups.last_mut() {
-            if *section == row.section {
-                rows.push((i, row));
-                continue;
-            }
+        if let Some((section, rows)) = groups.last_mut()
+            && *section == row.section
+        {
+            rows.push((i, row));
+            continue;
         }
         groups.push((row.section, vec![(i, row)]));
     }

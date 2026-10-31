@@ -1,7 +1,7 @@
 [package]
 name = "qompass-ai"
 version = "0.1.0"
-edition = "2021"
+edition = "2024"
 license = "Apache-2.0"
 description = "The Qompass AI website - Leptos SSG (Rust/WASM), served by vongola"
 keywords = ["qompass", "leptos", "website", "post-quantum"]
@@ -116,6 +116,10 @@ allow_attributes = "allow"
 allow_attributes_without_reason = "allow"
 cargo_common_metadata = "allow"
 cognitive_complexity = "allow"
+# clippy 0.1.101 (nightly-2026-10-30 pin): empty_enums fires on the
+# empty props enum leptos's TypedBuilder derive generates for
+# #[component]s — macro output the site code cannot change.
+empty_enums = "allow"
 missing_errors_doc = "allow"
 missing_panics_doc = "allow"
 module_name_repetitions = "allow"

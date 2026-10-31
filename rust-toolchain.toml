@@ -1,7 +1,9 @@
-# Current stable Rust, no exact version pin: any machine builds this site
-# identically (wasm target + lint/format components declared).
+# Fleet 1.0 pin (2026-10-31): dated nightly matching the estate pin —
+# resolved rustc 1.101.0-nightly (92b5b8c87 2026-10-29) and
+# clippy 0.1.101. Named nightlies drift in component versions, so the
+# gate reports name the RESOLVED versions, never just the channel.
 [toolchain]
-channel = "stable"
+channel = "nightly-2026-10-30"
 targets = ["wasm32-unknown-unknown"]
 components = ["clippy", "rustfmt", "rust-src"]
 profile = "default"
