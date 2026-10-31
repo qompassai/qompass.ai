@@ -3800,3 +3800,204 @@ a.download-box .download-state {
     }
   }
 }
+
+/* — Global search (Fleet 1.0, 2026-10-31) ————————————————————
+   Top-right of the header on every page. Static-index search:
+   /js/search.js fetches /search-index.json once, on first use. */
+.site-search {
+  position: relative;
+  margin-left: auto;
+  min-width: 220px;
+}
+.site-search-label {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+}
+.site-search-input {
+  width: 100%;
+  box-sizing: border-box;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid var(--brass-dim);
+  border-radius: 6px;
+  color: var(--starlight);
+  font-family: var(--font-mono);
+  font-size: 0.82rem;
+  padding: 0.42rem 0.6rem;
+}
+.site-search-input:focus {
+  outline: 2px solid var(--cherenkov);
+  outline-offset: 1px;
+}
+.site-search-results {
+  position: absolute;
+  right: 0;
+  top: calc(100% + 0.4rem);
+  width: min(380px, 92vw);
+  max-height: 60vh;
+  overflow-y: auto;
+  margin: 0;
+  padding: 0.3rem;
+  list-style: none;
+  background: #060b18;
+  border: 1px solid var(--brass-dim);
+  border-radius: 8px;
+  box-shadow: 0 18px 40px rgba(0, 0, 0, 0.55);
+  z-index: 40;
+}
+.site-search-results li a {
+  display: block;
+  padding: 0.45rem 0.55rem;
+  border-radius: 5px;
+  color: var(--fog);
+  text-decoration: none;
+}
+.site-search-results li.is-active a,
+.site-search-results li a:hover {
+  background: rgba(255, 255, 255, 0.07);
+  color: var(--starlight);
+}
+.search-result-title {
+  display: inline-block;
+  font-weight: 600;
+  color: var(--starlight);
+}
+.search-result-kind {
+  display: inline-block;
+  margin-left: 0.5rem;
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--brass);
+}
+.search-result-summary {
+  display: block;
+  font-size: 0.78rem;
+  margin-top: 0.15rem;
+}
+
+/* — Stepper explainer (Fleet 1.0, 2026-10-31) ————————————————
+   One component on every solution page. Panels stack in a grid so
+   the stage height follows the tallest panel; the active panel is
+   opaque and in place, the rest are transparent and shifted. The
+   transition is CSS-only (no JS animation loop) and lives in the
+   no-preference block, so reduced-motion visitors get an instant
+   swap. */
+.stepper {
+  margin: 2rem 0;
+  padding: 1.1rem 1.2rem 1rem;
+  border: 1px solid var(--brass-dim);
+  border-radius: 10px;
+  background: rgba(255, 255, 255, 0.02);
+}
+.stepper:focus {
+  outline: 2px solid var(--cherenkov);
+  outline-offset: 2px;
+}
+.stepper-head {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 1rem;
+}
+.stepper-head h2 {
+  margin: 0;
+  font-size: 1.05rem;
+  letter-spacing: 0.04em;
+}
+.stepper-count {
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+  color: var(--brass);
+  white-space: nowrap;
+}
+.stepper-stage {
+  display: grid;
+  margin-top: 0.6rem;
+}
+.stepper-panel {
+  grid-area: 1 / 1;
+  opacity: 0;
+  transform: translateX(14px);
+  pointer-events: none;
+}
+.stepper-panel.is-active {
+  opacity: 1;
+  transform: none;
+  pointer-events: auto;
+}
+@media (prefers-reduced-motion: no-preference) {
+  .stepper-panel {
+    transition: opacity 0.35s ease, transform 0.35s ease;
+  }
+}
+.stepper-title {
+  margin: 0.2rem 0 0.4rem;
+  color: var(--cherenkov);
+  font-size: 0.98rem;
+}
+.stepper-body {
+  margin: 0;
+}
+.stepper-markers {
+  display: flex;
+  gap: 0.45rem;
+  margin: 0.9rem 0 0.6rem;
+  padding: 0;
+  list-style: none;
+}
+.stepper-marker {
+  width: 2rem;
+  height: 2rem;
+  border-radius: 50%;
+  border: 1px solid var(--brass-dim);
+  background: transparent;
+  color: var(--fog);
+  font-family: var(--font-mono);
+  cursor: pointer;
+}
+.stepper-marker.is-active {
+  border-color: var(--cherenkov);
+  color: var(--starlight);
+  background: rgba(255, 255, 255, 0.08);
+}
+.stepper-controls {
+  display: flex;
+  align-items: center;
+  gap: 0.7rem;
+}
+.stepper-prev,
+.stepper-next {
+  border: 1px solid var(--brass-dim);
+  border-radius: 6px;
+  background: transparent;
+  color: var(--fog);
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  padding: 0.35rem 0.6rem;
+  cursor: pointer;
+  white-space: nowrap;
+}
+.stepper-range {
+  flex: 1;
+  accent-color: var(--cherenkov);
+}
+.stepper-hint {
+  margin: 0.55rem 0 0;
+  font-size: 0.78rem;
+  color: var(--fog);
+}
+@media (max-width: 560px) {
+  .site-search {
+    order: 3;
+    flex: 1 1 100%;
+    min-width: 0;
+  }
+  .stepper {
+    padding: 0.9rem 0.85rem 0.8rem;
+  }
+}

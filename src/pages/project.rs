@@ -17,6 +17,7 @@
 //! degraded, never broken.
 use crate::app_data::{app_guide, AppGuide, GuideControl, GuideEntry, GuideVisual};
 use crate::pages::compass_services::{solution_page, version_link, Solution, CARDINALS};
+use crate::pages::stepper::{GuideStepper, SolutionStepper};
 use crate::pages::telco_quizzes::{self, TelcoQuizzes};
 use crate::project_data::{project_page, Benchmark};
 use leptos::prelude::*;
@@ -563,6 +564,7 @@ fn AppGuidePage(guide: &'static AppGuide) -> impl IntoView {
                             </section>
                         }
                     })}
+                <GuideStepper guide=guide />
                 <GuideVisuals guide=guide />
                 <GuideSections guide=guide />
                 <BenchmarksSection slug=guide.slug />
@@ -684,6 +686,7 @@ fn SolutionPage(solution: &'static Solution) -> impl IntoView {
                             </section>
                         }
                     })}
+                <SolutionStepper solution=solution />
                 {crate::pages::diagrams::page_diagram(solution.slug)
                     .and_then(|id| {
                         crate::pages::diagrams::diagram(id).map(|svg| (id, svg))
@@ -768,6 +771,7 @@ pub fn ProjectStudy(slug: &'static str) -> impl IntoView {
                 </section>
                 {(!page.graphic.is_empty()).then(|| view! { <ProjectGraphic id={page.graphic} /> })}
                 {app_guide(page.slug).map(|guide| view! { <GuideVisuals guide=guide /> })}
+                {app_guide(page.slug).map(|guide| view! { <GuideStepper guide=guide /> })}
                 {(!page.abstract_text.is_empty())
                     .then(|| {
                         view! {

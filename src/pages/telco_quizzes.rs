@@ -23,6 +23,7 @@
 use crate::field_notes_data::{question_count, Quiz, QuizQuestion, QUIZZES};
 use crate::pages::compass_services::{solution_page, CARDINALS};
 use crate::pages::project::ReferencesSection;
+use crate::pages::stepper::SolutionStepper;
 use leptos::prelude::*;
 use leptos_meta::Title;
 
@@ -271,6 +272,7 @@ pub fn TelcoQuizzes() -> impl IntoView {
                     <p class="page-bearing">{solution.and_then(|s| CARDINALS.get(s.cardinal)).map(|c| c.mark)}</p>
                     <h1>{name}</h1>
                 </header>
+                {solution.map(|s| view! { <SolutionStepper solution=s /> })}
                 {quiz_section(run, enhanced)}
                 {crate::pages::diagrams::diagram("telco-answer-keys").map(|svg| {
                     view! {
@@ -405,8 +407,7 @@ mod tests {
     fn every_set_has_exactly_one_sealed_envelope_and_a_plain_slug() {
         let dir = format!("{}/public/answer-keys", env!("CARGO_MANIFEST_DIR"));
         let mut on_disk: Vec<String> = std::fs::read_dir(&dir)
-            .map(|d| d.flatten().filter_map(|e| e.file_name().into_string().ok()).collect())
-            .unwrap_or_default();
+            .map_or_else(|_| Vec::new(), |d| d.flatten().filter_map(|e| e.file_name().into_string().ok()).collect());
         on_disk.sort();
         let mut want: Vec<String> = QUIZZES.iter().map(|q| format!("{}.json", q.slug)).collect();
         want.sort();

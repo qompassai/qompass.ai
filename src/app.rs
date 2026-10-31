@@ -42,6 +42,8 @@ pub fn shell(options: LeptosOptions) -> impl IntoView {
             </head>
             <body>
                 <App />
+                <script src="/js/stepper.js" defer=true></script>
+                <script src="/js/search.js" defer=true></script>
             </body>
         </html>
     }
@@ -82,6 +84,26 @@ fn Header() -> impl IntoView {
                     <A href="/field-notes">"Field Notes"</A>
                     <A href="/about">"About"</A>
                 </nav>
+                <div class="site-search">
+                    <label class="site-search-label" for="site-search-input">"Search"</label>
+                    <input
+                        id="site-search-input"
+                        class="site-search-input"
+                        type="search"
+                        placeholder="Search solutions, packages, pages…"
+                        autocomplete="off"
+                        role="combobox"
+                        aria-expanded="false"
+                        aria-controls="site-search-results"
+                        aria-label="Search this site"
+                    />
+                    <ul
+                        id="site-search-results"
+                        class="site-search-results"
+                        role="listbox"
+                        hidden=true
+                    ></ul>
+                </div>
             </div>
         </header>
     }

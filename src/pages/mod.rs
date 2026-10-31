@@ -24,5 +24,6 @@ pub mod projects;
 pub mod re_history;
 pub mod research;
 pub mod solution_groups;
+pub mod stepper;
 pub mod telco_quizzes;
 pub mod tiger_style;

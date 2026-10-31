@@ -49,9 +49,15 @@ for toml in content/apps/*.toml; do
     fi
 done
 
+# Regenerate the header search index from the site's own data, then
+# copy it over the built assets below (the build copied public/ before
+# this regeneration, so the fresh file wins).
+python3 scripts/generate-search-index.py
+
 rm -rf "$DIST"
 mkdir -p "$DIST"
 cp -r "$SITE"/. "$DIST"/
+cp public/search-index.json "$DIST/search-index.json"
 
 "$BIN" &
 SERVER_PID=$!

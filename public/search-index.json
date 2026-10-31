@@ -1,0 +1,500 @@
+[
+ {
+  "title": "Ghost",
+  "url": "/solutions/ghost",
+  "summary": "Ghost is the Qompass AI Ghost Mail Server (GitHub repo description): a NixOS module (`ghost = { … }`) that runs a complete mail server — Postfix, Dovecot, Rspamd, nginx, and a local DNS resolver — from one declarative configuration, plus a ",
+  "kind": "Guide"
+ },
+ {
+  "title": "Light Show",
+  "url": "/solutions/light-show",
+  "summary": "Light Show is a puzzle game about real Outside Plant (OSP) fiber-optic engineering, built in Rust with Bevy for Android (Google Play + F-Droid) and desktop, in which the player routes light from the OLT (Point A) to the customer ONT (Point ",
+  "kind": "Guide"
+ },
+ {
+  "title": "Phlow",
+  "url": "/solutions/phlow",
+  "summary": "Phlow (named \"Flow\" in its README) runs local, bounded planner → coder → reviewer workflows with real file tools and a host-enforced verification gate; Ollama is the default backend, and the CLI, terminal UI and MCP server share one safe ru",
+  "kind": "Guide"
+ },
+ {
+  "title": "Volta",
+  "url": "/solutions/volta",
+  "summary": "Volta is an OpenPGP key server derived from Hagrid, the software behind keys.openpgp.org, serving the HKP protocol, the verifying-keyserver (VKS) API, and Web Key Directory with email-verified publication. The README explicitly corrects ear",
+  "kind": "Guide"
+ },
+ {
+  "title": "atelier (MCP server)",
+  "url": "/solutions/mcp/atelier",
+  "summary": "Media generation — image, video, and music behind ComfyUI",
+  "kind": "MCP Server"
+ },
+ {
+  "title": "bloch (MCP server)",
+  "url": "/solutions/mcp/bloch",
+  "summary": "Roadmaps, lessons, and memory — the estate's learning record",
+  "kind": "MCP Server"
+ },
+ {
+  "title": "broadside (MCP server)",
+  "url": "/solutions/mcp/broadside",
+  "summary": "This website — build, verify, deploy, with a honeypot",
+  "kind": "MCP Server"
+ },
+ {
+  "title": "buccaneer (MCP server)",
+  "url": "/solutions/mcp/buccaneer",
+  "summary": "Security-assessment engine — rose-first, chains into fathom",
+  "kind": "MCP Server"
+ },
+ {
+  "title": "bunker (MCP server)",
+  "url": "/solutions/mcp/bunker",
+  "summary": "Signed-manifest executor for consequential actions",
+  "kind": "MCP Server"
+ },
+ {
+  "title": "eigenstyle (MCP server)",
+  "url": "/solutions/mcp/eigenstyle",
+  "summary": "Voice and style fingerprinting for drafts",
+  "kind": "MCP Server"
+ },
+ {
+  "title": "fathom (MCP server)",
+  "url": "/solutions/mcp/fathom",
+  "summary": "Reverse engineering and artifact analysis",
+  "kind": "MCP Server"
+ },
+ {
+  "title": "ghidra bridge (MCP server)",
+  "url": "/solutions/mcp/ghidra-bridge",
+  "summary": "GhidraMCP plugin surface over stdio, fronting a running Ghidra GUI",
+  "kind": "MCP Server"
+ },
+ {
+  "title": "lumen (MCP server)",
+  "url": "/solutions/mcp/lumen",
+  "summary": "Deterministic conversion between 2D, 3D, and engine packages",
+  "kind": "MCP Server"
+ },
+ {
+  "title": "lupin (MCP server)",
+  "url": "/solutions/mcp/lupin",
+  "summary": "Revenue alignment across the Qompass and NTRanch lanes",
+  "kind": "MCP Server"
+ },
+ {
+  "title": "periscope (MCP server)",
+  "url": "/solutions/mcp/periscope",
+  "summary": "Neovim broker — editor state, LSP/DAP, shared attention",
+  "kind": "MCP Server"
+ },
+ {
+  "title": "phaedrus (MCP server)",
+  "url": "/solutions/mcp/phaedrus",
+  "summary": "Research feed — findings, watchlists, revenue candidates",
+  "kind": "MCP Server"
+ },
+ {
+  "title": "phlow (MCP server)",
+  "url": "/solutions/mcp/phlow",
+  "summary": "Agent runtime — CLI, TUI, and MCP over one safe core",
+  "kind": "MCP Server"
+ },
+ {
+  "title": "seahawk (MCP server)",
+  "url": "/solutions/mcp/seahawk",
+  "summary": "Broker for Unreal Engine's MCP server — curated surface, computer use",
+  "kind": "MCP Server"
+ },
+ {
+  "title": "slipway (MCP server)",
+  "url": "/solutions/mcp/slipway",
+  "summary": "Release certification — builds, bundles, and device verification",
+  "kind": "MCP Server"
+ },
+ {
+  "title": "tackle (MCP server)",
+  "url": "/solutions/mcp/tackle",
+  "summary": "Editor broker — Unity first, Godot later",
+  "kind": "MCP Server"
+ },
+ {
+  "title": "theodolite (MCP server)",
+  "url": "/solutions/mcp/theodolite",
+  "summary": "Headless LSP bridge — diagnostics and semantics without an editor",
+  "kind": "MCP Server"
+ },
+ {
+  "title": "twilight (MCP server)",
+  "url": "/solutions/mcp/twilight",
+  "summary": "Front desk for local inference engines",
+  "kind": "MCP Server"
+ },
+ {
+  "title": "volta (MCP server)",
+  "url": "/solutions/mcp/volta",
+  "summary": "Key service for the signed-authority chain",
+  "kind": "MCP Server"
+ },
+ {
+  "title": "vongola (MCP server)",
+  "url": "/solutions/mcp/vongola",
+  "summary": "Read-only operator instrumentation for the vongola TLS gateway",
+  "kind": "MCP Server"
+ },
+ {
+  "title": "About",
+  "url": "/about",
+  "summary": "The founder's record and identifiers.",
+  "kind": "Page"
+ },
+ {
+  "title": "Analysis",
+  "url": "/analysis",
+  "summary": "On AI: analysis and the Transformer explorer.",
+  "kind": "Page"
+ },
+ {
+  "title": "Apps",
+  "url": "/solutions/apps",
+  "summary": "The application solutions.",
+  "kind": "Page"
+ },
+ {
+  "title": "Field Notes",
+  "url": "/field-notes",
+  "summary": "Field service notes and the TIA-598 trainer.",
+  "kind": "Page"
+ },
+ {
+  "title": "Home",
+  "url": "/",
+  "summary": "Qompass AI — navigating deep tech's murky waters.",
+  "kind": "Page"
+ },
+ {
+  "title": "Legal",
+  "url": "/legal",
+  "summary": "Privacy, accessibility, and terms of service.",
+  "kind": "Page"
+ },
+ {
+  "title": "Light Show",
+  "url": "/light-show",
+  "summary": "The Light Show game.",
+  "kind": "Page"
+ },
+ {
+  "title": "MCP estate index",
+  "url": "/solutions/mcp",
+  "summary": "The full MCP server roster, with standings.",
+  "kind": "Page"
+ },
+ {
+  "title": "MCP Servers",
+  "url": "/solutions/mcp-servers",
+  "summary": "The MCP server solutions.",
+  "kind": "Page"
+ },
+ {
+  "title": "Packages",
+  "url": "/solutions/packages",
+  "summary": "The LuaRocks package solutions.",
+  "kind": "Page"
+ },
+ {
+  "title": "Privacy",
+  "url": "/privacy",
+  "summary": "The site privacy policy.",
+  "kind": "Page"
+ },
+ {
+  "title": "Research",
+  "url": "/research",
+  "summary": "The research program and its study pages.",
+  "kind": "Page"
+ },
+ {
+  "title": "Solutions",
+  "url": "/solutions",
+  "summary": "Every solution on the compass, by cardinal.",
+  "kind": "Page"
+ },
+ {
+  "title": "Standards",
+  "url": "/standards",
+  "summary": "The Tiger Style standards and their references.",
+  "kind": "Page"
+ },
+ {
+  "title": "Azimuth",
+  "url": "/solutions/azimuth",
+  "summary": "Your helpful AI navigator.",
+  "kind": "Solution — App"
+ },
+ {
+  "title": "Beacon",
+  "url": "/solutions/beacon",
+  "summary": "Beacon: a quality e-mail solution.",
+  "kind": "Solution — App"
+ },
+ {
+  "title": "Blaze-TS.nvim",
+  "url": "/solutions/blaze-ts-nvim",
+  "summary": "A tree-sitter grammar for the Mojo programming language, packaged as a Neovim plugin.",
+  "kind": "Solution — App"
+ },
+ {
+  "title": "Blaze.nvim",
+  "url": "/solutions/blaze-nvim",
+  "summary": "🔥 for Neovim.",
+  "kind": "Solution — App"
+ },
+ {
+  "title": "Bunker",
+  "url": "/solutions/bunker",
+  "summary": "An Attic-based Nix binary cache with hybrid Ed25519 + ML-DSA-65 narinfo signing.",
+  "kind": "Solution — App"
+ },
+ {
+  "title": "Current",
+  "url": "/solutions/current",
+  "summary": "Qompass AI Current: your self-hosted AI runner.",
+  "kind": "Solution — App"
+ },
+ {
+  "title": "Debian",
+  "url": "/solutions/debian",
+  "summary": "Debian Linux for stable servers — the Qompass AI base configuration.",
+  "kind": "Solution — App"
+ },
+ {
+  "title": "Diver",
+  "url": "/solutions/diver",
+  "summary": "Your blazingly fast everything editor.",
+  "kind": "Solution — App"
+ },
+ {
+  "title": "Dotfiles",
+  "url": "/solutions/dotfiles",
+  "summary": "XDG dotfiles for the Qompass AI development environment — a Qonfig link map paired with a Nix flake user environment.",
+  "kind": "Solution — App"
+ },
+ {
+  "title": "Moonwalk",
+  "url": "/solutions/moonwalk",
+  "summary": "A cross-platform Lua debugger and Debug Adapter Protocol server — a native, plugin-free Neovim debugging workflow, compatible with VS Code and other DAP clients.",
+  "kind": "Solution — App"
+ },
+ {
+  "title": "Network",
+  "url": "/solutions/network",
+  "summary": "Qompass AI network tooling.",
+  "kind": "Solution — App"
+ },
+ {
+  "title": "NUR",
+  "url": "/solutions/nur",
+  "summary": "Qompass AI's Nix user repository — the qompassai package set, built from source.",
+  "kind": "Solution — App"
+ },
+ {
+  "title": "PathFinders",
+  "url": "/solutions/pathfinders",
+  "summary": "The Qompass intern program.",
+  "kind": "Solution — App"
+ },
+ {
+  "title": "Qjp",
+  "url": "/solutions/qjp",
+  "summary": "NixOS module for NVIDIA Jetson devices.",
+  "kind": "Solution — App"
+ },
+ {
+  "title": "Qluv",
+  "url": "/solutions/qluv",
+  "summary": "Qompass Lua version manager.",
+  "kind": "Solution — App"
+ },
+ {
+  "title": "Qompass-Hold",
+  "url": "/solutions/qompass-hold",
+  "summary": "Qompass Secret-Service.",
+  "kind": "Solution — App"
+ },
+ {
+  "title": "Qonfig",
+  "url": "/solutions/qonfig",
+  "summary": "A quality dotfile manager.",
+  "kind": "Solution — App"
+ },
+ {
+  "title": "Qssl",
+  "url": "/solutions/qssl",
+  "summary": "Qompass AI SSL solution.",
+  "kind": "Solution — App"
+ },
+ {
+  "title": "Qudaz",
+  "url": "/solutions/qudaz",
+  "summary": "Qompass AI CUDA library for Zig.",
+  "kind": "Solution — App"
+ },
+ {
+  "title": "Qxet",
+  "url": "/solutions/qxet",
+  "summary": "QXet: Quality AI eXchange — content-addressed storage for large binary artifacts.",
+  "kind": "Solution — App"
+ },
+ {
+  "title": "Radar",
+  "url": "/solutions/radar",
+  "summary": "Risk Analysis Diagnostic Assessment Resolver (R.A.D.A.R).",
+  "kind": "Solution — App"
+ },
+ {
+  "title": "Redteam",
+  "url": "/solutions/redteam",
+  "summary": "Qompass AI on red teaming.",
+  "kind": "Solution — App"
+ },
+ {
+  "title": "Rose",
+  "url": "/solutions/rose",
+  "summary": "Qompass AI's fork of Ollama, the local model server — upstream releases with the fork delta re-applied, serving local specialists on local hardware.",
+  "kind": "Solution — App"
+ },
+ {
+  "title": "Rose.nvim",
+  "url": "/solutions/rose-nvim",
+  "summary": "The archived Neovim front end for Rose; Rose now lives inside Diver.",
+  "kind": "Solution — App"
+ },
+ {
+  "title": "Telco-Admin Practice Quizzes",
+  "url": "/solutions/telco-admin-quizzes",
+  "summary": "Telco-admin practice quizzes with encrypted answer keys, hosted on this site.",
+  "kind": "Solution — App"
+ },
+ {
+  "title": "Tor",
+  "url": "/solutions/tor",
+  "summary": "Qompass AI Tor setup.",
+  "kind": "Solution — App"
+ },
+ {
+  "title": "Tuxtype",
+  "url": "/solutions/tuxtype",
+  "summary": "Qompass AI on TuxType.",
+  "kind": "Solution — App"
+ },
+ {
+  "title": "Unreal",
+  "url": "/solutions/unreal",
+  "summary": "Qompass AI Unreal tooling.",
+  "kind": "Solution — App"
+ },
+ {
+  "title": "Vongola",
+  "url": "/solutions/vongola",
+  "summary": "A secure, performant reverse-proxy server for your deep tech needs.",
+  "kind": "Solution — App"
+ },
+ {
+  "title": "Eigenstyle",
+  "url": "/solutions/eigenstyle",
+  "summary": "Your voice profile as a tool — a Rust workspace (MCP server, TUI, and GPUI GUI) over a measured writing fingerprint.",
+  "kind": "Solution — MCP Server"
+ },
+ {
+  "title": "Fathom",
+  "url": "/solutions/fathom",
+  "summary": "Spec-led Rust port of REA — a reverse-engineering tool provider for agents (MCP/A2A), with evidence-carrying findings and a fail-closed policy gate.",
+  "kind": "Solution — MCP Server"
+ },
+ {
+  "title": "Lumen",
+  "url": "/solutions/lumen",
+  "summary": "Lux in motu — a deterministic cross-media conversion engine (2D art, 3D models, engine packages), served over MCP; atelier's image lane folded in (2026-10-27).",
+  "kind": "Solution — MCP Server"
+ },
+ {
+  "title": "Phlow MCP Server",
+  "url": "/solutions/phlow-mcp-server",
+  "summary": "Phlow's MCP server surface: one safe runtime shared with the CLI and TUI, over the MCP wire contract.",
+  "kind": "Solution — MCP Server"
+ },
+ {
+  "title": "Blaze.nvim (LuaRocks)",
+  "url": "/solutions/blaze-nvim-luarocks",
+  "summary": "🔥 for AI — the blaze.nvim plugin as a LuaRocks module.",
+  "kind": "Solution — Package"
+ },
+ {
+  "title": "Diver-AI",
+  "url": "/solutions/diver-ai",
+  "summary": "Diver AI suite: ai.* harness (registry/supervisor/policy), MCP, ACP, A2A, herd, rose integration, media, recon, plus salesforce.mcp.",
+  "kind": "Solution — Package"
+ },
+ {
+  "title": "Diver-Comms",
+  "url": "/solutions/diver-comms",
+  "summary": "Diver mail tooling: comms.* clients (aerc, neomutt), mail and MIME helpers.",
+  "kind": "Solution — Package"
+ },
+ {
+  "title": "Diver-Config",
+  "url": "/solutions/diver-config",
+  "summary": "Diver config library modules: config.ui.* (UI library: icons, image rendering, themes, virtual text) and config.data.* (database adapters).",
+  "kind": "Solution — Package"
+ },
+ {
+  "title": "Diver-DAP",
+  "url": "/solutions/diver-dap",
+  "summary": "Diver debug-adapter suite: dap.* session engine, adapters, store, lifecycle and integrations (Moonwalk, phlow).",
+  "kind": "Solution — Package"
+ },
+ {
+  "title": "Diver-Dev",
+  "url": "/solutions/diver-dev",
+  "summary": "Diver developer tooling: dev.* BSP servers, SCIP indexers, browser (BiDi/CDP), apps, Salesforce suite, git/jj/cargo runners.",
+  "kind": "Solution — Package"
+ },
+ {
+  "title": "Diver-Games",
+  "url": "/solutions/diver-games",
+  "summary": "Diver game-engine tooling: games.* for Aseprite, Blender, Godot, LÖVE, Redot, TIC-80, Unity, Unreal and Voidsprite, plus shared character kit.",
+  "kind": "Solution — Package"
+ },
+ {
+  "title": "Diver-Lintfmt",
+  "url": "/solutions/diver-lintfmt",
+  "summary": "Diver tool catalogs: formatters.* (138 formatter adapters + engine) and linters.* (185 linter adapters + engine). One adapter per file.",
+  "kind": "Solution — Package"
+ },
+ {
+  "title": "Diver-Research",
+  "url": "/solutions/diver-research",
+  "summary": "Diver research workflow: research.* journal registry, ORCID, OpenAlex, Web of Science, Zenodo, deadlines, watchlist, templates, Zotero.",
+  "kind": "Solution — Package"
+ },
+ {
+  "title": "Diver-Security",
+  "url": "/solutions/diver-security",
+  "summary": "Diver security toolkit: security.* RCE/MiTM/zombie/supply-chain guards, red/blue suites, pass integration, Ghidra bridge, PQC tokens.",
+  "kind": "Solution — Package"
+ },
+ {
+  "title": "Diver-Utils",
+  "url": "/solutions/diver-utils",
+  "summary": "Diver foundations: shared utility library (utils.*), tools.*, plus the shared primitives other diver rocks build on.",
+  "kind": "Solution — Package"
+ },
+ {
+  "title": "Hyprlua",
+  "url": "/solutions/hyprlua",
+  "summary": "LuaCATS annotations for the Hyprland 0.55+ Lua config API.",
+  "kind": "Solution — Package"
+ }
+]
