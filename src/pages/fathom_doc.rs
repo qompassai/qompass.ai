@@ -4,6 +4,13 @@
 //! Sources: the tool registrations in fathom's own source (read
 //! 2026-10-20, including the three il2cpp tools landed by Stage A)
 //! and the Pax-gated parity matrix against the Ghidra-MCP v6.0.0
+//!
+//! The Ghidra report section's program facts come from the parity
+//! study (2026-10-20, observable facts from the upstream project's
+//! public documentation, with its count erratum) and the G1
+//! reconciliation brief (Owner decision D-295, 2026-10-28), both in
+//! the estate record; the history claims are the cited entries on
+//! the companion RE-history page.
 //! surface (279 distinct upstream tools: 31 covered, 177 to build in
 //! stages G1–G4, 71 deferred). The tables are generated from those
 //! sources (`fathom_doc_data`); upstream names in the building and
@@ -140,15 +147,67 @@ pub fn FathomDoc() -> impl IntoView {
                 </div>
             </figure>
         </details>
+        <h2>"The Ghidra report — what the parity program is, and where it stands"</h2>
+        <p>
+            "Ghidra is the software reverse engineering framework the National Security \
+             Agency built inside its Research Directorate and released in the open at the \
+             2019 RSA Conference — the full history, cited entry by entry, is on the \
+             companion page linked at the bottom of this section. Fathom already drives \
+             Ghidra itself, headless: its native provider runs Ghidra's analyzeHeadless \
+             batch export into one JSON document, caches projects per subject SHA-256, \
+             and serves tools such as binary_overview, list_functions, analyze_function, \
+             decompile, and data_strings inside fathom's evidence-envelope and policy \
+             discipline."
+        </p>
+        <p>
+            "The parity program exists because an upstream project — bethington/ghidra-mcp, \
+             Apache-2.0 — exposes a much larger Ghidra surface over MCP: a Java Ghidra \
+             extension (GUI plugin plus headless server) with a Python bridge, its plugin \
+             answering on 127.0.0.1:8089 inside a running Ghidra GUI. Fathom's port is a \
+             parity expansion of its own engine, designed from that project's published \
+             interface only — not a wrapper around the Java plugin. Fathom keeps its \
+             no-second-engine rule: one Ghidra path, its own."
+        </p>
+        <p>
+            "The counts need care, because the upstream documentation and the upstream \
+             release disagree. The README headline said 209 tools; the count taken \
+             against the v6.0.0 release installed on the estate's analysis host found a \
+             larger enumerated surface, and the Pax-gated parity matrix (stage G0, passed \
+             2026-10-20) reconciled the census at 279 distinct upstream tools: 31 already \
+             covered by fathom tools (the table above), 177 to build across stages \
+             G1–G4, and 71 deferred by design (the final section of this page). The \
+             architectural gap the program has to close honestly is that the upstream \
+             server is stateful and live — an open program, mutations in transactions, a \
+             debugger — while fathom's model is headless and batch-oriented. Read parity \
+             extends the export schema; write parity needs a transactional headless \
+             mutation path, gated as Execute-class tooling, designed in G2 and not \
+             smuggled into G1."
+        </p>
+        <p>
+            "Where it stands (2026-10-28): the G1 read core — 78 tools across the read \
+             families: export modes, xrefs, functions and tags, data types, \
+             program/project/session reads, search and utility, and detection — was \
+             built on its own branch, in five commits, and then stranded: the branch was \
+             never reconciled onto main, never ran its full gate battery against current \
+             main, and was never live-gated, while fathom itself shipped 1.0 without it. \
+             The reconciliation was commissioned on 2026-10-28 (Owner decision D-295): \
+             rebase the branch onto current main, run the full battery, and prepare — \
+             not execute — a differential live gate that answers the same fixture calls \
+             through fathom and through the upstream bridge side by side. Until that \
+             gate passes, this page describes G1 as built-but-not-landed, and nothing \
+             below claims it as a live tool."
+        </p>
         <h2>"Tools — building"</h2>
         <p>
-            "The Ghidra read core (stage G1, 78 tools) is in build now: fathom grows its own \
-             implementations of the upstream Ghidra-MCP read surface, registered through the \
-             same registry and descriptor discipline as the live tools, over the headless \
-             batch-export model — no second engine. The names below are the upstream tools \
-             of the parity census, grouped by family; three of them (add_memory_reference, \
-             remove_reference, batch_apply_documentation) are mutation-flavoured and are \
-             classed honestly as such in the build, never dressed as reads."
+            "The Ghidra read core (stage G1, 78 tools) is built on its branch and awaiting \
+             the reconciliation and gates described above: fathom grows its own \
+             implementations of the upstream Ghidra-MCP read surface, registered through \
+             the same registry and descriptor discipline as the live tools, over the \
+             headless batch-export model — no second engine. The names below are the \
+             upstream tools of the parity census, grouped by family; three of them \
+             (add_memory_reference, remove_reference, batch_apply_documentation) are \
+             mutation-flavoured and are classed honestly as such in the build, never \
+             dressed as reads."
         </p>
         {families(G1_TOOLS)
             .into_iter()

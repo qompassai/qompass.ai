@@ -349,7 +349,7 @@ pub const MCP_SERVERS: [McpServer; 20] = [
         "buccaneer",
         "Security-assessment engine — rose-first, chains into fathom",
         "In development",
-        "Tool surface source-verified; the v1 gate is pending.",
+        "Tool surface source-verified; the v1 gate is pending. crates.io carries the buccaneer 0.1.0 name reservation (implementation in development).",
         Some("https://github.com/qompassai/buccaneer"),
         None,
     ),
