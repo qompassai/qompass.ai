@@ -208,7 +208,7 @@ pub static WORKS: &[Work] = &[
         url: "https://publons.com/wos-op/publon/56352299/",
         venue: "Journal of Investigative Medicine",
         year: "2022",
-        doi: "10.1136/JIM-2022-ERM.224",
+        doi: "",
         kind: "journal-article",
     },
     Work {
@@ -216,7 +216,7 @@ pub static WORKS: &[Work] = &[
         url: "https://publons.com/wos-op/publon/56352298/",
         venue: "Journal of Investigative Medicine",
         year: "2022",
-        doi: "10.1136/JIM-2022-MW.79",
+        doi: "",
         kind: "journal-article",
     },
     Work {
@@ -240,7 +240,7 @@ pub static WORKS: &[Work] = &[
         url: "https://publons.com/wos-op/publon/56352301/",
         venue: "Journal of Investigative Medicine",
         year: "2022",
-        doi: "10.1136/JIM-2022-ERM.154",
+        doi: "",
         kind: "journal-article",
     },
     Work {
