@@ -1,0 +1,13 @@
+{
+  "record": "broadside.agent-card-key",
+  "version": 1,
+  "kid": "",
+  "kty": "OKP",
+  "crv": "Ed25519",
+  "use": "sig",
+  "alg": "EdDSA",
+  "x": "",
+  "issued": "2026-11-10",
+  "fixture": false,
+  "signature": ""
+}

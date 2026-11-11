@@ -1,0 +1,30 @@
+{
+  "manifest": "broadside.honeypot",
+  "version": 1,
+  "revision": "2026-11-10.1",
+  "signer_kid": "",
+  "canaries": [
+    {
+      "path": "/.env",
+      "kind": "env"
+    },
+    {
+      "path": "/wp-login.php",
+      "kind": "page"
+    },
+    {
+      "path": "/admin/",
+      "kind": "page"
+    },
+    {
+      "path": "/backup.zip",
+      "kind": "page"
+    }
+  ],
+  "credential": {
+    "slot": "QOMPASS_DEPLOY_TOKEN",
+    "value": "db2eaa35682c9dbef85fb27c653fac236ac217ea"
+  },
+  "fixture": false,
+  "signature": ""
+}
