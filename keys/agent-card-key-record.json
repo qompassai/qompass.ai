@@ -1,13 +1,13 @@
 {
   "record": "broadside.agent-card-key",
   "version": 1,
-  "kid": "",
+  "kid": "qompass-agent-card-1",
   "kty": "OKP",
   "crv": "Ed25519",
   "use": "sig",
   "alg": "EdDSA",
-  "x": "",
+  "x": "s-5T-0PEIzg0i0jzCb6mZ8EVcMLhtv8QQnmabBgbcyw",
   "issued": "2026-11-10",
   "fixture": false,
-  "signature": ""
+  "signature": "mZcfHYdybOzyNhq_ygxtR1Peg9TKNeO6_NtoIZ0XZ0WKBa_6WWkphmHhm0IA3Fkoh_MfHXVi4jQmb2tnX61CDQ"
 }
