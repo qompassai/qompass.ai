@@ -309,8 +309,11 @@ pub fn mcp_display_name(name: &str) -> String {
 }
 
 /// Every MCP server in the estate roster, alphabetical — the
-/// public mirror of the internal census, verified 2026-10-20, plus
-/// the day's commissions (atelier).
+/// public mirror of the internal census, refreshed 2026-11-23
+/// against each server's landed tree (its server.json and
+/// agent-card records) and the live MCP Registry. Qompass lane
+/// only: servers whose records name the NTRanch lane
+/// (io.github.NTRanch/*) are never listed here.
 ///
 /// The Ghidra bridge is upstream,
 /// not a Qompass product, and is listed as External because the
@@ -320,36 +323,44 @@ pub fn mcp_display_name(name: &str) -> String {
 /// and page are read from the server's own source
 /// (crates/vongola-mcp). Every server has a page:
 /// `/solutions/mcp/<name>`.
-pub const MCP_SERVERS: [McpServer; 20] = [
+pub const MCP_SERVERS: [McpServer; 23] = [
     mcp(
         "atelier",
         "Media generation — image, video, and music behind ComfyUI",
         "Legacy",
-        "Folded into Lumen as its image lane (2026-10-27) · the standalone server was retired before it shipped; its surface lives on in lumen 1.0.0.",
+        "Folded into Lumen as its image lane (2026-10-27) · the standalone server was retired before it shipped; its surface lives on in lumen.",
         Some("https://github.com/qompassai/atelier"),
+        None,
+    ),
+    mcp(
+        "blender-gate",
+        "Live Blender control — read tools, a session lock, and an audited code-execution gate",
+        "In development",
+        "v0.1.0 · a clean-room Rust MCP server for a live Blender instance: read tools, a single-writer session lock, and an audited default-deny execute_code gate under lane law · 20 tools in the server's own table · rmcp, modern-era only · not yet on the MCP Registry.",
+        None,
         None,
     ),
     mcp(
         "bloch",
         "Roadmaps, lessons, and memory — the estate's learning record",
-        "Live",
-        "v0.4.0 · 11 tools · rmcp, modern-era only · lessons_search and the memory_propose / memory_promote gate are how the fleet's servers file and recall oracle-labelled lessons. Not yet on the MCP Registry.",
+        "Published",
+        "MCP Registry ai.qompass/bloch 1.0.4 (latest listing) · rmcp, modern-era only · lessons_search and the memory_propose / memory_promote gate are how the fleet's servers file and recall oracle-labelled lessons.",
         Some("https://github.com/qompassai/bloch"),
-        None,
+        Some("https://registry.modelcontextprotocol.io/?q=bloch"),
     ),
     mcp(
         "broadside",
         "This website — build, verify, deploy, with a honeypot",
-        "Commissioned",
-        "Commissioned 2026-10-20 as press; renamed broadside the same day · design complete, build pending.",
-        None,
-        None,
+        "Published",
+        "MCP Registry ai.qompass/broadside 1.0.0 · deterministic build, verify, and deploy for this site: signed JWKS, receipts, and the honeypot · rmcp, modern-era only.",
+        Some("https://github.com/qompassai/broadside"),
+        Some("https://registry.modelcontextprotocol.io/?q=broadside"),
     ),
     mcp(
         "buccaneer",
         "Security-assessment engine — rose-first, chains into fathom",
         "In development",
-        "Tool surface source-verified; the v1 gate is pending. crates.io carries the buccaneer 0.1.0 name reservation (implementation in development).",
+        "GitHub qompassai/buccaneer · crate 0.1.0 · an autonomous penetration-testing agent in Rust — rose-local models by default, deterministic authorization gates, MCP-native, no telemetry (the repo's own description) · the v1 gate is pending.",
         Some("https://github.com/qompassai/buccaneer"),
         None,
     ),
@@ -357,15 +368,23 @@ pub const MCP_SERVERS: [McpServer; 20] = [
         "bunker",
         "Signed-manifest executor for consequential actions",
         "In development",
-        "The Stage C server is under construction.",
+        "The Stage C server is under construction · the product it fronts, a secure Nix cache server, is public at GitHub qompassai/bunker.",
         Some("https://github.com/qompassai/bunker"),
         None,
+    ),
+    mcp(
+        "cartone",
+        "Generation broker — job queue and per-job cost ledger over image, video, and TTS routes",
+        "Published",
+        "MCP Registry ai.qompass/cartone 0.1.0 · a job queue and per-job cost ledger over image, video, and TTS routes · 6 tools · rmcp, modern-era only.",
+        Some("https://github.com/qompassai/cartone"),
+        Some("https://registry.modelcontextprotocol.io/?q=cartone"),
     ),
     mcp(
         "eigenstyle",
         "Voice and style fingerprinting for drafts",
         "Published",
-        "MCP Registry ai.qompass/eigenstyle 0.1.1, as a bundle · the server is now 1.0.0, migrated to rmcp, modern-era only (2026-10-27); the registry bundle is still the 0.1.1 build; crates.io carries eigenstyle 1.0.0.",
+        "MCP Registry ai.qompass/eigenstyle 1.0.4 · the server is 1.0.4 — tree and Registry agree · a personal voice profile as a tool: corpus, fingerprint, and draft-checking · migrated to rmcp, modern-era only (2026-10-27).",
         Some("https://github.com/qompassai/eigenstyle"),
         Some("https://registry.modelcontextprotocol.io/?q=eigenstyle"),
     ),
@@ -373,7 +392,7 @@ pub const MCP_SERVERS: [McpServer; 20] = [
         "fathom",
         "Reverse engineering and artifact analysis",
         "Published",
-        "MCP Registry ai.qompass/fathom 0.1.1 · the server is now 1.0.0, landed on GitHub main — not yet published to crates.io or the Registry · 158 tools · DOI 10.5281/zenodo.23503521 · migrated to rmcp, modern-era only (2026-10-27).",
+        "MCP Registry ai.qompass/fathom 1.0.0 · reverse-engineering tools for agents over MCP/A2A, with evidence-carrying findings and a fail-closed policy gate · rmcp, modern-era only · DOI 10.5281/zenodo.23503521.",
         Some("https://github.com/qompassai/fathom"),
         Some("https://registry.modelcontextprotocol.io/?q=fathom"),
     ),
@@ -389,7 +408,7 @@ pub const MCP_SERVERS: [McpServer; 20] = [
         "lumen",
         "Deterministic conversion between 2D, 3D, and engine packages",
         "Published",
-        "MCP Registry ai.qompass/lumen 0.1.1 · the server is now 1.0.0 — 15 tools, atelier folded in — migrated to rmcp, modern-era only · DOI 10.5281/zenodo.23503519.",
+        "MCP Registry ai.qompass/lumen 2.1.1 (latest listing) · 15 tools in the landed tree, atelier's image lane folded in · rmcp, modern-era only · DOI 10.5281/zenodo.23503519.",
         Some("https://github.com/qompassai/lumen"),
         Some("https://registry.modelcontextprotocol.io/?q=lumen"),
     ),
@@ -397,15 +416,23 @@ pub const MCP_SERVERS: [McpServer; 20] = [
         "lupin",
         "Revenue alignment across the Qompass and NTRanch lanes",
         "Published",
-        "MCP Registry ai.qompass/lupin 0.1.0 · 6 tools · the server is now 0.2.0, migrated to rmcp, modern-era only (2026-10-27).",
+        "MCP Registry ai.qompass/lupin 1.0.0 · revenue alignment: opportunity ledger, capability matching, and pipeline summary · rmcp, modern-era only.",
         Some("https://github.com/qompassai/lupin"),
         Some("https://registry.modelcontextprotocol.io/?q=lupin"),
+    ),
+    mcp(
+        "meister",
+        "SFW game maker — authoring and project state for SFW games",
+        "Published",
+        "MCP Registry ai.qompass/meister 0.5.0 · authoring and project state for SFW games, with a live lane gate · 33 tools in the server's catalog table · rmcp, modern-era only.",
+        Some("https://github.com/qompassai/meister"),
+        Some("https://registry.modelcontextprotocol.io/?q=meister"),
     ),
     mcp(
         "periscope",
         "Neovim broker — editor state, LSP/DAP, shared attention",
         "Published",
-        "MCP Registry ai.qompass/periscope 0.1.0 · 16 tools · the server is now 0.2.0, migrated to rmcp, modern-era only (2026-10-27).",
+        "MCP Registry ai.qompass/periscope 1.0.0 · broker into a live Neovim/Diver config: LSP, formatters, linters, DAP, MATE attention · rmcp, modern-era only.",
         Some("https://github.com/qompassai/periscope"),
         Some("https://registry.modelcontextprotocol.io/?q=periscope"),
     ),
@@ -413,7 +440,7 @@ pub const MCP_SERVERS: [McpServer; 20] = [
         "phaedrus",
         "Research feed — findings, watchlists, revenue candidates",
         "Published",
-        "MCP Registry ai.qompass/phaedrus 0.1.0 · 7 tools · the server is now 0.2.0, migrated to rmcp, modern-era only (2026-10-27).",
+        "MCP Registry ai.qompass/phaedrus 1.0.0 · research feed: literature-watch findings, watchlist, and revenue-candidate drafts · rmcp, modern-era only.",
         Some("https://github.com/qompassai/phaedrus"),
         Some("https://registry.modelcontextprotocol.io/?q=phaedrus"),
     ),
@@ -421,39 +448,39 @@ pub const MCP_SERVERS: [McpServer; 20] = [
         "phlow",
         "Agent runtime — CLI, TUI, and MCP over one safe core",
         "Published",
-        "MCP Registry ai.qompass/phlow 0.2.1 · server name “flow” · 7 tools · migration to rmcp, modern-era only, in progress (2026-10-28).",
+        "MCP Registry ai.qompass/phlow 1.0.0 · the phlow-mcp crate is 1.0.2 · rmcp, modern-era only — the migration is complete · the runtime's confinement layer (phlow-seccomp: Landlock and seccomp) is landed on main.",
         Some("https://github.com/qompassai/phlow"),
         Some("https://registry.modelcontextprotocol.io/?q=phlow"),
     ),
     mcp(
         "seahawk",
         "Broker for Unreal Engine's MCP server — curated surface, computer use",
-        "Live",
-        "Landed 2026-10-27 · token auth, execute-class default-deny through decide(), append-only op log · the downstream Unreal surface censused at 830 tools · not yet on the MCP Registry (publication not authorized).",
+        "Published",
+        "MCP Registry ai.qompass/seahawk 1.0.3 · broker for Unreal Engine's built-in MCP server: token auth, execute-class default-deny through decide(), append-only op log · lab-only · rmcp, modern-era only.",
         Some("https://github.com/qompassai/seahawk"),
-        None,
+        Some("https://registry.modelcontextprotocol.io/?q=seahawk"),
     ),
     mcp(
         "slipway",
         "Release certification — builds, bundles, and device verification",
         "Published",
-        "MCP Registry ai.qompass/slipway 0.1.0 · crates.io slipway-mcp 1.0.0 · the server is now 1.0.0 · rmcp, modern-era only.",
+        "MCP Registry ai.qompass/slipway 1.0.0 · Android build, sign, verify, install, and release with measured certification gates · rmcp, modern-era only.",
         Some("https://github.com/qompassai/slipway"),
         Some("https://registry.modelcontextprotocol.io/?q=slipway"),
     ),
     mcp(
         "tackle",
         "Editor broker — Unity first, Godot later",
-        "In development",
-        "Standardized on rmcp, modern-era only · U2 write core gated 2026-10-28 (crate 0.3.0): a committed batch is exactly one undo step; landing follows the phlow migration.",
-        None,
-        None,
+        "Published",
+        "MCP Registry ai.qompass/tackle 0.3.0 · the server is now 0.3.2: a live game-editor broker (U1 read core, U2 write core — a committed batch is exactly one undo step) · rmcp, modern-era only.",
+        Some("https://github.com/qompassai/tackle"),
+        Some("https://registry.modelcontextprotocol.io/?q=tackle"),
     ),
     mcp(
         "theodolite",
         "Headless LSP bridge — diagnostics and semantics without an editor",
         "Published",
-        "MCP Registry ai.qompass/theodolite 0.1.0 · rmcp, modern-era only · read-only by design: no format or lint tools.",
+        "MCP Registry ai.qompass/theodolite 1.0.1 · the 1.0.1 release is landed — tree and Registry agree · pinned language-server sessions as bounded read tools · read-only by design: no format or lint tools · rmcp, modern-era only.",
         Some("https://github.com/qompassai/theodolite"),
         Some("https://registry.modelcontextprotocol.io/?q=theodolite"),
     ),
@@ -461,26 +488,27 @@ pub const MCP_SERVERS: [McpServer; 20] = [
         "twilight",
         "Front desk for local inference engines",
         "Live",
-        "v0.1.0 · local release; public release pending.",
-        None,
+        "GitHub qompassai/twilight · a Rust MCP that detects, catalogs, and drives local model engines · probed live in the 2026-10-20 Inspector sweep (dual-era, 3 tools) · local release; public release pending.",
+        Some("https://github.com/qompassai/twilight"),
         None,
     ),
     mcp(
         "volta",
         "Key service for the signed-authority chain",
         "Design stage",
-        "Design complete; no repository yet.",
-        None,
+        "The key server itself is public: GitHub qompassai/volta, crate 1.1.0 — a Hagrid-derived OpenPGP key service (HKP, VKS API, Web Key Directory, email-verified publication) · the MCP surface for the signed-authority chain remains at design stage.",
+        Some("https://github.com/qompassai/volta"),
         None,
     ),
     mcp(
         "vongola",
         "Read-only operator instrumentation for the vongola TLS gateway",
-        "Live",
-        "v0.1.0 · 5 read-only tools · migrated to rmcp, modern-era only, and landed 2026-10-27.",
+        "Published",
+        "MCP Registry ai.qompass/vongola 1.0.1 (latest listing) · read-only operator instrumentation for the vongola TLS gateway · the 1.0.1 cure release · rmcp, modern-era only.",
         Some("https://github.com/qompassai/vongola"),
-        None,
+        Some("https://registry.modelcontextprotocol.io/?q=vongola"),
     ),
+
 ];
 
 /// Primary references for a generated solution page (the MCP servers
@@ -756,7 +784,7 @@ pub fn McpServers() -> impl IntoView {
                 </table>
             </div>
             <figcaption class="bench-note">
-                "Verified against the estate census, 2026-10-20; fleet standings refreshed 2026-10-28 against the landed trees and the live Registry. “Published” means listed on the official MCP Registry; “Live” means running and probed on our infrastructure. Each server's name links to its page: the full client config and tool list."
+                "Fleet standings refreshed 2026-11-23 against the landed trees — each server's own server.json and agent-card records — and the live MCP Registry, read the same day. “Published” means listed on the official MCP Registry; “Live” means running and probed on our infrastructure. Each server's name links to its page: the full client config and tool list."
             </figcaption>
         </figure>
     }
@@ -1558,7 +1586,7 @@ mod tests {
 
     #[test]
     fn the_mcp_table_is_alphabetical_unique_and_in_vocabulary() {
-        assert_eq!(MCP_SERVERS.len(), 20);
+        assert_eq!(MCP_SERVERS.len(), 23);
         let vocab = ["Commissioned", "Design stage", "External", "In development", "Legacy", "Live", "Published"];
         for (i, s) in MCP_SERVERS.iter().enumerate() {
             assert!(vocab.contains(&s.status), "{}: {}", s.name, s.status);
@@ -1584,8 +1612,8 @@ mod tests {
     }
 
     #[test]
-    fn the_mcp_table_marks_the_registry_nine_published() {
-        for name in ["eigenstyle", "fathom", "lumen", "lupin", "periscope", "phaedrus", "phlow", "slipway", "theodolite"] {
+    fn the_mcp_table_marks_the_registry_sixteen_published() {
+        for name in ["bloch", "broadside", "cartone", "eigenstyle", "fathom", "lumen", "lupin", "meister", "periscope", "phaedrus", "phlow", "seahawk", "slipway", "tackle", "theodolite", "vongola"] {
             let s = MCP_SERVERS.iter().find(|s| s.name == name).expect(name);
             assert_eq!(s.status, "Published", "{name}");
             assert!(s.href.is_some(), "{name}");

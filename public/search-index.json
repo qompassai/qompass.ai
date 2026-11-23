@@ -30,6 +30,12 @@
   "kind": "MCP Server"
  },
  {
+  "title": "blender-gate (MCP server)",
+  "url": "/solutions/mcp/blender-gate",
+  "summary": "Live Blender control — read tools, a session lock, and an audited code-execution gate",
+  "kind": "MCP Server"
+ },
+ {
   "title": "bloch (MCP server)",
   "url": "/solutions/mcp/bloch",
   "summary": "Roadmaps, lessons, and memory — the estate's learning record",
@@ -51,6 +57,12 @@
   "title": "bunker (MCP server)",
   "url": "/solutions/mcp/bunker",
   "summary": "Signed-manifest executor for consequential actions",
+  "kind": "MCP Server"
+ },
+ {
+  "title": "cartone (MCP server)",
+  "url": "/solutions/mcp/cartone",
+  "summary": "Generation broker — job queue and per-job cost ledger over image, video, and TTS routes",
   "kind": "MCP Server"
  },
  {
@@ -81,6 +93,12 @@
   "title": "lupin (MCP server)",
   "url": "/solutions/mcp/lupin",
   "summary": "Revenue alignment across the Qompass and NTRanch lanes",
+  "kind": "MCP Server"
+ },
+ {
+  "title": "meister (MCP server)",
+  "url": "/solutions/mcp/meister",
+  "summary": "SFW game maker — authoring and project state for SFW games",
   "kind": "MCP Server"
  },
  {

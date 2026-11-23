@@ -87,6 +87,45 @@ pub const MCP_DETAILS: &[McpDetail] = &[
          (2026-10-27), and this page remains as the design record.",
     ),
     detail(
+        "blender-gate",
+        None,
+        Some(
+            "Blender-gate runs as a stdio MCP server from its repository, driving a live \
+             Blender instance through its add-on over loopback. This page does not \
+             reproduce a client config it has not verified against the current \
+             release; the repo carries the launch.",
+        ),
+        &[
+            tool("bridge_status"),
+            tool("blend_file_summary"),
+            tool("list_objects"),
+            tool("object_summary"),
+            tool("collection_summary"),
+            tool("viewport_screenshot"),
+            tool("viewport_navigate"),
+            tool("render_thumbnail"),
+            tool("render_viewport"),
+            tool("api_docs_search"),
+            tool("session_open"),
+            tool("session_close"),
+            tool("lock_acquire"),
+            tool("lock_release"),
+            tool("lock_status"),
+            tool("execute_code"),
+            tool("blend_open"),
+            tool("blend_save"),
+            tool("scene_spec_export"),
+            tool("scene_spec_apply")
+        ],
+        Some("The served tool table, read from the server's own src/tools.rs (2026-11-23): read tools, session and lock tools, and the gated execute_code."),
+        "A clean-room Rust MCP server for a live Blender instance — the estate's answer \
+         to the Blender Lab MCP, with the guard layer designed in rather than wrapped on \
+         afterwards: policy, a decide() gate, and audit on the execution path, a \
+         single-writer session lock, and lane stamps on every session. The headless \
+         batch and census route stays with the estate's other Blender tooling; \
+         blender-gate is the live route.",
+    ),
+    detail(
         "bloch",
         None,
         Some(
@@ -119,9 +158,9 @@ pub const MCP_DETAILS: &[McpDetail] = &[
         "broadside",
         None,
         Some(
-            "Broadside is commissioned, not built: the study, program, and honeypot design are \
-             complete and the build stages are queued. There is no binary and no launch \
-             command yet.",
+            "Broadside runs as a stdio MCP server from its repository (the 1.0.0 build \
+             is on the MCP Registry). This page does not reproduce a client config it \
+             has not verified against the current release; the repo carries the launch.",
         ),
         &[
             tool_d("broadside_status", "Site tree state, dist freshness, last deployed hash"),
@@ -130,7 +169,7 @@ pub const MCP_DETAILS: &[McpDetail] = &[
             tool_d("broadside_verify", "The gate battery: tests, data freshness, citation verification, the JWKS against the signed key record"),
             tool_d("broadside_deploy", "Deploy one dist hash, only against a passing verify receipt for that hash"),
         ],
-        Some("The designed tool surface from the broadside program (P1–P3)."),
+        Some("The tool surface from the broadside program (P1–P3), as designed; this page has not re-verified it tool-by-tool against the 1.0.0 build."),
         "This website's own pipeline as an MCP server: build, verify, and deploy qompass.ai, \
          with an append-only receipt log that vongola reads (vongola stays read-only; broadside \
          holds the deploy key). The design includes a honeypot: canary endpoints and \
@@ -173,6 +212,28 @@ pub const MCP_DETAILS: &[McpDetail] = &[
          executor verifies the signature, checks revocation freshness, consumes the nonce, \
          and re-runs the decision at dispatch time. Consequential actions — delete, publish, \
          send — exist only inside that envelope.",
+    ),
+    detail(
+        "cartone",
+        None,
+        Some(
+            "Cartone runs as a stdio MCP server from its repository (cargo package \
+             cartone 0.1.0). This page does not reproduce a client config it has not \
+             verified against the current release; the repo carries the launch.",
+        ),
+        &[
+            tool("submit_job"),
+            tool("get_job"),
+            tool("list_jobs"),
+            tool("cancel_job"),
+            tool("list_routes"),
+            tool("ledger_summary")
+        ],
+        Some("The served surface, read from the server's catalog table (src/catalog.rs) and dispatch (src/server.rs), 2026-11-23."),
+        "The generation broker: clients submit jobs over image, video, and TTS routes; \
+         cartone queues them, passes them through its decide() gate, and keeps a \
+         per-job cost ledger — ledger_summary is the fleet's spend record for \
+         generated media.",
     ),
     detail(
         "eigenstyle",
@@ -260,6 +321,54 @@ pub const MCP_DETAILS: &[McpDetail] = &[
         "Revenue alignment: a scanned opportunity pipeline (scan, align, validate, refine, \
          queue) with the Qompass (SFW) and NTRanch lanes hard-separated server-side — only \
          the operator changes a lane. Phaedrus files research findings into lupin as drafts.",
+    ),
+    detail(
+        "meister",
+        None,
+        Some(
+            "Meister runs as a stdio MCP server from its repository. This page does not \
+             reproduce a client config it has not verified against the current \
+             release; the repo carries the launch.",
+        ),
+        &[
+            tool("meister_project_create"),
+            tool("meister_project_inspect"),
+            tool("meister_project_list"),
+            tool("meister_cast_add"),
+            tool("meister_cast_lock"),
+            tool("meister_canon_check"),
+            tool("meister_scene_define"),
+            tool("meister_system_define"),
+            tool("meister_scene_validate"),
+            tool("meister_dialogue_author"),
+            tool("meister_dialogue_get"),
+            tool("meister_reaction_set"),
+            tool("meister_story_define"),
+            tool("meister_level_compose"),
+            tool("meister_playtest_generate"),
+            tool("meister_rating_record"),
+            tool("meister_accessibility_check"),
+            tool("meister_content_summary"),
+            tool("meister_asset_intake"),
+            tool("meister_asset_route"),
+            tool("meister_asset_chain_get"),
+            tool("meister_verdict_record"),
+            tool("meister_playtest_define"),
+            tool("meister_replay_check"),
+            tool("meister_defect_record"),
+            tool("meister_emit"),
+            tool("meister_channel_list"),
+            tool("meister_release_prepare"),
+            tool("meister_preflight_run"),
+            tool("meister_account_register"),
+            tool("meister_account_inspect"),
+            tool("meister_account_verify"),
+            tool("meister_lane_check")
+        ],
+        Some("The served surface, read from the server's catalog table (src/catalog.rs), 2026-11-23."),
+        "The Qompass SFW game maker: authoring and project state for SFW games — \
+         projects, cast, canon, scenes, systems, dialogue, levels, playtests, and \
+         release preparation — with a live lane gate on the content path.",
     ),
     detail(
         "periscope",
@@ -376,9 +485,10 @@ pub const MCP_DETAILS: &[McpDetail] = &[
         "tackle",
         None,
         Some(
-            "Tackle is built but not yet landed: the U2 write core is gated (crate 0.3.0, \
-             2026-10-28) and its landing follows the phlow migration. This page publishes \
-             the standing; no client config is shown until the landed release is probed.",
+            "Tackle runs as a stdio MCP server from its repository (crate 0.3.2; the \
+             Registry carries the 0.3.0 build). This page does not reproduce a client \
+             config it has not verified against the current release; the repo carries \
+             the launch.",
         ),
         &[
             tool_d("tackle_editor_state", "Editor connection state; a clear “no editor connected” when the session is absent"),
